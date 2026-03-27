@@ -1,12 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { withBasePathAsset } from "@/lib/base-path";
 import { cn } from "@/lib/utils";
 import type { SocialIconLink } from "@/types/site";
 
 function SocialIcon({ iconKey, label }: { iconKey: string; label: string }) {
   if (iconKey === "x" || iconKey === "bandcamp" || iconKey === "soundcloud") {
-    return <Image src={`/icons/social/${iconKey}.svg`} alt={label} width={18} height={18} />;
+    return <Image src={withBasePathAsset(`/icons/social/${iconKey}.svg`)} alt={label} width={18} height={18} />;
   }
 
   return <span className="text-[11px] font-semibold uppercase">{label.slice(0, 2)}</span>;

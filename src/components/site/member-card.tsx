@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { FadeIn } from "@/components/motion/fade-in";
+import { withBasePathAsset } from "@/lib/base-path";
 import { withLocale } from "@/lib/locale";
 import type { Locale, MemberProfile } from "@/types/site";
 
@@ -25,7 +26,7 @@ export function MemberCard({
       >
         <div className="relative aspect-[4/3] overflow-hidden bg-neutral-100">
           <Image
-            src={member.image}
+            src={withBasePathAsset(member.image)}
             alt={member.name}
             fill
             className="motion-image object-cover group-hover:opacity-94 group-hover:brightness-105"

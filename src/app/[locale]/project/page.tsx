@@ -4,6 +4,7 @@ import { ProjectCallCta } from "@/components/site/project-call-cta";
 import { ProjectCallHeader } from "@/components/site/project-call-header";
 import { ProjectCallRuleGroup } from "@/components/site/project-call-rule-group";
 import { ProjectCallSection } from "@/components/site/project-call-section";
+import { withBasePathAsset } from "@/lib/base-path";
 import { assertLocale } from "@/lib/locale";
 import { getProjectCall } from "@/server/services/site-service";
 
@@ -22,7 +23,7 @@ export async function generateMetadata({
     openGraph: {
       title: `${project.title} — Thoughost`,
       description: project.summary,
-      images: ["/images/releases/KAKUSATSU SHOUJO 2.png"],
+      images: [withBasePathAsset("/images/releases/KAKUSATSU SHOUJO 2.png")],
     },
   };
 }

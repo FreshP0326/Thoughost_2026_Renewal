@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+
 import { MemberDetailDialog } from "@/components/site/member-detail-dialog";
 import { MemberGrid } from "@/components/site/member-grid";
 import { PageIntro } from "@/components/site/page-intro";
@@ -28,16 +30,18 @@ export default async function AboutPage({
           <MemberGrid locale={locale} groups={aboutPage.groups} viewProfileLabel={aboutPage.labels.viewProfile} />
         </div>
       </section>
-      <MemberDetailDialog
-        locale={locale}
-        members={allMembers}
-        labels={{
-          representativeWorks: aboutPage.labels.representativeWorks,
-          links: aboutPage.labels.links,
-          close: aboutPage.labels.close,
-          memberNotFound: aboutPage.labels.memberNotFound,
-        }}
-      />
+      <Suspense fallback={null}>
+        <MemberDetailDialog
+          locale={locale}
+          members={allMembers}
+          labels={{
+            representativeWorks: aboutPage.labels.representativeWorks,
+            links: aboutPage.labels.links,
+            close: aboutPage.labels.close,
+            memberNotFound: aboutPage.labels.memberNotFound,
+          }}
+        />
+      </Suspense>
     </>
   );
 }

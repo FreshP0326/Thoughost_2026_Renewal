@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { FadeIn } from "@/components/motion/fade-in";
 import { SocialLinks } from "@/components/site/social-links";
+import { withBasePathAsset } from "@/lib/base-path";
 import { withLocale } from "@/lib/locale";
 import type { FooterGroup, Locale, SocialIconLink } from "@/types/site";
 
@@ -51,7 +52,7 @@ export function SiteFooter({
               ))}
             </div>
             <Image
-              src="/thoughost-logo.svg"
+              src={withBasePathAsset("/thoughost-logo.svg")}
               alt="Thoughost"
               width={148}
               height={33}

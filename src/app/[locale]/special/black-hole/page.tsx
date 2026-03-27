@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { StaggerGroup, StaggerItem } from "@/components/motion/stagger-group";
+import { withBasePathAsset } from "@/lib/base-path";
 import { assertLocale, withLocale } from "@/lib/locale";
 import { getBlackHolePage } from "@/server/services/site-service";
 
@@ -20,7 +21,7 @@ export async function generateMetadata({
     openGraph: {
       title: `${content.title} — Thoughost`,
       description: content.summary,
-      images: ["/images/releases/release-bar-1.png"],
+      images: [withBasePathAsset("/images/releases/release-bar-1.png")],
     },
   };
 }

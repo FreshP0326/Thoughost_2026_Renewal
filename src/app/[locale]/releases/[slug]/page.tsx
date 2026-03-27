@@ -2,8 +2,21 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { ReleaseDetail } from "@/components/site/release-detail";
+import { releases, supportedLocales } from "@/content/site/data";
+import { withBasePathAsset } from "@/lib/base-path";
 import { assertLocale } from "@/lib/locale";
 import { getReleaseBySlug } from "@/server/services/site-service";
+
+export function generateStaticParams() {
+  return supportedLocales.flatMap((locale) =>
+    releases.map((release) => ({
+      locale,
+      slug: release.slug,
+    })),
+  );
+}
+
+export const dynamicParams = false;
 
 export async function generateMetadata({
   params,
@@ -26,7 +39,7 @@ export async function generateMetadata({
       description: release.summary,
       images: [
         {
-          url: release.coverImage,
+          url: withBasePathAsset(release.coverImage),
         },
       ],
     },

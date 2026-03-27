@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useCallback, useEffect, useMemo } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
+import { withBasePathAsset } from "@/lib/base-path";
 import { withLocale } from "@/lib/locale";
 import { motionDurations, motionEasing } from "@/lib/motion";
 import type { Locale, MemberProfile } from "@/types/site";
@@ -84,7 +85,7 @@ export function MemberDetailDialog({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 16 }}
             transition={{ duration: motionDurations.base, ease: motionEasing.emphasized }}
-            className="relative max-h-[92vh] w-full overflow-y-auto bg-white md:max-h-[86vh] md:max-w-[1080px]"
+            className="relative max-h-[92vh] w-full overflow-y-auto bg-white md:max-h-[86vh] md:max-w-[960px]"
             onClick={(event) => event.stopPropagation()}
           >
             <button
@@ -97,24 +98,24 @@ export function MemberDetailDialog({
             </button>
 
             {selectedMember ? (
-              <div className="md:grid md:grid-cols-[minmax(420px,1.15fr)_minmax(360px,0.95fr)]">
-                <div className="border-b border-neutral-200 bg-[var(--hero-surface)] md:border-r md:border-b-0">
-                  <div className="relative aspect-[16/10] md:sticky md:top-0 md:aspect-[16/9]">
-                    <div className="absolute inset-0 p-4 md:p-6 lg:p-8">
-                      <div className="relative h-full w-full overflow-hidden border border-neutral-200 bg-neutral-100">
+              <div>
+                <div className="border-b border-neutral-200 bg-[var(--hero-surface)]">
+                  <div className="px-4 pt-4 md:px-6 md:pt-6 lg:px-8 lg:pt-8">
+                    <div className="relative overflow-hidden border border-neutral-200 bg-neutral-100">
+                      <div className="relative aspect-[16/10] md:aspect-[16/9]">
                         <Image
-                          src={selectedMember.image}
+                          src={withBasePathAsset(selectedMember.image)}
                           alt={selectedMember.name}
                           fill
                           className="object-contain"
-                          sizes="(max-width: 767px) 100vw, 56vw"
+                          sizes="(max-width: 767px) 100vw, 960px"
                         />
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <div className="px-5 pb-8 pt-5 md:max-h-[calc(86vh-48px)] md:overflow-y-auto md:px-8 md:pb-10 md:pt-8">
+                <div className="px-5 pb-8 pt-5 md:px-8 md:pb-10 md:pt-8">
                   <div className="border-b border-neutral-200 pb-5 md:pb-6">
                     <p className="text-[11px] leading-none font-semibold tracking-[0.08em] text-neutral-500">
                       {selectedMember.role}

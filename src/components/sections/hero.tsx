@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
+import { withBasePathAsset } from "@/lib/base-path";
 import { withLocale } from "@/lib/locale";
 import { motionDurations, motionEasing } from "@/lib/motion";
 import type { HeroSlide, Locale } from "@/types/site";
@@ -105,7 +106,7 @@ export function HeroSection({
                 className="group relative hidden overflow-hidden bg-black text-left md:block"
               >
                 <Image
-                  src={previousSlide.leftImage}
+                  src={withBasePathAsset(previousSlide.leftImage)}
                   alt=""
                   fill
                   className="motion-image object-cover saturate-[0.78] group-hover:opacity-95 group-hover:brightness-105"
@@ -135,7 +136,7 @@ export function HeroSection({
                   className="absolute inset-0"
                 >
                   <Image
-                    src={activeSlide.mainImage}
+                    src={withBasePathAsset(activeSlide.mainImage)}
                     alt={activeSlide.title}
                     fill
                     className="motion-image object-cover"
@@ -201,7 +202,7 @@ export function HeroSection({
                 className="group relative hidden overflow-hidden bg-[#0e2430] text-left md:block"
               >
                 <Image
-                  src={nextSlide.rightImage}
+                  src={withBasePathAsset(nextSlide.rightImage)}
                   alt=""
                   fill
                   className="motion-image object-cover contrast-[0.96] saturate-[0.88] group-hover:opacity-95 group-hover:brightness-105"

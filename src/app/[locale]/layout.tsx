@@ -1,8 +1,18 @@
 import type { Metadata } from "next";
 
 import { PageShell } from "@/components/site/page-shell";
+import { supportedLocales } from "@/content/site/data";
+import { withBasePathAsset } from "@/lib/base-path";
 import { assertLocale } from "@/lib/locale";
 import { getSiteConfig } from "@/server/services/site-service";
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+
+export function generateStaticParams() {
+  return supportedLocales.map((locale) => ({ locale }));
+}
+
+export const dynamicParams = false;
 
 export async function generateMetadata({
   params,
@@ -21,11 +31,11 @@ export async function generateMetadata({
         : locale === "jp"
           ? "Thoughost のリビルド版サイト。作品、企画、ビジュアル表現に焦点を当てています。"
           : "A rebuilt Thoughost site focused on releases, projects, and image-led presentation.",
-    metadataBase: new URL("http://localhost:3000"),
+    metadataBase: new URL(siteUrl),
     openGraph: {
       title: "Thoughost",
       description: config.footerQuote,
-      images: ["/images/releases/KAKUSATSU SHOUJO 2.png"],
+      images: [withBasePathAsset("/images/releases/KAKUSATSU SHOUJO 2.png")],
     },
   };
 }

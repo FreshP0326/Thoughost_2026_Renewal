@@ -4,6 +4,7 @@ import Link from "next/link";
 import { FadeIn } from "@/components/motion/fade-in";
 import { StaggerGroup, StaggerItem } from "@/components/motion/stagger-group";
 import { ReleaseDetailMeta } from "@/components/site/release-detail-meta";
+import { withBasePathAsset } from "@/lib/base-path";
 import type { ReleaseDetailViewModel } from "@/types/site";
 
 type ReleaseDetailLabels = {
@@ -25,7 +26,7 @@ export function ReleaseDetailHeader({
           <FadeIn className="motion-image-group">
             <div className="relative aspect-square overflow-hidden bg-neutral-100">
               <Image
-                src={release.coverImage}
+                src={withBasePathAsset(release.coverImage)}
                 alt={release.title}
                 fill
                 className="motion-image object-cover"

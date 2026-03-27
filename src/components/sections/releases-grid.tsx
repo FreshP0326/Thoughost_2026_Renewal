@@ -4,6 +4,7 @@ import Link from "next/link";
 import { FadeIn } from "@/components/motion/fade-in";
 import { StaggerGroup, StaggerItem } from "@/components/motion/stagger-group";
 import { SectionHeading } from "@/components/site/section-heading";
+import { withBasePathAsset } from "@/lib/base-path";
 import { withLocale } from "@/lib/locale";
 import type { Locale, ReleaseGridItem } from "@/types/site";
 
@@ -33,7 +34,7 @@ export function ReleasesGridSection({
               >
                 <div className="relative aspect-square">
                   <Image
-                    src={item.coverImage}
+                    src={withBasePathAsset(item.coverImage)}
                     alt={item.title}
                     fill
                     className="motion-image object-cover group-hover:opacity-95 group-hover:brightness-105"

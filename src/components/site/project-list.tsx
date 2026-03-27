@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { StaggerGroup, StaggerItem } from "@/components/motion/stagger-group";
+import { withBasePathAsset } from "@/lib/base-path";
 import { withLocale } from "@/lib/locale";
 import type { Locale } from "@/types/site";
 
@@ -29,7 +30,7 @@ export function ProjectList({
             >
               <div className="relative aspect-[16/5] overflow-hidden bg-neutral-100 md:aspect-[3/1]">
                 <Image
-                  src={item.coverImage}
+                  src={withBasePathAsset(item.coverImage)}
                   alt={item.title}
                   fill
                   className="motion-image object-cover group-hover:opacity-95 group-hover:brightness-105"
