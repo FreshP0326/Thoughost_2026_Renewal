@@ -21,7 +21,7 @@ describe("news-service", () => {
   });
 
   it("returns localized article HTML", async () => {
-    const article = await getNewsBySlug("jp", "moonshine-001-preview");
+    const article = await getNewsBySlug("ja", "moonshine-001-preview");
 
     expect(article).not.toBeNull();
     expect(article?.title).toContain("MOONSHINE 001");

@@ -109,7 +109,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       memberNotFound: "未找到对应成员资料。",
     },
   },
-  jp: {
+  ja: {
     localeLabel: "日",
     home: {
       news: "NEWS",
@@ -172,5 +172,5 @@ export function getDictionary(locale: Locale) {
 export const localeDisplayNames: Record<Locale, string> = {
   en: "English",
   zh: "中文",
-  jp: "日本語",
+  ja: "日本語",
 };

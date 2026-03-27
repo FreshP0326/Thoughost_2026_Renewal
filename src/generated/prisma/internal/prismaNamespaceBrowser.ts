@@ -81,7 +81,8 @@ export const SiteConfigScalarFieldEnum = {
   contactEmail: 'contactEmail',
   copyrightText: 'copyrightText',
   footerQuoteEn: 'footerQuoteEn',
-  footerQuoteZh: 'footerQuoteZh'
+  footerQuoteZh: 'footerQuoteZh',
+  footerQuoteJa: 'footerQuoteJa'
 } as const
 
 export type SiteConfigScalarFieldEnum = (typeof SiteConfigScalarFieldEnum)[keyof typeof SiteConfigScalarFieldEnum]
@@ -92,6 +93,7 @@ export const NavigationLinkScalarFieldEnum = {
   key: 'key',
   labelEn: 'labelEn',
   labelZh: 'labelZh',
+  labelJa: 'labelJa',
   href: 'href',
   sortOrder: 'sortOrder',
   location: 'location'
@@ -117,10 +119,13 @@ export const HeroProjectScalarFieldEnum = {
   slug: 'slug',
   titleEn: 'titleEn',
   titleZh: 'titleZh',
+  titleJa: 'titleJa',
   subtitleEn: 'subtitleEn',
   subtitleZh: 'subtitleZh',
+  subtitleJa: 'subtitleJa',
   ctaLabelEn: 'ctaLabelEn',
   ctaLabelZh: 'ctaLabelZh',
+  ctaLabelJa: 'ctaLabelJa',
   ctaHref: 'ctaHref',
   leftImage: 'leftImage',
   mainImage: 'mainImage',
@@ -138,8 +143,10 @@ export const NewsItemScalarFieldEnum = {
   date: 'date',
   titleEn: 'titleEn',
   titleZh: 'titleZh',
+  titleJa: 'titleJa',
   summaryEn: 'summaryEn',
   summaryZh: 'summaryZh',
+  summaryJa: 'summaryJa',
   href: 'href',
   isPinned: 'isPinned',
   published: 'published'
@@ -153,6 +160,7 @@ export const ReleaseScalarFieldEnum = {
   slug: 'slug',
   titleEn: 'titleEn',
   titleZh: 'titleZh',
+  titleJa: 'titleJa',
   artistName: 'artistName',
   releaseType: 'releaseType',
   releaseDate: 'releaseDate',
@@ -160,8 +168,10 @@ export const ReleaseScalarFieldEnum = {
   heroImage: 'heroImage',
   summaryEn: 'summaryEn',
   summaryZh: 'summaryZh',
+  summaryJa: 'summaryJa',
   tracklistEn: 'tracklistEn',
   tracklistZh: 'tracklistZh',
+  tracklistJa: 'tracklistJa',
   isFeatured: 'isFeatured',
   sortOrder: 'sortOrder',
   published: 'published'
@@ -186,8 +196,10 @@ export const PageContentScalarFieldEnum = {
   pageKey: 'pageKey',
   titleEn: 'titleEn',
   titleZh: 'titleZh',
+  titleJa: 'titleJa',
   bodyEn: 'bodyEn',
-  bodyZh: 'bodyZh'
+  bodyZh: 'bodyZh',
+  bodyJa: 'bodyJa'
 } as const
 
 export type PageContentScalarFieldEnum = (typeof PageContentScalarFieldEnum)[keyof typeof PageContentScalarFieldEnum]
@@ -198,8 +210,10 @@ export const ProjectItemScalarFieldEnum = {
   slug: 'slug',
   titleEn: 'titleEn',
   titleZh: 'titleZh',
+  titleJa: 'titleJa',
   summaryEn: 'summaryEn',
   summaryZh: 'summaryZh',
+  summaryJa: 'summaryJa',
   coverImage: 'coverImage',
   href: 'href',
   published: 'published',

@@ -39,6 +39,7 @@ export type ReleaseMinAggregateOutputType = {
   slug: string | null
   titleEn: string | null
   titleZh: string | null
+  titleJa: string | null
   artistName: string | null
   releaseType: string | null
   releaseDate: Date | null
@@ -46,6 +47,7 @@ export type ReleaseMinAggregateOutputType = {
   heroImage: string | null
   summaryEn: string | null
   summaryZh: string | null
+  summaryJa: string | null
   isFeatured: boolean | null
   sortOrder: number | null
   published: boolean | null
@@ -56,6 +58,7 @@ export type ReleaseMaxAggregateOutputType = {
   slug: string | null
   titleEn: string | null
   titleZh: string | null
+  titleJa: string | null
   artistName: string | null
   releaseType: string | null
   releaseDate: Date | null
@@ -63,6 +66,7 @@ export type ReleaseMaxAggregateOutputType = {
   heroImage: string | null
   summaryEn: string | null
   summaryZh: string | null
+  summaryJa: string | null
   isFeatured: boolean | null
   sortOrder: number | null
   published: boolean | null
@@ -73,6 +77,7 @@ export type ReleaseCountAggregateOutputType = {
   slug: number
   titleEn: number
   titleZh: number
+  titleJa: number
   artistName: number
   releaseType: number
   releaseDate: number
@@ -80,8 +85,10 @@ export type ReleaseCountAggregateOutputType = {
   heroImage: number
   summaryEn: number
   summaryZh: number
+  summaryJa: number
   tracklistEn: number
   tracklistZh: number
+  tracklistJa: number
   isFeatured: number
   sortOrder: number
   published: number
@@ -102,6 +109,7 @@ export type ReleaseMinAggregateInputType = {
   slug?: true
   titleEn?: true
   titleZh?: true
+  titleJa?: true
   artistName?: true
   releaseType?: true
   releaseDate?: true
@@ -109,6 +117,7 @@ export type ReleaseMinAggregateInputType = {
   heroImage?: true
   summaryEn?: true
   summaryZh?: true
+  summaryJa?: true
   isFeatured?: true
   sortOrder?: true
   published?: true
@@ -119,6 +128,7 @@ export type ReleaseMaxAggregateInputType = {
   slug?: true
   titleEn?: true
   titleZh?: true
+  titleJa?: true
   artistName?: true
   releaseType?: true
   releaseDate?: true
@@ -126,6 +136,7 @@ export type ReleaseMaxAggregateInputType = {
   heroImage?: true
   summaryEn?: true
   summaryZh?: true
+  summaryJa?: true
   isFeatured?: true
   sortOrder?: true
   published?: true
@@ -136,6 +147,7 @@ export type ReleaseCountAggregateInputType = {
   slug?: true
   titleEn?: true
   titleZh?: true
+  titleJa?: true
   artistName?: true
   releaseType?: true
   releaseDate?: true
@@ -143,8 +155,10 @@ export type ReleaseCountAggregateInputType = {
   heroImage?: true
   summaryEn?: true
   summaryZh?: true
+  summaryJa?: true
   tracklistEn?: true
   tracklistZh?: true
+  tracklistJa?: true
   isFeatured?: true
   sortOrder?: true
   published?: true
@@ -242,6 +256,7 @@ export type ReleaseGroupByOutputType = {
   slug: string
   titleEn: string
   titleZh: string
+  titleJa: string
   artistName: string
   releaseType: string
   releaseDate: Date
@@ -249,8 +264,10 @@ export type ReleaseGroupByOutputType = {
   heroImage: string | null
   summaryEn: string
   summaryZh: string
+  summaryJa: string
   tracklistEn: runtime.JsonValue
   tracklistZh: runtime.JsonValue
+  tracklistJa: runtime.JsonValue
   isFeatured: boolean
   sortOrder: number
   published: boolean
@@ -284,6 +301,7 @@ export type ReleaseWhereInput = {
   slug?: Prisma.StringFilter<"Release"> | string
   titleEn?: Prisma.StringFilter<"Release"> | string
   titleZh?: Prisma.StringFilter<"Release"> | string
+  titleJa?: Prisma.StringFilter<"Release"> | string
   artistName?: Prisma.StringFilter<"Release"> | string
   releaseType?: Prisma.StringFilter<"Release"> | string
   releaseDate?: Prisma.DateTimeFilter<"Release"> | Date | string
@@ -291,8 +309,10 @@ export type ReleaseWhereInput = {
   heroImage?: Prisma.StringNullableFilter<"Release"> | string | null
   summaryEn?: Prisma.StringFilter<"Release"> | string
   summaryZh?: Prisma.StringFilter<"Release"> | string
+  summaryJa?: Prisma.StringFilter<"Release"> | string
   tracklistEn?: Prisma.JsonFilter<"Release">
   tracklistZh?: Prisma.JsonFilter<"Release">
+  tracklistJa?: Prisma.JsonFilter<"Release">
   isFeatured?: Prisma.BoolFilter<"Release"> | boolean
   sortOrder?: Prisma.IntFilter<"Release"> | number
   published?: Prisma.BoolFilter<"Release"> | boolean
@@ -304,6 +324,7 @@ export type ReleaseOrderByWithRelationInput = {
   slug?: Prisma.SortOrder
   titleEn?: Prisma.SortOrder
   titleZh?: Prisma.SortOrder
+  titleJa?: Prisma.SortOrder
   artistName?: Prisma.SortOrder
   releaseType?: Prisma.SortOrder
   releaseDate?: Prisma.SortOrder
@@ -311,8 +332,10 @@ export type ReleaseOrderByWithRelationInput = {
   heroImage?: Prisma.SortOrderInput | Prisma.SortOrder
   summaryEn?: Prisma.SortOrder
   summaryZh?: Prisma.SortOrder
+  summaryJa?: Prisma.SortOrder
   tracklistEn?: Prisma.SortOrder
   tracklistZh?: Prisma.SortOrder
+  tracklistJa?: Prisma.SortOrder
   isFeatured?: Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
   published?: Prisma.SortOrder
@@ -327,6 +350,7 @@ export type ReleaseWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.ReleaseWhereInput | Prisma.ReleaseWhereInput[]
   titleEn?: Prisma.StringFilter<"Release"> | string
   titleZh?: Prisma.StringFilter<"Release"> | string
+  titleJa?: Prisma.StringFilter<"Release"> | string
   artistName?: Prisma.StringFilter<"Release"> | string
   releaseType?: Prisma.StringFilter<"Release"> | string
   releaseDate?: Prisma.DateTimeFilter<"Release"> | Date | string
@@ -334,8 +358,10 @@ export type ReleaseWhereUniqueInput = Prisma.AtLeast<{
   heroImage?: Prisma.StringNullableFilter<"Release"> | string | null
   summaryEn?: Prisma.StringFilter<"Release"> | string
   summaryZh?: Prisma.StringFilter<"Release"> | string
+  summaryJa?: Prisma.StringFilter<"Release"> | string
   tracklistEn?: Prisma.JsonFilter<"Release">
   tracklistZh?: Prisma.JsonFilter<"Release">
+  tracklistJa?: Prisma.JsonFilter<"Release">
   isFeatured?: Prisma.BoolFilter<"Release"> | boolean
   sortOrder?: Prisma.IntFilter<"Release"> | number
   published?: Prisma.BoolFilter<"Release"> | boolean
@@ -347,6 +373,7 @@ export type ReleaseOrderByWithAggregationInput = {
   slug?: Prisma.SortOrder
   titleEn?: Prisma.SortOrder
   titleZh?: Prisma.SortOrder
+  titleJa?: Prisma.SortOrder
   artistName?: Prisma.SortOrder
   releaseType?: Prisma.SortOrder
   releaseDate?: Prisma.SortOrder
@@ -354,8 +381,10 @@ export type ReleaseOrderByWithAggregationInput = {
   heroImage?: Prisma.SortOrderInput | Prisma.SortOrder
   summaryEn?: Prisma.SortOrder
   summaryZh?: Prisma.SortOrder
+  summaryJa?: Prisma.SortOrder
   tracklistEn?: Prisma.SortOrder
   tracklistZh?: Prisma.SortOrder
+  tracklistJa?: Prisma.SortOrder
   isFeatured?: Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
   published?: Prisma.SortOrder
@@ -374,6 +403,7 @@ export type ReleaseScalarWhereWithAggregatesInput = {
   slug?: Prisma.StringWithAggregatesFilter<"Release"> | string
   titleEn?: Prisma.StringWithAggregatesFilter<"Release"> | string
   titleZh?: Prisma.StringWithAggregatesFilter<"Release"> | string
+  titleJa?: Prisma.StringWithAggregatesFilter<"Release"> | string
   artistName?: Prisma.StringWithAggregatesFilter<"Release"> | string
   releaseType?: Prisma.StringWithAggregatesFilter<"Release"> | string
   releaseDate?: Prisma.DateTimeWithAggregatesFilter<"Release"> | Date | string
@@ -381,8 +411,10 @@ export type ReleaseScalarWhereWithAggregatesInput = {
   heroImage?: Prisma.StringNullableWithAggregatesFilter<"Release"> | string | null
   summaryEn?: Prisma.StringWithAggregatesFilter<"Release"> | string
   summaryZh?: Prisma.StringWithAggregatesFilter<"Release"> | string
+  summaryJa?: Prisma.StringWithAggregatesFilter<"Release"> | string
   tracklistEn?: Prisma.JsonWithAggregatesFilter<"Release">
   tracklistZh?: Prisma.JsonWithAggregatesFilter<"Release">
+  tracklistJa?: Prisma.JsonWithAggregatesFilter<"Release">
   isFeatured?: Prisma.BoolWithAggregatesFilter<"Release"> | boolean
   sortOrder?: Prisma.IntWithAggregatesFilter<"Release"> | number
   published?: Prisma.BoolWithAggregatesFilter<"Release"> | boolean
@@ -393,6 +425,7 @@ export type ReleaseCreateInput = {
   slug: string
   titleEn: string
   titleZh: string
+  titleJa: string
   artistName: string
   releaseType: string
   releaseDate: Date | string
@@ -400,8 +433,10 @@ export type ReleaseCreateInput = {
   heroImage?: string | null
   summaryEn: string
   summaryZh: string
+  summaryJa: string
   tracklistEn: Prisma.JsonNullValueInput | runtime.InputJsonValue
   tracklistZh: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  tracklistJa: Prisma.JsonNullValueInput | runtime.InputJsonValue
   isFeatured?: boolean
   sortOrder?: number
   published?: boolean
@@ -413,6 +448,7 @@ export type ReleaseUncheckedCreateInput = {
   slug: string
   titleEn: string
   titleZh: string
+  titleJa: string
   artistName: string
   releaseType: string
   releaseDate: Date | string
@@ -420,8 +456,10 @@ export type ReleaseUncheckedCreateInput = {
   heroImage?: string | null
   summaryEn: string
   summaryZh: string
+  summaryJa: string
   tracklistEn: Prisma.JsonNullValueInput | runtime.InputJsonValue
   tracklistZh: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  tracklistJa: Prisma.JsonNullValueInput | runtime.InputJsonValue
   isFeatured?: boolean
   sortOrder?: number
   published?: boolean
@@ -433,6 +471,7 @@ export type ReleaseUpdateInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   titleEn?: Prisma.StringFieldUpdateOperationsInput | string
   titleZh?: Prisma.StringFieldUpdateOperationsInput | string
+  titleJa?: Prisma.StringFieldUpdateOperationsInput | string
   artistName?: Prisma.StringFieldUpdateOperationsInput | string
   releaseType?: Prisma.StringFieldUpdateOperationsInput | string
   releaseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -440,8 +479,10 @@ export type ReleaseUpdateInput = {
   heroImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   summaryEn?: Prisma.StringFieldUpdateOperationsInput | string
   summaryZh?: Prisma.StringFieldUpdateOperationsInput | string
+  summaryJa?: Prisma.StringFieldUpdateOperationsInput | string
   tracklistEn?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   tracklistZh?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  tracklistJa?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -453,6 +494,7 @@ export type ReleaseUncheckedUpdateInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   titleEn?: Prisma.StringFieldUpdateOperationsInput | string
   titleZh?: Prisma.StringFieldUpdateOperationsInput | string
+  titleJa?: Prisma.StringFieldUpdateOperationsInput | string
   artistName?: Prisma.StringFieldUpdateOperationsInput | string
   releaseType?: Prisma.StringFieldUpdateOperationsInput | string
   releaseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -460,8 +502,10 @@ export type ReleaseUncheckedUpdateInput = {
   heroImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   summaryEn?: Prisma.StringFieldUpdateOperationsInput | string
   summaryZh?: Prisma.StringFieldUpdateOperationsInput | string
+  summaryJa?: Prisma.StringFieldUpdateOperationsInput | string
   tracklistEn?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   tracklistZh?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  tracklistJa?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -473,6 +517,7 @@ export type ReleaseCreateManyInput = {
   slug: string
   titleEn: string
   titleZh: string
+  titleJa: string
   artistName: string
   releaseType: string
   releaseDate: Date | string
@@ -480,8 +525,10 @@ export type ReleaseCreateManyInput = {
   heroImage?: string | null
   summaryEn: string
   summaryZh: string
+  summaryJa: string
   tracklistEn: Prisma.JsonNullValueInput | runtime.InputJsonValue
   tracklistZh: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  tracklistJa: Prisma.JsonNullValueInput | runtime.InputJsonValue
   isFeatured?: boolean
   sortOrder?: number
   published?: boolean
@@ -492,6 +539,7 @@ export type ReleaseUpdateManyMutationInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   titleEn?: Prisma.StringFieldUpdateOperationsInput | string
   titleZh?: Prisma.StringFieldUpdateOperationsInput | string
+  titleJa?: Prisma.StringFieldUpdateOperationsInput | string
   artistName?: Prisma.StringFieldUpdateOperationsInput | string
   releaseType?: Prisma.StringFieldUpdateOperationsInput | string
   releaseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -499,8 +547,10 @@ export type ReleaseUpdateManyMutationInput = {
   heroImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   summaryEn?: Prisma.StringFieldUpdateOperationsInput | string
   summaryZh?: Prisma.StringFieldUpdateOperationsInput | string
+  summaryJa?: Prisma.StringFieldUpdateOperationsInput | string
   tracklistEn?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   tracklistZh?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  tracklistJa?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -511,6 +561,7 @@ export type ReleaseUncheckedUpdateManyInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   titleEn?: Prisma.StringFieldUpdateOperationsInput | string
   titleZh?: Prisma.StringFieldUpdateOperationsInput | string
+  titleJa?: Prisma.StringFieldUpdateOperationsInput | string
   artistName?: Prisma.StringFieldUpdateOperationsInput | string
   releaseType?: Prisma.StringFieldUpdateOperationsInput | string
   releaseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -518,8 +569,10 @@ export type ReleaseUncheckedUpdateManyInput = {
   heroImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   summaryEn?: Prisma.StringFieldUpdateOperationsInput | string
   summaryZh?: Prisma.StringFieldUpdateOperationsInput | string
+  summaryJa?: Prisma.StringFieldUpdateOperationsInput | string
   tracklistEn?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   tracklistZh?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  tracklistJa?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -530,6 +583,7 @@ export type ReleaseCountOrderByAggregateInput = {
   slug?: Prisma.SortOrder
   titleEn?: Prisma.SortOrder
   titleZh?: Prisma.SortOrder
+  titleJa?: Prisma.SortOrder
   artistName?: Prisma.SortOrder
   releaseType?: Prisma.SortOrder
   releaseDate?: Prisma.SortOrder
@@ -537,8 +591,10 @@ export type ReleaseCountOrderByAggregateInput = {
   heroImage?: Prisma.SortOrder
   summaryEn?: Prisma.SortOrder
   summaryZh?: Prisma.SortOrder
+  summaryJa?: Prisma.SortOrder
   tracklistEn?: Prisma.SortOrder
   tracklistZh?: Prisma.SortOrder
+  tracklistJa?: Prisma.SortOrder
   isFeatured?: Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
   published?: Prisma.SortOrder
@@ -553,6 +609,7 @@ export type ReleaseMaxOrderByAggregateInput = {
   slug?: Prisma.SortOrder
   titleEn?: Prisma.SortOrder
   titleZh?: Prisma.SortOrder
+  titleJa?: Prisma.SortOrder
   artistName?: Prisma.SortOrder
   releaseType?: Prisma.SortOrder
   releaseDate?: Prisma.SortOrder
@@ -560,6 +617,7 @@ export type ReleaseMaxOrderByAggregateInput = {
   heroImage?: Prisma.SortOrder
   summaryEn?: Prisma.SortOrder
   summaryZh?: Prisma.SortOrder
+  summaryJa?: Prisma.SortOrder
   isFeatured?: Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
   published?: Prisma.SortOrder
@@ -570,6 +628,7 @@ export type ReleaseMinOrderByAggregateInput = {
   slug?: Prisma.SortOrder
   titleEn?: Prisma.SortOrder
   titleZh?: Prisma.SortOrder
+  titleJa?: Prisma.SortOrder
   artistName?: Prisma.SortOrder
   releaseType?: Prisma.SortOrder
   releaseDate?: Prisma.SortOrder
@@ -577,6 +636,7 @@ export type ReleaseMinOrderByAggregateInput = {
   heroImage?: Prisma.SortOrder
   summaryEn?: Prisma.SortOrder
   summaryZh?: Prisma.SortOrder
+  summaryJa?: Prisma.SortOrder
   isFeatured?: Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
   published?: Prisma.SortOrder
@@ -610,6 +670,7 @@ export type ReleaseCreateWithoutLinksInput = {
   slug: string
   titleEn: string
   titleZh: string
+  titleJa: string
   artistName: string
   releaseType: string
   releaseDate: Date | string
@@ -617,8 +678,10 @@ export type ReleaseCreateWithoutLinksInput = {
   heroImage?: string | null
   summaryEn: string
   summaryZh: string
+  summaryJa: string
   tracklistEn: Prisma.JsonNullValueInput | runtime.InputJsonValue
   tracklistZh: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  tracklistJa: Prisma.JsonNullValueInput | runtime.InputJsonValue
   isFeatured?: boolean
   sortOrder?: number
   published?: boolean
@@ -629,6 +692,7 @@ export type ReleaseUncheckedCreateWithoutLinksInput = {
   slug: string
   titleEn: string
   titleZh: string
+  titleJa: string
   artistName: string
   releaseType: string
   releaseDate: Date | string
@@ -636,8 +700,10 @@ export type ReleaseUncheckedCreateWithoutLinksInput = {
   heroImage?: string | null
   summaryEn: string
   summaryZh: string
+  summaryJa: string
   tracklistEn: Prisma.JsonNullValueInput | runtime.InputJsonValue
   tracklistZh: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  tracklistJa: Prisma.JsonNullValueInput | runtime.InputJsonValue
   isFeatured?: boolean
   sortOrder?: number
   published?: boolean
@@ -664,6 +730,7 @@ export type ReleaseUpdateWithoutLinksInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   titleEn?: Prisma.StringFieldUpdateOperationsInput | string
   titleZh?: Prisma.StringFieldUpdateOperationsInput | string
+  titleJa?: Prisma.StringFieldUpdateOperationsInput | string
   artistName?: Prisma.StringFieldUpdateOperationsInput | string
   releaseType?: Prisma.StringFieldUpdateOperationsInput | string
   releaseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -671,8 +738,10 @@ export type ReleaseUpdateWithoutLinksInput = {
   heroImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   summaryEn?: Prisma.StringFieldUpdateOperationsInput | string
   summaryZh?: Prisma.StringFieldUpdateOperationsInput | string
+  summaryJa?: Prisma.StringFieldUpdateOperationsInput | string
   tracklistEn?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   tracklistZh?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  tracklistJa?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -683,6 +752,7 @@ export type ReleaseUncheckedUpdateWithoutLinksInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   titleEn?: Prisma.StringFieldUpdateOperationsInput | string
   titleZh?: Prisma.StringFieldUpdateOperationsInput | string
+  titleJa?: Prisma.StringFieldUpdateOperationsInput | string
   artistName?: Prisma.StringFieldUpdateOperationsInput | string
   releaseType?: Prisma.StringFieldUpdateOperationsInput | string
   releaseDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -690,8 +760,10 @@ export type ReleaseUncheckedUpdateWithoutLinksInput = {
   heroImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   summaryEn?: Prisma.StringFieldUpdateOperationsInput | string
   summaryZh?: Prisma.StringFieldUpdateOperationsInput | string
+  summaryJa?: Prisma.StringFieldUpdateOperationsInput | string
   tracklistEn?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   tracklistZh?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  tracklistJa?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -733,6 +805,7 @@ export type ReleaseSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   slug?: boolean
   titleEn?: boolean
   titleZh?: boolean
+  titleJa?: boolean
   artistName?: boolean
   releaseType?: boolean
   releaseDate?: boolean
@@ -740,8 +813,10 @@ export type ReleaseSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   heroImage?: boolean
   summaryEn?: boolean
   summaryZh?: boolean
+  summaryJa?: boolean
   tracklistEn?: boolean
   tracklistZh?: boolean
+  tracklistJa?: boolean
   isFeatured?: boolean
   sortOrder?: boolean
   published?: boolean
@@ -754,6 +829,7 @@ export type ReleaseSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   slug?: boolean
   titleEn?: boolean
   titleZh?: boolean
+  titleJa?: boolean
   artistName?: boolean
   releaseType?: boolean
   releaseDate?: boolean
@@ -761,8 +837,10 @@ export type ReleaseSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   heroImage?: boolean
   summaryEn?: boolean
   summaryZh?: boolean
+  summaryJa?: boolean
   tracklistEn?: boolean
   tracklistZh?: boolean
+  tracklistJa?: boolean
   isFeatured?: boolean
   sortOrder?: boolean
   published?: boolean
@@ -773,6 +851,7 @@ export type ReleaseSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   slug?: boolean
   titleEn?: boolean
   titleZh?: boolean
+  titleJa?: boolean
   artistName?: boolean
   releaseType?: boolean
   releaseDate?: boolean
@@ -780,8 +859,10 @@ export type ReleaseSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   heroImage?: boolean
   summaryEn?: boolean
   summaryZh?: boolean
+  summaryJa?: boolean
   tracklistEn?: boolean
   tracklistZh?: boolean
+  tracklistJa?: boolean
   isFeatured?: boolean
   sortOrder?: boolean
   published?: boolean
@@ -792,6 +873,7 @@ export type ReleaseSelectScalar = {
   slug?: boolean
   titleEn?: boolean
   titleZh?: boolean
+  titleJa?: boolean
   artistName?: boolean
   releaseType?: boolean
   releaseDate?: boolean
@@ -799,14 +881,16 @@ export type ReleaseSelectScalar = {
   heroImage?: boolean
   summaryEn?: boolean
   summaryZh?: boolean
+  summaryJa?: boolean
   tracklistEn?: boolean
   tracklistZh?: boolean
+  tracklistJa?: boolean
   isFeatured?: boolean
   sortOrder?: boolean
   published?: boolean
 }
 
-export type ReleaseOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "slug" | "titleEn" | "titleZh" | "artistName" | "releaseType" | "releaseDate" | "coverImage" | "heroImage" | "summaryEn" | "summaryZh" | "tracklistEn" | "tracklistZh" | "isFeatured" | "sortOrder" | "published", ExtArgs["result"]["release"]>
+export type ReleaseOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "slug" | "titleEn" | "titleZh" | "titleJa" | "artistName" | "releaseType" | "releaseDate" | "coverImage" | "heroImage" | "summaryEn" | "summaryZh" | "summaryJa" | "tracklistEn" | "tracklistZh" | "tracklistJa" | "isFeatured" | "sortOrder" | "published", ExtArgs["result"]["release"]>
 export type ReleaseInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   links?: boolean | Prisma.Release$linksArgs<ExtArgs>
   _count?: boolean | Prisma.ReleaseCountOutputTypeDefaultArgs<ExtArgs>
@@ -824,6 +908,7 @@ export type $ReleasePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     slug: string
     titleEn: string
     titleZh: string
+    titleJa: string
     artistName: string
     releaseType: string
     releaseDate: Date
@@ -831,8 +916,10 @@ export type $ReleasePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     heroImage: string | null
     summaryEn: string
     summaryZh: string
+    summaryJa: string
     tracklistEn: runtime.JsonValue
     tracklistZh: runtime.JsonValue
+    tracklistJa: runtime.JsonValue
     isFeatured: boolean
     sortOrder: number
     published: boolean
@@ -1264,6 +1351,7 @@ export interface ReleaseFieldRefs {
   readonly slug: Prisma.FieldRef<"Release", 'String'>
   readonly titleEn: Prisma.FieldRef<"Release", 'String'>
   readonly titleZh: Prisma.FieldRef<"Release", 'String'>
+  readonly titleJa: Prisma.FieldRef<"Release", 'String'>
   readonly artistName: Prisma.FieldRef<"Release", 'String'>
   readonly releaseType: Prisma.FieldRef<"Release", 'String'>
   readonly releaseDate: Prisma.FieldRef<"Release", 'DateTime'>
@@ -1271,8 +1359,10 @@ export interface ReleaseFieldRefs {
   readonly heroImage: Prisma.FieldRef<"Release", 'String'>
   readonly summaryEn: Prisma.FieldRef<"Release", 'String'>
   readonly summaryZh: Prisma.FieldRef<"Release", 'String'>
+  readonly summaryJa: Prisma.FieldRef<"Release", 'String'>
   readonly tracklistEn: Prisma.FieldRef<"Release", 'Json'>
   readonly tracklistZh: Prisma.FieldRef<"Release", 'Json'>
+  readonly tracklistJa: Prisma.FieldRef<"Release", 'Json'>
   readonly isFeatured: Prisma.FieldRef<"Release", 'Boolean'>
   readonly sortOrder: Prisma.FieldRef<"Release", 'Int'>
   readonly published: Prisma.FieldRef<"Release", 'Boolean'>

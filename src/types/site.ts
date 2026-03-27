@@ -1,9 +1,9 @@
-export type Locale = "en" | "zh" | "jp";
+export type Locale = "en" | "zh" | "ja";
 
 export type LocalizedText = {
   en: string;
   zh: string;
-  jp: string;
+  ja: string;
 };
 
 export type NavItem = {
@@ -72,7 +72,7 @@ export type ReleaseEntry = {
   tracklist: {
     en: string[];
     zh: string[];
-    jp: string[];
+    ja: string[];
   };
   links: ReleaseLink[];
   subtitle?: LocalizedText;
@@ -86,7 +86,7 @@ export type ReleaseEntry = {
   tracks?: {
     en: ReleaseTrack[];
     zh: ReleaseTrack[];
-    jp: ReleaseTrack[];
+    ja: ReleaseTrack[];
   };
   circleLink?: string;
   itemListLink?: string;

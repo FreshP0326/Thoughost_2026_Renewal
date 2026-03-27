@@ -3,6 +3,8 @@ generator client {
   output   = "../src/generated/prisma"
 }
 
+// Reserved scaffolding only: the rendered site currently reads from src/content/**
+// through src/server/services/** during static export, not from this schema.
 datasource db {
   provider = "sqlite"
 }
@@ -14,6 +16,7 @@ model SiteConfig {
   copyrightText String
   footerQuoteEn String
   footerQuoteZh String
+  footerQuoteJa String
 }
 
 model NavigationLink {
@@ -21,6 +24,7 @@ model NavigationLink {
   key       String
   labelEn   String
   labelZh   String
+  labelJa   String
   href      String
   sortOrder Int
   location  String
@@ -40,10 +44,13 @@ model HeroProject {
   slug       String  @unique
   titleEn    String
   titleZh    String
+  titleJa    String
   subtitleEn String?
   subtitleZh String?
+  subtitleJa String?
   ctaLabelEn String
   ctaLabelZh String
+  ctaLabelJa String
   ctaHref    String
   leftImage  String
   mainImage  String
@@ -58,8 +65,10 @@ model NewsItem {
   date      DateTime
   titleEn   String
   titleZh   String
+  titleJa   String
   summaryEn String?
   summaryZh String?
+  summaryJa String?
   href      String
   isPinned  Boolean  @default(false)
   published Boolean  @default(true)
@@ -70,6 +79,7 @@ model Release {
   slug        String        @unique
   titleEn     String
   titleZh     String
+  titleJa     String
   artistName  String
   releaseType String
   releaseDate DateTime
@@ -77,8 +87,10 @@ model Release {
   heroImage   String?
   summaryEn   String
   summaryZh   String
+  summaryJa   String
   tracklistEn Json
   tracklistZh Json
+  tracklistJa Json
   isFeatured  Boolean       @default(false)
   sortOrder   Int           @default(0)
   published   Boolean       @default(true)
@@ -99,8 +111,10 @@ model PageContent {
   pageKey String @unique
   titleEn String
   titleZh String
+  titleJa String
   bodyEn  String
   bodyZh  String
+  bodyJa  String
 }
 
 model ProjectItem {
@@ -108,8 +122,10 @@ model ProjectItem {
   slug       String  @unique
   titleEn    String
   titleZh    String
+  titleJa    String
   summaryEn  String
   summaryZh  String
+  summaryJa  String
   coverImage String
   href       String
   published  Boolean @default(true)

@@ -39,8 +39,10 @@ export type ProjectItemMinAggregateOutputType = {
   slug: string | null
   titleEn: string | null
   titleZh: string | null
+  titleJa: string | null
   summaryEn: string | null
   summaryZh: string | null
+  summaryJa: string | null
   coverImage: string | null
   href: string | null
   published: boolean | null
@@ -52,8 +54,10 @@ export type ProjectItemMaxAggregateOutputType = {
   slug: string | null
   titleEn: string | null
   titleZh: string | null
+  titleJa: string | null
   summaryEn: string | null
   summaryZh: string | null
+  summaryJa: string | null
   coverImage: string | null
   href: string | null
   published: boolean | null
@@ -65,8 +69,10 @@ export type ProjectItemCountAggregateOutputType = {
   slug: number
   titleEn: number
   titleZh: number
+  titleJa: number
   summaryEn: number
   summaryZh: number
+  summaryJa: number
   coverImage: number
   href: number
   published: number
@@ -88,8 +94,10 @@ export type ProjectItemMinAggregateInputType = {
   slug?: true
   titleEn?: true
   titleZh?: true
+  titleJa?: true
   summaryEn?: true
   summaryZh?: true
+  summaryJa?: true
   coverImage?: true
   href?: true
   published?: true
@@ -101,8 +109,10 @@ export type ProjectItemMaxAggregateInputType = {
   slug?: true
   titleEn?: true
   titleZh?: true
+  titleJa?: true
   summaryEn?: true
   summaryZh?: true
+  summaryJa?: true
   coverImage?: true
   href?: true
   published?: true
@@ -114,8 +124,10 @@ export type ProjectItemCountAggregateInputType = {
   slug?: true
   titleEn?: true
   titleZh?: true
+  titleJa?: true
   summaryEn?: true
   summaryZh?: true
+  summaryJa?: true
   coverImage?: true
   href?: true
   published?: true
@@ -214,8 +226,10 @@ export type ProjectItemGroupByOutputType = {
   slug: string
   titleEn: string
   titleZh: string
+  titleJa: string
   summaryEn: string
   summaryZh: string
+  summaryJa: string
   coverImage: string
   href: string
   published: boolean
@@ -250,8 +264,10 @@ export type ProjectItemWhereInput = {
   slug?: Prisma.StringFilter<"ProjectItem"> | string
   titleEn?: Prisma.StringFilter<"ProjectItem"> | string
   titleZh?: Prisma.StringFilter<"ProjectItem"> | string
+  titleJa?: Prisma.StringFilter<"ProjectItem"> | string
   summaryEn?: Prisma.StringFilter<"ProjectItem"> | string
   summaryZh?: Prisma.StringFilter<"ProjectItem"> | string
+  summaryJa?: Prisma.StringFilter<"ProjectItem"> | string
   coverImage?: Prisma.StringFilter<"ProjectItem"> | string
   href?: Prisma.StringFilter<"ProjectItem"> | string
   published?: Prisma.BoolFilter<"ProjectItem"> | boolean
@@ -263,8 +279,10 @@ export type ProjectItemOrderByWithRelationInput = {
   slug?: Prisma.SortOrder
   titleEn?: Prisma.SortOrder
   titleZh?: Prisma.SortOrder
+  titleJa?: Prisma.SortOrder
   summaryEn?: Prisma.SortOrder
   summaryZh?: Prisma.SortOrder
+  summaryJa?: Prisma.SortOrder
   coverImage?: Prisma.SortOrder
   href?: Prisma.SortOrder
   published?: Prisma.SortOrder
@@ -279,8 +297,10 @@ export type ProjectItemWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.ProjectItemWhereInput | Prisma.ProjectItemWhereInput[]
   titleEn?: Prisma.StringFilter<"ProjectItem"> | string
   titleZh?: Prisma.StringFilter<"ProjectItem"> | string
+  titleJa?: Prisma.StringFilter<"ProjectItem"> | string
   summaryEn?: Prisma.StringFilter<"ProjectItem"> | string
   summaryZh?: Prisma.StringFilter<"ProjectItem"> | string
+  summaryJa?: Prisma.StringFilter<"ProjectItem"> | string
   coverImage?: Prisma.StringFilter<"ProjectItem"> | string
   href?: Prisma.StringFilter<"ProjectItem"> | string
   published?: Prisma.BoolFilter<"ProjectItem"> | boolean
@@ -292,8 +312,10 @@ export type ProjectItemOrderByWithAggregationInput = {
   slug?: Prisma.SortOrder
   titleEn?: Prisma.SortOrder
   titleZh?: Prisma.SortOrder
+  titleJa?: Prisma.SortOrder
   summaryEn?: Prisma.SortOrder
   summaryZh?: Prisma.SortOrder
+  summaryJa?: Prisma.SortOrder
   coverImage?: Prisma.SortOrder
   href?: Prisma.SortOrder
   published?: Prisma.SortOrder
@@ -313,8 +335,10 @@ export type ProjectItemScalarWhereWithAggregatesInput = {
   slug?: Prisma.StringWithAggregatesFilter<"ProjectItem"> | string
   titleEn?: Prisma.StringWithAggregatesFilter<"ProjectItem"> | string
   titleZh?: Prisma.StringWithAggregatesFilter<"ProjectItem"> | string
+  titleJa?: Prisma.StringWithAggregatesFilter<"ProjectItem"> | string
   summaryEn?: Prisma.StringWithAggregatesFilter<"ProjectItem"> | string
   summaryZh?: Prisma.StringWithAggregatesFilter<"ProjectItem"> | string
+  summaryJa?: Prisma.StringWithAggregatesFilter<"ProjectItem"> | string
   coverImage?: Prisma.StringWithAggregatesFilter<"ProjectItem"> | string
   href?: Prisma.StringWithAggregatesFilter<"ProjectItem"> | string
   published?: Prisma.BoolWithAggregatesFilter<"ProjectItem"> | boolean
@@ -326,8 +350,10 @@ export type ProjectItemCreateInput = {
   slug: string
   titleEn: string
   titleZh: string
+  titleJa: string
   summaryEn: string
   summaryZh: string
+  summaryJa: string
   coverImage: string
   href: string
   published?: boolean
@@ -339,8 +365,10 @@ export type ProjectItemUncheckedCreateInput = {
   slug: string
   titleEn: string
   titleZh: string
+  titleJa: string
   summaryEn: string
   summaryZh: string
+  summaryJa: string
   coverImage: string
   href: string
   published?: boolean
@@ -352,8 +380,10 @@ export type ProjectItemUpdateInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   titleEn?: Prisma.StringFieldUpdateOperationsInput | string
   titleZh?: Prisma.StringFieldUpdateOperationsInput | string
+  titleJa?: Prisma.StringFieldUpdateOperationsInput | string
   summaryEn?: Prisma.StringFieldUpdateOperationsInput | string
   summaryZh?: Prisma.StringFieldUpdateOperationsInput | string
+  summaryJa?: Prisma.StringFieldUpdateOperationsInput | string
   coverImage?: Prisma.StringFieldUpdateOperationsInput | string
   href?: Prisma.StringFieldUpdateOperationsInput | string
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -365,8 +395,10 @@ export type ProjectItemUncheckedUpdateInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   titleEn?: Prisma.StringFieldUpdateOperationsInput | string
   titleZh?: Prisma.StringFieldUpdateOperationsInput | string
+  titleJa?: Prisma.StringFieldUpdateOperationsInput | string
   summaryEn?: Prisma.StringFieldUpdateOperationsInput | string
   summaryZh?: Prisma.StringFieldUpdateOperationsInput | string
+  summaryJa?: Prisma.StringFieldUpdateOperationsInput | string
   coverImage?: Prisma.StringFieldUpdateOperationsInput | string
   href?: Prisma.StringFieldUpdateOperationsInput | string
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -378,8 +410,10 @@ export type ProjectItemCreateManyInput = {
   slug: string
   titleEn: string
   titleZh: string
+  titleJa: string
   summaryEn: string
   summaryZh: string
+  summaryJa: string
   coverImage: string
   href: string
   published?: boolean
@@ -391,8 +425,10 @@ export type ProjectItemUpdateManyMutationInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   titleEn?: Prisma.StringFieldUpdateOperationsInput | string
   titleZh?: Prisma.StringFieldUpdateOperationsInput | string
+  titleJa?: Prisma.StringFieldUpdateOperationsInput | string
   summaryEn?: Prisma.StringFieldUpdateOperationsInput | string
   summaryZh?: Prisma.StringFieldUpdateOperationsInput | string
+  summaryJa?: Prisma.StringFieldUpdateOperationsInput | string
   coverImage?: Prisma.StringFieldUpdateOperationsInput | string
   href?: Prisma.StringFieldUpdateOperationsInput | string
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -404,8 +440,10 @@ export type ProjectItemUncheckedUpdateManyInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   titleEn?: Prisma.StringFieldUpdateOperationsInput | string
   titleZh?: Prisma.StringFieldUpdateOperationsInput | string
+  titleJa?: Prisma.StringFieldUpdateOperationsInput | string
   summaryEn?: Prisma.StringFieldUpdateOperationsInput | string
   summaryZh?: Prisma.StringFieldUpdateOperationsInput | string
+  summaryJa?: Prisma.StringFieldUpdateOperationsInput | string
   coverImage?: Prisma.StringFieldUpdateOperationsInput | string
   href?: Prisma.StringFieldUpdateOperationsInput | string
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -417,8 +455,10 @@ export type ProjectItemCountOrderByAggregateInput = {
   slug?: Prisma.SortOrder
   titleEn?: Prisma.SortOrder
   titleZh?: Prisma.SortOrder
+  titleJa?: Prisma.SortOrder
   summaryEn?: Prisma.SortOrder
   summaryZh?: Prisma.SortOrder
+  summaryJa?: Prisma.SortOrder
   coverImage?: Prisma.SortOrder
   href?: Prisma.SortOrder
   published?: Prisma.SortOrder
@@ -434,8 +474,10 @@ export type ProjectItemMaxOrderByAggregateInput = {
   slug?: Prisma.SortOrder
   titleEn?: Prisma.SortOrder
   titleZh?: Prisma.SortOrder
+  titleJa?: Prisma.SortOrder
   summaryEn?: Prisma.SortOrder
   summaryZh?: Prisma.SortOrder
+  summaryJa?: Prisma.SortOrder
   coverImage?: Prisma.SortOrder
   href?: Prisma.SortOrder
   published?: Prisma.SortOrder
@@ -447,8 +489,10 @@ export type ProjectItemMinOrderByAggregateInput = {
   slug?: Prisma.SortOrder
   titleEn?: Prisma.SortOrder
   titleZh?: Prisma.SortOrder
+  titleJa?: Prisma.SortOrder
   summaryEn?: Prisma.SortOrder
   summaryZh?: Prisma.SortOrder
+  summaryJa?: Prisma.SortOrder
   coverImage?: Prisma.SortOrder
   href?: Prisma.SortOrder
   published?: Prisma.SortOrder
@@ -466,8 +510,10 @@ export type ProjectItemSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   slug?: boolean
   titleEn?: boolean
   titleZh?: boolean
+  titleJa?: boolean
   summaryEn?: boolean
   summaryZh?: boolean
+  summaryJa?: boolean
   coverImage?: boolean
   href?: boolean
   published?: boolean
@@ -479,8 +525,10 @@ export type ProjectItemSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   slug?: boolean
   titleEn?: boolean
   titleZh?: boolean
+  titleJa?: boolean
   summaryEn?: boolean
   summaryZh?: boolean
+  summaryJa?: boolean
   coverImage?: boolean
   href?: boolean
   published?: boolean
@@ -492,8 +540,10 @@ export type ProjectItemSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   slug?: boolean
   titleEn?: boolean
   titleZh?: boolean
+  titleJa?: boolean
   summaryEn?: boolean
   summaryZh?: boolean
+  summaryJa?: boolean
   coverImage?: boolean
   href?: boolean
   published?: boolean
@@ -505,15 +555,17 @@ export type ProjectItemSelectScalar = {
   slug?: boolean
   titleEn?: boolean
   titleZh?: boolean
+  titleJa?: boolean
   summaryEn?: boolean
   summaryZh?: boolean
+  summaryJa?: boolean
   coverImage?: boolean
   href?: boolean
   published?: boolean
   sortOrder?: boolean
 }
 
-export type ProjectItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "slug" | "titleEn" | "titleZh" | "summaryEn" | "summaryZh" | "coverImage" | "href" | "published" | "sortOrder", ExtArgs["result"]["projectItem"]>
+export type ProjectItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "slug" | "titleEn" | "titleZh" | "titleJa" | "summaryEn" | "summaryZh" | "summaryJa" | "coverImage" | "href" | "published" | "sortOrder", ExtArgs["result"]["projectItem"]>
 
 export type $ProjectItemPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "ProjectItem"
@@ -523,8 +575,10 @@ export type $ProjectItemPayload<ExtArgs extends runtime.Types.Extensions.Interna
     slug: string
     titleEn: string
     titleZh: string
+    titleJa: string
     summaryEn: string
     summaryZh: string
+    summaryJa: string
     coverImage: string
     href: string
     published: boolean
@@ -956,8 +1010,10 @@ export interface ProjectItemFieldRefs {
   readonly slug: Prisma.FieldRef<"ProjectItem", 'String'>
   readonly titleEn: Prisma.FieldRef<"ProjectItem", 'String'>
   readonly titleZh: Prisma.FieldRef<"ProjectItem", 'String'>
+  readonly titleJa: Prisma.FieldRef<"ProjectItem", 'String'>
   readonly summaryEn: Prisma.FieldRef<"ProjectItem", 'String'>
   readonly summaryZh: Prisma.FieldRef<"ProjectItem", 'String'>
+  readonly summaryJa: Prisma.FieldRef<"ProjectItem", 'String'>
   readonly coverImage: Prisma.FieldRef<"ProjectItem", 'String'>
   readonly href: Prisma.FieldRef<"ProjectItem", 'String'>
   readonly published: Prisma.FieldRef<"ProjectItem", 'Boolean'>

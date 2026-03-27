@@ -40,13 +40,13 @@ import type {
 } from "@/types/site";
 import { newsContentModules } from "@/content/news";
 
-function pickText<T extends { en: unknown; zh: unknown; jp: unknown }>(locale: Locale, value: T): T["en"] {
+function pickText<T extends { en: unknown; zh: unknown; ja: unknown }>(locale: Locale, value: T): T["en"] {
   return value[locale] ?? value.en;
 }
 
 const heroOrder = ["2000-invasion", "thoughts", "kakusatsu-shoujo-3", "moonshine-001", "asteria"] as const;
 
-function pickMaybeLocalized(locale: Locale, value?: { en: string; zh: string; jp: string } | string) {
+function pickMaybeLocalized(locale: Locale, value?: { en: string; zh: string; ja: string } | string) {
   if (!value) {
     return undefined;
   }
@@ -132,7 +132,7 @@ function getInfoFieldLabels(locale: Locale) {
       mastering: "母带",
       producer: "制作",
     },
-    jp: {
+    ja: {
       modelNumber: "型番",
       releaseDate: "発売日",
       price: "価格",

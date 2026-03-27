@@ -39,6 +39,7 @@ export type NavigationLinkMinAggregateOutputType = {
   key: string | null
   labelEn: string | null
   labelZh: string | null
+  labelJa: string | null
   href: string | null
   sortOrder: number | null
   location: string | null
@@ -49,6 +50,7 @@ export type NavigationLinkMaxAggregateOutputType = {
   key: string | null
   labelEn: string | null
   labelZh: string | null
+  labelJa: string | null
   href: string | null
   sortOrder: number | null
   location: string | null
@@ -59,6 +61,7 @@ export type NavigationLinkCountAggregateOutputType = {
   key: number
   labelEn: number
   labelZh: number
+  labelJa: number
   href: number
   sortOrder: number
   location: number
@@ -79,6 +82,7 @@ export type NavigationLinkMinAggregateInputType = {
   key?: true
   labelEn?: true
   labelZh?: true
+  labelJa?: true
   href?: true
   sortOrder?: true
   location?: true
@@ -89,6 +93,7 @@ export type NavigationLinkMaxAggregateInputType = {
   key?: true
   labelEn?: true
   labelZh?: true
+  labelJa?: true
   href?: true
   sortOrder?: true
   location?: true
@@ -99,6 +104,7 @@ export type NavigationLinkCountAggregateInputType = {
   key?: true
   labelEn?: true
   labelZh?: true
+  labelJa?: true
   href?: true
   sortOrder?: true
   location?: true
@@ -196,6 +202,7 @@ export type NavigationLinkGroupByOutputType = {
   key: string
   labelEn: string
   labelZh: string
+  labelJa: string
   href: string
   sortOrder: number
   location: string
@@ -229,6 +236,7 @@ export type NavigationLinkWhereInput = {
   key?: Prisma.StringFilter<"NavigationLink"> | string
   labelEn?: Prisma.StringFilter<"NavigationLink"> | string
   labelZh?: Prisma.StringFilter<"NavigationLink"> | string
+  labelJa?: Prisma.StringFilter<"NavigationLink"> | string
   href?: Prisma.StringFilter<"NavigationLink"> | string
   sortOrder?: Prisma.IntFilter<"NavigationLink"> | number
   location?: Prisma.StringFilter<"NavigationLink"> | string
@@ -239,6 +247,7 @@ export type NavigationLinkOrderByWithRelationInput = {
   key?: Prisma.SortOrder
   labelEn?: Prisma.SortOrder
   labelZh?: Prisma.SortOrder
+  labelJa?: Prisma.SortOrder
   href?: Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
   location?: Prisma.SortOrder
@@ -252,6 +261,7 @@ export type NavigationLinkWhereUniqueInput = Prisma.AtLeast<{
   key?: Prisma.StringFilter<"NavigationLink"> | string
   labelEn?: Prisma.StringFilter<"NavigationLink"> | string
   labelZh?: Prisma.StringFilter<"NavigationLink"> | string
+  labelJa?: Prisma.StringFilter<"NavigationLink"> | string
   href?: Prisma.StringFilter<"NavigationLink"> | string
   sortOrder?: Prisma.IntFilter<"NavigationLink"> | number
   location?: Prisma.StringFilter<"NavigationLink"> | string
@@ -262,6 +272,7 @@ export type NavigationLinkOrderByWithAggregationInput = {
   key?: Prisma.SortOrder
   labelEn?: Prisma.SortOrder
   labelZh?: Prisma.SortOrder
+  labelJa?: Prisma.SortOrder
   href?: Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
   location?: Prisma.SortOrder
@@ -280,6 +291,7 @@ export type NavigationLinkScalarWhereWithAggregatesInput = {
   key?: Prisma.StringWithAggregatesFilter<"NavigationLink"> | string
   labelEn?: Prisma.StringWithAggregatesFilter<"NavigationLink"> | string
   labelZh?: Prisma.StringWithAggregatesFilter<"NavigationLink"> | string
+  labelJa?: Prisma.StringWithAggregatesFilter<"NavigationLink"> | string
   href?: Prisma.StringWithAggregatesFilter<"NavigationLink"> | string
   sortOrder?: Prisma.IntWithAggregatesFilter<"NavigationLink"> | number
   location?: Prisma.StringWithAggregatesFilter<"NavigationLink"> | string
@@ -290,6 +302,7 @@ export type NavigationLinkCreateInput = {
   key: string
   labelEn: string
   labelZh: string
+  labelJa: string
   href: string
   sortOrder: number
   location: string
@@ -300,6 +313,7 @@ export type NavigationLinkUncheckedCreateInput = {
   key: string
   labelEn: string
   labelZh: string
+  labelJa: string
   href: string
   sortOrder: number
   location: string
@@ -310,6 +324,7 @@ export type NavigationLinkUpdateInput = {
   key?: Prisma.StringFieldUpdateOperationsInput | string
   labelEn?: Prisma.StringFieldUpdateOperationsInput | string
   labelZh?: Prisma.StringFieldUpdateOperationsInput | string
+  labelJa?: Prisma.StringFieldUpdateOperationsInput | string
   href?: Prisma.StringFieldUpdateOperationsInput | string
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   location?: Prisma.StringFieldUpdateOperationsInput | string
@@ -320,6 +335,7 @@ export type NavigationLinkUncheckedUpdateInput = {
   key?: Prisma.StringFieldUpdateOperationsInput | string
   labelEn?: Prisma.StringFieldUpdateOperationsInput | string
   labelZh?: Prisma.StringFieldUpdateOperationsInput | string
+  labelJa?: Prisma.StringFieldUpdateOperationsInput | string
   href?: Prisma.StringFieldUpdateOperationsInput | string
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   location?: Prisma.StringFieldUpdateOperationsInput | string
@@ -330,6 +346,7 @@ export type NavigationLinkCreateManyInput = {
   key: string
   labelEn: string
   labelZh: string
+  labelJa: string
   href: string
   sortOrder: number
   location: string
@@ -340,6 +357,7 @@ export type NavigationLinkUpdateManyMutationInput = {
   key?: Prisma.StringFieldUpdateOperationsInput | string
   labelEn?: Prisma.StringFieldUpdateOperationsInput | string
   labelZh?: Prisma.StringFieldUpdateOperationsInput | string
+  labelJa?: Prisma.StringFieldUpdateOperationsInput | string
   href?: Prisma.StringFieldUpdateOperationsInput | string
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   location?: Prisma.StringFieldUpdateOperationsInput | string
@@ -350,6 +368,7 @@ export type NavigationLinkUncheckedUpdateManyInput = {
   key?: Prisma.StringFieldUpdateOperationsInput | string
   labelEn?: Prisma.StringFieldUpdateOperationsInput | string
   labelZh?: Prisma.StringFieldUpdateOperationsInput | string
+  labelJa?: Prisma.StringFieldUpdateOperationsInput | string
   href?: Prisma.StringFieldUpdateOperationsInput | string
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   location?: Prisma.StringFieldUpdateOperationsInput | string
@@ -360,6 +379,7 @@ export type NavigationLinkCountOrderByAggregateInput = {
   key?: Prisma.SortOrder
   labelEn?: Prisma.SortOrder
   labelZh?: Prisma.SortOrder
+  labelJa?: Prisma.SortOrder
   href?: Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
   location?: Prisma.SortOrder
@@ -374,6 +394,7 @@ export type NavigationLinkMaxOrderByAggregateInput = {
   key?: Prisma.SortOrder
   labelEn?: Prisma.SortOrder
   labelZh?: Prisma.SortOrder
+  labelJa?: Prisma.SortOrder
   href?: Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
   location?: Prisma.SortOrder
@@ -384,6 +405,7 @@ export type NavigationLinkMinOrderByAggregateInput = {
   key?: Prisma.SortOrder
   labelEn?: Prisma.SortOrder
   labelZh?: Prisma.SortOrder
+  labelJa?: Prisma.SortOrder
   href?: Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
   location?: Prisma.SortOrder
@@ -408,6 +430,7 @@ export type NavigationLinkSelect<ExtArgs extends runtime.Types.Extensions.Intern
   key?: boolean
   labelEn?: boolean
   labelZh?: boolean
+  labelJa?: boolean
   href?: boolean
   sortOrder?: boolean
   location?: boolean
@@ -418,6 +441,7 @@ export type NavigationLinkSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   key?: boolean
   labelEn?: boolean
   labelZh?: boolean
+  labelJa?: boolean
   href?: boolean
   sortOrder?: boolean
   location?: boolean
@@ -428,6 +452,7 @@ export type NavigationLinkSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   key?: boolean
   labelEn?: boolean
   labelZh?: boolean
+  labelJa?: boolean
   href?: boolean
   sortOrder?: boolean
   location?: boolean
@@ -438,12 +463,13 @@ export type NavigationLinkSelectScalar = {
   key?: boolean
   labelEn?: boolean
   labelZh?: boolean
+  labelJa?: boolean
   href?: boolean
   sortOrder?: boolean
   location?: boolean
 }
 
-export type NavigationLinkOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "key" | "labelEn" | "labelZh" | "href" | "sortOrder" | "location", ExtArgs["result"]["navigationLink"]>
+export type NavigationLinkOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "key" | "labelEn" | "labelZh" | "labelJa" | "href" | "sortOrder" | "location", ExtArgs["result"]["navigationLink"]>
 
 export type $NavigationLinkPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "NavigationLink"
@@ -453,6 +479,7 @@ export type $NavigationLinkPayload<ExtArgs extends runtime.Types.Extensions.Inte
     key: string
     labelEn: string
     labelZh: string
+    labelJa: string
     href: string
     sortOrder: number
     location: string
@@ -883,6 +910,7 @@ export interface NavigationLinkFieldRefs {
   readonly key: Prisma.FieldRef<"NavigationLink", 'String'>
   readonly labelEn: Prisma.FieldRef<"NavigationLink", 'String'>
   readonly labelZh: Prisma.FieldRef<"NavigationLink", 'String'>
+  readonly labelJa: Prisma.FieldRef<"NavigationLink", 'String'>
   readonly href: Prisma.FieldRef<"NavigationLink", 'String'>
   readonly sortOrder: Prisma.FieldRef<"NavigationLink", 'Int'>
   readonly location: Prisma.FieldRef<"NavigationLink", 'String'>

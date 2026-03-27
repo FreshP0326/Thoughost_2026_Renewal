@@ -39,10 +39,13 @@ export type HeroProjectMinAggregateOutputType = {
   slug: string | null
   titleEn: string | null
   titleZh: string | null
+  titleJa: string | null
   subtitleEn: string | null
   subtitleZh: string | null
+  subtitleJa: string | null
   ctaLabelEn: string | null
   ctaLabelZh: string | null
+  ctaLabelJa: string | null
   ctaHref: string | null
   leftImage: string | null
   mainImage: string | null
@@ -56,10 +59,13 @@ export type HeroProjectMaxAggregateOutputType = {
   slug: string | null
   titleEn: string | null
   titleZh: string | null
+  titleJa: string | null
   subtitleEn: string | null
   subtitleZh: string | null
+  subtitleJa: string | null
   ctaLabelEn: string | null
   ctaLabelZh: string | null
+  ctaLabelJa: string | null
   ctaHref: string | null
   leftImage: string | null
   mainImage: string | null
@@ -73,10 +79,13 @@ export type HeroProjectCountAggregateOutputType = {
   slug: number
   titleEn: number
   titleZh: number
+  titleJa: number
   subtitleEn: number
   subtitleZh: number
+  subtitleJa: number
   ctaLabelEn: number
   ctaLabelZh: number
+  ctaLabelJa: number
   ctaHref: number
   leftImage: number
   mainImage: number
@@ -100,10 +109,13 @@ export type HeroProjectMinAggregateInputType = {
   slug?: true
   titleEn?: true
   titleZh?: true
+  titleJa?: true
   subtitleEn?: true
   subtitleZh?: true
+  subtitleJa?: true
   ctaLabelEn?: true
   ctaLabelZh?: true
+  ctaLabelJa?: true
   ctaHref?: true
   leftImage?: true
   mainImage?: true
@@ -117,10 +129,13 @@ export type HeroProjectMaxAggregateInputType = {
   slug?: true
   titleEn?: true
   titleZh?: true
+  titleJa?: true
   subtitleEn?: true
   subtitleZh?: true
+  subtitleJa?: true
   ctaLabelEn?: true
   ctaLabelZh?: true
+  ctaLabelJa?: true
   ctaHref?: true
   leftImage?: true
   mainImage?: true
@@ -134,10 +149,13 @@ export type HeroProjectCountAggregateInputType = {
   slug?: true
   titleEn?: true
   titleZh?: true
+  titleJa?: true
   subtitleEn?: true
   subtitleZh?: true
+  subtitleJa?: true
   ctaLabelEn?: true
   ctaLabelZh?: true
+  ctaLabelJa?: true
   ctaHref?: true
   leftImage?: true
   mainImage?: true
@@ -238,10 +256,13 @@ export type HeroProjectGroupByOutputType = {
   slug: string
   titleEn: string
   titleZh: string
+  titleJa: string
   subtitleEn: string | null
   subtitleZh: string | null
+  subtitleJa: string | null
   ctaLabelEn: string
   ctaLabelZh: string
+  ctaLabelJa: string
   ctaHref: string
   leftImage: string
   mainImage: string
@@ -278,10 +299,13 @@ export type HeroProjectWhereInput = {
   slug?: Prisma.StringFilter<"HeroProject"> | string
   titleEn?: Prisma.StringFilter<"HeroProject"> | string
   titleZh?: Prisma.StringFilter<"HeroProject"> | string
+  titleJa?: Prisma.StringFilter<"HeroProject"> | string
   subtitleEn?: Prisma.StringNullableFilter<"HeroProject"> | string | null
   subtitleZh?: Prisma.StringNullableFilter<"HeroProject"> | string | null
+  subtitleJa?: Prisma.StringNullableFilter<"HeroProject"> | string | null
   ctaLabelEn?: Prisma.StringFilter<"HeroProject"> | string
   ctaLabelZh?: Prisma.StringFilter<"HeroProject"> | string
+  ctaLabelJa?: Prisma.StringFilter<"HeroProject"> | string
   ctaHref?: Prisma.StringFilter<"HeroProject"> | string
   leftImage?: Prisma.StringFilter<"HeroProject"> | string
   mainImage?: Prisma.StringFilter<"HeroProject"> | string
@@ -295,10 +319,13 @@ export type HeroProjectOrderByWithRelationInput = {
   slug?: Prisma.SortOrder
   titleEn?: Prisma.SortOrder
   titleZh?: Prisma.SortOrder
+  titleJa?: Prisma.SortOrder
   subtitleEn?: Prisma.SortOrderInput | Prisma.SortOrder
   subtitleZh?: Prisma.SortOrderInput | Prisma.SortOrder
+  subtitleJa?: Prisma.SortOrderInput | Prisma.SortOrder
   ctaLabelEn?: Prisma.SortOrder
   ctaLabelZh?: Prisma.SortOrder
+  ctaLabelJa?: Prisma.SortOrder
   ctaHref?: Prisma.SortOrder
   leftImage?: Prisma.SortOrder
   mainImage?: Prisma.SortOrder
@@ -315,10 +342,13 @@ export type HeroProjectWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.HeroProjectWhereInput | Prisma.HeroProjectWhereInput[]
   titleEn?: Prisma.StringFilter<"HeroProject"> | string
   titleZh?: Prisma.StringFilter<"HeroProject"> | string
+  titleJa?: Prisma.StringFilter<"HeroProject"> | string
   subtitleEn?: Prisma.StringNullableFilter<"HeroProject"> | string | null
   subtitleZh?: Prisma.StringNullableFilter<"HeroProject"> | string | null
+  subtitleJa?: Prisma.StringNullableFilter<"HeroProject"> | string | null
   ctaLabelEn?: Prisma.StringFilter<"HeroProject"> | string
   ctaLabelZh?: Prisma.StringFilter<"HeroProject"> | string
+  ctaLabelJa?: Prisma.StringFilter<"HeroProject"> | string
   ctaHref?: Prisma.StringFilter<"HeroProject"> | string
   leftImage?: Prisma.StringFilter<"HeroProject"> | string
   mainImage?: Prisma.StringFilter<"HeroProject"> | string
@@ -332,10 +362,13 @@ export type HeroProjectOrderByWithAggregationInput = {
   slug?: Prisma.SortOrder
   titleEn?: Prisma.SortOrder
   titleZh?: Prisma.SortOrder
+  titleJa?: Prisma.SortOrder
   subtitleEn?: Prisma.SortOrderInput | Prisma.SortOrder
   subtitleZh?: Prisma.SortOrderInput | Prisma.SortOrder
+  subtitleJa?: Prisma.SortOrderInput | Prisma.SortOrder
   ctaLabelEn?: Prisma.SortOrder
   ctaLabelZh?: Prisma.SortOrder
+  ctaLabelJa?: Prisma.SortOrder
   ctaHref?: Prisma.SortOrder
   leftImage?: Prisma.SortOrder
   mainImage?: Prisma.SortOrder
@@ -357,10 +390,13 @@ export type HeroProjectScalarWhereWithAggregatesInput = {
   slug?: Prisma.StringWithAggregatesFilter<"HeroProject"> | string
   titleEn?: Prisma.StringWithAggregatesFilter<"HeroProject"> | string
   titleZh?: Prisma.StringWithAggregatesFilter<"HeroProject"> | string
+  titleJa?: Prisma.StringWithAggregatesFilter<"HeroProject"> | string
   subtitleEn?: Prisma.StringNullableWithAggregatesFilter<"HeroProject"> | string | null
   subtitleZh?: Prisma.StringNullableWithAggregatesFilter<"HeroProject"> | string | null
+  subtitleJa?: Prisma.StringNullableWithAggregatesFilter<"HeroProject"> | string | null
   ctaLabelEn?: Prisma.StringWithAggregatesFilter<"HeroProject"> | string
   ctaLabelZh?: Prisma.StringWithAggregatesFilter<"HeroProject"> | string
+  ctaLabelJa?: Prisma.StringWithAggregatesFilter<"HeroProject"> | string
   ctaHref?: Prisma.StringWithAggregatesFilter<"HeroProject"> | string
   leftImage?: Prisma.StringWithAggregatesFilter<"HeroProject"> | string
   mainImage?: Prisma.StringWithAggregatesFilter<"HeroProject"> | string
@@ -374,10 +410,13 @@ export type HeroProjectCreateInput = {
   slug: string
   titleEn: string
   titleZh: string
+  titleJa: string
   subtitleEn?: string | null
   subtitleZh?: string | null
+  subtitleJa?: string | null
   ctaLabelEn: string
   ctaLabelZh: string
+  ctaLabelJa: string
   ctaHref: string
   leftImage: string
   mainImage: string
@@ -391,10 +430,13 @@ export type HeroProjectUncheckedCreateInput = {
   slug: string
   titleEn: string
   titleZh: string
+  titleJa: string
   subtitleEn?: string | null
   subtitleZh?: string | null
+  subtitleJa?: string | null
   ctaLabelEn: string
   ctaLabelZh: string
+  ctaLabelJa: string
   ctaHref: string
   leftImage: string
   mainImage: string
@@ -408,10 +450,13 @@ export type HeroProjectUpdateInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   titleEn?: Prisma.StringFieldUpdateOperationsInput | string
   titleZh?: Prisma.StringFieldUpdateOperationsInput | string
+  titleJa?: Prisma.StringFieldUpdateOperationsInput | string
   subtitleEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subtitleZh?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subtitleJa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ctaLabelEn?: Prisma.StringFieldUpdateOperationsInput | string
   ctaLabelZh?: Prisma.StringFieldUpdateOperationsInput | string
+  ctaLabelJa?: Prisma.StringFieldUpdateOperationsInput | string
   ctaHref?: Prisma.StringFieldUpdateOperationsInput | string
   leftImage?: Prisma.StringFieldUpdateOperationsInput | string
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
@@ -425,10 +470,13 @@ export type HeroProjectUncheckedUpdateInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   titleEn?: Prisma.StringFieldUpdateOperationsInput | string
   titleZh?: Prisma.StringFieldUpdateOperationsInput | string
+  titleJa?: Prisma.StringFieldUpdateOperationsInput | string
   subtitleEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subtitleZh?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subtitleJa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ctaLabelEn?: Prisma.StringFieldUpdateOperationsInput | string
   ctaLabelZh?: Prisma.StringFieldUpdateOperationsInput | string
+  ctaLabelJa?: Prisma.StringFieldUpdateOperationsInput | string
   ctaHref?: Prisma.StringFieldUpdateOperationsInput | string
   leftImage?: Prisma.StringFieldUpdateOperationsInput | string
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
@@ -442,10 +490,13 @@ export type HeroProjectCreateManyInput = {
   slug: string
   titleEn: string
   titleZh: string
+  titleJa: string
   subtitleEn?: string | null
   subtitleZh?: string | null
+  subtitleJa?: string | null
   ctaLabelEn: string
   ctaLabelZh: string
+  ctaLabelJa: string
   ctaHref: string
   leftImage: string
   mainImage: string
@@ -459,10 +510,13 @@ export type HeroProjectUpdateManyMutationInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   titleEn?: Prisma.StringFieldUpdateOperationsInput | string
   titleZh?: Prisma.StringFieldUpdateOperationsInput | string
+  titleJa?: Prisma.StringFieldUpdateOperationsInput | string
   subtitleEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subtitleZh?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subtitleJa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ctaLabelEn?: Prisma.StringFieldUpdateOperationsInput | string
   ctaLabelZh?: Prisma.StringFieldUpdateOperationsInput | string
+  ctaLabelJa?: Prisma.StringFieldUpdateOperationsInput | string
   ctaHref?: Prisma.StringFieldUpdateOperationsInput | string
   leftImage?: Prisma.StringFieldUpdateOperationsInput | string
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
@@ -476,10 +530,13 @@ export type HeroProjectUncheckedUpdateManyInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   titleEn?: Prisma.StringFieldUpdateOperationsInput | string
   titleZh?: Prisma.StringFieldUpdateOperationsInput | string
+  titleJa?: Prisma.StringFieldUpdateOperationsInput | string
   subtitleEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subtitleZh?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subtitleJa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ctaLabelEn?: Prisma.StringFieldUpdateOperationsInput | string
   ctaLabelZh?: Prisma.StringFieldUpdateOperationsInput | string
+  ctaLabelJa?: Prisma.StringFieldUpdateOperationsInput | string
   ctaHref?: Prisma.StringFieldUpdateOperationsInput | string
   leftImage?: Prisma.StringFieldUpdateOperationsInput | string
   mainImage?: Prisma.StringFieldUpdateOperationsInput | string
@@ -493,10 +550,13 @@ export type HeroProjectCountOrderByAggregateInput = {
   slug?: Prisma.SortOrder
   titleEn?: Prisma.SortOrder
   titleZh?: Prisma.SortOrder
+  titleJa?: Prisma.SortOrder
   subtitleEn?: Prisma.SortOrder
   subtitleZh?: Prisma.SortOrder
+  subtitleJa?: Prisma.SortOrder
   ctaLabelEn?: Prisma.SortOrder
   ctaLabelZh?: Prisma.SortOrder
+  ctaLabelJa?: Prisma.SortOrder
   ctaHref?: Prisma.SortOrder
   leftImage?: Prisma.SortOrder
   mainImage?: Prisma.SortOrder
@@ -514,10 +574,13 @@ export type HeroProjectMaxOrderByAggregateInput = {
   slug?: Prisma.SortOrder
   titleEn?: Prisma.SortOrder
   titleZh?: Prisma.SortOrder
+  titleJa?: Prisma.SortOrder
   subtitleEn?: Prisma.SortOrder
   subtitleZh?: Prisma.SortOrder
+  subtitleJa?: Prisma.SortOrder
   ctaLabelEn?: Prisma.SortOrder
   ctaLabelZh?: Prisma.SortOrder
+  ctaLabelJa?: Prisma.SortOrder
   ctaHref?: Prisma.SortOrder
   leftImage?: Prisma.SortOrder
   mainImage?: Prisma.SortOrder
@@ -531,10 +594,13 @@ export type HeroProjectMinOrderByAggregateInput = {
   slug?: Prisma.SortOrder
   titleEn?: Prisma.SortOrder
   titleZh?: Prisma.SortOrder
+  titleJa?: Prisma.SortOrder
   subtitleEn?: Prisma.SortOrder
   subtitleZh?: Prisma.SortOrder
+  subtitleJa?: Prisma.SortOrder
   ctaLabelEn?: Prisma.SortOrder
   ctaLabelZh?: Prisma.SortOrder
+  ctaLabelJa?: Prisma.SortOrder
   ctaHref?: Prisma.SortOrder
   leftImage?: Prisma.SortOrder
   mainImage?: Prisma.SortOrder
@@ -562,10 +628,13 @@ export type HeroProjectSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   slug?: boolean
   titleEn?: boolean
   titleZh?: boolean
+  titleJa?: boolean
   subtitleEn?: boolean
   subtitleZh?: boolean
+  subtitleJa?: boolean
   ctaLabelEn?: boolean
   ctaLabelZh?: boolean
+  ctaLabelJa?: boolean
   ctaHref?: boolean
   leftImage?: boolean
   mainImage?: boolean
@@ -579,10 +648,13 @@ export type HeroProjectSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   slug?: boolean
   titleEn?: boolean
   titleZh?: boolean
+  titleJa?: boolean
   subtitleEn?: boolean
   subtitleZh?: boolean
+  subtitleJa?: boolean
   ctaLabelEn?: boolean
   ctaLabelZh?: boolean
+  ctaLabelJa?: boolean
   ctaHref?: boolean
   leftImage?: boolean
   mainImage?: boolean
@@ -596,10 +668,13 @@ export type HeroProjectSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   slug?: boolean
   titleEn?: boolean
   titleZh?: boolean
+  titleJa?: boolean
   subtitleEn?: boolean
   subtitleZh?: boolean
+  subtitleJa?: boolean
   ctaLabelEn?: boolean
   ctaLabelZh?: boolean
+  ctaLabelJa?: boolean
   ctaHref?: boolean
   leftImage?: boolean
   mainImage?: boolean
@@ -613,10 +688,13 @@ export type HeroProjectSelectScalar = {
   slug?: boolean
   titleEn?: boolean
   titleZh?: boolean
+  titleJa?: boolean
   subtitleEn?: boolean
   subtitleZh?: boolean
+  subtitleJa?: boolean
   ctaLabelEn?: boolean
   ctaLabelZh?: boolean
+  ctaLabelJa?: boolean
   ctaHref?: boolean
   leftImage?: boolean
   mainImage?: boolean
@@ -625,7 +703,7 @@ export type HeroProjectSelectScalar = {
   sortOrder?: boolean
 }
 
-export type HeroProjectOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "slug" | "titleEn" | "titleZh" | "subtitleEn" | "subtitleZh" | "ctaLabelEn" | "ctaLabelZh" | "ctaHref" | "leftImage" | "mainImage" | "rightImage" | "isActive" | "sortOrder", ExtArgs["result"]["heroProject"]>
+export type HeroProjectOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "slug" | "titleEn" | "titleZh" | "titleJa" | "subtitleEn" | "subtitleZh" | "subtitleJa" | "ctaLabelEn" | "ctaLabelZh" | "ctaLabelJa" | "ctaHref" | "leftImage" | "mainImage" | "rightImage" | "isActive" | "sortOrder", ExtArgs["result"]["heroProject"]>
 
 export type $HeroProjectPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "HeroProject"
@@ -635,10 +713,13 @@ export type $HeroProjectPayload<ExtArgs extends runtime.Types.Extensions.Interna
     slug: string
     titleEn: string
     titleZh: string
+    titleJa: string
     subtitleEn: string | null
     subtitleZh: string | null
+    subtitleJa: string | null
     ctaLabelEn: string
     ctaLabelZh: string
+    ctaLabelJa: string
     ctaHref: string
     leftImage: string
     mainImage: string
@@ -1072,10 +1153,13 @@ export interface HeroProjectFieldRefs {
   readonly slug: Prisma.FieldRef<"HeroProject", 'String'>
   readonly titleEn: Prisma.FieldRef<"HeroProject", 'String'>
   readonly titleZh: Prisma.FieldRef<"HeroProject", 'String'>
+  readonly titleJa: Prisma.FieldRef<"HeroProject", 'String'>
   readonly subtitleEn: Prisma.FieldRef<"HeroProject", 'String'>
   readonly subtitleZh: Prisma.FieldRef<"HeroProject", 'String'>
+  readonly subtitleJa: Prisma.FieldRef<"HeroProject", 'String'>
   readonly ctaLabelEn: Prisma.FieldRef<"HeroProject", 'String'>
   readonly ctaLabelZh: Prisma.FieldRef<"HeroProject", 'String'>
+  readonly ctaLabelJa: Prisma.FieldRef<"HeroProject", 'String'>
   readonly ctaHref: Prisma.FieldRef<"HeroProject", 'String'>
   readonly leftImage: Prisma.FieldRef<"HeroProject", 'String'>
   readonly mainImage: Prisma.FieldRef<"HeroProject", 'String'>

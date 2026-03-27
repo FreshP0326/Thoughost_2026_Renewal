@@ -2,6 +2,8 @@ import { PrismaLibSql } from "@prisma/adapter-libsql";
 
 import { PrismaClient } from "../generated/prisma/client";
 
+// Reserved scaffolding only: rendered pages do not currently read from this DB
+// client. The live site builds from src/content/** via server services.
 const globalForPrisma = globalThis as unknown as {
   prisma?: PrismaClient;
 };

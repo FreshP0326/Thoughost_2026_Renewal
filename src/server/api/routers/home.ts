@@ -3,7 +3,7 @@ import { z } from "zod";
 import { createTRPCRouter, publicProcedure } from "@/server/api/trpc";
 import { getFeaturedReleases, getHero, getNews } from "@/server/services/site-service";
 
-const localeSchema = z.enum(["en", "zh", "jp"]);
+const localeSchema = z.enum(["en", "zh", "ja"]);
 
 export const homeRouter = createTRPCRouter({
   getHero: publicProcedure.input(z.object({ locale: localeSchema })).query(({ input }) => getHero(input.locale)),

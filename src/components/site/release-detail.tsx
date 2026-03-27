@@ -19,7 +19,7 @@ function getLabels(locale: Locale) {
       trackNumber: "曲目",
       trackArtist: "作者 / 参与者",
     },
-    jp: {
+    ja: {
       linksTitle: "リンク",
       meta: "リリース情報",
       tracklist: "トラックリスト",

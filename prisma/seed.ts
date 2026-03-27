@@ -9,6 +9,8 @@ import {
   socialLinks,
 } from "../src/content/site/data";
 
+// Reserved scaffolding only: this mirrors the file-content source so Prisma can
+// stay ready for future DB-backed reads without defining the current runtime path.
 async function main() {
   await db.releaseLink.deleteMany();
   await db.release.deleteMany();
@@ -27,6 +29,7 @@ async function main() {
       copyrightText: siteConfig.copyrightText,
       footerQuoteEn: siteConfig.footerQuote.en,
       footerQuoteZh: siteConfig.footerQuote.zh,
+      footerQuoteJa: siteConfig.footerQuote.ja,
     },
   });
 
@@ -35,6 +38,7 @@ async function main() {
       key: item.key,
       labelEn: item.label.en,
       labelZh: item.label.zh,
+      labelJa: item.label.ja,
       href: item.href,
       sortOrder: index,
       location: "header",
@@ -58,15 +62,18 @@ async function main() {
         slug: item.slug,
         titleEn: item.title.en,
         titleZh: item.title.zh,
+        titleJa: item.title.ja,
         subtitleEn: item.summary.en,
         subtitleZh: item.summary.zh,
-      ctaLabelEn: "Learn more",
-      ctaLabelZh: "了解更多",
-      ctaHref: `/releases/${item.slug}`,
-      leftImage: item.coverImage,
-      mainImage: item.coverImage,
-      rightImage: item.coverImage,
-      isActive: true,
+        subtitleJa: item.summary.ja,
+        ctaLabelEn: "Learn more",
+        ctaLabelZh: "了解更多",
+        ctaLabelJa: "もっと見る",
+        ctaHref: `/releases/${item.slug}`,
+        leftImage: item.coverImage,
+        mainImage: item.coverImage,
+        rightImage: item.coverImage,
+        isActive: true,
         sortOrder: index,
       })),
   });
@@ -77,8 +84,10 @@ async function main() {
       date: new Date(meta.date),
       titleEn: meta.title.en,
       titleZh: meta.title.zh,
+      titleJa: meta.title.ja,
       summaryEn: meta.summary.en,
       summaryZh: meta.summary.zh,
+      summaryJa: meta.summary.ja,
       href: meta.externalUrl ?? `/news/${meta.slug}`,
       isPinned: meta.pinned ?? false,
       published: meta.published,
@@ -91,6 +100,7 @@ async function main() {
         slug: item.slug,
         titleEn: item.title.en,
         titleZh: item.title.zh,
+        titleJa: item.title.ja,
         artistName: item.artistName,
         releaseType: item.releaseType,
         releaseDate: new Date(item.releaseDate.replace(/\./g, "-")),
@@ -98,8 +108,10 @@ async function main() {
         heroImage: item.heroImage,
         summaryEn: item.summary.en,
         summaryZh: item.summary.zh,
+        summaryJa: item.summary.ja,
         tracklistEn: item.tracklist.en,
         tracklistZh: item.tracklist.zh,
+        tracklistJa: item.tracklist.ja,
         isFeatured: item.isFeatured ?? false,
         sortOrder: index,
         published: true,
@@ -119,8 +131,10 @@ async function main() {
       pageKey,
       titleEn: value.title.en,
       titleZh: value.title.zh,
+      titleJa: value.title.ja,
       bodyEn: value.body.en,
       bodyZh: value.body.zh,
+      bodyJa: value.body.ja,
     })),
   });
 
@@ -129,8 +143,10 @@ async function main() {
       slug: item.slug,
       titleEn: item.title.en,
       titleZh: item.title.zh,
+      titleJa: item.title.ja,
       summaryEn: item.summary.en,
       summaryZh: item.summary.zh,
+      summaryJa: item.summary.ja,
       coverImage: item.coverImage,
       href: item.href,
       published: true,

@@ -16,7 +16,7 @@ export default async function NewsPage({
   const body =
     locale === "zh"
       ? "按时间浏览 Thoughost 的厂牌动态、发行说明与短篇编辑式更新。"
-      : locale === "jp"
+      : locale === "ja"
         ? "Thoughost のレーベル更新、リリースノート、短いエディトリアル記事を時系列で閲覧できます。"
         : "Browse Thoughost label updates, release notes, and short editorial entries in one archive.";
 

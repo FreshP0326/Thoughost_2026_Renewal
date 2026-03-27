@@ -26,7 +26,7 @@ describe("site-service", () => {
   it("returns migrated about intro for all locales", () => {
     const enAbout = getAboutPage("en");
     const zhAbout = getAboutPage("zh");
-    const jpAbout = getAboutPage("jp");
+    const jpAbout = getAboutPage("ja");
 
     expect(enAbout.introTitle).toBe("ABOUT");
     expect(enAbout.introBody).toContain("doujin circle from China");
@@ -146,7 +146,7 @@ describe("site-service", () => {
   it("returns localized project call content for all locales", () => {
     const enProject = getProjectCall("en");
     const zhProject = getProjectCall("zh");
-    const jpProject = getProjectCall("jp");
+    const jpProject = getProjectCall("ja");
 
     expect(enProject.title).toBe("KAKUSATSU SHOUJO 4");
     expect(zhProject.deadline).toContain("2026");
@@ -155,8 +155,8 @@ describe("site-service", () => {
   });
 
   it("returns japanese navigation and page content", () => {
-    const navigation = getNavigation("jp");
-    const thoughts = getPageContent("jp", "thoughts");
+    const navigation = getNavigation("ja");
+    const thoughts = getPageContent("ja", "thoughts");
 
     expect(navigation[0]?.label).toBe("NEXT PROJECT");
     expect(thoughts.title).toContain("Thoughts");
@@ -172,7 +172,7 @@ describe("site-service", () => {
   it("returns localized BLACK HOLE page copy", () => {
     const enPage = getBlackHolePage("en");
     const zhPage = getBlackHolePage("zh");
-    const jpPage = getBlackHolePage("jp");
+    const jpPage = getBlackHolePage("ja");
 
     expect(enPage.title).toBe("BLACK HOLE");
     expect(enPage.status).toBe("COMING SONG");
@@ -221,7 +221,7 @@ describe("site-service", () => {
 
   it("keeps hero headline original and CTA in english", () => {
     const zhHeroes = getHero("zh");
-    const jpHeroes = getHero("jp");
+    const jpHeroes = getHero("ja");
 
     expect(zhHeroes[1]?.title).toBe("thoughts");
     expect(jpHeroes[0]?.ctaLabel).toBe("Learn More");
@@ -267,7 +267,7 @@ describe("site-service", () => {
   });
 
   it("localizes fixed release info labels", () => {
-    const release = getReleaseBySlug("jp", "asteria");
+    const release = getReleaseBySlug("ja", "asteria");
 
     expect(release?.infoFields[0]?.label).toBe("型番");
     expect(release?.infoFields[0]?.value).toBe("TGEP-003");
@@ -306,7 +306,7 @@ describe("site-service", () => {
 
   it("uses multi-paragraph source-style summaries without credits in chinese and japanese", () => {
     const zhRelease = getReleaseBySlug("zh", "2000-invasion");
-    const jpRelease = getReleaseBySlug("jp", "2000-invasion");
+    const jpRelease = getReleaseBySlug("ja", "2000-invasion");
 
     expect(zhRelease?.summary).toContain("献给想再一次在舞池听到2000s声音的你！");
     expect(zhRelease?.summary).toContain("\n\n");

@@ -31,6 +31,7 @@ export type SiteConfigMinAggregateOutputType = {
   copyrightText: string | null
   footerQuoteEn: string | null
   footerQuoteZh: string | null
+  footerQuoteJa: string | null
 }
 
 export type SiteConfigMaxAggregateOutputType = {
@@ -40,6 +41,7 @@ export type SiteConfigMaxAggregateOutputType = {
   copyrightText: string | null
   footerQuoteEn: string | null
   footerQuoteZh: string | null
+  footerQuoteJa: string | null
 }
 
 export type SiteConfigCountAggregateOutputType = {
@@ -49,6 +51,7 @@ export type SiteConfigCountAggregateOutputType = {
   copyrightText: number
   footerQuoteEn: number
   footerQuoteZh: number
+  footerQuoteJa: number
   _all: number
 }
 
@@ -60,6 +63,7 @@ export type SiteConfigMinAggregateInputType = {
   copyrightText?: true
   footerQuoteEn?: true
   footerQuoteZh?: true
+  footerQuoteJa?: true
 }
 
 export type SiteConfigMaxAggregateInputType = {
@@ -69,6 +73,7 @@ export type SiteConfigMaxAggregateInputType = {
   copyrightText?: true
   footerQuoteEn?: true
   footerQuoteZh?: true
+  footerQuoteJa?: true
 }
 
 export type SiteConfigCountAggregateInputType = {
@@ -78,6 +83,7 @@ export type SiteConfigCountAggregateInputType = {
   copyrightText?: true
   footerQuoteEn?: true
   footerQuoteZh?: true
+  footerQuoteJa?: true
   _all?: true
 }
 
@@ -160,6 +166,7 @@ export type SiteConfigGroupByOutputType = {
   copyrightText: string
   footerQuoteEn: string
   footerQuoteZh: string
+  footerQuoteJa: string
   _count: SiteConfigCountAggregateOutputType | null
   _min: SiteConfigMinAggregateOutputType | null
   _max: SiteConfigMaxAggregateOutputType | null
@@ -190,6 +197,7 @@ export type SiteConfigWhereInput = {
   copyrightText?: Prisma.StringFilter<"SiteConfig"> | string
   footerQuoteEn?: Prisma.StringFilter<"SiteConfig"> | string
   footerQuoteZh?: Prisma.StringFilter<"SiteConfig"> | string
+  footerQuoteJa?: Prisma.StringFilter<"SiteConfig"> | string
 }
 
 export type SiteConfigOrderByWithRelationInput = {
@@ -199,6 +207,7 @@ export type SiteConfigOrderByWithRelationInput = {
   copyrightText?: Prisma.SortOrder
   footerQuoteEn?: Prisma.SortOrder
   footerQuoteZh?: Prisma.SortOrder
+  footerQuoteJa?: Prisma.SortOrder
 }
 
 export type SiteConfigWhereUniqueInput = Prisma.AtLeast<{
@@ -211,6 +220,7 @@ export type SiteConfigWhereUniqueInput = Prisma.AtLeast<{
   copyrightText?: Prisma.StringFilter<"SiteConfig"> | string
   footerQuoteEn?: Prisma.StringFilter<"SiteConfig"> | string
   footerQuoteZh?: Prisma.StringFilter<"SiteConfig"> | string
+  footerQuoteJa?: Prisma.StringFilter<"SiteConfig"> | string
 }, "id">
 
 export type SiteConfigOrderByWithAggregationInput = {
@@ -220,6 +230,7 @@ export type SiteConfigOrderByWithAggregationInput = {
   copyrightText?: Prisma.SortOrder
   footerQuoteEn?: Prisma.SortOrder
   footerQuoteZh?: Prisma.SortOrder
+  footerQuoteJa?: Prisma.SortOrder
   _count?: Prisma.SiteConfigCountOrderByAggregateInput
   _max?: Prisma.SiteConfigMaxOrderByAggregateInput
   _min?: Prisma.SiteConfigMinOrderByAggregateInput
@@ -235,6 +246,7 @@ export type SiteConfigScalarWhereWithAggregatesInput = {
   copyrightText?: Prisma.StringWithAggregatesFilter<"SiteConfig"> | string
   footerQuoteEn?: Prisma.StringWithAggregatesFilter<"SiteConfig"> | string
   footerQuoteZh?: Prisma.StringWithAggregatesFilter<"SiteConfig"> | string
+  footerQuoteJa?: Prisma.StringWithAggregatesFilter<"SiteConfig"> | string
 }
 
 export type SiteConfigCreateInput = {
@@ -244,6 +256,7 @@ export type SiteConfigCreateInput = {
   copyrightText: string
   footerQuoteEn: string
   footerQuoteZh: string
+  footerQuoteJa: string
 }
 
 export type SiteConfigUncheckedCreateInput = {
@@ -253,6 +266,7 @@ export type SiteConfigUncheckedCreateInput = {
   copyrightText: string
   footerQuoteEn: string
   footerQuoteZh: string
+  footerQuoteJa: string
 }
 
 export type SiteConfigUpdateInput = {
@@ -262,6 +276,7 @@ export type SiteConfigUpdateInput = {
   copyrightText?: Prisma.StringFieldUpdateOperationsInput | string
   footerQuoteEn?: Prisma.StringFieldUpdateOperationsInput | string
   footerQuoteZh?: Prisma.StringFieldUpdateOperationsInput | string
+  footerQuoteJa?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type SiteConfigUncheckedUpdateInput = {
@@ -271,6 +286,7 @@ export type SiteConfigUncheckedUpdateInput = {
   copyrightText?: Prisma.StringFieldUpdateOperationsInput | string
   footerQuoteEn?: Prisma.StringFieldUpdateOperationsInput | string
   footerQuoteZh?: Prisma.StringFieldUpdateOperationsInput | string
+  footerQuoteJa?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type SiteConfigCreateManyInput = {
@@ -280,6 +296,7 @@ export type SiteConfigCreateManyInput = {
   copyrightText: string
   footerQuoteEn: string
   footerQuoteZh: string
+  footerQuoteJa: string
 }
 
 export type SiteConfigUpdateManyMutationInput = {
@@ -289,6 +306,7 @@ export type SiteConfigUpdateManyMutationInput = {
   copyrightText?: Prisma.StringFieldUpdateOperationsInput | string
   footerQuoteEn?: Prisma.StringFieldUpdateOperationsInput | string
   footerQuoteZh?: Prisma.StringFieldUpdateOperationsInput | string
+  footerQuoteJa?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type SiteConfigUncheckedUpdateManyInput = {
@@ -298,6 +316,7 @@ export type SiteConfigUncheckedUpdateManyInput = {
   copyrightText?: Prisma.StringFieldUpdateOperationsInput | string
   footerQuoteEn?: Prisma.StringFieldUpdateOperationsInput | string
   footerQuoteZh?: Prisma.StringFieldUpdateOperationsInput | string
+  footerQuoteJa?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type SiteConfigCountOrderByAggregateInput = {
@@ -307,6 +326,7 @@ export type SiteConfigCountOrderByAggregateInput = {
   copyrightText?: Prisma.SortOrder
   footerQuoteEn?: Prisma.SortOrder
   footerQuoteZh?: Prisma.SortOrder
+  footerQuoteJa?: Prisma.SortOrder
 }
 
 export type SiteConfigMaxOrderByAggregateInput = {
@@ -316,6 +336,7 @@ export type SiteConfigMaxOrderByAggregateInput = {
   copyrightText?: Prisma.SortOrder
   footerQuoteEn?: Prisma.SortOrder
   footerQuoteZh?: Prisma.SortOrder
+  footerQuoteJa?: Prisma.SortOrder
 }
 
 export type SiteConfigMinOrderByAggregateInput = {
@@ -325,6 +346,7 @@ export type SiteConfigMinOrderByAggregateInput = {
   copyrightText?: Prisma.SortOrder
   footerQuoteEn?: Prisma.SortOrder
   footerQuoteZh?: Prisma.SortOrder
+  footerQuoteJa?: Prisma.SortOrder
 }
 
 export type StringFieldUpdateOperationsInput = {
@@ -340,6 +362,7 @@ export type SiteConfigSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   copyrightText?: boolean
   footerQuoteEn?: boolean
   footerQuoteZh?: boolean
+  footerQuoteJa?: boolean
 }, ExtArgs["result"]["siteConfig"]>
 
 export type SiteConfigSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -349,6 +372,7 @@ export type SiteConfigSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   copyrightText?: boolean
   footerQuoteEn?: boolean
   footerQuoteZh?: boolean
+  footerQuoteJa?: boolean
 }, ExtArgs["result"]["siteConfig"]>
 
 export type SiteConfigSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -358,6 +382,7 @@ export type SiteConfigSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   copyrightText?: boolean
   footerQuoteEn?: boolean
   footerQuoteZh?: boolean
+  footerQuoteJa?: boolean
 }, ExtArgs["result"]["siteConfig"]>
 
 export type SiteConfigSelectScalar = {
@@ -367,9 +392,10 @@ export type SiteConfigSelectScalar = {
   copyrightText?: boolean
   footerQuoteEn?: boolean
   footerQuoteZh?: boolean
+  footerQuoteJa?: boolean
 }
 
-export type SiteConfigOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "defaultLocale" | "contactEmail" | "copyrightText" | "footerQuoteEn" | "footerQuoteZh", ExtArgs["result"]["siteConfig"]>
+export type SiteConfigOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "defaultLocale" | "contactEmail" | "copyrightText" | "footerQuoteEn" | "footerQuoteZh" | "footerQuoteJa", ExtArgs["result"]["siteConfig"]>
 
 export type $SiteConfigPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "SiteConfig"
@@ -381,6 +407,7 @@ export type $SiteConfigPayload<ExtArgs extends runtime.Types.Extensions.Internal
     copyrightText: string
     footerQuoteEn: string
     footerQuoteZh: string
+    footerQuoteJa: string
   }, ExtArgs["result"]["siteConfig"]>
   composites: {}
 }
@@ -810,6 +837,7 @@ export interface SiteConfigFieldRefs {
   readonly copyrightText: Prisma.FieldRef<"SiteConfig", 'String'>
   readonly footerQuoteEn: Prisma.FieldRef<"SiteConfig", 'String'>
   readonly footerQuoteZh: Prisma.FieldRef<"SiteConfig", 'String'>
+  readonly footerQuoteJa: Prisma.FieldRef<"SiteConfig", 'String'>
 }
     
 

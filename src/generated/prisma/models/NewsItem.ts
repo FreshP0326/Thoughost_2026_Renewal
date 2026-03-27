@@ -30,8 +30,10 @@ export type NewsItemMinAggregateOutputType = {
   date: Date | null
   titleEn: string | null
   titleZh: string | null
+  titleJa: string | null
   summaryEn: string | null
   summaryZh: string | null
+  summaryJa: string | null
   href: string | null
   isPinned: boolean | null
   published: boolean | null
@@ -43,8 +45,10 @@ export type NewsItemMaxAggregateOutputType = {
   date: Date | null
   titleEn: string | null
   titleZh: string | null
+  titleJa: string | null
   summaryEn: string | null
   summaryZh: string | null
+  summaryJa: string | null
   href: string | null
   isPinned: boolean | null
   published: boolean | null
@@ -56,8 +60,10 @@ export type NewsItemCountAggregateOutputType = {
   date: number
   titleEn: number
   titleZh: number
+  titleJa: number
   summaryEn: number
   summaryZh: number
+  summaryJa: number
   href: number
   isPinned: number
   published: number
@@ -71,8 +77,10 @@ export type NewsItemMinAggregateInputType = {
   date?: true
   titleEn?: true
   titleZh?: true
+  titleJa?: true
   summaryEn?: true
   summaryZh?: true
+  summaryJa?: true
   href?: true
   isPinned?: true
   published?: true
@@ -84,8 +92,10 @@ export type NewsItemMaxAggregateInputType = {
   date?: true
   titleEn?: true
   titleZh?: true
+  titleJa?: true
   summaryEn?: true
   summaryZh?: true
+  summaryJa?: true
   href?: true
   isPinned?: true
   published?: true
@@ -97,8 +107,10 @@ export type NewsItemCountAggregateInputType = {
   date?: true
   titleEn?: true
   titleZh?: true
+  titleJa?: true
   summaryEn?: true
   summaryZh?: true
+  summaryJa?: true
   href?: true
   isPinned?: true
   published?: true
@@ -183,8 +195,10 @@ export type NewsItemGroupByOutputType = {
   date: Date
   titleEn: string
   titleZh: string
+  titleJa: string
   summaryEn: string | null
   summaryZh: string | null
+  summaryJa: string | null
   href: string
   isPinned: boolean
   published: boolean
@@ -217,8 +231,10 @@ export type NewsItemWhereInput = {
   date?: Prisma.DateTimeFilter<"NewsItem"> | Date | string
   titleEn?: Prisma.StringFilter<"NewsItem"> | string
   titleZh?: Prisma.StringFilter<"NewsItem"> | string
+  titleJa?: Prisma.StringFilter<"NewsItem"> | string
   summaryEn?: Prisma.StringNullableFilter<"NewsItem"> | string | null
   summaryZh?: Prisma.StringNullableFilter<"NewsItem"> | string | null
+  summaryJa?: Prisma.StringNullableFilter<"NewsItem"> | string | null
   href?: Prisma.StringFilter<"NewsItem"> | string
   isPinned?: Prisma.BoolFilter<"NewsItem"> | boolean
   published?: Prisma.BoolFilter<"NewsItem"> | boolean
@@ -230,8 +246,10 @@ export type NewsItemOrderByWithRelationInput = {
   date?: Prisma.SortOrder
   titleEn?: Prisma.SortOrder
   titleZh?: Prisma.SortOrder
+  titleJa?: Prisma.SortOrder
   summaryEn?: Prisma.SortOrderInput | Prisma.SortOrder
   summaryZh?: Prisma.SortOrderInput | Prisma.SortOrder
+  summaryJa?: Prisma.SortOrderInput | Prisma.SortOrder
   href?: Prisma.SortOrder
   isPinned?: Prisma.SortOrder
   published?: Prisma.SortOrder
@@ -246,8 +264,10 @@ export type NewsItemWhereUniqueInput = Prisma.AtLeast<{
   date?: Prisma.DateTimeFilter<"NewsItem"> | Date | string
   titleEn?: Prisma.StringFilter<"NewsItem"> | string
   titleZh?: Prisma.StringFilter<"NewsItem"> | string
+  titleJa?: Prisma.StringFilter<"NewsItem"> | string
   summaryEn?: Prisma.StringNullableFilter<"NewsItem"> | string | null
   summaryZh?: Prisma.StringNullableFilter<"NewsItem"> | string | null
+  summaryJa?: Prisma.StringNullableFilter<"NewsItem"> | string | null
   href?: Prisma.StringFilter<"NewsItem"> | string
   isPinned?: Prisma.BoolFilter<"NewsItem"> | boolean
   published?: Prisma.BoolFilter<"NewsItem"> | boolean
@@ -259,8 +279,10 @@ export type NewsItemOrderByWithAggregationInput = {
   date?: Prisma.SortOrder
   titleEn?: Prisma.SortOrder
   titleZh?: Prisma.SortOrder
+  titleJa?: Prisma.SortOrder
   summaryEn?: Prisma.SortOrderInput | Prisma.SortOrder
   summaryZh?: Prisma.SortOrderInput | Prisma.SortOrder
+  summaryJa?: Prisma.SortOrderInput | Prisma.SortOrder
   href?: Prisma.SortOrder
   isPinned?: Prisma.SortOrder
   published?: Prisma.SortOrder
@@ -278,8 +300,10 @@ export type NewsItemScalarWhereWithAggregatesInput = {
   date?: Prisma.DateTimeWithAggregatesFilter<"NewsItem"> | Date | string
   titleEn?: Prisma.StringWithAggregatesFilter<"NewsItem"> | string
   titleZh?: Prisma.StringWithAggregatesFilter<"NewsItem"> | string
+  titleJa?: Prisma.StringWithAggregatesFilter<"NewsItem"> | string
   summaryEn?: Prisma.StringNullableWithAggregatesFilter<"NewsItem"> | string | null
   summaryZh?: Prisma.StringNullableWithAggregatesFilter<"NewsItem"> | string | null
+  summaryJa?: Prisma.StringNullableWithAggregatesFilter<"NewsItem"> | string | null
   href?: Prisma.StringWithAggregatesFilter<"NewsItem"> | string
   isPinned?: Prisma.BoolWithAggregatesFilter<"NewsItem"> | boolean
   published?: Prisma.BoolWithAggregatesFilter<"NewsItem"> | boolean
@@ -291,8 +315,10 @@ export type NewsItemCreateInput = {
   date: Date | string
   titleEn: string
   titleZh: string
+  titleJa: string
   summaryEn?: string | null
   summaryZh?: string | null
+  summaryJa?: string | null
   href: string
   isPinned?: boolean
   published?: boolean
@@ -304,8 +330,10 @@ export type NewsItemUncheckedCreateInput = {
   date: Date | string
   titleEn: string
   titleZh: string
+  titleJa: string
   summaryEn?: string | null
   summaryZh?: string | null
+  summaryJa?: string | null
   href: string
   isPinned?: boolean
   published?: boolean
@@ -317,8 +345,10 @@ export type NewsItemUpdateInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   titleEn?: Prisma.StringFieldUpdateOperationsInput | string
   titleZh?: Prisma.StringFieldUpdateOperationsInput | string
+  titleJa?: Prisma.StringFieldUpdateOperationsInput | string
   summaryEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   summaryZh?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  summaryJa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   href?: Prisma.StringFieldUpdateOperationsInput | string
   isPinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -330,8 +360,10 @@ export type NewsItemUncheckedUpdateInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   titleEn?: Prisma.StringFieldUpdateOperationsInput | string
   titleZh?: Prisma.StringFieldUpdateOperationsInput | string
+  titleJa?: Prisma.StringFieldUpdateOperationsInput | string
   summaryEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   summaryZh?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  summaryJa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   href?: Prisma.StringFieldUpdateOperationsInput | string
   isPinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -343,8 +375,10 @@ export type NewsItemCreateManyInput = {
   date: Date | string
   titleEn: string
   titleZh: string
+  titleJa: string
   summaryEn?: string | null
   summaryZh?: string | null
+  summaryJa?: string | null
   href: string
   isPinned?: boolean
   published?: boolean
@@ -356,8 +390,10 @@ export type NewsItemUpdateManyMutationInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   titleEn?: Prisma.StringFieldUpdateOperationsInput | string
   titleZh?: Prisma.StringFieldUpdateOperationsInput | string
+  titleJa?: Prisma.StringFieldUpdateOperationsInput | string
   summaryEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   summaryZh?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  summaryJa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   href?: Prisma.StringFieldUpdateOperationsInput | string
   isPinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -369,8 +405,10 @@ export type NewsItemUncheckedUpdateManyInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   titleEn?: Prisma.StringFieldUpdateOperationsInput | string
   titleZh?: Prisma.StringFieldUpdateOperationsInput | string
+  titleJa?: Prisma.StringFieldUpdateOperationsInput | string
   summaryEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   summaryZh?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  summaryJa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   href?: Prisma.StringFieldUpdateOperationsInput | string
   isPinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -382,8 +420,10 @@ export type NewsItemCountOrderByAggregateInput = {
   date?: Prisma.SortOrder
   titleEn?: Prisma.SortOrder
   titleZh?: Prisma.SortOrder
+  titleJa?: Prisma.SortOrder
   summaryEn?: Prisma.SortOrder
   summaryZh?: Prisma.SortOrder
+  summaryJa?: Prisma.SortOrder
   href?: Prisma.SortOrder
   isPinned?: Prisma.SortOrder
   published?: Prisma.SortOrder
@@ -395,8 +435,10 @@ export type NewsItemMaxOrderByAggregateInput = {
   date?: Prisma.SortOrder
   titleEn?: Prisma.SortOrder
   titleZh?: Prisma.SortOrder
+  titleJa?: Prisma.SortOrder
   summaryEn?: Prisma.SortOrder
   summaryZh?: Prisma.SortOrder
+  summaryJa?: Prisma.SortOrder
   href?: Prisma.SortOrder
   isPinned?: Prisma.SortOrder
   published?: Prisma.SortOrder
@@ -408,8 +450,10 @@ export type NewsItemMinOrderByAggregateInput = {
   date?: Prisma.SortOrder
   titleEn?: Prisma.SortOrder
   titleZh?: Prisma.SortOrder
+  titleJa?: Prisma.SortOrder
   summaryEn?: Prisma.SortOrder
   summaryZh?: Prisma.SortOrder
+  summaryJa?: Prisma.SortOrder
   href?: Prisma.SortOrder
   isPinned?: Prisma.SortOrder
   published?: Prisma.SortOrder
@@ -427,8 +471,10 @@ export type NewsItemSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   date?: boolean
   titleEn?: boolean
   titleZh?: boolean
+  titleJa?: boolean
   summaryEn?: boolean
   summaryZh?: boolean
+  summaryJa?: boolean
   href?: boolean
   isPinned?: boolean
   published?: boolean
@@ -440,8 +486,10 @@ export type NewsItemSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   date?: boolean
   titleEn?: boolean
   titleZh?: boolean
+  titleJa?: boolean
   summaryEn?: boolean
   summaryZh?: boolean
+  summaryJa?: boolean
   href?: boolean
   isPinned?: boolean
   published?: boolean
@@ -453,8 +501,10 @@ export type NewsItemSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   date?: boolean
   titleEn?: boolean
   titleZh?: boolean
+  titleJa?: boolean
   summaryEn?: boolean
   summaryZh?: boolean
+  summaryJa?: boolean
   href?: boolean
   isPinned?: boolean
   published?: boolean
@@ -466,14 +516,16 @@ export type NewsItemSelectScalar = {
   date?: boolean
   titleEn?: boolean
   titleZh?: boolean
+  titleJa?: boolean
   summaryEn?: boolean
   summaryZh?: boolean
+  summaryJa?: boolean
   href?: boolean
   isPinned?: boolean
   published?: boolean
 }
 
-export type NewsItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "slug" | "date" | "titleEn" | "titleZh" | "summaryEn" | "summaryZh" | "href" | "isPinned" | "published", ExtArgs["result"]["newsItem"]>
+export type NewsItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "slug" | "date" | "titleEn" | "titleZh" | "titleJa" | "summaryEn" | "summaryZh" | "summaryJa" | "href" | "isPinned" | "published", ExtArgs["result"]["newsItem"]>
 
 export type $NewsItemPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "NewsItem"
@@ -484,8 +536,10 @@ export type $NewsItemPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     date: Date
     titleEn: string
     titleZh: string
+    titleJa: string
     summaryEn: string | null
     summaryZh: string | null
+    summaryJa: string | null
     href: string
     isPinned: boolean
     published: boolean
@@ -917,8 +971,10 @@ export interface NewsItemFieldRefs {
   readonly date: Prisma.FieldRef<"NewsItem", 'DateTime'>
   readonly titleEn: Prisma.FieldRef<"NewsItem", 'String'>
   readonly titleZh: Prisma.FieldRef<"NewsItem", 'String'>
+  readonly titleJa: Prisma.FieldRef<"NewsItem", 'String'>
   readonly summaryEn: Prisma.FieldRef<"NewsItem", 'String'>
   readonly summaryZh: Prisma.FieldRef<"NewsItem", 'String'>
+  readonly summaryJa: Prisma.FieldRef<"NewsItem", 'String'>
   readonly href: Prisma.FieldRef<"NewsItem", 'String'>
   readonly isPinned: Prisma.FieldRef<"NewsItem", 'Boolean'>
   readonly published: Prisma.FieldRef<"NewsItem", 'Boolean'>

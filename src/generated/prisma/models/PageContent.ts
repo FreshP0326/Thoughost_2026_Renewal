@@ -29,8 +29,10 @@ export type PageContentMinAggregateOutputType = {
   pageKey: string | null
   titleEn: string | null
   titleZh: string | null
+  titleJa: string | null
   bodyEn: string | null
   bodyZh: string | null
+  bodyJa: string | null
 }
 
 export type PageContentMaxAggregateOutputType = {
@@ -38,8 +40,10 @@ export type PageContentMaxAggregateOutputType = {
   pageKey: string | null
   titleEn: string | null
   titleZh: string | null
+  titleJa: string | null
   bodyEn: string | null
   bodyZh: string | null
+  bodyJa: string | null
 }
 
 export type PageContentCountAggregateOutputType = {
@@ -47,8 +51,10 @@ export type PageContentCountAggregateOutputType = {
   pageKey: number
   titleEn: number
   titleZh: number
+  titleJa: number
   bodyEn: number
   bodyZh: number
+  bodyJa: number
   _all: number
 }
 
@@ -58,8 +64,10 @@ export type PageContentMinAggregateInputType = {
   pageKey?: true
   titleEn?: true
   titleZh?: true
+  titleJa?: true
   bodyEn?: true
   bodyZh?: true
+  bodyJa?: true
 }
 
 export type PageContentMaxAggregateInputType = {
@@ -67,8 +75,10 @@ export type PageContentMaxAggregateInputType = {
   pageKey?: true
   titleEn?: true
   titleZh?: true
+  titleJa?: true
   bodyEn?: true
   bodyZh?: true
+  bodyJa?: true
 }
 
 export type PageContentCountAggregateInputType = {
@@ -76,8 +86,10 @@ export type PageContentCountAggregateInputType = {
   pageKey?: true
   titleEn?: true
   titleZh?: true
+  titleJa?: true
   bodyEn?: true
   bodyZh?: true
+  bodyJa?: true
   _all?: true
 }
 
@@ -158,8 +170,10 @@ export type PageContentGroupByOutputType = {
   pageKey: string
   titleEn: string
   titleZh: string
+  titleJa: string
   bodyEn: string
   bodyZh: string
+  bodyJa: string
   _count: PageContentCountAggregateOutputType | null
   _min: PageContentMinAggregateOutputType | null
   _max: PageContentMaxAggregateOutputType | null
@@ -188,8 +202,10 @@ export type PageContentWhereInput = {
   pageKey?: Prisma.StringFilter<"PageContent"> | string
   titleEn?: Prisma.StringFilter<"PageContent"> | string
   titleZh?: Prisma.StringFilter<"PageContent"> | string
+  titleJa?: Prisma.StringFilter<"PageContent"> | string
   bodyEn?: Prisma.StringFilter<"PageContent"> | string
   bodyZh?: Prisma.StringFilter<"PageContent"> | string
+  bodyJa?: Prisma.StringFilter<"PageContent"> | string
 }
 
 export type PageContentOrderByWithRelationInput = {
@@ -197,8 +213,10 @@ export type PageContentOrderByWithRelationInput = {
   pageKey?: Prisma.SortOrder
   titleEn?: Prisma.SortOrder
   titleZh?: Prisma.SortOrder
+  titleJa?: Prisma.SortOrder
   bodyEn?: Prisma.SortOrder
   bodyZh?: Prisma.SortOrder
+  bodyJa?: Prisma.SortOrder
 }
 
 export type PageContentWhereUniqueInput = Prisma.AtLeast<{
@@ -209,8 +227,10 @@ export type PageContentWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.PageContentWhereInput | Prisma.PageContentWhereInput[]
   titleEn?: Prisma.StringFilter<"PageContent"> | string
   titleZh?: Prisma.StringFilter<"PageContent"> | string
+  titleJa?: Prisma.StringFilter<"PageContent"> | string
   bodyEn?: Prisma.StringFilter<"PageContent"> | string
   bodyZh?: Prisma.StringFilter<"PageContent"> | string
+  bodyJa?: Prisma.StringFilter<"PageContent"> | string
 }, "id" | "pageKey">
 
 export type PageContentOrderByWithAggregationInput = {
@@ -218,8 +238,10 @@ export type PageContentOrderByWithAggregationInput = {
   pageKey?: Prisma.SortOrder
   titleEn?: Prisma.SortOrder
   titleZh?: Prisma.SortOrder
+  titleJa?: Prisma.SortOrder
   bodyEn?: Prisma.SortOrder
   bodyZh?: Prisma.SortOrder
+  bodyJa?: Prisma.SortOrder
   _count?: Prisma.PageContentCountOrderByAggregateInput
   _max?: Prisma.PageContentMaxOrderByAggregateInput
   _min?: Prisma.PageContentMinOrderByAggregateInput
@@ -233,8 +255,10 @@ export type PageContentScalarWhereWithAggregatesInput = {
   pageKey?: Prisma.StringWithAggregatesFilter<"PageContent"> | string
   titleEn?: Prisma.StringWithAggregatesFilter<"PageContent"> | string
   titleZh?: Prisma.StringWithAggregatesFilter<"PageContent"> | string
+  titleJa?: Prisma.StringWithAggregatesFilter<"PageContent"> | string
   bodyEn?: Prisma.StringWithAggregatesFilter<"PageContent"> | string
   bodyZh?: Prisma.StringWithAggregatesFilter<"PageContent"> | string
+  bodyJa?: Prisma.StringWithAggregatesFilter<"PageContent"> | string
 }
 
 export type PageContentCreateInput = {
@@ -242,8 +266,10 @@ export type PageContentCreateInput = {
   pageKey: string
   titleEn: string
   titleZh: string
+  titleJa: string
   bodyEn: string
   bodyZh: string
+  bodyJa: string
 }
 
 export type PageContentUncheckedCreateInput = {
@@ -251,8 +277,10 @@ export type PageContentUncheckedCreateInput = {
   pageKey: string
   titleEn: string
   titleZh: string
+  titleJa: string
   bodyEn: string
   bodyZh: string
+  bodyJa: string
 }
 
 export type PageContentUpdateInput = {
@@ -260,8 +288,10 @@ export type PageContentUpdateInput = {
   pageKey?: Prisma.StringFieldUpdateOperationsInput | string
   titleEn?: Prisma.StringFieldUpdateOperationsInput | string
   titleZh?: Prisma.StringFieldUpdateOperationsInput | string
+  titleJa?: Prisma.StringFieldUpdateOperationsInput | string
   bodyEn?: Prisma.StringFieldUpdateOperationsInput | string
   bodyZh?: Prisma.StringFieldUpdateOperationsInput | string
+  bodyJa?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type PageContentUncheckedUpdateInput = {
@@ -269,8 +299,10 @@ export type PageContentUncheckedUpdateInput = {
   pageKey?: Prisma.StringFieldUpdateOperationsInput | string
   titleEn?: Prisma.StringFieldUpdateOperationsInput | string
   titleZh?: Prisma.StringFieldUpdateOperationsInput | string
+  titleJa?: Prisma.StringFieldUpdateOperationsInput | string
   bodyEn?: Prisma.StringFieldUpdateOperationsInput | string
   bodyZh?: Prisma.StringFieldUpdateOperationsInput | string
+  bodyJa?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type PageContentCreateManyInput = {
@@ -278,8 +310,10 @@ export type PageContentCreateManyInput = {
   pageKey: string
   titleEn: string
   titleZh: string
+  titleJa: string
   bodyEn: string
   bodyZh: string
+  bodyJa: string
 }
 
 export type PageContentUpdateManyMutationInput = {
@@ -287,8 +321,10 @@ export type PageContentUpdateManyMutationInput = {
   pageKey?: Prisma.StringFieldUpdateOperationsInput | string
   titleEn?: Prisma.StringFieldUpdateOperationsInput | string
   titleZh?: Prisma.StringFieldUpdateOperationsInput | string
+  titleJa?: Prisma.StringFieldUpdateOperationsInput | string
   bodyEn?: Prisma.StringFieldUpdateOperationsInput | string
   bodyZh?: Prisma.StringFieldUpdateOperationsInput | string
+  bodyJa?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type PageContentUncheckedUpdateManyInput = {
@@ -296,8 +332,10 @@ export type PageContentUncheckedUpdateManyInput = {
   pageKey?: Prisma.StringFieldUpdateOperationsInput | string
   titleEn?: Prisma.StringFieldUpdateOperationsInput | string
   titleZh?: Prisma.StringFieldUpdateOperationsInput | string
+  titleJa?: Prisma.StringFieldUpdateOperationsInput | string
   bodyEn?: Prisma.StringFieldUpdateOperationsInput | string
   bodyZh?: Prisma.StringFieldUpdateOperationsInput | string
+  bodyJa?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type PageContentCountOrderByAggregateInput = {
@@ -305,8 +343,10 @@ export type PageContentCountOrderByAggregateInput = {
   pageKey?: Prisma.SortOrder
   titleEn?: Prisma.SortOrder
   titleZh?: Prisma.SortOrder
+  titleJa?: Prisma.SortOrder
   bodyEn?: Prisma.SortOrder
   bodyZh?: Prisma.SortOrder
+  bodyJa?: Prisma.SortOrder
 }
 
 export type PageContentMaxOrderByAggregateInput = {
@@ -314,8 +354,10 @@ export type PageContentMaxOrderByAggregateInput = {
   pageKey?: Prisma.SortOrder
   titleEn?: Prisma.SortOrder
   titleZh?: Prisma.SortOrder
+  titleJa?: Prisma.SortOrder
   bodyEn?: Prisma.SortOrder
   bodyZh?: Prisma.SortOrder
+  bodyJa?: Prisma.SortOrder
 }
 
 export type PageContentMinOrderByAggregateInput = {
@@ -323,8 +365,10 @@ export type PageContentMinOrderByAggregateInput = {
   pageKey?: Prisma.SortOrder
   titleEn?: Prisma.SortOrder
   titleZh?: Prisma.SortOrder
+  titleJa?: Prisma.SortOrder
   bodyEn?: Prisma.SortOrder
   bodyZh?: Prisma.SortOrder
+  bodyJa?: Prisma.SortOrder
 }
 
 
@@ -334,8 +378,10 @@ export type PageContentSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   pageKey?: boolean
   titleEn?: boolean
   titleZh?: boolean
+  titleJa?: boolean
   bodyEn?: boolean
   bodyZh?: boolean
+  bodyJa?: boolean
 }, ExtArgs["result"]["pageContent"]>
 
 export type PageContentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -343,8 +389,10 @@ export type PageContentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   pageKey?: boolean
   titleEn?: boolean
   titleZh?: boolean
+  titleJa?: boolean
   bodyEn?: boolean
   bodyZh?: boolean
+  bodyJa?: boolean
 }, ExtArgs["result"]["pageContent"]>
 
 export type PageContentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -352,8 +400,10 @@ export type PageContentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   pageKey?: boolean
   titleEn?: boolean
   titleZh?: boolean
+  titleJa?: boolean
   bodyEn?: boolean
   bodyZh?: boolean
+  bodyJa?: boolean
 }, ExtArgs["result"]["pageContent"]>
 
 export type PageContentSelectScalar = {
@@ -361,11 +411,13 @@ export type PageContentSelectScalar = {
   pageKey?: boolean
   titleEn?: boolean
   titleZh?: boolean
+  titleJa?: boolean
   bodyEn?: boolean
   bodyZh?: boolean
+  bodyJa?: boolean
 }
 
-export type PageContentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "pageKey" | "titleEn" | "titleZh" | "bodyEn" | "bodyZh", ExtArgs["result"]["pageContent"]>
+export type PageContentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "pageKey" | "titleEn" | "titleZh" | "titleJa" | "bodyEn" | "bodyZh" | "bodyJa", ExtArgs["result"]["pageContent"]>
 
 export type $PageContentPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "PageContent"
@@ -375,8 +427,10 @@ export type $PageContentPayload<ExtArgs extends runtime.Types.Extensions.Interna
     pageKey: string
     titleEn: string
     titleZh: string
+    titleJa: string
     bodyEn: string
     bodyZh: string
+    bodyJa: string
   }, ExtArgs["result"]["pageContent"]>
   composites: {}
 }
@@ -804,8 +858,10 @@ export interface PageContentFieldRefs {
   readonly pageKey: Prisma.FieldRef<"PageContent", 'String'>
   readonly titleEn: Prisma.FieldRef<"PageContent", 'String'>
   readonly titleZh: Prisma.FieldRef<"PageContent", 'String'>
+  readonly titleJa: Prisma.FieldRef<"PageContent", 'String'>
   readonly bodyEn: Prisma.FieldRef<"PageContent", 'String'>
   readonly bodyZh: Prisma.FieldRef<"PageContent", 'String'>
+  readonly bodyJa: Prisma.FieldRef<"PageContent", 'String'>
 }
     
 

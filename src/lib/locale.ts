@@ -20,7 +20,7 @@ export function withLocale(locale: Locale, href: string) {
 }
 
 export function stripLocalePrefix(pathname: string) {
-  return pathname.replace(/^\/(en|zh|jp)(?=\/|$)/, "") || "";
+  return pathname.replace(/^\/(en|zh|ja)(?=\/|$)/, "") || "";
 }
 
 export function resolveSystemLocale(language: string | undefined): Locale {
@@ -31,7 +31,7 @@ export function resolveSystemLocale(language: string | undefined): Locale {
   }
 
   if (normalized.startsWith("ja")) {
-    return "jp";
+    return "ja";
   }
 
   return "en";

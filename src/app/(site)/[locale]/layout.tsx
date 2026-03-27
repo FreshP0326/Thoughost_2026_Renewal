@@ -48,7 +48,7 @@ export async function generateMetadata({
     description:
       locale === "zh"
         ? "Thoughost 官方网站重构版，聚焦作品、项目与视觉表达。"
-        : locale === "jp"
+        : locale === "ja"
           ? "Thoughost のリビルド版サイト。作品、企画、ビジュアル表現に焦点を当てています。"
           : "A rebuilt Thoughost site focused on releases, projects, and image-led presentation.",
     metadataBase: new URL(siteUrl),

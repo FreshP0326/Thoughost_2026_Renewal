@@ -16,7 +16,7 @@ export default async function ReleasesPage({
   const body =
     locale === "zh"
       ? "按时间浏览 Thoughost 的作品目录，包括专辑、EP、单曲与合作作品。"
-      : locale === "jp"
+      : locale === "ja"
         ? "Thoughost の作品群を時系列で閲覧できます。アルバム、EP、シングル、コラボ作品を含みます。"
         : "Browse Thoughost releases by chronology, from albums and EPs to singles and collaborations.";
 
@@ -30,7 +30,7 @@ export default async function ReleasesPage({
           Compilation: "合集",
           Collaboration: "合作",
         }
-      : locale === "jp"
+      : locale === "ja"
         ? {
             All: "All",
             Album: "Album",

@@ -3,7 +3,7 @@ import { z } from "zod";
 import { createTRPCRouter, publicProcedure } from "@/server/api/trpc";
 import { getPageContent } from "@/server/services/site-service";
 
-const localeSchema = z.enum(["en", "zh", "jp"]);
+const localeSchema = z.enum(["en", "zh", "ja"]);
 
 export const pageRouter = createTRPCRouter({
   byKey: publicProcedure

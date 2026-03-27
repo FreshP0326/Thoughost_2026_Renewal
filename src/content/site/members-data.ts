@@ -18,12 +18,12 @@ export const aboutIntro = {
   title: {
     en: "ABOUT",
     zh: "关于",
-    jp: "ABOUT",
+    ja: "ABOUT",
   } satisfies LocalizedText,
   body: {
     en: "Thoughost is a doujin circle from China. We want to find creative sounds in the whole world.",
     zh: "Thoughost 是一个来自中国的同人社团。我们希望在世界各地找到具有创造力的声音。",
-    jp: "Thoughost は中国発の同人サークルです。世界中から創造的なサウンドを見つけたいと考えています。",
+    ja: "Thoughost は中国発の同人サークルです。世界中から創造的なサウンドを見つけたいと考えています。",
   } satisfies LocalizedText,
 } as const;
 
@@ -33,19 +33,19 @@ export const members: MemberContentEntry[] = [
     name: {
       en: "潮音きつね",
       zh: "潮音きつね",
-      jp: "潮音きつね",
+      ja: "潮音きつね",
     },
     role: {
       en: "ARTIST",
       zh: "艺术家",
-      jp: "ARTIST",
+      ja: "ARTIST",
     },
     group: "members",
     image: "/images/artists/kitsune.jpg",
     bio: {
       en: `潮音きつね aka HERkomachi aka 黒猫です！\n\n主にtechnoなどの四つ打ち系を作っています。時々他のジャンル(ブレイクコアとか電波ソングとか)も試しています。最近はハードウェアシンセに熱中しています。\n\nななひらForever．．．`,
       zh: `潮音きつね aka HERkomachi aka 黒猫です！\n\n主にtechnoなどの四つ打ち系を作っています。時々他のジャンル(ブレイクコアとか電波ソングとか)も試しています。最近はハードウェアシンセに熱中しています。\n\nななひらForever．．．`,
-      jp: `潮音きつね aka HERkomachi aka 黒猫です！\n\n主にtechnoなどの四つ打ち系を作っています。時々他のジャンル(ブレイクコアとか電波ソングとか)も試しています。最近はハードウェアシンセに熱中しています。\n\nななひらForever．．．`,
+      ja: `潮音きつね aka HERkomachi aka 黒猫です！\n\n主にtechnoなどの四つ打ち系を作っています。時々他のジャンル(ブレイクコアとか電波ソングとか)も試しています。最近はハードウェアシンセに熱中しています。\n\nななひらForever．．．`,
     },
     representativeTracks: [
       { releaseSlug: "thoughts", trackNumbers: ["03"] },
@@ -63,19 +63,19 @@ export const members: MemberContentEntry[] = [
     name: {
       en: "Konseki Takane",
       zh: "Konseki Takane",
-      jp: "Konseki Takane",
+      ja: "Konseki Takane",
     },
     role: {
       en: "DESIGNER",
       zh: "设计",
-      jp: "DESIGNER",
+      ja: "DESIGNER",
     },
     group: "members",
     image: "/images/artists/konseki.jpg",
     bio: {
       en: `Graphic Designer. Responsible for most of the visual design and also set the main visual direction for each album. Occasionally as a DJ.\n\nFounded "DOUJiN LiFE'S CAFE", an organization for fans of doujin music, in order to promote doujin music in China.\n\n"The most beautiful thing in the world is a girl with beast ears wearing white stockings."`,
       zh: `Graphic Designer. Responsible for most of the visual design and also set the main visual direction for each album. Occasionally as a DJ.\n\nFounded "DOUJiN LiFE'S CAFE", an organization for fans of doujin music, in order to promote doujin music in China.\n\n"The most beautiful thing in the world is a girl with beast ears wearing white stockings."`,
-      jp: `Graphic Designer. Responsible for most of the visual design and also set the main visual direction for each album. Occasionally as a DJ.\n\nFounded "DOUJiN LiFE'S CAFE", an organization for fans of doujin music, in order to promote doujin music in China.\n\n"The most beautiful thing in the world is a girl with beast ears wearing white stockings."`,
+      ja: `Graphic Designer. Responsible for most of the visual design and also set the main visual direction for each album. Occasionally as a DJ.\n\nFounded "DOUJiN LiFE'S CAFE", an organization for fans of doujin music, in order to promote doujin music in China.\n\n"The most beautiful thing in the world is a girl with beast ears wearing white stockings."`,
     },
     representativeTracks: [],
     links: [
@@ -88,19 +88,19 @@ export const members: MemberContentEntry[] = [
     name: {
       en: "望月真白",
       zh: "望月真白",
-      jp: "望月真白",
+      ja: "望月真白",
     },
     role: {
       en: "DJ&ARTIST",
       zh: "DJ / 艺术家",
-      jp: "DJ&ARTIST",
+      ja: "DJ&ARTIST",
     },
     group: "members",
     image: "/images/artists/mashiro.jpg",
     bio: {
       en: `Aka DJ MASHIRO (2), a DJ who loves Drummin’, Experimental sound.\n\nStarted music career w’ Doujin music, now show an interest in Denpa (galgame lol) culture.\n\nAlso works for GNG, a group about party night organization, digital magazine, radio sessions.`,
       zh: `Aka DJ MASHIRO (2), a DJ who loves Drummin’, Experimental sound.\n\nStarted music career w’ Doujin music, now show an interest in Denpa (galgame lol) culture.\n\nAlso works for GNG, a group about party night organization, digital magazine, radio sessions.`,
-      jp: `Aka DJ MASHIRO (2), a DJ who loves Drummin’, Experimental sound.\n\nStarted music career w’ Doujin music, now show an interest in Denpa (galgame lol) culture.\n\nAlso works for GNG, a group about party night organization, digital magazine, radio sessions.`,
+      ja: `Aka DJ MASHIRO (2), a DJ who loves Drummin’, Experimental sound.\n\nStarted music career w’ Doujin music, now show an interest in Denpa (galgame lol) culture.\n\nAlso works for GNG, a group about party night organization, digital magazine, radio sessions.`,
     },
     representativeTracks: [
       { releaseSlug: "s-l-v-t-mixture", trackNumbers: ["04", "05", "08"] },
@@ -115,19 +115,19 @@ export const members: MemberContentEntry[] = [
     name: {
       en: "Nirotiy",
       zh: "Nirotiy",
-      jp: "Nirotiy",
+      ja: "Nirotiy",
     },
     role: {
       en: "ARTIST",
       zh: "艺术家",
-      jp: "ARTIST",
+      ja: "ARTIST",
     },
     group: "members",
     image: "/images/artists/nirotiy.jpg",
     bio: {
       en: `Electronic Music Producer focused on HDM, Drum'n'Bass, and more.\n\nStarted production back from 2019 with my phone.\n\nPursue to convey emotions directly from myself or other people around me.\n\n"Something I claim myself to be."`,
       zh: `Electronic Music Producer focused on HDM, Drum'n'Bass, and more.\n\nStarted production back from 2019 with my phone.\n\nPursue to convey emotions directly from myself or other people around me.\n\n"Something I claim myself to be."`,
-      jp: `Electronic Music Producer focused on HDM, Drum'n'Bass, and more.\n\nStarted production back from 2019 with my phone.\n\nPursue to convey emotions directly from myself or other people around me.\n\n"Something I claim myself to be."`,
+      ja: `Electronic Music Producer focused on HDM, Drum'n'Bass, and more.\n\nStarted production back from 2019 with my phone.\n\nPursue to convey emotions directly from myself or other people around me.\n\n"Something I claim myself to be."`,
     },
     representativeTracks: [
       { releaseSlug: "palette-of-clouds", trackNumbers: ["01", "03", "05"] },
@@ -145,19 +145,19 @@ export const members: MemberContentEntry[] = [
     name: {
       en: "Laxeno57",
       zh: "Laxeno57",
-      jp: "Laxeno57",
+      ja: "Laxeno57",
     },
     role: {
       en: "ARTIST",
       zh: "艺术家",
-      jp: "ARTIST",
+      ja: "ARTIST",
     },
     group: "members",
     image: "/images/artists/laxeno57.jpg",
     bio: {
       en: `Hello, I'm Laxeno57.\n\nI'm interested in many styles of music, and I also produce a very wide variety of styles, some of which are extreme and far from each other, such as breakcore, rock and acoustic, and jazz, to name a few. I hope that my work will bring you images and aesthetics.`,
       zh: `Hello, I'm Laxeno57.\n\nI'm interested in many styles of music, and I also produce a very wide variety of styles, some of which are extreme and far from each other, such as breakcore, rock and acoustic, and jazz, to name a few. I hope that my work will bring you images and aesthetics.`,
-      jp: `Hello, I'm Laxeno57.\n\nI'm interested in many styles of music, and I also produce a very wide variety of styles, some of which are extreme and far from each other, such as breakcore, rock and acoustic, and jazz, to name a few. I hope that my work will bring you images and aesthetics.`,
+      ja: `Hello, I'm Laxeno57.\n\nI'm interested in many styles of music, and I also produce a very wide variety of styles, some of which are extreme and far from each other, such as breakcore, rock and acoustic, and jazz, to name a few. I hope that my work will bring you images and aesthetics.`,
     },
     representativeTracks: [
       { releaseSlug: "after-the-forerunner-e-p", trackNumbers: ["02"] },
@@ -170,19 +170,19 @@ export const members: MemberContentEntry[] = [
     name: {
       en: "Joulez",
       zh: "Joulez",
-      jp: "Joulez",
+      ja: "Joulez",
     },
     role: {
       en: "ARTIST&MASTERING",
       zh: "艺术家 / 母带",
-      jp: "ARTIST&MASTERING",
+      ja: "ARTIST&MASTERING",
     },
     group: "members",
     image: "/images/artists/joulez.jpg",
     bio: {
       en: `Hi there, this is Joulez.\n\nI'm currently the mastering engineer for Thoughost, and a producer of hardcore and other music here. I like Cities Skyline and eating good food. I believe in souls and spirits.\n\nYou might not be pronoucing my name right, but thats fine. Neither do I. May the spirit of health and fortune be with you.`,
       zh: `Hi there, this is Joulez.\n\nI'm currently the mastering engineer for Thoughost, and a producer of hardcore and other music here. I like Cities Skyline and eating good food. I believe in souls and spirits.\n\nYou might not be pronoucing my name right, but thats fine. Neither do I. May the spirit of health and fortune be with you.`,
-      jp: `Hi there, this is Joulez.\n\nI'm currently the mastering engineer for Thoughost, and a producer of hardcore and other music here. I like Cities Skyline and eating good food. I believe in souls and spirits.\n\nYou might not be pronoucing my name right, but thats fine. Neither do I. May the spirit of health and fortune be with you.`,
+      ja: `Hi there, this is Joulez.\n\nI'm currently the mastering engineer for Thoughost, and a producer of hardcore and other music here. I like Cities Skyline and eating good food. I believe in souls and spirits.\n\nYou might not be pronoucing my name right, but thats fine. Neither do I. May the spirit of health and fortune be with you.`,
     },
     representativeTracks: [
       { releaseSlug: "haru-no-shuen", trackNumbers: ["01"] },
@@ -199,19 +199,19 @@ export const members: MemberContentEntry[] = [
     name: {
       en: "wheatfox",
       zh: "wheatfox",
-      jp: "wheatfox",
+      ja: "wheatfox",
     },
     role: {
       en: "ARTIST",
       zh: "艺术家",
-      jp: "ARTIST",
+      ja: "ARTIST",
     },
     group: "members",
     image: "/images/artists/wheatfox.jpg",
     bio: {
       en: `This is wheatfox, an electronic music producer.\n\nI mainly focus on genres of drum & bass, liquid funk, and jazz hip hop. also interested in game music scoring, garage music stuff, and hardware synthesizer design.\n\n"It's funny how the music put times in perspective Add a soundtrack to your life and perfect it"`,
       zh: `This is wheatfox, an electronic music producer.\n\nI mainly focus on genres of drum & bass, liquid funk, and jazz hip hop. also interested in game music scoring, garage music stuff, and hardware synthesizer design.\n\n"It's funny how the music put times in perspective Add a soundtrack to your life and perfect it"`,
-      jp: `This is wheatfox, an electronic music producer.\n\nI mainly focus on genres of drum & bass, liquid funk, and jazz hip hop. also interested in game music scoring, garage music stuff, and hardware synthesizer design.\n\n"It's funny how the music put times in perspective Add a soundtrack to your life and perfect it"`,
+      ja: `This is wheatfox, an electronic music producer.\n\nI mainly focus on genres of drum & bass, liquid funk, and jazz hip hop. also interested in game music scoring, garage music stuff, and hardware synthesizer design.\n\n"It's funny how the music put times in perspective Add a soundtrack to your life and perfect it"`,
     },
     representativeTracks: [
       { releaseSlug: "asteria", trackNumbers: ["06"] },
@@ -228,19 +228,19 @@ export const members: MemberContentEntry[] = [
     name: {
       en: "rmdyh",
       zh: "rmdyh",
-      jp: "rmdyh",
+      ja: "rmdyh",
     },
     role: {
       en: "WEB",
       zh: "网站",
-      jp: "WEB",
+      ja: "WEB",
     },
     group: "staff",
     image: "/images/artists/rmdyh.jpg",
     bio: {
       en: `This is rmdyh, with some understanding of web development. At Thoughost, I am responsible for building the homepage website.\n\nI like Galgames, rhythm games, and Touhou Project. I also play lots of games on my mobile, but I can hardly persist in playing one game every day for more than six months.\n\n"WELCOME TO OSU!"`,
       zh: `This is rmdyh, with some understanding of web development. At Thoughost, I am responsible for building the homepage website.\n\nI like Galgames, rhythm games, and Touhou Project. I also play lots of games on my mobile, but I can hardly persist in playing one game every day for more than six months.\n\n"WELCOME TO OSU!"`,
-      jp: `This is rmdyh, with some understanding of web development. At Thoughost, I am responsible for building the homepage website.\n\nI like Galgames, rhythm games, and Touhou Project. I also play lots of games on my mobile, but I can hardly persist in playing one game every day for more than six months.\n\n"WELCOME TO OSU!"`,
+      ja: `This is rmdyh, with some understanding of web development. At Thoughost, I am responsible for building the homepage website.\n\nI like Galgames, rhythm games, and Touhou Project. I also play lots of games on my mobile, but I can hardly persist in playing one game every day for more than six months.\n\n"WELCOME TO OSU!"`,
     },
     representativeTracks: [],
     links: [{ label: "Github", url: "https://github.com/rmdyh" }],
@@ -250,19 +250,19 @@ export const members: MemberContentEntry[] = [
     name: {
       en: "Erua",
       zh: "Erua",
-      jp: "Erua",
+      ja: "Erua",
     },
     role: {
       en: "STAFF",
       zh: "工作人员",
-      jp: "STAFF",
+      ja: "STAFF",
     },
     group: "staff",
     image: "/images/artists/erua.jpg",
     bio: {
       en: `Hi, Erua. here\n\nWorking hard in counter and support thoughost’s accounting.\n\nI often play MUG and SLG in my free time, or just lay down and space out, and I love varieties of music style that is hard to say which is my favorite.\n\nCan not live without soda water.\n\nAnime grils with sidetail is justice!`,
       zh: `Hi, Erua. here\n\nWorking hard in counter and support thoughost’s accounting.\n\nI often play MUG and SLG in my free time, or just lay down and space out, and I love varieties of music style that is hard to say which is my favorite.\n\nCan not live without soda water.\n\nAnime grils with sidetail is justice!`,
-      jp: `Hi, Erua. here\n\nWorking hard in counter and support thoughost’s accounting.\n\nI often play MUG and SLG in my free time, or just lay down and space out, and I love varieties of music style that is hard to say which is my favorite.\n\nCan not live without soda water.\n\nAnime grils with sidetail is justice!`,
+      ja: `Hi, Erua. here\n\nWorking hard in counter and support thoughost’s accounting.\n\nI often play MUG and SLG in my free time, or just lay down and space out, and I love varieties of music style that is hard to say which is my favorite.\n\nCan not live without soda water.\n\nAnime grils with sidetail is justice!`,
     },
     representativeTracks: [],
     links: [],

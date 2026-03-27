@@ -6,8 +6,12 @@ import { ReleaseDetailHeader } from "@/components/site/release-detail-header";
 import type { ReleaseDetailViewModel } from "@/types/site";
 
 vi.mock("next/image", () => ({
-  default: ({ alt, fill: _fill, ...props }: React.ImgHTMLAttributes<HTMLImageElement> & { fill?: boolean }) =>
-    React.createElement("img", { alt, ...props }),
+  default: (imageProps: React.ImgHTMLAttributes<HTMLImageElement> & { fill?: boolean }) => {
+    const { alt, fill, ...props } = imageProps;
+    void fill;
+
+    return React.createElement("img", { alt, ...props });
+  },
 }));
 
 vi.mock("next/link", () => ({

@@ -16,7 +16,7 @@ const localeItems = [
   { key: "system", label: "Follow System" },
   { key: "zh", label: localeDisplayNames.zh },
   { key: "en", label: localeDisplayNames.en },
-  { key: "jp", label: localeDisplayNames.jp },
+  { key: "ja", label: localeDisplayNames.ja },
 ] as const;
 
 export function LocaleSwitcher({
