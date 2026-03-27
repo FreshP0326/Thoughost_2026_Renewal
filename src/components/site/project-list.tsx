@@ -21,8 +21,8 @@ export function ProjectList({
 }) {
   return (
     <section className="bg-white py-12 md:py-16">
-      <StaggerGroup className="mx-auto max-w-[1100px] space-y-6 px-4 sm:px-6 lg:px-0">
-        {items.map((item) => (
+      <StaggerGroup className="mx-auto max-w-[1100px] space-y-6 px-4 sm:px-6 lg:px-0" density="base">
+        {items.map((item, index) => (
           <StaggerItem key={item.slug}>
             <Link
               href={withLocale(locale, item.href)}
@@ -33,7 +33,8 @@ export function ProjectList({
                   src={withBasePathAsset(item.coverImage)}
                   alt={item.title}
                   fill
-                  className="motion-image object-cover group-hover:opacity-95 group-hover:brightness-105"
+                  loading={index < 2 ? "eager" : "lazy"}
+                  className="motion-image object-cover group-hover:opacity-97 group-hover:brightness-105"
                   sizes="30vw"
                 />
               </div>

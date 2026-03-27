@@ -22,7 +22,7 @@ export const socialLinks = [
   {
     platform: "X",
     label: "X",
-    url: "https://x.com/",
+    url: "https://x.com/thoughost",
     iconKey: "x",
   },
   {
@@ -34,8 +34,20 @@ export const socialLinks = [
   {
     platform: "SoundCloud",
     label: "SoundCloud",
-    url: "https://soundcloud.com/",
+    url: "https://soundcloud.com/thoughost",
     iconKey: "soundcloud",
+  },
+  {
+    platform: "Bilibili",
+    label: "Bilibili",
+    url: "https://space.bilibili.com/2004994075",
+    iconKey: "bilibili",
+  },
+  {
+    platform: "Dizzylab",
+    label: "Dizzylab",
+    url: "https://www.dizzylab.net/l/Thoughost/",
+    iconKey: "dizzylab",
   },
 ] satisfies SocialIconLink[];
 
@@ -51,59 +63,25 @@ export const navigation = [
     label: { en: "ABOUT", zh: "关于", jp: "ABOUT" },
   },
   {
+    key: "news",
+    href: "/news",
+    label: { en: "NEWS", zh: "新闻", jp: "NEWS" },
+  },
+  {
     key: "releases",
     href: "/releases",
     label: { en: "DISCOGRAPHY", zh: "作品", jp: "DISCOGRAPHY" },
   },
   {
     key: "contact",
-    href: "/#contact",
+    href: "https://docs.google.com/forms/d/e/1FAIpQLSe-kA6nNwropsvfp6No1fsUl1BFTn6oP-myHSnwsCNfXNayiQ/viewform",
     label: { en: "CONTACT", zh: "联系", jp: "CONTACT" },
   },
 ] as const;
 
-export const newsItems = [
-  {
-    slug: "site-refresh",
-    date: "2024.12.22",
-    title: {
-      en: "Thoughost site refresh enters the next project phase.",
-      zh: "Thoughost 网站更新进入下一个项目阶段。",
-      jp: "Thoughost のサイト刷新は次のプロジェクトフェーズに入ります。",
-    },
-    href: "/project",
-  },
-  {
-    slug: "new-release-window",
-    date: "2024.11.10",
-    title: {
-      en: "Kakusatsu Shoujo 2 physical and digital release window announced.",
-      zh: "《Kakusatsu Shoujo 2》实体与数字发行窗口公布。",
-      jp: "『Kakusatsu Shoujo 2』のフィジカル / デジタル発売時期を公開。",
-    },
-    href: "/releases/kakusatsu-shoujo-2",
-  },
-  {
-    slug: "artist-collab",
-    date: "2024.08.08",
-    title: {
-      en: "New collaboration lineup expands Thoughost’s visual direction.",
-      zh: "新的合作阵容拓展了 Thoughost 的视觉方向。",
-      jp: "新しいコラボレーション陣が Thoughost のビジュアルの方向性を広げます。",
-    },
-    href: "/about",
-  },
-  {
-    slug: "thoughts-open",
-    date: "2024.07.21",
-    title: {
-      en: "Thoughts archive opens with notes on rhythm, noise, and editing.",
-      zh: "Thoughts 页面上线，收录关于节奏、噪音与剪辑的笔记。",
-      jp: "Thoughts アーカイブ公開。リズム、ノイズ、編集に関するノートを掲載。",
-    },
-    href: "/special/thoughts",
-  },
-];
+export const featureFlags = {
+  showNewsInNavigation: true,
+} as const;
 
 export const pageContent = {
   about: {

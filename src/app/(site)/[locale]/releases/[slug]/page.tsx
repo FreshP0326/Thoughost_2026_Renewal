@@ -33,10 +33,10 @@ export async function generateMetadata({
 
   return {
     title: `${release.title} | Thoughost`,
-    description: release.summary,
+    description: release.teaser,
     openGraph: {
       title: release.title,
-      description: release.summary,
+      description: release.teaser,
       images: [
         {
           url: withBasePathAsset(release.coverImage),

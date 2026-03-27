@@ -1,224 +1,228 @@
 "use client";
 
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
 import { withBasePathAsset } from "@/lib/base-path";
 import { withLocale } from "@/lib/locale";
-import { motionDurations, motionEasing } from "@/lib/motion";
+import { motionEasing, motionTokens } from "@/lib/motion";
 import type { HeroSlide, Locale } from "@/types/site";
 
-function getSlideImagePositions(slug: string) {
-  if (slug === "kakusatsu-shoujo") {
-    return {
-      left: "left center",
-      main: "center center",
-      right: "right center",
-    };
-  }
+const AUTOPLAY_MS = 6000;
 
-  if (slug === "ground-attack") {
-    return {
-      left: "left center",
-      main: "center center",
-      right: "right center",
-    };
-  }
-
+function getSlideImagePositions(slide: HeroSlide) {
   return {
-    left: "left center",
-    main: "center center",
-    right: "right center",
+    left: slide.desktopImagePosition?.left ?? "center center",
+    right: slide.desktopImagePosition?.right ?? "center center",
+    mobile: slide.mobileImagePosition ?? slide.desktopImagePosition?.main ?? "center center",
   };
 }
 
 export function HeroSection({
   locale,
   slides,
+  introComplete = true,
 }: {
   locale: Locale;
   slides: HeroSlide[];
+  introComplete?: boolean;
 }) {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const shouldReduceMotion = useReducedMotion();
-  const safeSlides = Array.isArray(slides) ? slides : [];
+  const safeSlides = Array.isArray(slides) ? slides.slice(0, 5) : [];
+
   const activeIndex = safeSlides.length === 0 ? 0 : index % safeSlides.length;
-  const activeSlide = safeSlides[activeIndex];
   const previousIndex = safeSlides.length === 0 ? 0 : (activeIndex - 1 + safeSlides.length) % safeSlides.length;
   const nextIndex = safeSlides.length === 0 ? 0 : (activeIndex + 1) % safeSlides.length;
+  const activeSlide = safeSlides[activeIndex];
   const previousSlide = safeSlides[previousIndex];
   const nextSlide = safeSlides[nextIndex];
 
   useEffect(() => {
-    if (safeSlides.length <= 1 || paused) {
+    if (safeSlides.length <= 1 || paused || shouldReduceMotion || !introComplete) {
       return;
     }
 
-    const timer = window.setInterval(() => {
-      setIndex((prev) => (prev + 1) % safeSlides.length);
-    }, 5900);
+    const timer = window.setTimeout(() => {
+      setIndex((current) => (current + 1) % safeSlides.length);
+    }, AUTOPLAY_MS);
 
-    return () => window.clearInterval(timer);
-  }, [paused, safeSlides.length]);
+    return () => window.clearTimeout(timer);
+  }, [activeIndex, introComplete, paused, safeSlides.length, shouldReduceMotion]);
 
-  if (safeSlides.length === 0) {
+  if (!safeSlides.length || !activeSlide || !previousSlide || !nextSlide) {
     return null;
   }
 
-  const titleLines = activeSlide.title.split("\n");
-  const positions = getSlideImagePositions(activeSlide.slug);
-  const previousPositions = getSlideImagePositions(previousSlide.slug);
-  const nextPositions = getSlideImagePositions(nextSlide.slug);
+  const previewLabels = {
+    previous: previousSlide.title.replace("\n", " "),
+    next: nextSlide.title.replace("\n", " "),
+  };
 
-  const goToIndex = (targetIndex: number) => {
-    setPaused(true);
+  const goToSlide = (targetIndex: number) => {
     setIndex(targetIndex);
-
-    window.setTimeout(() => {
-      setPaused(false);
-    }, 2200);
   };
 
   return (
-    <section className="border-b border-[var(--page-divider)] bg-white">
-      <div className="mx-auto w-full max-w-[1919px]">
+    <section className="relative left-1/2 w-screen -translate-x-1/2 overflow-hidden border-b border-[var(--page-divider)] bg-white">
+      <div className="w-screen">
         <div
-          className="relative h-[382px] overflow-hidden md:h-[396px] lg:h-[408px] xl:h-[422px]"
+          className="col-span-full grid min-h-[var(--hero-height-mobile)] overflow-hidden md:min-h-[var(--hero-height-tablet)] lg:min-h-[var(--hero-height-desktop)] lg:grid-cols-[minmax(0,var(--hero-side-width))_minmax(0,var(--hero-center-max))_minmax(0,var(--hero-side-width))]"
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
         >
-          <AnimatePresence initial={false} mode="wait">
+          <button
+            type="button"
+            aria-label={`Show ${previewLabels.previous}`}
+            onClick={() => goToSlide(previousIndex)}
+            className="group relative hidden overflow-hidden bg-black lg:block"
+          >
+            <Image
+              src={withBasePathAsset(previousSlide.leftImage)}
+              alt=""
+              fill
+              loading="eager"
+              sizes="21vw"
+              className="motion-image object-cover saturate-[0.82] group-hover:scale-[1.02]"
+              style={{ objectPosition: getSlideImagePositions(previousSlide).left }}
+            />
+            <div className="motion-overlay absolute inset-0 bg-[var(--hero-mask-strong)] group-hover:bg-black/58" />
+            <div className="absolute inset-y-0 right-0 w-px bg-white/88" />
+            <div className="absolute inset-x-0 bottom-0 p-4">
+              <span className="inline-flex bg-black/88 px-[3px] py-0 text-[12px] font-bold tracking-[-0.04em] text-white">
+                {previewLabels.previous}
+              </span>
+            </div>
+          </button>
+
+          <div className="relative overflow-hidden bg-black">
             <motion.div
-              key={`${locale}-${activeSlide.slug}`}
-              initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={shouldReduceMotion ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ duration: motionDurations.base, ease: motionEasing.emphasized }}
-              className="absolute inset-0 grid grid-cols-[1fr] md:grid-cols-[0.9fr_2.42fr_0.9fr]"
+              animate={{ x: `${-activeIndex * 100}%` }}
+              transition={{
+                duration: shouldReduceMotion ? motionTokens.tap : motionTokens.heroSlide,
+                ease: motionEasing.soft,
+              }}
+              className="flex h-full"
             >
-              <button
-                type="button"
-                aria-label={`Show ${previousSlide.title}`}
-                onClick={() => goToIndex(previousIndex)}
-                className="group relative hidden overflow-hidden bg-black text-left md:block"
-              >
-                <Image
-                  src={withBasePathAsset(previousSlide.leftImage)}
-                  alt=""
-                  fill
-                  className="motion-image object-cover saturate-[0.78] group-hover:opacity-95 group-hover:brightness-105"
-                  style={{ objectPosition: previousPositions.left }}
-                  sizes="22vw"
-                  priority={false}
-                />
-                <div className="motion-overlay absolute inset-0 bg-[var(--hero-mask-strong)] group-hover:bg-black/58" />
-                <div className="absolute inset-y-0 right-0 w-px bg-white/92" />
-                <div className="absolute inset-x-0 bottom-0 flex items-end justify-start p-4">
-                  <span className="motion-surface motion-lift-subtle inline-flex bg-black/90 px-[3px] py-0 text-[12px] leading-none font-bold tracking-[-0.04em] text-white opacity-[0.72] group-hover:opacity-100">
-                    {previousSlide.title.replace("\n", " ")}
-                  </span>
-                </div>
-              </button>
+              {safeSlides.map((slide) => {
+                const positions = getSlideImagePositions(slide);
+                const titleLines = slide.title.split("\n");
 
-              <Link
-                href={withLocale(locale, activeSlide.ctaHref)}
-                aria-label={activeSlide.title}
-                className="motion-image-group relative overflow-hidden bg-black"
-              >
-                <motion.div
-                  initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0.94, scale: 1.028 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={shouldReduceMotion ? { opacity: 1 } : { opacity: 0.94, scale: 1.012 }}
-                  transition={{ duration: motionDurations.hero, ease: motionEasing.emphasized }}
-                  className="absolute inset-0"
-                >
-                  <Image
-                    src={withBasePathAsset(activeSlide.mainImage)}
-                    alt={activeSlide.title}
-                    fill
-                    className="motion-image object-cover"
-                    style={{ objectPosition: positions.main }}
-                    sizes="(max-width: 767px) 100vw, 56vw"
-                    priority
-                  />
-                </motion.div>
-                <motion.div
-                  initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0.7 }}
-                  animate={{ opacity: 1 }}
-                  exit={shouldReduceMotion ? { opacity: 1 } : { opacity: 0.7 }}
-                  transition={{ duration: motionDurations.slow, ease: motionEasing.emphasized }}
-                  className="motion-overlay absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.16)_0%,rgba(0,0,0,0.05)_28%,rgba(0,0,0,0.14)_100%)]"
-                />
-                <div className="absolute inset-y-0 left-0 hidden w-px bg-white/92 md:block" />
-                <div className="absolute inset-y-0 right-0 hidden w-px bg-white/92 md:block" />
-
-                <motion.div
-                  initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 18 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: motionDurations.slow, delay: 0.06, ease: motionEasing.emphasized }}
-                  className="absolute left-4 top-4 max-w-[270px] sm:left-5 sm:top-5 sm:max-w-[340px] md:left-8 md:top-6 md:max-w-[430px]"
-                >
-                  <h1 className="font-ulagadi inline-flex max-w-[410px] flex-col items-start text-[29px] leading-[0.72] tracking-[-0.1em] text-white sm:text-[38px] md:text-[56px] lg:text-[60px]">
-                    {titleLines.map((line, lineIndex) => (
-                      <motion.span
-                        key={line}
-                        initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 12 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{
-                          duration: motionDurations.base,
-                          delay: 0.08 + lineIndex * 0.04,
-                          ease: motionEasing.emphasized,
-                        }}
-                        className="mb-0 inline-flex w-max self-start bg-black px-[1px] py-0 leading-[0.74] font-black"
-                      >
-                        {line}
-                      </motion.span>
-                    ))}
-                  </h1>
-                </motion.div>
-
-                <motion.div
-                  initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: motionDurations.base, delay: 0.18, ease: motionEasing.emphasized }}
-                  className="absolute left-4 bottom-4 z-10 sm:left-5 sm:bottom-5 md:left-8 md:bottom-8"
-                >
-                  <span
-                    className="motion-link inline-flex w-fit items-center justify-center bg-black px-[2px] py-0 text-[17px] leading-[0.9] font-black tracking-[-0.06em] text-white hover:opacity-[0.74] md:text-[20px]"
-                    style={{ color: "#ffffff" }}
-                  >
-                    {activeSlide.ctaLabel}
-                  </span>
-                </motion.div>
-              </Link>
-
-              <button
-                type="button"
-                aria-label={`Show ${nextSlide.title}`}
-                onClick={() => goToIndex(nextIndex)}
-                className="group relative hidden overflow-hidden bg-[#0e2430] text-left md:block"
-              >
-                <Image
-                  src={withBasePathAsset(nextSlide.rightImage)}
-                  alt=""
-                  fill
-                  className="motion-image object-cover contrast-[0.96] saturate-[0.88] group-hover:opacity-95 group-hover:brightness-105"
-                  style={{ objectPosition: nextPositions.right }}
-                  sizes="22vw"
-                  priority={false}
-                />
-                <div className="motion-overlay absolute inset-0 bg-[var(--hero-mask-medium)] group-hover:bg-black/26" />
-                <div className="absolute inset-x-0 bottom-0 flex items-end justify-end p-4">
-                  <span className="motion-surface motion-lift-subtle inline-flex bg-black/90 px-[3px] py-0 text-[12px] leading-none font-bold tracking-[-0.04em] text-white opacity-[0.72] group-hover:opacity-100">
-                    {nextSlide.title.replace("\n", " ")}
-                  </span>
-                </div>
-              </button>
+                return (
+                  <div key={slide.slug} className="relative h-full min-w-full overflow-hidden">
+                    <Link href={withLocale(locale, slide.ctaHref)} aria-label={slide.title} className="block h-full w-full">
+                      <Image
+                        src={withBasePathAsset(slide.mainImage)}
+                        alt={slide.title}
+                        fill
+                        loading={slide.slug === activeSlide.slug ? "eager" : "lazy"}
+                        fetchPriority={slide.slug === activeSlide.slug ? "high" : undefined}
+                        sizes="(max-width: 1023px) 100vw, 64vw"
+                        className="object-cover"
+                        style={{ objectPosition: positions.mobile }}
+                      />
+                      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.58)_0%,rgba(0,0,0,0.18)_34%,rgba(0,0,0,0.28)_100%)] md:bg-[linear-gradient(90deg,rgba(0,0,0,0.62)_0%,rgba(0,0,0,0.12)_34%,rgba(0,0,0,0.28)_100%)]" />
+                      <div className="absolute inset-y-0 left-0 hidden w-px bg-white/88 lg:block" />
+                      <div className="absolute inset-y-0 right-0 hidden w-px bg-white/88 lg:block" />
+                      <div className="absolute inset-x-0 top-0 z-10 flex h-full flex-col justify-between p-4 sm:p-5 md:p-6 lg:p-8">
+                        <div className="max-w-[440px]">
+                          <motion.h1
+                            initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
+                            animate={{ opacity: activeSlide.slug === slide.slug ? 1 : 0.72, y: activeSlide.slug === slide.slug ? 0 : 4 }}
+                            transition={{ duration: motionTokens.heroInitial, ease: motionEasing.emphasized }}
+                            className="font-ulagadi inline-flex flex-col items-start gap-0 text-[34px] leading-[0.8] tracking-[-0.1em] text-white uppercase sm:text-[46px] md:text-[62px] lg:text-[76px]"
+                          >
+                            {titleLines.map((line) => (
+                              <span key={`${slide.slug}-${line}`} className="inline-flex bg-black px-[2px] py-0">
+                                {line}
+                              </span>
+                            ))}
+                          </motion.h1>
+                          {slide.subtitle ? (
+                            <motion.p
+                              initial={shouldReduceMotion ? false : { opacity: 0, y: 12 }}
+                              animate={{ opacity: activeSlide.slug === slide.slug ? 1 : 0.5, y: 0 }}
+                              transition={{ duration: motionTokens.enterBase, delay: 0.04, ease: motionEasing.soft }}
+                              className="mt-4 hidden max-w-[420px] text-[12px] leading-[1.55] font-medium text-white/88 lg:block"
+                            >
+                              {slide.subtitle}
+                            </motion.p>
+                          ) : null}
+                        </div>
+                        <div className="flex items-end justify-between gap-4">
+                          <span className="inline-flex bg-black px-[3px] py-0 text-[15px] leading-none font-black tracking-[-0.06em] text-white md:text-[18px]">
+                            {slide.ctaLabel}
+                          </span>
+                          <div className="hidden text-right md:block">
+                            <p className="text-[10px] font-semibold tracking-[0.12em] text-white/72 uppercase">Thoughost</p>
+                            <p className="mt-1.5 text-[11px] leading-[1.45] text-white/78">{slide.title.replace("\n", " ")}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </Link>
+                  </div>
+                );
+              })}
             </motion.div>
-          </AnimatePresence>
+
+            <div className="absolute inset-x-0 bottom-0 z-20 flex justify-center px-4 pb-4 sm:px-5 sm:pb-5 md:justify-center md:px-6 md:pb-4 lg:pb-3">
+              <div className="flex items-center gap-[6px]">
+                {safeSlides.map((slide, slideIndex) => {
+                  const isActive = slideIndex === activeIndex;
+
+                  return (
+                    <button
+                      key={slide.slug}
+                      type="button"
+                      aria-label={`Go to slide ${slideIndex + 1}`}
+                      aria-current={isActive ? "true" : undefined}
+                      onClick={() => goToSlide(slideIndex)}
+                      className="group flex items-center"
+                    >
+                      <span className="relative block h-[var(--hero-dot-height)] w-[var(--hero-dot-width)] overflow-hidden rounded-full bg-white/38">
+                        {isActive ? (
+                          <span
+                            key={`${slide.slug}-${activeIndex}`}
+                            data-paused={paused || shouldReduceMotion || !introComplete}
+                            className="hero-progress-fill absolute inset-y-0 left-0 rounded-full bg-white"
+                            style={{ width: "100%" }}
+                          />
+                        ) : (
+                          <span className="absolute inset-0 rounded-full bg-white/70 opacity-85" />
+                        )}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            aria-label={`Show ${previewLabels.next}`}
+            onClick={() => goToSlide(nextIndex)}
+            className="group relative hidden overflow-hidden bg-black lg:block"
+          >
+            <Image
+              src={withBasePathAsset(nextSlide.rightImage)}
+              alt=""
+              fill
+              loading="eager"
+              sizes="21vw"
+              className="motion-image object-cover saturate-[0.9] group-hover:scale-[1.02]"
+              style={{ objectPosition: getSlideImagePositions(nextSlide).right }}
+            />
+            <div className="motion-overlay absolute inset-0 bg-[var(--hero-mask-medium)] group-hover:bg-black/30" />
+            <div className="absolute inset-x-0 bottom-0 p-4 text-right">
+              <span className="inline-flex bg-black/88 px-[3px] py-0 text-[12px] font-bold tracking-[-0.04em] text-white">
+                {previewLabels.next}
+              </span>
+            </div>
+          </button>
         </div>
       </div>
     </section>

@@ -5,12 +5,20 @@ import { withBasePathAsset } from "@/lib/base-path";
 import { cn } from "@/lib/utils";
 import type { SocialIconLink } from "@/types/site";
 
-function SocialIcon({ iconKey, label }: { iconKey: string; label: string }) {
-  if (iconKey === "x" || iconKey === "bandcamp" || iconKey === "soundcloud") {
-    return <Image src={withBasePathAsset(`/icons/social/${iconKey}.svg`)} alt={label} width={18} height={18} />;
+function SocialIcon({ iconKey, label, dark = false }: { iconKey: string; label: string; dark?: boolean }) {
+  if (["x", "bandcamp", "soundcloud", "bilibili", "dizzylab"].includes(iconKey)) {
+    return (
+      <Image
+        src={withBasePathAsset(`/icons/social/${iconKey}.svg`)}
+        alt={label}
+        width={18}
+        height={18}
+        className={cn(dark && "opacity-95 brightness-0 invert")}
+      />
+    );
   }
 
-  return <span className="text-[11px] font-semibold uppercase">{label.slice(0, 2)}</span>;
+  return <span className={cn("text-[11px] font-semibold uppercase", dark && "text-white")}>{label.slice(0, 2)}</span>;
 }
 
 export function SocialLinks({
@@ -21,7 +29,7 @@ export function SocialLinks({
   dark?: boolean;
 }) {
   return (
-    <div className="flex items-center gap-3">
+    <div className="flex items-center gap-2">
       {links.map((item) => (
         <Link
           key={item.platform}
@@ -30,13 +38,13 @@ export function SocialLinks({
           rel="noreferrer"
           aria-label={item.label}
           className={cn(
-            "motion-surface flex h-8 w-8 items-center justify-center border hover:-translate-y-px",
+            "motion-surface flex h-8 w-8 items-center justify-center border",
             dark
-              ? "border-neutral-600 bg-neutral-500/20 hover:border-neutral-400 hover:bg-neutral-500/30"
-              : "border-transparent hover:border-neutral-200 hover:bg-neutral-100",
+              ? "border-neutral-500 bg-white/[0.06] hover:border-neutral-300 hover:bg-white/[0.12]"
+              : "border-transparent hover:border-neutral-300 hover:bg-neutral-100",
           )}
         >
-          <SocialIcon iconKey={item.iconKey} label={item.label} />
+          <SocialIcon iconKey={item.iconKey} label={item.label} dark={dark} />
         </Link>
       ))}
     </div>

@@ -1,15 +1,35 @@
 export const motionEasing = {
   emphasized: [0.22, 1, 0.36, 1] as const,
+  soft: [0.24, 0.9, 0.32, 1] as const,
   standard: [0.16, 1, 0.3, 1] as const,
   exit: [0.4, 0, 0.2, 1] as const,
 };
 
+export const motionTokens = {
+  hover: 0.13,
+  tap: 0.1,
+  enterFast: 0.32,
+  enterBase: 0.42,
+  enterSlow: 0.56,
+  exitFast: 0.22,
+  pageEnter: 0.38,
+  pageExit: 0.28,
+  heroSlide: 0.64,
+  heroInitial: 0.52,
+  introBeat: 0.18,
+  introShort: 0.28,
+  introBase: 0.42,
+  introPanel: 0.56,
+  staggerTight: 0.04,
+  staggerBase: 0.07,
+} as const;
+
 export const motionDurations = {
-  hover: 0.14,
-  fast: 0.16,
-  base: 0.48,
-  slow: 0.72,
-  hero: 0.86,
+  hover: motionTokens.hover,
+  fast: motionTokens.enterFast,
+  base: motionTokens.enterBase,
+  slow: motionTokens.enterSlow,
+  hero: motionTokens.heroSlide,
 };
 
 export const motionViewport = {
@@ -17,14 +37,14 @@ export const motionViewport = {
   amount: 0.18,
 } as const;
 
-export function createFadeUpSoft(y = 18, delay = 0) {
+export function createFadeUp(y = 18, delay = 0, duration: number = motionTokens.enterBase) {
   return {
     hidden: { opacity: 0, y },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: motionDurations.base,
+        duration,
         delay,
         ease: motionEasing.emphasized,
       },
@@ -32,37 +52,87 @@ export function createFadeUpSoft(y = 18, delay = 0) {
   };
 }
 
-export const fadeInSoft = {
+export const fadeIn = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      duration: motionDurations.base,
-      ease: motionEasing.emphasized,
+      duration: motionTokens.enterBase,
+      ease: motionEasing.soft,
     },
   },
 };
 
-export const fadeUpSoft = createFadeUpSoft();
+export const fadeUp = createFadeUp();
+export const fadeUpLarge = createFadeUp(26, 0, motionTokens.enterSlow);
 
-export const staggerFast = {
-  hidden: {},
+export function maskReveal(delay = 0) {
+  return {
+    hidden: { opacity: 0, scale: 1.015, clipPath: "inset(0 0 100% 0)" },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      clipPath: "inset(0 0 0% 0)",
+      transition: {
+        duration: motionTokens.enterSlow,
+        delay,
+        ease: motionEasing.emphasized,
+      },
+    },
+  };
+}
+
+export function staggerContainer(density: "tight" | "base" = "base") {
+  return {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: density === "tight" ? motionTokens.staggerTight : motionTokens.staggerBase,
+        delayChildren: density === "tight" ? 0.02 : 0.05,
+        ease: motionEasing.emphasized,
+      },
+    },
+  };
+}
+
+export const staggerItem = fadeUp;
+
+export const pageFrame = {
+  hidden: { opacity: 0, y: 10 },
   visible: {
+    opacity: 1,
+    y: 0,
     transition: {
-      staggerChildren: 0.06,
-      delayChildren: 0.04,
-      ease: motionEasing.emphasized,
+      duration: motionTokens.pageEnter,
+      ease: motionEasing.soft,
+    },
+  },
+  exit: {
+    opacity: 0,
+    y: 6,
+    transition: {
+      duration: motionTokens.pageExit,
+      ease: motionEasing.exit,
     },
   },
 };
 
-export const staggerStandard = {
-  hidden: {},
+export const pageOverlay = {
+  hidden: { opacity: 0, scaleY: 0.84, transformOrigin: "top center" },
   visible: {
+    opacity: 0.32,
+    scaleY: 1,
     transition: {
-      staggerChildren: 0.09,
-      delayChildren: 0.06,
-      ease: motionEasing.emphasized,
+      duration: motionTokens.pageEnter,
+      ease: motionEasing.soft,
+    },
+  },
+  exit: {
+    opacity: 0,
+    scaleY: 1.04,
+    transition: {
+      duration: motionTokens.pageExit,
+      ease: motionEasing.exit,
     },
   },
 };
@@ -72,35 +142,61 @@ export const dialogOverlay = {
   visible: {
     opacity: 1,
     transition: {
-      duration: motionDurations.base,
-      ease: motionEasing.emphasized,
+      duration: motionTokens.enterBase,
+      ease: motionEasing.soft,
     },
   },
   exit: {
     opacity: 0,
     transition: {
-      duration: motionDurations.fast,
+      duration: motionTokens.exitFast,
       ease: motionEasing.exit,
     },
   },
 };
 
 export const dialogContent = {
-  hidden: { opacity: 0, y: 18 },
+  hidden: { opacity: 0, y: 16 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: motionDurations.base,
+      duration: motionTokens.enterBase,
       ease: motionEasing.emphasized,
     },
   },
   exit: {
     opacity: 0,
-    y: 12,
+    y: 10,
     transition: {
-      duration: motionDurations.fast,
+      duration: motionTokens.exitFast,
       ease: motionEasing.exit,
     },
   },
 };
+
+export const drawerContent = {
+  hidden: { opacity: 0, height: 0 },
+  visible: {
+    opacity: 1,
+    height: "auto",
+    transition: {
+      duration: motionTokens.enterFast,
+      ease: motionEasing.soft,
+    },
+  },
+  exit: {
+    opacity: 0,
+    height: 0,
+    transition: {
+      duration: motionTokens.exitFast,
+      ease: motionEasing.exit,
+    },
+  },
+};
+
+export const fadeInSoft = fadeIn;
+export const fadeUpSoft = fadeUp;
+export const staggerFast = staggerContainer("tight");
+export const staggerStandard = staggerContainer("base");
+export const createFadeUpSoft = createFadeUp;

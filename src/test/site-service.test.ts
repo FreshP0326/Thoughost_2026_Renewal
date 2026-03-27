@@ -19,7 +19,8 @@ describe("site-service", () => {
     const slides = getHero("zh");
 
     expect(slides[0]?.title).toBe("2000%\nINVASION");
-    expect(slides).toHaveLength(3);
+    expect(slides[0]?.subtitle).toBe("五周年纪念大作，把 2000s 舞池记忆与全明星阵容一起重新点燃。");
+    expect(slides).toHaveLength(5);
   });
 
   it("returns migrated about intro for all locales", () => {
@@ -60,6 +61,10 @@ describe("site-service", () => {
     expect(joulez?.role).toBe("艺术家 / 母带");
     expect(joulez?.image).toBe("/images/artists/joulez.jpg");
     expect(joulez?.bio).toContain("mastering engineer");
+    expect(joulez?.isArtistLike).toBe(true);
+    expect(joulez?.metrics?.releaseAppearanceCount).toBeGreaterThan(0);
+    expect(joulez?.metrics?.trackAppearanceCount).toBeGreaterThanOrEqual(joulez?.representativeTracks.length ?? 0);
+    expect(joulez?.selectedReleases.length).toBeGreaterThan(0);
     expect(joulez?.representativeTracks.slice(0, 3).map((item) => item.trackTitle)).toEqual([
       "春ノ終焉",
       "Tessarect of light and stars",
@@ -74,11 +79,48 @@ describe("site-service", () => {
     expect(nirotiy?.representativeTracks.some((item) => item.trackTitle === "Series Planet Exploration - Miranda -")).toBe(true);
   });
 
+  it("keeps staff profiles simplified while artists get derived release data", () => {
+    const about = getAboutPage("en");
+    const rmdyh = about.groups.flatMap((group) => group.members).find((member) => member.slug === "rmdyh");
+    const nirotiy = about.groups.flatMap((group) => group.members).find((member) => member.slug === "nirotiy");
+
+    expect(rmdyh?.isArtistLike).toBe(false);
+    expect(rmdyh?.metrics).toBeUndefined();
+    expect(rmdyh?.selectedReleases).toEqual([]);
+    expect(nirotiy?.selectedReleases.some((release) => release.releaseSlug === "s-l-v-t-mixture")).toBe(true);
+    expect(nirotiy?.metrics?.latestReleaseDateLabel).toBe("2025.10.26");
+  });
+
+  it("dedupes and sorts selected releases while preserving manual representative track order", () => {
+    const about = getAboutPage("en");
+    const joulez = about.groups.flatMap((group) => group.members).find((member) => member.slug === "joulez");
+
+    expect(joulez?.selectedReleases.map((release) => release.releaseSlug)).toEqual(["haru-no-shuen", "asteria", "16-48"]);
+    expect(new Set(joulez?.selectedReleases.map((release) => release.releaseSlug)).size).toBe(
+      joulez?.selectedReleases.length,
+    );
+    expect(joulez?.selectedReleases[0]?.matchKind).toBe("primary");
+    expect(joulez?.representativeTracks.slice(0, 3).map((item) => item.trackTitle)).toEqual([
+      "春ノ終焉",
+      "Tessarect of light and stars",
+      "Asteria",
+    ]);
+  });
+
+  it("matches track credits by partial artist text", () => {
+    const about = getAboutPage("en");
+    const nirotiy = about.groups.flatMap((group) => group.members).find((member) => member.slug === "nirotiy");
+
+    expect(nirotiy?.metrics?.trackAppearanceCount).toBeGreaterThan(nirotiy?.representativeTracks.length ?? 0);
+    expect(nirotiy?.selectedReleases.some((release) => release.releaseSlug === "s-l-v-t-mixture")).toBe(true);
+  });
+
   it("keeps news items available for dual-column layout", () => {
     const news = getNews("en");
 
     expect(news.length).toBeGreaterThanOrEqual(4);
-    expect(news[0]?.dateLabel).toMatch(/2024/);
+    expect(news[0]?.dateLabel).toMatch(/2026/);
+    expect(news[0]?.href).toBe("/news/site-refresh-archive");
   });
 
   it("maps release detail view model correctly", () => {
@@ -86,6 +128,7 @@ describe("site-service", () => {
 
     expect(release).not.toBeNull();
     expect(release?.releaseDateLabel).toBe("2022.04.24");
+    expect(release?.teaser).toContain("returns");
     expect(release?.tracksDetailed.at(-1)?.title).toBe("LET ME SAY SANK YOU");
     expect(release?.purchaseLinks[0]?.url).toBe("https://thoughost.bandcamp.com/album/kakusatsu-shoujo-2");
     expect(release?.infoFields[0]?.value).toBe("THGO-004");
@@ -95,7 +138,7 @@ describe("site-service", () => {
     const footer = getFooter("en");
 
     expect(footer.groups).toHaveLength(2);
-    expect(footer.socialLinks).toHaveLength(3);
+    expect(footer.socialLinks).toHaveLength(5);
     expect(footer.contactLabel).toBe("EMAIL");
     expect(footer.groups[1]?.links[0]?.href).toBe("/special/black-hole");
   });
@@ -167,7 +210,13 @@ describe("site-service", () => {
 
     expect(blue?.title).toBe("蒼 -depressive & emotional compilation-");
     expect(blue?.releaseType).toBe("Compilation");
-    expect(heroes.map((item) => item.slug)).toEqual(["2000-invasion", "thoughts", "kakusatsu-shoujo-3"]);
+    expect(heroes.map((item) => item.slug)).toEqual([
+      "2000-invasion",
+      "thoughts",
+      "kakusatsu-shoujo-3",
+      "moonshine-001",
+      "asteria",
+    ]);
   });
 
   it("keeps hero headline original and CTA in english", () => {
@@ -178,13 +227,27 @@ describe("site-service", () => {
     expect(jpHeroes[0]?.ctaLabel).toBe("Learn More");
   });
 
+  it("includes bilibili and dizzylab in site socials", () => {
+    const footer = getFooter("en");
+
+    expect(footer.socialLinks.some((link) => link.iconKey === "bilibili")).toBe(true);
+    expect(footer.socialLinks.some((link) => link.iconKey === "dizzylab")).toBe(true);
+  });
+
   it("returns enriched release details when available", () => {
     const release = getReleaseBySlug("en", "2000-invasion");
 
     expect(release?.subtitle).toBe("5th Anniversary Compilation");
+    expect(release?.summary).toContain("For anyone who wants to hear the sound of the 2000s");
+    expect(release?.summary).not.toContain("CREDIT");
+    expect(release?.summary).not.toContain("credits");
+    expect(release?.summary).toContain("\n\n");
+    expect(release?.teaser).toBe("A fifth-anniversary rush of 2000s club power, reviving rave euphoria with a full-scale all-star lineup.");
     expect(release?.infoFields[0]).toEqual({ label: "Model Number", value: "THGO-0010" });
-    expect(release?.infoFields[2]).toEqual({ label: "Price", value: "¥2,500 JPY or more" });
-    expect(release?.tracksDetailed[0]?.artist).toBe("The Operation");
+    expect(release?.infoFields[2]).toEqual({ label: "Price", value: "¥2,000 JPY or more" });
+    expect(release?.infoFields[5]).toEqual({ label: "Designer", value: "Konseki Takane" });
+    expect(release?.infoFields[7]).toEqual({ label: "Producer", value: "—" });
+    expect(release?.tracksDetailed[0]?.artist).toBe("nova+z");
     expect(release?.purchaseLinks).toHaveLength(3);
     expect(release?.purchaseLinks.some((link) => link.label === "Dizzylab")).toBe(true);
     expect(release?.storeLinks.some((link) => link.label === "DIVERSE DIRECT")).toBe(true);
@@ -239,5 +302,18 @@ describe("site-service", () => {
     const release = getReleaseBySlug("en", "perpetual-status");
 
     expect(release?.infoFields).toHaveLength(8);
+  });
+
+  it("uses multi-paragraph source-style summaries without credits in chinese and japanese", () => {
+    const zhRelease = getReleaseBySlug("zh", "2000-invasion");
+    const jpRelease = getReleaseBySlug("jp", "2000-invasion");
+
+    expect(zhRelease?.summary).toContain("献给想再一次在舞池听到2000s声音的你！");
+    expect(zhRelease?.summary).toContain("\n\n");
+    expect(zhRelease?.summary).not.toContain("CREDIT");
+    expect(zhRelease?.teaser).toBe("五周年纪念大作，把 2000s 舞池记忆与全明星阵容一起重新点燃。");
+    expect(jpRelease?.summary).toContain("GET YOUR 2000s POWER!!!!!");
+    expect(jpRelease?.summary).toContain("\n\n");
+    expect(jpRelease?.summary).not.toContain("credits");
   });
 });

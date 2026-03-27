@@ -101,13 +101,26 @@ export const releases: ReleaseEntry[] = [
     },
     coverImage: "/images/releases/2000-invasion.jpg",
     heroImage: "/images/releases/2000-invasion.jpg",
+    teaser: {
+      en: "A fifth-anniversary rush of 2000s club power, reviving rave euphoria with a full-scale all-star lineup.",
+      zh: "五周年纪念大作，把 2000s 舞池记忆与全明星阵容一起重新点燃。",
+      jp: "2000s クラブの高揚感を、オールスター編成で鮮烈に呼び戻す5周年記念作。",
+    },
     summary: {
-      en: "A fifth-anniversary compilation that revives turn-of-the-millennium rave energy with euphoric synths, club-scale hooks, and a bright collective rush.",
-      zh: "Thoughost 五周年纪念合集，以千禧年前后的 rave 质感为核心，把高亮合成器、俱乐部推进感与群体热量重新点燃。",
-      jp: "Thoughost 5周年を記念するコンピレーション。2000年代レイヴの高揚感を、鮮やかなシンセとクラブサイズの推進力で現代に呼び戻す作品です。",
+      en: `For anyone who wants to hear the sound of the 2000s on the dancefloor once again, this is the answer.
+
+Across fourteen tracks, Thoughost’s fifth-anniversary release brings back the rush of rave, eurobeat, bubblegum dance, happy hardcore, and disco, with a large guest lineup and vocal appearances from Konseki Takane and Rin★.`,
+      zh: `献给想再一次在舞池听到2000s声音的你！
+
+全14曲超豪华艺术家阵容，加上 Konseki Takane 与 Rin★ 的献声，把 RAVE / EUROBEAT / BUBBLEGUM DANCE / HAPPY HARDCORE / DISCO 等各种令人怀念的声音重新点燃。`,
+      jp: `GET YOUR 2000s POWER!!!!!
+
+甦る、その懐かしいシンセサイザー。あの頃のレイヴサウンドを、もう一度クラブで鳴らしたい人へ向けた Thoughost 五周年記念作です。
+
+RAVE / EUROBEAT / BUBBLEGUM DANCE / HAPPY HARDCORE / DISCO を横断しながら、あの時代の熱量を現代のフロアへ撃ち返します。`,
     },
     modelNumber: "THGO-0010",
-    price: createBandcampPrice(2500),
+    price: createBandcampPrice(2000),
     store: {
       en: "DIVERSE DIRECT / Thoughost Bandcamp / Dizzylab",
       zh: "DIVERSE DIRECT / Thoughost Bandcamp / Dizzylab",
@@ -117,7 +130,6 @@ export const releases: ReleaseEntry[] = [
       illustrator: "TARA#376",
       designer: "Konseki Takane",
       mastering: "Joulez",
-      producer: "Thoughost",
     },
     tracklist: createTracklist([
       "HIT THE RAVE ANTHEM",
@@ -136,20 +148,20 @@ export const releases: ReleaseEntry[] = [
       "Dream So Real",
     ]),
     tracks: createDetailedTracks([
-      { number: "01", title: "HIT THE RAVE ANTHEM", artist: "The Operation" },
-      { number: "02", title: "Grooooovy↑", artist: "Silent Xords" },
-      { number: "03", title: "Afterglow", artist: "Joulez" },
+      { number: "01", title: "HIT THE RAVE ANTHEM", artist: "nova+z" },
+      { number: "02", title: "Grooooovy↑", artist: "潮音きつね" },
+      { number: "03", title: "Afterglow", artist: "inaharu" },
       { number: "04", title: "Call Me", artist: "Nirotiy" },
-      { number: "05", title: "Lumière", artist: "うさぎずきん" },
-      { number: "06", title: "Ravenaissance", artist: "hapi⇒" },
-      { number: "07", title: "New Player Adventure", artist: "Eszett" },
-      { number: "08", title: "CATCH THE FIRE feat. Konseki Takane", artist: "Thoughost" },
-      { number: "09", title: "Better Walk Away", artist: "slytheta" },
-      { number: "10", title: "Soda", artist: "A4" },
-      { number: "11", title: "Surf the Ravenet", artist: "Julian T" },
-      { number: "12", title: "Exhausting Mind", artist: "RiraN" },
-      { number: "13", title: "Music Is My Savior", artist: "M-Project" },
-      { number: "14", title: "Dream So Real", artist: "DJ Noriken" },
+      { number: "05", title: "Lumière", artist: "wheatfox" },
+      { number: "06", title: "Ravenaissance", artist: "Ouuuuuu x DazzEdgh" },
+      { number: "07", title: "New Player Adventure", artist: "FreshP" },
+      { number: "08", title: "CATCH THE FIRE feat. Konseki Takane", artist: "HASEKO" },
+      { number: "09", title: "Better Walk Away", artist: "Violet Delta" },
+      { number: "10", title: "Soda", artist: "57Lab" },
+      { number: "11", title: "Surf the Ravenet", artist: "Hazecat" },
+      { number: "12", title: "Exhausting Mind", artist: "板烧鹅尼子 feat. Rin★" },
+      { number: "13", title: "Music Is My Savior", artist: "Supa7onyz" },
+      { number: "14", title: "Dream So Real", artist: "Valtrax" },
     ]),
     links: createBandcampLinks("/album/2000-invasion"),
     purchaseLinks: [
@@ -189,10 +201,25 @@ export const releases: ReleaseEntry[] = [
     store: standardStore,
     coverImage: "/images/releases/moonshine-001.jpg",
     heroImage: "/images/releases/moonshine-001.jpg",
+    teaser: {
+      en: "An all-techno compilation that drifts from hypnosis to pressure, gathering eleven distinct shades of midnight motion.",
+      zh: "以 techno 为核心的 11 曲合辑，把夜色、压力与微醺感并排推进。",
+      jp: "微酔いの夜気とともに、11 のテクノが静かに深まっていくコンピレーション。",
+    },
     summary: {
-      en: "An all-techno compilation that moves from pressure-built hypnosis to sharper machine funk, holding eleven different angles of the same nocturnal pulse.",
-      zh: "一张以 techno 为主轴的合集，在低频压迫、机械律动与夜色张力之间展开，收录十一种风格各异却互相呼应的切面。",
-      jp: "テクノに焦点を当てたコンピレーション。催眠的な反復から硬質なマシン・ファンクまで、夜の鼓動を11通りの視点で束ねています。",
+      en: `This is the flavor of moonshine: tonight, sink into that gentle intoxication.
+
+MOONSHINE #001 is a techno compilation featuring eleven tracks with sharply different personalities, from deep pressure to machine-cut grooves.
+
+Alongside Thoughost members, the release brings in guests including A.I., Project-G, Irish Kappa, Yazavva, NANO_TAN, FISHY, Y., and KeiuO.`,
+      zh: `"月光"的醍醐味，今宵且沉醉于微醺之中。
+
+TECHNO 合辑《MOONSHINE #001》收录 11 首个性鲜明的 Techno 作品，从低频压迫到机械律动，把夜色里的不同温度逐一展开。
+
+除社团成员外，本作还邀请到 A.I. / Project-G / Irish Kappa / Yazavva / NANO_TAN / FISHY / Y. / KeiuO 组成豪华 Guest 阵容。`,
+      jp: `MOONSHINE の醍醐味、今宵はほろ酔いに浸ろう。
+
+TECHNO コンピレーション「MOONSHINE #001」には、多彩なスタイルのテクノ全11曲を収録。深く沈む反復から硬質なグルーヴまで、夜の気配をそれぞれの質感で描いています。`,
     },
     credits: {
       mastering: "火烧",
@@ -227,6 +254,12 @@ export const releases: ReleaseEntry[] = [
     ]),
     links: createBandcampLinks("/album/moonshine-001"),
     purchaseLinks: createPurchaseLinks("/album/moonshine-001", "THGO-009"),
+    heroTitle: {
+      en: "MOONSHINE\n#001",
+      zh: "MOONSHINE\n#001",
+      jp: "MOONSHINE\n#001",
+    },
+    isHero: true,
     isFeatured: true,
   },
   {
@@ -244,10 +277,27 @@ export const releases: ReleaseEntry[] = [
     store: standardStore,
     coverImage: "/images/releases/haru-no-shuen.jpg",
     heroImage: "/images/releases/haru-no-shuen.jpg",
+    teaser: {
+      en: "A short, fading-season single that turns the end of spring into one last clear afterglow.",
+      zh: "把春天谢幕时刻写成一首安静余韵的单曲。",
+      jp: "春の終わりを、静かな余韻として閉じ込めたシングル。",
+    },
     summary: {
-      en: "A concise single built around the fading edge of spring, pairing melancholy melody with a clean, focused emotional descent.",
-      zh: "一首围绕春日终章展开的单曲，以克制的旋律与下坠式情绪勾出季节结束时的余温。",
-      jp: "春の終わり際を切り取ったシングル。抑えた旋律とまっすぐな感情の沈み込みで、季節の余韻を静かに残します。",
+      en: `This is the curtain call of spring.
+
+Joulez and 月見静華 shape the end of the season into a single song, keeping the arrangement restrained while letting the emotion sink in slowly and clearly.
+
+It is a small farewell, but one that leaves a long afterglow behind it.`,
+      zh: `这是春天的谢幕。
+
+Joulez 与月見静華把季节尽头的情绪压进这一首歌里，用克制的旋律和缓慢下坠的情感，把最后一点春意留在空气中。
+
+它并不张扬，却把告别的余温拉得很长。`,
+      jp: `春の終焉、ここに。
+
+Joulez と月見静華が、季節の切れ目に残る感情を一曲へと閉じ込めました。抑えた旋律のまま、余韻だけがゆっくりと深く沈んでいきます。
+
+小さな別れを、長く残る残響として描いたシングルです。`,
     },
     tracklist: createTracklist(["春ノ終焉"]),
     tracks: createUniformArtistTracks(["春ノ終焉"], "Joulez, 月見静華"),
@@ -275,10 +325,27 @@ export const releases: ReleaseEntry[] = [
     store: standardStore,
     coverImage: "/images/releases/thoughts.jpg",
     heroImage: "/images/releases/thoughts.jpg",
+    teaser: {
+      en: "A new Thoughost series built around one theme per release, beginning here with rebirth.",
+      zh: "以单一主题贯穿多种声音的新系列，从“rebirth”开始展开。",
+      jp: "ひとつのテーマを多様な音で掘り下げる新シリーズ、その出発点は「rebirth」。",
+    },
     summary: {
-      en: "The opening chapter of a new series that threads one theme through many voices, here centered on rebirth, afterglow, and emotional reset.",
-      zh: "新系列的起点，以“rebirth”为统一主题，让多位作者在同一概念下展开各自的再生感、余辉感与情绪复位。",
-      jp: "新シリーズの幕開けとなる一作。今回は「rebirth」を軸に、複数のアーティストが再生と余韻をそれぞれの方法で描いています。",
+      en: `"Discover our own sound."
+
+thoughts is a new series from Thoughost, built around carrying one theme through many different genres and perspectives. The first theme is "rebirth."
+
+This chapter brings in VeetaCrush, Rayven, かたぎり, and Aki Sz as guests, while TARA#376 establishes the visual direction for the series.`,
+      zh: `新系列《thoughts》，以各种各样的音乐贯彻同一个主题，挖掘属于 Thoughost 自己的声音。
+
+这一次的主题是“rebirth”。不同创作者会从各自的语言、情绪与结构出发，去描绘再生、余辉与重新开始的瞬间。
+
+本作邀请到 VeetaCrush / Rayven / かたぎり / Aki Sz 作为 Guest，同时由 TARA#376 担任《thoughts》系列画家。`,
+      jp: `"Discover our own sound."
+
+新シリーズ「thoughts」は、さまざまなジャンルを通してひとつのテーマを貫くシリーズです。今回のテーマは「rebirth」。
+
+VeetaCrush、Rayven、かたぎり、Aki Sz をゲストに迎え、さらに TARA#376 が「thoughts」シリーズのイラストレーターを担当しています。`,
     },
     credits: {
       mastering: "Valtrax",
@@ -330,10 +397,27 @@ export const releases: ReleaseEntry[] = [
     store: standardStore,
     coverImage: "/images/releases/asteria.jpg",
     heroImage: "/images/releases/asteria.jpg",
+    teaser: {
+      en: "Joulez returns with a starlit solo record that opens outward through four distinct remixes.",
+      zh: "Joulez 回归后的个人作品，把星光意象与四首 remix 一起展开成完整叙事。",
+      jp: "静寂から戻った Joulez が、星の光と4つのリミックスで描くソロ作品。",
+    },
     summary: {
-      en: "Joulez returns with a solo record shaped by starlight imagery, reflective songwriting, and a second half that refracts the core theme through four remixes.",
-      zh: "Joulez 回归后的首张个人作品，以星光意象、抒情结构与四首不同方向的 remix，完整展开同一主题的多重折射。",
-      jp: "Joulez が活動再開後に届けたソロ作品。星光のイメージ、内省的な書法、そして4つのリミックスで主題を多面的に広げています。",
+      en: `Returning from silence, Joulez brings back the power of starlight.
+
+Asteria is the first work he created after resuming musical activity. It reconnects with familiar sounds while folding in tones shaped by newer experiences.
+
+Himawari writes and sings on tracks two and three, and four stylistically different remixes let the record refract its core theme in different colors.`,
+      zh: `从寂静中回归，带回星光的力量。
+
+《Asteria》是 Joulez 重回创作后的首部作品。在重拾熟悉声音的同时，也加入了从各种体验中获得的新声音，让整张作品带着更开阔的光感和距离感。
+
+Himawari 为 Track 2 与 3 作词并献唱，歌词与人声的交汇让星空仿佛近在咫尺；另有四首风格迥异的 Remix，在不同方向上继续闪烁。`,
+      jp: `静寂の中から戻ってきて、星の光の力を手にした。
+
+『Asteria』は、Joulez が音楽活動を再開して初めて作った作品です。昔ながらのサウンドを活かしつつ、新しい経験から生まれた音も加えています。
+
+Track 2 と 3 では Himawari が作詞とボーカルを担当。さらに4種類のリミックスを収録し、それぞれが違う色で光っています。`,
     },
     credits: {
       producer: "Joulez",
@@ -362,6 +446,12 @@ export const releases: ReleaseEntry[] = [
     ]),
     links: createBandcampLinks("/album/asteria"),
     purchaseLinks: createPurchaseLinks("/album/asteria", "TGEP-003"),
+    heroTitle: {
+      en: "ASTERIA",
+      zh: "ASTERIA",
+      jp: "ASTERIA",
+    },
+    isHero: true,
     isFeatured: true,
   },
   {
@@ -379,10 +469,27 @@ export const releases: ReleaseEntry[] = [
     store: standardStore,
     coverImage: "/images/releases/palette-of-clouds.jpg",
     heroImage: "/images/releases/palette-of-clouds.jpg",
+    teaser: {
+      en: "Nirotiy’s first EP turns cloud forms into a palette for memory, weather, and human feeling.",
+      zh: "Nirotiy 的首张 EP 把云层变化写成情绪与故事的调色盘。",
+      jp: "雲の形を感情の色へと変えていく、Nirotiy 初の EP。",
+    },
     summary: {
-      en: "Nirotiy’s first EP turns cloud forms into emotional weather, painting quiet scenes with airy atmosphere, freeform motion, and soft scientific wonder.",
-      zh: "Nirotiy 的首张 EP 把云层形态转化为情绪天气，用轻盈空间、自由流动与一点天文式观察去描绘不同场景。",
-      jp: "Nirotiy の1st EP。雲の形を感情の天候へと置き換え、軽やかな空気感と自由な流れで静かな風景を描いています。",
+      en: `Nirotiy 1st EP.
+
+On the planet beneath us, there are countless silent witnesses, and among them are the clouds overhead. Shaped by temperature, pressure, and light, they change form endlessly.
+
+This EP treats those clouds not just as weather charts, but as vessels for human feeling: summer walks beneath broken cumulus, autumn reflection under stratocumulus, winter endings under nimbostratus, and spring farewells under cirrostratus.`,
+      zh: `Nirotiy 1st EP.
+
+我们脚下这颗星球上，有着无数无声的见证者，其中之一便是头顶的云朵。它们受温度、气压与光线影响，展现出多种多样的形态。
+
+虽然云朵通常被记录成云图，为人们提供天气判断的依据，但在这里，它们也成为人类情感的寄托。夏日晨间的散步、秋日晚湖边的冥想、冬日下午的悲剧终章，以及春天里的作别，都被放进这块名为云层的调色盘里。`,
+      jp: `Nirotiy 1st EP.
+
+私たちの頭上にある雲は、温度、気圧、そして光によってさまざまな姿を見せる、静かな目撃者です。
+
+この作品では、雲をただの気象記号としてではなく、人の感情を受け止める器として捉えています。夏の朝、秋の夕暮れ、冬の終幕、春の別れ。そうした景色を、雲というパレットで描いた EP です。`,
     },
     tracklist: createTracklist([
       "cirrostratus fibratus",
@@ -419,10 +526,27 @@ export const releases: ReleaseEntry[] = [
     store: standardStore,
     coverImage: "/images/releases/kakusatsu-shoujo-3.jpg",
     heroImage: "/images/releases/kakusatsu-shoujo-3.jpg",
+    teaser: {
+      en: "The third impact of KAKUSATSU SHOUJO, sharpening chaos, violence, and cuteness into ten tracks.",
+      zh: "核杀少女第三次冲击，把回归阵容与新面孔压进 10 首更锋利的作品里。",
+      jp: "『KAKUSATSU SHOUJO』第三の衝撃。狂気とかわいさを、さらに鋭く10曲へ圧縮した一作。",
+    },
     summary: {
-      en: "The third chapter in Thoughost’s signature compilation line pushes anime-sampled chaos, lolicore pressure, and violent-cute contrast into a sharper collective form.",
-      zh: "Thoughost 标志性系列的第三章，把动画采样、lolicore 压力与“暴力 × 可爱”的反差推到更锋利、更集体化的状态。",
-      jp: "Thoughost を象徴するシリーズの第3章。アニメ・サンプル、lolicore の圧力、そして“暴力とかわいさ”の対比を、さらに鋭くまとめ上げた作品です。",
+      en: `KAKUSATSU SHOUJO, third impact.
+
+This chapter pushes the series further with ten tracks of sharper pressure, brighter rupture, and a more focused collision between cuteness and violence.
+
+Returning names such as M9RVEN, かたぎり, Aki, and Null Specification are joined by newcomers Moetek and Yakumo, alongside open-call winner nova+z.`,
+      zh: `核杀少女、三次冲击。
+
+不仅 M9RVEN、かたぎり、Aki、Null Specification 回归，还有新面孔 Moetek、Yakumo，以及公开募集获胜者 nova+z，一起将这张作品推向更尖锐的方向。
+
+全10曲的《KAKUSATSU SHOUJO 3》把系列里标志性的混乱、暴力与可爱再次压缩并增幅。`,
+      jp: `核殺少女、三度目の衝撃。
+
+M9RVEN、かたぎり、Aki、Null Specification の再参加に加え、Moetek、Yakumo、そして公募採用の nova+z が加わり、シリーズの輪郭をさらに鋭く押し広げます。
+
+全10曲の『KAKUSATSU SHOUJO 3』は、混乱、暴力、そしてかわいさの衝突を、これまで以上に研ぎ澄ませた一作です。`,
     },
     credits: {
       mastering: "Joulez",
@@ -473,10 +597,27 @@ export const releases: ReleaseEntry[] = [
     store: standardStore,
     coverImage: "/images/releases/ephemanent.jpg",
     heroImage: "/images/releases/ephemanent.jpg",
+    teaser: {
+      en: "A freeform hardcore compilation filled with dreamlike glow, nostalgia, and full-throttle lift.",
+      zh: "以 freeform hardcore 为核，把梦幻、怀旧与高速推进一起拉满的合集。",
+      jp: "夢幻とノスタルジアをまとった Freeform Hardcore コンピレーション。",
+    },
     summary: {
-      en: "A freeform hardcore compilation that leans into velocity, edge glow, and cosmic melodrama without losing the emotional lift inside the rush.",
-      zh: "一张以 freeform hardcore 为核心的合集，在高速推进、星体感光泽与戏剧化情绪之间保持强烈上升感。",
-      jp: "Freeform Hardcore を軸にしたコンピレーション。疾走感、宇宙的なきらめき、そして感情の昂りを同時に押し出しています。",
+      en: `Dreamlike timbres, nostalgic feeling, and a renewed vision of freeform hardcore.
+
+Ephemanent gathers those elements into one compilation, pushing forward with speed and emotional brightness while keeping a sense of melodrama suspended in the air.
+
+It is a record built to surge upward, but never at the cost of feeling.`,
+      zh: `梦幻的音色、怀旧的感受、全新的 FREEFORM HARDCORE。
+
+《Ephemanent》将这些元素集中为一张合集，在高速推进中保留旋律的明亮、情绪的抬升与一点遥远的宇宙感。
+
+它既追求速度，也不放弃感性，是一张把上升感持续拉满的作品。`,
+      jp: `夢幻的な音色、懐かしさ、そして新しい FREEFORM HARDCORE。
+
+『Ephemanent』は、それらをひとつに束ねたコンピレーションです。疾走感を前面に出しながらも、感情の高まりときらめきを手放しません。
+
+速さの中に、しっかりとした情感を残す一作です。`,
     },
     credits: {
       mastering: "Joulez",
@@ -534,10 +675,27 @@ export const releases: ReleaseEntry[] = [
     store: standardStore,
     coverImage: "/images/releases/16-48.jpg",
     heroImage: "/images/releases/16-48.jpg",
+    teaser: {
+      en: "Joulez’s first solo album turns three years of work into a diary of music, poetry, and memory.",
+      zh: "Joulez 的首张个人专辑，把三年的积累写成音乐、诗歌与记忆的合集。",
+      jp: "3年の結晶を、音楽と詩と記憶の流れへと束ねた Joulez 初のソロ・アルバム。",
+    },
     summary: {
-      en: "Joulez’s first solo album gathers three years of writing into a diaristic electronic record where poetry, memory, and brittle digital emotion sit side by side.",
-      zh: "Joulez 的首张个人专辑，把三年间的创作凝成一份电子日记，让诗句、记忆与脆弱的数字情绪并置出现。",
-      jp: "Joulez の初ソロ・アルバム。3年分の制作を束ね、詩、記憶、そして壊れそうなデジタル感情をひとつの流れに収めています。",
+      en: `After six years of creating music, electronic artist Joulez released his first solo album through Thoughost. 16:48 is the culmination of three years of work.
+
+It is a collection of music, poetry, and photography, a space where emotions flow and remain.
+
+Across twelve tracks, the record invites you to listen through a more inward, private story.`,
+      zh: `经历了六年的创作生涯后，电子音乐人 Joulez 在 Thoughost 推出了自己的第一张个人专辑《16:48》，这是他三年来的结晶。
+
+《16:48》是一张音乐、诗歌与摄影交织而成的作品集，情感在其中流动、驻留，也在十二首乐曲里逐渐展开属于他内心的故事。
+
+听，焦耳。`,
+      jp: `Joulez にとって『16:48』は、音楽活動再開後ではなく、長い制作の積み重ねの先に生まれた最初のソロ・アルバムです。3年にわたる歩みが、ここへ結晶しています。
+
+この作品は、音楽、詩、そして写真が交差するコレクションであり、感情が流れ、留まり続ける場所でもあります。
+
+12曲を通して、彼の内側にある物語へ静かに耳を傾けるアルバムです。`,
     },
     credits: {
       producer: "Joulez",
@@ -591,10 +749,27 @@ export const releases: ReleaseEntry[] = [
     store: standardStore,
     coverImage: "/images/releases/after-the-forerunner-e-p.jpg",
     heroImage: "/images/releases/after-the-forerunner-e-p.jpg",
+    teaser: {
+      en: "A six-track EP about influence, inheritance, and the path that begins after the forerunners.",
+      zh: "以“先驱者之后”为题，把启发、继承与继续前行写成六首作品的 EP。",
+      jp: "先駆者のあとに始まる、自分たちの歩みを描いた6曲入り EP。",
+    },
     summary: {
-      en: "A six-track EP framed as a response to influence, tracing what happens after inspiration becomes movement, discipline, and a shared path forward.",
-      zh: "一张六曲 EP，以“在先驱之后”作为主题，把影响、继承与继续前行的意志写成更明确的集体轨迹。",
-      jp: "“先駆者のあと”をテーマにした6曲入り EP。影響を受けた先から、自分たちの歩みが始まる瞬間をまとめています。",
+      en: `They opened a way for us to be inspired, motivated, and dedicated. That is why we call them the forerunners.
+
+After the forerunner, we began our own journey of liberation, emotion, and realization.
+
+This six-track EP is about what comes after influence: not imitation, but the decision to keep walking forward on the road they revealed.`,
+      zh: `正是因为他们的启发，我们才会开始音乐创作，因此称呼他们为“先驱者”。
+
+在先驱者之后，我们将继续沿着这条路走下去，把灵感、情绪与实践一点点变成自己的声音。
+
+这张六曲 EP 所写的，不只是影响本身，更是继承之后继续前行的意志。`,
+      jp: `道を示したからこそ、先駆者である。影響を受けたからこそ、私たちの音楽活動は始まった。
+
+先駆者の足跡を追いながら、私たちはこの道を歩き続けていく。
+
+『After the Forerunner e.p.』は、影響を受けたその先で、自分たちの旅が始まる瞬間をまとめた作品です。`,
     },
     credits: {
       mastering: "Joulez",
@@ -635,10 +810,27 @@ export const releases: ReleaseEntry[] = [
     store: standardStore,
     coverImage: "/images/releases/depressive-emotional-compilation.jpg",
     heroImage: "/images/releases/depressive-emotional-compilation.jpg",
+    teaser: {
+      en: "A large-scale emotional compilation tracing blue-toned collapse, fragility, and endurance across many voices.",
+      zh: "以“蒼”为核心，把脆弱、抑郁与残存意志压进深蓝叙事中的大型合集。",
+      jp: "深い青の感情を、多数のアーティストで描き出す大規模コンピレーション。",
+    },
     summary: {
-      en: "A large-scale emotional compilation that gathers depressive, fragile, and inward-facing cuts into a deep blue sequence of collapse and endurance.",
-      zh: "一张体量很大的情绪合集，把抑郁、脆弱与内向性的片段压进一整片深蓝色叙事之中。",
-      jp: "抑鬱、脆さ、内向きの感情を集めた大規模コンピレーション。深い青の中で崩れかける感覚と持ちこたえる意志が並走します。",
+      en: `To keep living is to keep layering guilt. Then is being born itself a kind of curse?
+
+A blue bird flies upward, tirelessly, toward a sky far beyond reach. Beneath that image, this release gathers thoughts of collapse, yearning, and bodies already coming apart.
+
+Beginning in China and extending to artists active across Japan, the UK, France, Russia, and beyond, this compilation brings together internet musicians to describe that one grey-blue emotion hidden in the heart.`,
+      zh: `先人说苟且而活此事，就是罪孽的堆积。那我们被生下来这件事，是否是一场诅咒？
+
+一只青鸟向着极高的天空飞翔，遮断太阳，仿佛自己也要变成耀眼的存在。而在这份眩目之下，是下坠、妄想、破碎与再也无法维系完整的肉体。
+
+以中国为起点，日本、英国、法国、俄罗斯等地活跃于互联网中的音乐人在这里相遇，用各自的声音去描写心中那一抹独特的灰蓝色感情。`,
+      jp: `生き続けることは、罪を重ねることだ。生まれることは、呪いではないのか。
+
+蒼い鳥は、ずっと遠くの空へ向かって飛び続ける。眩しい太陽を遮り、自らもまた眩しい存在になろうとするその姿の下で、落下、妄想、破損、そして持ちこたえられない肉体の感覚が積み重なっていく。
+
+このコンピレーションは、そうした深い青の感情を、各地のインターネット音楽家たちがそれぞれの方法で描き出した作品です。`,
     },
     credits: {
       mastering: "Joulez",
@@ -709,10 +901,27 @@ export const releases: ReleaseEntry[] = [
     store: standardStore,
     coverImage: "/images/releases/kakusatsu-shoujo-2.jpg",
     heroImage: "/images/releases/kakusatsu-shoujo-2.jpg",
+    teaser: {
+      en: "KAKUSATSU SHOUJO returns with fourteen tracks of greater chaos, violence, and sampled frenzy.",
+      zh: "第二章回归，把“Kawaii, Bouryoku, Sampling.”进一步推向更混乱更暴力的方向。",
+      jp: "『KAKUSATSU SHOUJO』再来。より混沌と暴力を増した14曲の第二章。",
+    },
     summary: {
-      en: "The second KAKUSATSU SHOUJO chapter locks breakcore shock, anime-source mania, and compilation sprawl into one of Thoughost’s defining releases.",
-      zh: "KAKUSATSU SHOUJO 系列第二章，把 breakcore 冲击、动画源采样与合集式爆发力进一步推成 Thoughost 的代表作之一。",
-      jp: "KAKUSATSU SHOUJO シリーズ第2章。ブレイクコアの衝撃、アニメ・サンプル由来の狂気、コンピレーション特有の熱量が強く噛み合った代表作です。",
+      en: `KAKUSATSU SHOUJO returns.
+
+Built on the phrase "Kawaii, Bouryoku, Sampling.", this second chapter pushes everything further toward more chaotic and violent sound.
+
+Alongside returning contributors such as Dz'Xa, かたぎり, and citybridge, new guests including pencil and Null Specification join a fourteen-track release shaped as a louder, madder volume.`,
+      zh: `KAKUSATSU SHOUJO、归来。
+
+在“Kawaii, Bouryoku, Sampling.”的基础上更进一步，“更混乱和暴力的声音”是本次的主题。
+
+不仅 Dz'Xa、かたぎり、citybridge 回归，更有 pencil、Null Specification 作为新 Guest 加入。全14曲的《KAKUSATSU SHOUJO 2》是一册更狂气、更膨胀的作品。`,
+      jp: `KAKUSATSU SHOUJO、再来。
+
+“Kawaii, Bouryoku, Sampling.” を土台にしながら、第二章ではさらに混沌と暴力を強めたサウンドをテーマにしています。
+
+Dz'Xa、かたぎり、citybridge の再参加に加え、pencil、Null Specification も新たに加わり、全14曲のより狂気的な一冊へと仕上がりました。`,
     },
     credits: {
       mastering: "Joulez",
@@ -769,10 +978,27 @@ export const releases: ReleaseEntry[] = [
     store: standardStore,
     coverImage: "/images/releases/s-l-v-t-mixture.jpg",
     heroImage: "/images/releases/s-l-v-t-mixture.jpg",
+    teaser: {
+      en: "A split release from Nirotiy and 望月真白, decoding dark synthetic mass, halation, and malfunctioning flow.",
+      zh: "Nirotiy 与望月真白的合作专辑，把深暗色无机质流动写成一场解码。",
+      jp: "深く暗い無機質な流れを解読していく、Nirotiy と望月真白のスプリット作品。",
+    },
     summary: {
-      en: "A split release from Nirotiy and 望月真白, built from cold synthetic mass, dark halation, and club tracks that keep mutating under pressure.",
-      zh: "Nirotiy 与 望月真白的 split 作品，以冷质合成器、暗色晕光与不断变形的俱乐部结构组成一整块无机体。",
-      jp: "Nirotiy と 望月真白によるスプリット作品。冷たい合成音、暗いハレーション、圧力の中で変形し続けるクラブ・トラックが核になっています。",
+      en: `Inside a flowing, dark, inorganic mass, colors bloom like malfunctioning halation.
+
+Decode it, and you may catch a glimpse of everything hidden inside this mixture.
+
+S.L.V.T: MIXTURE is a split album by Thoughost members Nirotiy and 望月真白, with additional participation from 空読無 白眼 and Coredump Breaks.`,
+      zh: `MIXTURE：深暗色的无机质流动中，晕染上故障般的颜色。
+
+解码它吧。一窥其中潜伏的结构、噪声与不断变形的情绪。
+
+这张《S.L.V.T: MIXTURE》由 Thoughost 成员 Nirotiy 与望月真白共同制作，并特别邀请空読無 白眼与 Coredump Breaks 参与。`,
+      jp: `流れの中で誤作動の色にハレーションを起こした、深く暗い無機質な塊。
+
+それをデコードしよう。この MIXTURE に含まれるすべてを垣間見るために。
+
+Nirotiy と望月真白によるスプリット作品であり、異なる質感がひとつの塊としてせめぎ合うアルバムです。`,
     },
     credits: {
       mastering: "Joulez",
@@ -821,10 +1047,21 @@ export const releases: ReleaseEntry[] = [
     store: standardStore,
     coverImage: "/images/releases/trixxck.jpg",
     heroImage: "/images/releases/trixxck.jpg",
+    teaser: {
+      en: "A Halloween EP from Thoughost and Silent Xords, charged with horror tension and overstimulated club energy.",
+      zh: "Thoughost × Silent Xords 的万圣节合作 EP，把惊悚感与俱乐部张力一起推高。",
+      jp: "Thoughost × Silent Xords による、ハロウィン仕様の高緊張 EP。",
+    },
     summary: {
-      en: "A Thoughost × Silent Xords Halloween collaboration that runs on horror-coded synths, sharp visual grime, and overstimulated club tension.",
-      zh: "Thoughost × Silent Xords 的万圣节联合作品，以惊悚感合成器、脏锐视觉和高度兴奋的俱乐部张力推进整张 EP。",
-      jp: "Thoughost × Silent Xords によるハロウィン作品。ホラー感のあるシンセ、鋭い質感、過剰なテンションで押し切るコラボレーションです。",
+      en: `Thoughost × Silent Xords special Halloween EP.
+
+TRIXXCK is built around tense synths, sharpened surfaces, and a restless club pulse, keeping the whole release hovering between horror mood and physical momentum.`,
+      zh: `Thoughost × Silent Xords 特别合作万圣节 EP。
+
+《TRIXXCK》把惊悚感合成器、脏锐的质地和高度兴奋的俱乐部张力压进同一张作品里，让整张 EP 始终处于一种不安又上头的状态。`,
+      jp: `Thoughost × Silent Xords Special Halloween EP。
+
+『TRIXXCK』は、ホラーの気配をまとったシンセと鋭い質感、落ち着かないクラブの脈動で押し切る一作です。`,
     },
     credits: {
       mastering: "BlueWind",
@@ -867,10 +1104,27 @@ export const releases: ReleaseEntry[] = [
     store: standardStore,
     coverImage: "/images/releases/ground-attack.jpg",
     heroImage: "/images/releases/ground-attack.jpg",
+    teaser: {
+      en: "A high-pressure compilation driven by funkot, hard bass, donk, and tribecore with reckless physical energy.",
+      zh: "以 funkot、hard bass、donk、tribecore 为主轴的高压“土嗨大碟”。",
+      jp: "Funkot / Hard Bass / Donk / Tribecore を一気に叩き込む高圧コンピレーション。",
+    },
     summary: {
-      en: "A hard-charging compilation focused on funkot, hard bass, donk, and tribecore, keeping every cut bright, unruly, and physically direct.",
-      zh: "一张围绕 funkot、hard bass、donk 与 tribecore 展开的高压合集，整体明亮、躁动，而且非常直接。",
-      jp: "Funkot、Hard Bass、Donk、Tribecore を前面に出した攻撃的なコンピレーション。全編を通して明るく、荒々しく、身体的です。",
+      en: `GROUND ATTACK!!! is Thoughost’s second compilation, built around funkot, hard bass, donk, and tribecore.
+
+The project began from a shared fascination with their raw physical drive: "wooden fish music," "pipe-knocking music," and the impulsive force that makes these styles impossible to ignore.
+
+Alongside circle members and open-call winners, the release brings in Japanese funkot producers Aki, hayato87b, Liet NRC, and totsumal, tekno producer 4nzu, and longtime friend citybridge.`,
+      zh: `《GROUND ATTACK!!!》是 Thoughost 的第二张合辑专辑，以 Funkot / Hard Bass / Donk / Tribecore 为创作主轴。
+
+Funkot 在国内被戏称为“敲木鱼音乐”，Hard Bass 和 Donk 又因标志性的 Donkbass 音色被戏称为“敲水管音乐”，再加上我们一直着迷于 Tribecore 那股原始的冲劲，于是有了这张专辑的企划灵感。
+
+除了社团成员与公开募集入选者外，本作还邀请了来自日本的 Funkot 好手 Aki、hayato87b、Liet NRC、totsumal，tekno 制作人 4nzu，以及老朋友 citybridge。`,
+      jp: `『GROUND ATTACK!!!』は、Funkot / Hard Bass / Donk / Tribecore を主軸に据えた Thoughost の第2コンピレーションです。
+
+それぞれのジャンルが持つ原始的な勢いと身体性に惹かれたことが、この企画の出発点になりました。
+
+サークルメンバーや公募採用者に加え、日本の Funkot プロデューサー Aki、hayato87b、Liet NRC、totsumal、tekno 制作人 4nzu、そして citybridge を迎えた一作です。`,
     },
     credits: {
       mastering: "Joulez, Project Nirvana",
@@ -926,10 +1180,25 @@ export const releases: ReleaseEntry[] = [
     },
     coverImage: "/images/releases/perpetual-status.jpg",
     heroImage: "/images/releases/perpetual-status.jpg",
+    teaser: {
+      en: "A standalone DJ Mashiro (2) single built around denpa-game intensity and the motif of reincarnating angels.",
+      zh: "以电波系名作与“转生天使”意象为核心的一首独立单曲。",
+      jp: "電波系ゲームの狂気と“転生する天使”のモチーフを重ねた単曲。",
+    },
     summary: {
-      en: "A standalone cut for a cult denpa-galgame reference point, balancing trance-like uplift with a darker reincarnation motif underneath.",
-      zh: "一首独立单曲，以电波系游戏的情绪坐标为背景，在上扬感与更阴暗的“转生”主题之间保持平衡。",
-      jp: "カルト的な電波系ゲームへの視線を含んだ単曲。上昇感のある流れの下で、“転生”のイメージがじわりと沈んでいます。",
+      en: `Made in response to one of the wildest cult denpa galgames, Sayonara o Oshiete: comment te dire adieu.
+
+Composed by 望月真白 aka DJ Mashiro (2), this standalone track balances upward momentum with a darker image of reincarnation and disquiet underneath.
+
+It is a small release, but one tied to a very specific emotional reference point.`,
+      zh: `这是一首围绕电波系名作《さよならを教えて ～comment te dire adieu～》而生的独立单曲。
+
+由望月真白，也就是 DJ Mashiro (2) 作曲，在上扬感与不安感之间维持着微妙平衡，让“转生天使”的意象缓慢下沉。
+
+它篇幅不长，却有着非常明确而浓重的情绪坐标。`,
+      jp: `数ある電波系作品の中でも強烈な存在感を放つ『さよならを教えて ～comment te dire adieu～』へ向けた一曲。
+
+DJ Mashiro (2) こと望月真白が手がけたこの単曲は、上昇感のある流れの下に、“転生する天使”の不穏なイメージを静かに沈めています。`,
     },
     tracklist: createTracklist(["Perpetual Status -転生する天使-"]),
     tracks: createUniformArtistTracks(["Perpetual Status -転生する天使-"], "DJ Mashiro (2)"),
@@ -951,10 +1220,27 @@ export const releases: ReleaseEntry[] = [
     store: standardStore,
     coverImage: "/images/releases/series-planet-exploration-miranda.jpg",
     heroImage: "/images/releases/series-planet-exploration-miranda.jpg",
+    teaser: {
+      en: "A sci-fi single inspired by Miranda and Verona Rupes, turning planetary scale into sensation and song.",
+      zh: "以米兰达与维罗纳断崖为灵感，把宇宙尺度写进声音的一首科幻单曲。",
+      jp: "ミランダとヴェローナ・ルーペスの巨大さを、感覚と音へ変換した探査シングル。",
+    },
     summary: {
-      en: "A planet-exploration single inspired by Miranda and Verona Rupes, translating distance, scale, and fracture into a focused sci-fi rush.",
-      zh: "以天王星卫星 Miranda 与 Verona Rupes 为灵感的科幻单曲，把遥远尺度、断崖意象与探索欲凝成一次集中的推进。",
-      jp: "ミランダとヴェローナ・ルーペスを着想源にした惑星探査シングル。距離感、巨大さ、破砕のイメージを一点集中の勢いへ変換しています。",
+      en: `Miranda, the fifth satellite of Uranus, lies far from Earth and holds Verona Rupes, one of the tallest cliffs in the solar system.
+
+Thinking about that five-to-ten-kilometer drop, and the explosion and shattering that formed it, Nirotiy set out to turn those ideas into sensation and song.
+
+This track begins a series of planetary explorations translated into sound.`,
+      zh: `米兰达，天王星的第五卫星，离地球极远，并拥有太阳系中最高的悬崖之一：维罗纳断崖。
+
+当人类意识到无垠宇宙的宏大时，心中便会萌生探索欲。Nirotiy 虽非天文学专业人士，但正因想象那道约 5～10 公里深的绝壁，以及它形成时的爆裂与粉碎，才试着把这些感受写进一首歌里。
+
+这首作品也成为“行星探索”系列的起点。`,
+      jp: `ミランダ。天王星の第五衛星。
+
+地球から遠く離れたその場所には、太陽系でも屈指の高さを持つ崖、ヴェローナ・ルーペスがあります。その深さ5〜10kmにも及ぶ断崖と、それを形づくった爆発や粉砕のイメージから、この曲は生まれました。
+
+いくつもの曲を通してさまざまな惑星を探っていく、その最初の一歩となるシングルです。`,
     },
     tracklist: createTracklist(["Series Planet Exploration - Miranda -"]),
     tracks: createUniformArtistTracks(["Series Planet Exploration - Miranda -"], "Nirotiy"),
@@ -976,10 +1262,27 @@ export const releases: ReleaseEntry[] = [
     store: standardStore,
     coverImage: "/images/releases/kakusatsu-shoujo.jpg",
     heroImage: "/images/releases/kakusatsu-shoujo.jpg",
+    teaser: {
+      en: "The first KAKUSATSU SHOUJO compilation, setting the project’s early lolicore identity in place.",
+      zh: "KAKUSATSU SHOUJO 的起点，把“可爱、暴力、采样”第一次完整落成合辑。",
+      jp: "“かわいさ、暴力、サンプリング”を最初に形にした KAKUSATSU SHOUJO の原点。",
+    },
     summary: {
-      en: "The original entry in the KAKUSATSU SHOUJO line, laying down the project’s lolicore-heavy identity with manic energy and anime-sourced rupture.",
-      zh: "KAKUSATSU SHOUJO 系列的起点，用 lolicore 导向的狂躁能量与动画采样式断裂感，奠定了整个项目的早期轮廓。",
-      jp: "KAKUSATSU SHOUJO シリーズの原点。lolicore 的な狂騒とアニメ・サンプル由来の破断感で、この企画の初期輪郭を定めた作品です。",
+      en: `"Cute, violent, sampling."
+
+KAKUSATSU SHOUJO is the compilation where that phrase first took shape as a full Thoughost release, bringing together manic energy, lolicore pressure, and a deliberately unstable sense of rupture.
+
+With help from invited Japanese artists and artwork by 桜都あるす, it became one of the earliest statements of the project’s identity.`,
+      zh: `“可爱，暴力，采样”。
+
+《KAKUSATSU SHOUJO》把这句话第一次完整做成了一张合辑。凶暴而又可爱的气质、萝莉核取向的冲击感，以及采样带来的断裂感，都在这里定下了早期轮廓。
+
+本作邀请了几位日本友人参与，也请来了曾为 m1dy 与扑杀少女工坊等绘制封面的桜都あるす担任封面，是系列真正的起点。`,
+      jp: `“かわいさ、暴力、サンプリング”。
+
+『KAKUSATSU SHOUJO』は、その言葉を最初にひとつのコンピレーションとして結晶させた作品です。凶暴さとかわいさ、そしてサンプリングによる断裂感が、この時点ですでに強く刻まれています。
+
+日本の参加アーティストと、桜都あるすによるアートワークを迎えたこの一作は、シリーズの原点となりました。`,
     },
     credits: {
       mastering: "iOM",

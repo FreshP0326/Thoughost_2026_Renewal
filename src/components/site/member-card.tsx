@@ -10,13 +10,13 @@ export function MemberCard({
   locale,
   member,
   viewProfileLabel,
+  imageLoading = "lazy",
 }: {
   locale: Locale;
   member: MemberProfile;
   viewProfileLabel: string;
+  imageLoading?: "eager" | "lazy";
 }) {
-  const previewTracks = member.representativeTracks.slice(0, 2);
-
   return (
     <FadeIn>
       <Link
@@ -29,7 +29,8 @@ export function MemberCard({
             src={withBasePathAsset(member.image)}
             alt={member.name}
             fill
-            className="motion-image object-cover group-hover:opacity-94 group-hover:brightness-105"
+            loading={imageLoading}
+            className="motion-image object-cover group-hover:opacity-97 group-hover:brightness-105"
             sizes="(max-width: 767px) 50vw, (max-width: 1024px) 33vw, 25vw"
           />
           <div className="motion-overlay absolute inset-0 bg-gradient-to-t from-black/16 via-transparent to-transparent opacity-0 group-hover:opacity-100" />
@@ -41,12 +42,7 @@ export function MemberCard({
               {member.name}
             </h3>
           </div>
-          {previewTracks.length ? (
-            <p className="border-t border-neutral-200 pt-3 text-[12px] leading-5 text-neutral-500 motion-surface group-hover:text-neutral-600">
-              {previewTracks.map((track) => track.trackTitle).join(" / ")}
-            </p>
-          ) : null}
-          <p className="pt-1 text-[11px] leading-none font-semibold tracking-[0.04em] text-[var(--page-ink)] motion-surface group-hover:text-neutral-700">
+          <p className="pt-1 text-[11px] leading-none font-semibold tracking-[0.08em] text-[var(--page-ink)] motion-surface group-hover:text-neutral-700">
             {viewProfileLabel} →
           </p>
         </div>

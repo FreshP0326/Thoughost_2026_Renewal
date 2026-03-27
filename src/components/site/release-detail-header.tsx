@@ -19,6 +19,8 @@ export function ReleaseDetailHeader({
   release: ReleaseDetailViewModel;
   labels: ReleaseDetailLabels;
 }) {
+  const summaryParagraphs = release.summary.split("\n\n").filter(Boolean);
+
   return (
     <section className="border-b border-neutral-200 bg-white">
       <div className="mx-auto max-w-[1100px] px-4 py-8 sm:px-6 md:py-10 lg:px-0 lg:py-12">
@@ -29,12 +31,14 @@ export function ReleaseDetailHeader({
                 src={withBasePathAsset(release.coverImage)}
                 alt={release.title}
                 fill
+                loading="eager"
+                fetchPriority="high"
                 className="motion-image object-cover"
                 sizes="(max-width: 1024px) 100vw, 400px"
               />
             </div>
           </FadeIn>
-          <StaggerGroup className="flex flex-col gap-6" fast>
+          <StaggerGroup className="flex flex-col gap-6" density="tight">
             <StaggerItem>
               <p className="text-[12px] font-semibold tracking-[0.08em] text-neutral-500">
                 {release.releaseType} · {release.releaseDateLabel}
@@ -46,7 +50,11 @@ export function ReleaseDetailHeader({
                 <p className="mt-2 text-[15px] font-medium text-neutral-600 md:text-[16px]">{release.subtitle}</p>
               ) : null}
               <p className="mt-2 text-[15px] font-medium text-neutral-700 md:text-[16px]">{release.artistName}</p>
-              <p className="mt-5 max-w-[760px] text-[15px] leading-7 text-neutral-700 md:text-[16px]">{release.summary}</p>
+              <div className="mt-5 max-w-[760px] space-y-4 text-[15px] leading-7 text-neutral-700 md:text-[16px]">
+                {summaryParagraphs.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </div>
             </StaggerItem>
 
             {release.storeLinks.length ? (

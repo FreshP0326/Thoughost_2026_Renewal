@@ -1,47 +1,97 @@
-import Link from "next/link";
+"use client";
 
-import { FadeIn } from "@/components/motion/fade-in";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { Languages } from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useMemo, useState } from "react";
+
+import { localeDisplayNames } from "@/content/site/dictionaries";
+import { resolveSystemLocale, stripLocalePrefix } from "@/lib/locale";
+import { drawerContent } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 import type { Locale } from "@/types/site";
 
 const localeItems = [
-  { key: "en", label: "En" },
-  { key: "jp", label: "日" },
-  { key: "zh", label: "中" },
-] as const satisfies Array<{ key: Locale; label: string }>;
+  { key: "system", label: "Follow System" },
+  { key: "zh", label: localeDisplayNames.zh },
+  { key: "en", label: localeDisplayNames.en },
+  { key: "jp", label: localeDisplayNames.jp },
+] as const;
 
 export function LocaleSwitcher({
   locale,
   pathname,
+  placement = "header",
 }: {
   locale: Locale;
   pathname: string;
+  placement?: "header";
 }) {
-  const pathWithoutLocale = pathname.replace(/^\/(en|zh|jp)(?=\/|$)/, "") || "";
+  const router = useRouter();
+  const [open, setOpen] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
+  const pathWithoutLocale = useMemo(() => stripLocalePrefix(pathname), [pathname]);
+
+  const goSystemLocale = () => {
+    const targetLocale = resolveSystemLocale(window.navigator.language);
+    router.push(`/${targetLocale}${pathWithoutLocale || ""}`);
+    setOpen(false);
+  };
 
   return (
-    <FadeIn className="fixed top-1/2 right-4 z-40 -translate-y-1/2 sm:right-6" delay={0.12}>
-      <div className="flex flex-col gap-2 border border-neutral-200 bg-white/92 p-1 backdrop-blur-[2px]">
-        {localeItems.map((entry) => {
-          const active = entry.key === locale;
-
-          return (
-            <Link
-              key={entry.key}
-              href={`/${entry.key}${pathWithoutLocale || ""}`}
-              aria-current={active ? "page" : undefined}
-              className={cn(
-                "motion-surface flex h-10 w-10 items-center justify-center border text-[18px] font-medium",
-                active
-                  ? "border-[#3a3a3a] bg-[#3a3a3a] !text-white visited:!text-white hover:bg-[#3a3a3a] hover:!text-white"
-                  : "border-transparent bg-white !text-[#101010] visited:!text-[#101010] hover:border-[#101010] hover:bg-neutral-100 hover:!text-[#101010]",
-              )}
-            >
-              {entry.label}
-            </Link>
-          );
-        })}
-      </div>
-    </FadeIn>
+    <div className={cn("relative", placement === "header" && "shrink-0")}>
+      <button
+        type="button"
+        aria-haspopup="menu"
+        aria-expanded={open}
+        aria-label="Change language"
+        onClick={() => setOpen((value) => !value)}
+        className="motion-surface inline-flex h-8 w-8 items-center justify-center border border-[var(--page-divider)] bg-white text-[var(--page-ink)] hover:border-neutral-400"
+      >
+        <Languages size={13} strokeWidth={1.8} />
+      </button>
+      <AnimatePresence initial={false}>
+        {open ? (
+          <motion.div
+            initial={shouldReduceMotion ? false : "hidden"}
+            animate="visible"
+            exit="exit"
+            variants={drawerContent}
+            className="absolute top-full right-0 z-50 mt-2 min-w-[172px] overflow-hidden border border-[var(--page-divider)] bg-white py-1 shadow-[0_14px_30px_rgba(0,0,0,0.08)]"
+          >
+            {localeItems.map((entry) =>
+              entry.key === "system" ? (
+                <button
+                  key={entry.key}
+                  type="button"
+                  onClick={goSystemLocale}
+                  className="motion-surface flex w-full items-center justify-between px-4 py-3 text-left text-[12px] font-medium text-[var(--page-ink)] hover:bg-neutral-100"
+                >
+                  <span>{entry.label}</span>
+                  <span className="text-[10px] tracking-[0.08em] text-neutral-500 uppercase">Auto</span>
+                </button>
+              ) : (
+                <Link
+                  key={entry.key}
+                  href={`/${entry.key}${pathWithoutLocale || ""}`}
+                  onClick={() => setOpen(false)}
+                  aria-current={entry.key === locale ? "page" : undefined}
+                  className={cn(
+                    "motion-surface flex items-center justify-between px-4 py-3 text-[12px] font-medium hover:bg-neutral-100",
+                    entry.key === locale ? "bg-neutral-100 text-[var(--page-ink)]" : "text-[var(--page-ink-soft)]",
+                  )}
+                >
+                  <span>{entry.label}</span>
+                  {entry.key === locale ? (
+                    <span className="text-[10px] font-semibold tracking-[0.08em] text-[var(--page-ink)] uppercase">Now</span>
+                  ) : null}
+                </Link>
+              ),
+            )}
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
+    </div>
   );
 }

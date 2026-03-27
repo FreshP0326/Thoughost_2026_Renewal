@@ -2,11 +2,11 @@
 
 import { usePathname } from "next/navigation";
 
+import { PageTransitionShell } from "@/components/motion/page-transition-shell";
 import { BackToTop } from "@/components/site/back-to-top";
 import { DevRuntimeGuard } from "@/components/site/dev-runtime-guard";
 import { SiteFooter } from "@/components/site/footer";
 import { SiteHeader } from "@/components/site/header";
-import { LocaleSwitcher } from "@/components/site/locale-switcher";
 import { getFooter, getNavigation, getSocialLinks } from "@/server/services/site-service";
 import type { Locale } from "@/types/site";
 
@@ -25,9 +25,15 @@ export function PageShell({
   return (
     <>
       <DevRuntimeGuard />
-      <SiteHeader locale={locale} navigation={navigation} socialLinks={socialLinks} />
-      <LocaleSwitcher locale={locale} pathname={pathname ?? `/${locale}`} />
-      <main className="flex-1">{children}</main>
+      <SiteHeader
+        locale={locale}
+        pathname={pathname ?? `/${locale}`}
+        navigation={navigation}
+        socialLinks={socialLinks}
+      />
+      <main className="flex-1">
+        <PageTransitionShell>{children}</PageTransitionShell>
+      </main>
       <SiteFooter
         locale={locale}
         groups={footer.groups}

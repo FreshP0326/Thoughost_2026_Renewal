@@ -67,6 +67,7 @@ export type ReleaseEntry = {
   releaseDate: string;
   coverImage: string;
   heroImage?: string;
+  teaser: LocalizedText;
   summary: LocalizedText;
   tracklist: {
     en: string[];
@@ -105,6 +106,12 @@ export type HeroSlide = {
   leftImage: string;
   mainImage: string;
   rightImage: string;
+  desktopImagePosition?: {
+    left?: string;
+    main?: string;
+    right?: string;
+  };
+  mobileImagePosition?: string;
 };
 
 export type NewsCardItem = {
@@ -112,6 +119,64 @@ export type NewsCardItem = {
   title: string;
   dateLabel: string;
   href: string;
+  isExternal?: boolean;
+};
+
+export type NewsCategory = "release" | "event" | "site" | "collab";
+
+export type NewsEntryMeta = {
+  slug: string;
+  date: string;
+  title: LocalizedText;
+  summary: LocalizedText;
+  coverImage?: string;
+  coverAlt?: LocalizedText;
+  published: boolean;
+  pinned?: boolean;
+  externalUrl?: string;
+  category?: NewsCategory;
+  seoTitle?: LocalizedText;
+  seoDescription?: LocalizedText;
+};
+
+export type NewsLocaleContent = {
+  body: string;
+};
+
+export type NewsListItem = {
+  slug: string;
+  title: string;
+  summary: string;
+  dateLabel: string;
+  href: string;
+  coverImage?: string;
+  coverAlt?: string;
+  pinned: boolean;
+  isExternal?: boolean;
+  category?: NewsCategory;
+};
+
+export type NewsAdjacentItem = {
+  slug: string;
+  title: string;
+  href: string;
+  dateLabel: string;
+  isExternal?: boolean;
+};
+
+export type NewsArticleViewModel = {
+  slug: string;
+  title: string;
+  summary: string;
+  dateLabel: string;
+  href: string;
+  coverImage?: string;
+  coverAlt?: string;
+  html: string;
+  pinned: boolean;
+  category?: NewsCategory;
+  seoTitle?: string;
+  seoDescription?: string;
 };
 
 export type ReleaseGridItem = {
@@ -132,6 +197,7 @@ export type ReleaseDetailViewModel = {
   releaseDateLabel: string;
   coverImage: string;
   heroImage?: string;
+  teaser: string;
   summary: string;
   purchaseLinks: ReleasePurchaseLink[];
   infoFields: ReleaseInfoField[];
@@ -173,13 +239,37 @@ export type MemberTrackSummary = {
   trackArtist?: string;
 };
 
+export type MemberAppearanceMatchKind = "primary" | "track";
+
+export type MemberAppearanceSummary = {
+  releaseSlug: string;
+  releaseTitle: string;
+  releaseHref: string;
+  releaseType: ReleaseType;
+  releaseDateLabel: string;
+  coverImage: string;
+  matchKind: MemberAppearanceMatchKind;
+  matchedTrackCount: number;
+};
+
+export type MemberProfileMetrics = {
+  featuredTrackCount: number;
+  releaseAppearanceCount: number;
+  trackAppearanceCount: number;
+  latestReleaseTitle?: string;
+  latestReleaseDateLabel?: string;
+};
+
 export type MemberProfile = {
   slug: string;
   name: string;
   role: string;
   group: MemberGroupKey;
+  isArtistLike: boolean;
   image: string;
   bio?: string;
+  metrics?: MemberProfileMetrics;
+  selectedReleases: MemberAppearanceSummary[];
   representativeTracks: MemberTrackSummary[];
   links: MemberProfileLink[];
 };
@@ -198,7 +288,13 @@ export type AboutPageViewModel = {
     membersHeading: string;
     staffHeading: string;
     viewProfile: string;
+    profileOverview: string;
     representativeWorks: string;
+    featuredTracks: string;
+    selectedReleases: string;
+    releaseAppearances: string;
+    trackAppearances: string;
+    latestRelease: string;
     links: string;
     close: string;
     memberNotFound: string;
@@ -217,6 +313,7 @@ export type Dictionary = {
   nav: {
     nextProject: string;
     about: string;
+    news: string;
     discography: string;
     contact: string;
     thoughts: string;
@@ -229,16 +326,31 @@ export type Dictionary = {
   };
   pages: {
     aboutHeading: string;
+    newsHeading: string;
     discographyHeading: string;
     projectHeading: string;
     thoughtsHeading: string;
+  };
+  news: {
+    archiveLabel: string;
+    backToNews: string;
+    publishedOn: string;
+    latestNews: string;
+    emptyState: string;
+    moreNews: string;
   };
   about: {
     aboutIntroHeading: string;
     membersHeading: string;
     staffHeading: string;
     viewProfile: string;
+    profileOverview: string;
     representativeWorks: string;
+    featuredTracks: string;
+    selectedReleases: string;
+    releaseAppearances: string;
+    trackAppearances: string;
+    latestRelease: string;
     links: string;
     close: string;
     memberNotFound: string;

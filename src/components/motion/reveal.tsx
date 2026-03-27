@@ -3,7 +3,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 import type { ReactNode } from "react";
 
-import { createFadeUpSoft, fadeInSoft, motionViewport } from "@/lib/motion";
+import { createFadeUp, fadeIn, motionViewport } from "@/lib/motion";
 
 type RevealProps = {
   children: ReactNode;
@@ -28,7 +28,7 @@ export function Reveal({
       initial="hidden"
       whileInView="visible"
       viewport={{ ...motionViewport, once, amount }}
-      variants={shouldReduceMotion ? fadeInSoft : createFadeUpSoft(18, delay)}
+      variants={shouldReduceMotion ? fadeIn : createFadeUp(18, delay)}
     >
       {children}
     </motion.div>

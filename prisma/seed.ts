@@ -1,7 +1,7 @@
 import { db } from "../src/server/db";
+import { newsContentModules } from "../src/content/news";
 import {
   navigation,
-  newsItems,
   pageContent,
   projects,
   releases,
@@ -72,16 +72,16 @@ async function main() {
   });
 
   await db.newsItem.createMany({
-    data: newsItems.map((item) => ({
-      slug: item.slug,
-      date: new Date(item.date.replace(/\./g, "-")),
-      titleEn: item.title.en,
-      titleZh: item.title.zh,
-      summaryEn: item.title.en,
-      summaryZh: item.title.zh,
-      href: item.href,
-      isPinned: false,
-      published: true,
+    data: newsContentModules.map(({ meta }) => ({
+      slug: meta.slug,
+      date: new Date(meta.date),
+      titleEn: meta.title.en,
+      titleZh: meta.title.zh,
+      summaryEn: meta.summary.en,
+      summaryZh: meta.summary.zh,
+      href: meta.externalUrl ?? `/news/${meta.slug}`,
+      isPinned: meta.pinned ?? false,
+      published: meta.published,
     })),
   });
 

@@ -20,13 +20,13 @@ export function ReleasesGridSection({
   items: ReleaseGridItem[];
 }) {
   return (
-    <section id="releases" className="bg-[#f3f3f3] pt-[36px] pb-[44px] md:pt-[40px] md:pb-[48px]">
-      <div className="mx-auto max-w-[1120px] px-4 sm:px-6 lg:px-0">
+    <section id="releases" className="bg-[#f2f2f2] pt-[40px] pb-[50px] md:pt-[44px] md:pb-[56px]">
+      <div className="site-content-frame">
         <FadeIn>
           <SectionHeading title={title} />
         </FadeIn>
-        <StaggerGroup className="mt-[16px] grid grid-cols-2 gap-[5px] sm:grid-cols-3 lg:grid-cols-5" fast>
-          {items.map((item) => (
+        <StaggerGroup className="mt-[18px] grid grid-cols-2 gap-[4px] sm:grid-cols-3 lg:grid-cols-5" density="tight">
+          {items.map((item, index) => (
             <StaggerItem key={item.slug}>
               <Link
                 href={withLocale(locale, `/releases/${item.slug}`)}
@@ -37,11 +37,12 @@ export function ReleasesGridSection({
                     src={withBasePathAsset(item.coverImage)}
                     alt={item.title}
                     fill
-                    className="motion-image object-cover group-hover:opacity-95 group-hover:brightness-105"
+                    loading={index < 5 ? "eager" : "lazy"}
+                    className="motion-image object-cover group-hover:opacity-97 group-hover:brightness-105"
                     sizes="(max-width: 1024px) 50vw, 20vw"
                   />
                 </div>
-                <div className="motion-overlay absolute inset-x-0 bottom-0 translate-y-2 bg-gradient-to-t from-black/72 via-black/22 to-transparent p-3 opacity-0 group-hover:translate-y-0 group-hover:opacity-100">
+                <div className="motion-overlay absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/72 via-black/22 to-transparent p-3 opacity-0 group-hover:opacity-100">
                   <p className="text-[13px] font-semibold text-white">{item.title}</p>
                   <p className="mt-1 text-[11px] text-white/80">{item.artistName}</p>
                 </div>
@@ -50,7 +51,7 @@ export function ReleasesGridSection({
           ))}
         </StaggerGroup>
         <FadeIn className="mt-[8px] flex justify-end" delay={0.08}>
-          <Link href={withLocale(locale, "/releases")} className="text-[10px] font-semibold tracking-[0.02em] text-[#101010] motion-surface hover:text-neutral-500">
+          <Link href={withLocale(locale, "/releases")} className="text-[10px] font-semibold tracking-[0.03em] text-[#101010] uppercase motion-surface hover:text-neutral-500">
             {moreLabel} →
           </Link>
         </FadeIn>

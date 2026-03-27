@@ -28,10 +28,10 @@ export function SiteFooter({
 }) {
   return (
     <footer id="contact" className="bg-[#101010] text-white">
-      <div className="mx-auto max-w-[1120px] px-4 pt-[48px] pb-[18px] sm:px-6 lg:px-0">
-        <div className="grid gap-10 md:grid-cols-[1.45fr_0.9fr_1.12fr]">
+      <div className="site-content-frame px-0 pt-[46px] pb-[20px]">
+        <div className="grid gap-10 md:grid-cols-[1.5fr_0.9fr_1.05fr]">
           <div className="space-y-8">
-            <div className="flex flex-wrap gap-x-14 gap-y-7">
+            <div className="flex flex-wrap gap-x-14 gap-y-6">
               {groups.map((group, index) => (
                 <div key={`${group.title ?? "links"}-${index}`} className="space-y-3">
                   {group.title ? (

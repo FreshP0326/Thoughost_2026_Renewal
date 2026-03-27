@@ -3,7 +3,7 @@ import { getDictionary } from "@/content/site/dictionaries";
 import {
   navigation,
   blackHole,
-  newsItems,
+  featureFlags,
   pageContent,
   projectCall,
   projects,
@@ -16,10 +16,13 @@ import type {
   BlackHolePageViewModel,
   AboutGroupViewModel,
   FooterGroup,
+  MemberAppearanceSummary,
   HeroSlide,
   Locale,
+  LocalizedText,
   MemberGroupKey,
   MemberProfile,
+  MemberProfileMetrics,
   MemberTrackSummary,
   NavItem,
   NewsCardItem,
@@ -35,10 +38,13 @@ import type {
   ReleaseType,
   SocialIconLink,
 } from "@/types/site";
+import { newsContentModules } from "@/content/news";
 
 function pickText<T extends { en: unknown; zh: unknown; jp: unknown }>(locale: Locale, value: T): T["en"] {
   return value[locale] ?? value.en;
 }
+
+const heroOrder = ["2000-invasion", "thoughts", "kakusatsu-shoujo-3", "moonshine-001", "asteria"] as const;
 
 function pickMaybeLocalized(locale: Locale, value?: { en: string; zh: string; jp: string } | string) {
   if (!value) {
@@ -247,6 +253,116 @@ function getRepresentativeTracks(
   });
 }
 
+function tokenizeArtistCredits(artistName: string) {
+  return artistName
+    .split(/[,;/&、]+/)
+    .map((item) => item.trim())
+    .filter(Boolean);
+}
+
+function matchesMemberName(text: string, memberName: string) {
+  return text.toLowerCase().includes(memberName.toLowerCase());
+}
+
+function getReleaseTimestamp(label: string) {
+  return Date.parse(label.replaceAll(".", "-"));
+}
+
+function sortAppearances(a: { releaseDateLabel: string; sortIndex: number }, b: { releaseDateLabel: string; sortIndex: number }) {
+  const timestampDiff = getReleaseTimestamp(b.releaseDateLabel) - getReleaseTimestamp(a.releaseDateLabel);
+
+  if (timestampDiff !== 0) {
+    return timestampDiff;
+  }
+
+  return a.sortIndex - b.sortIndex;
+}
+
+function getMemberAppearances(
+  locale: Locale,
+  member: Pick<MemberProfile, "name">,
+): MemberAppearanceSummary[] {
+  const appearances = releases.flatMap((release, sortIndex) => {
+    const primaryMatch = tokenizeArtistCredits(release.artistName).includes(member.name);
+    const tracksDetailed = getTracksDetailed(locale, release);
+    const matchedTrackCount = tracksDetailed.filter((track) =>
+      track.artist ? matchesMemberName(track.artist, member.name) : false,
+    ).length;
+
+    if (!primaryMatch && matchedTrackCount === 0) {
+      return [];
+    }
+
+    return [
+      {
+        releaseSlug: release.slug,
+        releaseTitle: pickText(locale, release.title),
+        releaseHref: `/releases/${release.slug}`,
+        releaseType: castReleaseType(release.releaseType),
+        releaseDateLabel: release.releaseDate,
+        coverImage: release.coverImage,
+        matchKind: primaryMatch ? ("primary" as const) : ("track" as const),
+        matchedTrackCount,
+        sortIndex,
+      },
+    ];
+  });
+
+  return appearances
+    .sort(sortAppearances)
+    .map(({ sortIndex, ...appearance }) => {
+      void sortIndex;
+
+      return appearance;
+    });
+}
+
+function getSelectedReleases(appearances: MemberAppearanceSummary[]) {
+  const primaryMatches = appearances.filter((appearance) => appearance.matchKind === "primary");
+  const trackMatches = appearances.filter((appearance) => appearance.matchKind === "track");
+  const selected = [...primaryMatches];
+
+  for (const appearance of trackMatches) {
+    if (selected.length >= 3) {
+      break;
+    }
+
+    selected.push(appearance);
+  }
+
+  return selected
+    .sort((a, b) =>
+      sortAppearances(
+        { releaseDateLabel: a.releaseDateLabel, sortIndex: releases.findIndex((release) => release.slug === a.releaseSlug) },
+        { releaseDateLabel: b.releaseDateLabel, sortIndex: releases.findIndex((release) => release.slug === b.releaseSlug) },
+      ),
+    )
+    .slice(0, 3);
+}
+
+function getMemberMetrics(
+  member: Pick<MemberProfile, "representativeTracks">,
+  appearances: MemberAppearanceSummary[],
+): MemberProfileMetrics | undefined {
+  if (!appearances.length) {
+    return {
+      featuredTrackCount: member.representativeTracks.length,
+      releaseAppearanceCount: 0,
+      trackAppearanceCount: 0,
+    };
+  }
+
+  const latestRelease = appearances[0];
+
+  return {
+    featuredTrackCount: member.representativeTracks.length,
+    releaseAppearanceCount: appearances.length,
+    trackAppearanceCount: appearances.reduce((total, appearance) => total + appearance.matchedTrackCount, 0),
+    latestReleaseTitle: latestRelease.releaseTitle,
+    latestReleaseDateLabel: latestRelease.releaseDateLabel,
+  };
+}
+
 export function getAboutPage(locale: Locale): AboutPageViewModel {
   const dictionary = getDictionary(locale);
   const groupLabels: Record<MemberGroupKey, string> = {
@@ -254,16 +370,35 @@ export function getAboutPage(locale: Locale): AboutPageViewModel {
     staff: dictionary.about.staffHeading,
   };
 
-  const mappedMembers = memberEntries.map<MemberProfile>((member) => ({
-    slug: member.slug,
-    name: pickText(locale, member.name),
-    role: pickText(locale, member.role),
-    group: member.group,
-    image: member.image,
-    bio: member.bio ? pickText(locale, member.bio) : undefined,
-    representativeTracks: getRepresentativeTracks(locale, member.representativeTracks),
-    links: member.links,
-  }));
+  const mappedMembers = memberEntries.map<MemberProfile>((member) => {
+    const representativeTracks = getRepresentativeTracks(locale, member.representativeTracks);
+    const mappedMemberBase = {
+      slug: member.slug,
+      name: pickText(locale, member.name),
+      role: pickText(locale, member.role),
+      group: member.group,
+      isArtistLike: member.group === "members",
+      image: member.image,
+      bio: member.bio ? pickText(locale, member.bio) : undefined,
+      representativeTracks,
+      links: member.links,
+    };
+
+    if (member.group !== "members") {
+      return {
+        ...mappedMemberBase,
+        selectedReleases: [],
+      };
+    }
+
+    const appearances = getMemberAppearances(locale, { name: mappedMemberBase.name });
+
+    return {
+      ...mappedMemberBase,
+      metrics: getMemberMetrics({ representativeTracks }, appearances),
+      selectedReleases: getSelectedReleases(appearances),
+    };
+  });
 
   const groups = (["members", "staff"] as const).map<AboutGroupViewModel>((groupKey) => ({
     key: groupKey,
@@ -287,12 +422,42 @@ export function getSiteConfig(locale: Locale) {
   };
 }
 
+function mapNewsPreview(locale: Locale) {
+  return newsContentModules
+    .filter((item) => item.meta.published)
+    .sort((a, b) => {
+      const pinDiff = Number(Boolean(b.meta.pinned)) - Number(Boolean(a.meta.pinned));
+
+      if (pinDiff !== 0) {
+        return pinDiff;
+      }
+
+      const dateDiff = Date.parse(b.meta.date) - Date.parse(a.meta.date);
+
+      if (dateDiff !== 0) {
+        return dateDiff;
+      }
+
+      return a.meta.slug.localeCompare(b.meta.slug);
+    })
+    .slice(0, 4)
+    .map((item) => ({
+      slug: item.meta.slug,
+      title: pickText(locale, item.meta.title as LocalizedText),
+      dateLabel: item.meta.date.replaceAll("-", "."),
+      href: item.meta.externalUrl ?? `/news/${item.meta.slug}`,
+      isExternal: Boolean(item.meta.externalUrl),
+    }));
+}
+
 export function getNavigation(locale: Locale): NavItem[] {
-  return navigation.map((item) => ({
-    key: item.key,
-    href: item.href,
-    label: pickText(locale, item.label),
-  }));
+  return navigation
+    .filter((item) => item.key !== "news" || featureFlags.showNewsInNavigation)
+    .map((item) => ({
+      key: item.key,
+      href: item.href,
+      label: pickText(locale, item.label),
+    }));
 }
 
 export function getSocialLinks(): SocialIconLink[] {
@@ -300,27 +465,23 @@ export function getSocialLinks(): SocialIconLink[] {
 }
 
 export function getHero(locale: Locale): HeroSlide[] {
-  return releases
-    .filter((item) => item.isHero)
+  return heroOrder
+    .map((slug) => releases.find((item) => item.slug === slug && item.isHero))
+    .filter((item): item is ReleaseEntry => Boolean(item))
     .map((item) => ({
       slug: item.slug,
-      title: item.heroTitle?.en ?? item.title.en,
-      subtitle: pickText(locale, item.summary),
+      title: pickText(locale, item.heroTitle ?? item.title),
+      subtitle: pickText(locale, item.teaser),
       ctaLabel: "Learn More",
       ctaHref: `/releases/${item.slug}`,
-      leftImage: item.coverImage,
-      mainImage: item.coverImage,
-      rightImage: item.coverImage,
+      leftImage: item.heroImage ?? item.coverImage,
+      mainImage: item.heroImage ?? item.coverImage,
+      rightImage: item.heroImage ?? item.coverImage,
     }));
 }
 
 export function getNews(locale: Locale): NewsCardItem[] {
-  return newsItems.map((item) => ({
-    slug: item.slug,
-    title: pickText(locale, item.title),
-    dateLabel: item.date,
-    href: item.href,
-  }));
+  return mapNewsPreview(locale);
 }
 
 export function getReleases(locale: Locale): ReleaseGridItem[] {
@@ -366,6 +527,7 @@ export function getReleaseBySlug(locale: Locale, slug: string): ReleaseDetailVie
     releaseDateLabel: release.releaseDate,
     coverImage: release.coverImage,
     heroImage: release.heroImage,
+    teaser: pickText(locale, release.teaser),
     summary: pickText(locale, release.summary),
     purchaseLinks,
     infoFields: getInfoFields(locale, release, purchaseLinks),

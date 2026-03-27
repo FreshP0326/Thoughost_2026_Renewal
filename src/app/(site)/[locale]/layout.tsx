@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import { Archivo, Noto_Sans_JP, Noto_Sans_SC } from "next/font/google";
 
+import "../../globals.css";
 import { PageShell } from "@/components/site/page-shell";
 import { supportedLocales } from "@/content/site/data";
 import { withBasePathAsset } from "@/lib/base-path";
@@ -7,6 +9,24 @@ import { assertLocale } from "@/lib/locale";
 import { getSiteConfig } from "@/server/services/site-service";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+
+const archivo = Archivo({
+  variable: "--font-archivo",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
+
+const notoSansJp = Noto_Sans_JP({
+  variable: "--font-noto-sans-jp",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
+
+const notoSansSc = Noto_Sans_SC({
+  variable: "--font-noto-sans-sc",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
 
 export function generateStaticParams() {
   return supportedLocales.map((locale) => ({ locale }));
@@ -50,5 +70,15 @@ export default async function LocaleLayout({
   const { locale: rawLocale } = await params;
   const locale = assertLocale(rawLocale);
 
-  return <PageShell locale={locale}>{children}</PageShell>;
+  return (
+    <html
+      lang={locale}
+      data-scroll-behavior="smooth"
+      className={`${archivo.variable} ${notoSansJp.variable} ${notoSansSc.variable} h-full antialiased`}
+    >
+      <body className="min-h-full flex flex-col">
+        <PageShell locale={locale}>{children}</PageShell>
+      </body>
+    </html>
+  );
 }

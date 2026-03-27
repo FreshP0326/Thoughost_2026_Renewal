@@ -35,7 +35,13 @@ export default async function AboutPage({
           locale={locale}
           members={allMembers}
           labels={{
+            profileOverview: aboutPage.labels.profileOverview,
             representativeWorks: aboutPage.labels.representativeWorks,
+            featuredTracks: aboutPage.labels.featuredTracks,
+            selectedReleases: aboutPage.labels.selectedReleases,
+            releaseAppearances: aboutPage.labels.releaseAppearances,
+            trackAppearances: aboutPage.labels.trackAppearances,
+            latestRelease: aboutPage.labels.latestRelease,
             links: aboutPage.labels.links,
             close: aboutPage.labels.close,
             memberNotFound: aboutPage.labels.memberNotFound,

@@ -18,3 +18,21 @@ export function assertLocale(value: string): Locale {
 export function withLocale(locale: Locale, href: string) {
   return `/${locale}${href === "/" ? "" : href}`;
 }
+
+export function stripLocalePrefix(pathname: string) {
+  return pathname.replace(/^\/(en|zh|jp)(?=\/|$)/, "") || "";
+}
+
+export function resolveSystemLocale(language: string | undefined): Locale {
+  const normalized = language?.toLowerCase() ?? "";
+
+  if (normalized.startsWith("zh")) {
+    return "zh";
+  }
+
+  if (normalized.startsWith("ja")) {
+    return "jp";
+  }
+
+  return "en";
+}

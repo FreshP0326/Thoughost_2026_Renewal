@@ -3,7 +3,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 import type { ReactNode } from "react";
 
-import { createFadeUpSoft, fadeInSoft, motionViewport } from "@/lib/motion";
+import { createFadeUp, fadeIn, motionViewport } from "@/lib/motion";
 
 type FadeInProps = {
   children: ReactNode;
@@ -23,7 +23,7 @@ export function FadeIn({
   amount = 0.2,
 }: FadeInProps) {
   const shouldReduceMotion = useReducedMotion();
-  const variant = shouldReduceMotion ? fadeInSoft : createFadeUpSoft(y, delay);
+  const variant = shouldReduceMotion ? fadeIn : createFadeUp(y, delay);
 
   return (
     <motion.div

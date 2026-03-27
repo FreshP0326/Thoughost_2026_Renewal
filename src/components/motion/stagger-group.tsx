@@ -3,14 +3,14 @@
 import { motion, useReducedMotion } from "framer-motion";
 import type { ReactNode } from "react";
 
-import { fadeInSoft, fadeUpSoft, motionViewport, staggerFast, staggerStandard } from "@/lib/motion";
+import { fadeIn, motionViewport, staggerContainer, staggerItem } from "@/lib/motion";
 
 type StaggerGroupProps = {
   children: ReactNode;
   className?: string;
   once?: boolean;
   amount?: number;
-  fast?: boolean;
+  density?: "tight" | "base";
 };
 
 export function StaggerGroup({
@@ -18,7 +18,7 @@ export function StaggerGroup({
   className,
   once = true,
   amount = 0.1,
-  fast = false,
+  density = "base",
 }: StaggerGroupProps) {
   const shouldReduceMotion = useReducedMotion();
 
@@ -28,7 +28,7 @@ export function StaggerGroup({
       initial="hidden"
       whileInView="visible"
       viewport={{ ...motionViewport, once, amount }}
-      variants={shouldReduceMotion ? { hidden: {}, visible: {} } : fast ? staggerFast : staggerStandard}
+      variants={shouldReduceMotion ? { hidden: {}, visible: {} } : staggerContainer(density)}
     >
       {children}
     </motion.div>
@@ -45,7 +45,7 @@ export function StaggerItem({
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <motion.div className={className} variants={shouldReduceMotion ? fadeInSoft : fadeUpSoft}>
+    <motion.div className={className} variants={shouldReduceMotion ? fadeIn : staggerItem}>
       {children}
     </motion.div>
   );

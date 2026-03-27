@@ -20,9 +20,15 @@ export function MemberGrid({
           <FadeIn>
             <SectionHeading title={group.label} />
           </FadeIn>
-          <StaggerGroup className="mt-4 grid grid-cols-2 gap-3 md:mt-5 md:grid-cols-3 lg:grid-cols-4" fast>
-            {group.members.map((member) => (
-              <MemberCard key={member.slug} locale={locale} member={member} viewProfileLabel={viewProfileLabel} />
+          <StaggerGroup className="mt-4 grid grid-cols-2 gap-3 md:mt-5 md:grid-cols-3 lg:grid-cols-4" density="base">
+            {group.members.map((member, index) => (
+              <MemberCard
+                key={member.slug}
+                locale={locale}
+                member={member}
+                viewProfileLabel={viewProfileLabel}
+                imageLoading={index < 4 ? "eager" : "lazy"}
+              />
             ))}
           </StaggerGroup>
         </section>
