@@ -1,0 +1,282 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --page-ink: #101010;
+  --page-ink-soft: #5f5f5f;
+  --page-divider: #dedede;
+  --hero-mask-strong: rgba(0, 0, 0, 0.56);
+  --hero-mask-medium: rgba(0, 0, 0, 0.3);
+  --hero-mask-soft: rgba(0, 0, 0, 0.12);
+  --hero-surface: #f4f4f2;
+  --motion-hover: 140ms;
+  --motion-fast: 160ms;
+  --motion-base: 480ms;
+  --motion-slow: 720ms;
+  --motion-hero: 860ms;
+  --motion-drift: 16s;
+  --motion-ease-out: ease-out;
+  --motion-ease-emphasized: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@theme inline {
+  --color-background: #ffffff;
+  --color-foreground: #101010;
+  --font-sans: var(--font-poppins), var(--font-noto-sans-jp), var(--font-noto-sans-sc), sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #ffffff;
+  color: var(--page-ink);
+  font-family: var(--font-poppins), var(--font-noto-sans-jp), var(--font-noto-sans-sc), sans-serif;
+}
+
+.motion-opacity {
+  transition:
+    opacity var(--motion-hover) var(--motion-ease-out),
+    transform var(--motion-hover) var(--motion-ease-out),
+    filter var(--motion-hover) var(--motion-ease-out);
+}
+
+.motion-surface {
+  transition:
+    color var(--motion-hover) var(--motion-ease-out),
+    background-color var(--motion-hover) var(--motion-ease-out),
+    border-color var(--motion-hover) var(--motion-ease-out),
+    opacity var(--motion-hover) var(--motion-ease-out),
+    transform var(--motion-hover) var(--motion-ease-out),
+    filter var(--motion-hover) var(--motion-ease-out);
+}
+
+.motion-border {
+  transition:
+    border-color var(--motion-hover) var(--motion-ease-out),
+    opacity var(--motion-hover) var(--motion-ease-out);
+}
+
+.motion-link {
+  transition:
+    color var(--motion-hover) var(--motion-ease-out),
+    opacity var(--motion-hover) var(--motion-ease-out),
+    letter-spacing var(--motion-hover) var(--motion-ease-out);
+}
+
+.motion-overlay {
+  transition:
+    opacity var(--motion-base) var(--motion-ease-emphasized),
+    background-color var(--motion-hover) var(--motion-ease-out),
+    transform var(--motion-fast) var(--motion-ease-out);
+}
+
+.motion-image {
+  transition:
+    transform var(--motion-base) var(--motion-ease-emphasized),
+    opacity var(--motion-hover) var(--motion-ease-out),
+    filter var(--motion-hover) var(--motion-ease-out);
+  transform-origin: center center;
+  will-change: transform;
+}
+
+.motion-lift-subtle {
+  transition: transform var(--motion-hover) var(--motion-ease-out);
+}
+
+.motion-image-group:hover .motion-lift-subtle,
+.motion-image-group:focus-visible .motion-lift-subtle {
+  transform: translateY(-1px);
+}
+
+.motion-image-group:hover .motion-image,
+.motion-image-group:focus-visible .motion-image {
+  transform: scale(1.02);
+}
+
+.font-ulagadi {
+  font-family:
+    "UlagadiSansBold",
+    "Arial Black",
+    "Helvetica Neue",
+    var(--font-poppins),
+    var(--font-noto-sans-jp),
+    var(--font-noto-sans-sc),
+    sans-serif;
+  font-weight: 900;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  user-select: none;
+}
+
+::selection {
+  background: #101010;
+  color: #ffffff;
+}
+
+.hero-fade-in {
+  animation: hero-fade-in var(--motion-base) var(--motion-ease-emphasized);
+}
+
+.black-hole-enter {
+  animation: black-hole-enter var(--motion-slow) var(--motion-ease-emphasized) both;
+}
+
+.black-hole-enter-delayed {
+  animation-delay: 120ms;
+}
+
+.black-hole-enter-late {
+  animation-delay: 220ms;
+}
+
+.black-hole-grid {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(circle at center, black 22%, transparent 84%);
+}
+
+.black-hole-noise {
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.06) 0 1px, transparent 1px),
+    radial-gradient(circle at 70% 35%, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px),
+    radial-gradient(circle at 50% 80%, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px);
+  background-size: 180px 180px, 220px 220px, 260px 260px;
+  animation: black-hole-drift var(--motion-drift) linear infinite;
+}
+
+.black-hole-ring {
+  border: 1px solid rgba(255, 255, 255, 0.075);
+  box-shadow: inset 0 0 60px rgba(255, 255, 255, 0.02);
+}
+
+.black-hole-ring-outer {
+  opacity: 0.34;
+  animation: black-hole-breathe 14s ease-in-out infinite;
+}
+
+.black-hole-ring-mid {
+  opacity: 0.5;
+  animation: black-hole-breathe 10s ease-in-out infinite reverse;
+}
+
+.black-hole-core {
+  background:
+    radial-gradient(circle at center, rgba(240, 64, 52, 0.3) 0%, rgba(240, 64, 52, 0.12) 16%, rgba(10, 10, 10, 0.98) 40%, rgba(0, 0, 0, 1) 72%);
+  box-shadow:
+    0 0 140px rgba(240, 64, 52, 0.08),
+    0 0 60px rgba(0, 0, 0, 0.6);
+}
+
+.black-hole-status-pulse {
+  animation: black-hole-status-pulse 2.8s ease-in-out infinite;
+}
+
+@keyframes hero-fade-in {
+  from {
+    opacity: 0.38;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes black-hole-enter {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes black-hole-breathe {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(0.985);
+  }
+
+  50% {
+    transform: translate(-50%, -50%) scale(1.015);
+  }
+}
+
+@keyframes black-hole-drift {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(-8px, 6px, 0);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes black-hole-status-pulse {
+  0%,
+  100% {
+    opacity: 0.76;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-hover: 1ms;
+    --motion-fast: 1ms;
+    --motion-base: 1ms;
+    --motion-slow: 1ms;
+    --motion-hero: 1ms;
+    --motion-drift: 1ms;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .black-hole-noise,
+  .black-hole-ring-outer,
+  .black-hole-ring-mid,
+  .black-hole-status-pulse,
+  .hero-fade-in {
+    animation: none !important;
+  }
+
+  .motion-image-group:hover .motion-image,
+  .motion-image-group:focus-visible .motion-image {
+    transform: none;
+  }
+}

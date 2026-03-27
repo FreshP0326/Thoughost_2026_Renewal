@@ -1,0 +1,117 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model SiteConfig {
+  id            String @id @default(cuid())
+  defaultLocale String @default("en")
+  contactEmail  String
+  copyrightText String
+  footerQuoteEn String
+  footerQuoteZh String
+}
+
+model NavigationLink {
+  id        String @id @default(cuid())
+  key       String
+  labelEn   String
+  labelZh   String
+  href      String
+  sortOrder Int
+  location  String
+}
+
+model SocialLink {
+  id        String @id @default(cuid())
+  platform  String
+  label     String
+  url       String
+  iconKey   String
+  sortOrder Int
+}
+
+model HeroProject {
+  id         String  @id @default(cuid())
+  slug       String  @unique
+  titleEn    String
+  titleZh    String
+  subtitleEn String?
+  subtitleZh String?
+  ctaLabelEn String
+  ctaLabelZh String
+  ctaHref    String
+  leftImage  String
+  mainImage  String
+  rightImage String
+  isActive   Boolean @default(true)
+  sortOrder  Int     @default(0)
+}
+
+model NewsItem {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  date      DateTime
+  titleEn   String
+  titleZh   String
+  summaryEn String?
+  summaryZh String?
+  href      String
+  isPinned  Boolean  @default(false)
+  published Boolean  @default(true)
+}
+
+model Release {
+  id          String        @id @default(cuid())
+  slug        String        @unique
+  titleEn     String
+  titleZh     String
+  artistName  String
+  releaseType String
+  releaseDate DateTime
+  coverImage  String
+  heroImage   String?
+  summaryEn   String
+  summaryZh   String
+  tracklistEn Json
+  tracklistZh Json
+  isFeatured  Boolean       @default(false)
+  sortOrder   Int           @default(0)
+  published   Boolean       @default(true)
+  links       ReleaseLink[]
+}
+
+model ReleaseLink {
+  id        String  @id @default(cuid())
+  platform  String
+  url       String
+  sortOrder Int     @default(0)
+  releaseId String
+  release   Release @relation(fields: [releaseId], references: [id], onDelete: Cascade)
+}
+
+model PageContent {
+  id      String @id @default(cuid())
+  pageKey String @unique
+  titleEn String
+  titleZh String
+  bodyEn  String
+  bodyZh  String
+}
+
+model ProjectItem {
+  id         String  @id @default(cuid())
+  slug       String  @unique
+  titleEn    String
+  titleZh    String
+  summaryEn  String
+  summaryZh  String
+  coverImage String
+  href       String
+  published  Boolean @default(true)
+  sortOrder  Int     @default(0)
+}

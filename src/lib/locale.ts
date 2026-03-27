@@ -1,0 +1,20 @@
+import { notFound } from "next/navigation";
+
+import { supportedLocales } from "@/content/site/data";
+import type { Locale } from "@/types/site";
+
+export function isLocale(value: string): value is Locale {
+  return supportedLocales.includes(value as Locale);
+}
+
+export function assertLocale(value: string): Locale {
+  if (!isLocale(value)) {
+    notFound();
+  }
+
+  return value;
+}
+
+export function withLocale(locale: Locale, href: string) {
+  return `/${locale}${href === "/" ? "" : href}`;
+}

@@ -1,0 +1,150 @@
+import { db } from "../src/server/db";
+import {
+  navigation,
+  newsItems,
+  pageContent,
+  projects,
+  releases,
+  siteConfig,
+  socialLinks,
+} from "../src/content/site/data";
+
+async function main() {
+  await db.releaseLink.deleteMany();
+  await db.release.deleteMany();
+  await db.newsItem.deleteMany();
+  await db.heroProject.deleteMany();
+  await db.projectItem.deleteMany();
+  await db.navigationLink.deleteMany();
+  await db.socialLink.deleteMany();
+  await db.pageContent.deleteMany();
+  await db.siteConfig.deleteMany();
+
+  await db.siteConfig.create({
+    data: {
+      defaultLocale: siteConfig.defaultLocale,
+      contactEmail: siteConfig.contactEmail,
+      copyrightText: siteConfig.copyrightText,
+      footerQuoteEn: siteConfig.footerQuote.en,
+      footerQuoteZh: siteConfig.footerQuote.zh,
+    },
+  });
+
+  await db.navigationLink.createMany({
+    data: navigation.map((item, index) => ({
+      key: item.key,
+      labelEn: item.label.en,
+      labelZh: item.label.zh,
+      href: item.href,
+      sortOrder: index,
+      location: "header",
+    })),
+  });
+
+  await db.socialLink.createMany({
+    data: socialLinks.map((item, index) => ({
+      platform: item.platform,
+      label: item.label,
+      url: item.url,
+      iconKey: item.iconKey,
+      sortOrder: index,
+    })),
+  });
+
+  await db.heroProject.createMany({
+    data: releases
+      .filter((item) => item.isHero)
+      .map((item, index) => ({
+        slug: item.slug,
+        titleEn: item.title.en,
+        titleZh: item.title.zh,
+        subtitleEn: item.summary.en,
+        subtitleZh: item.summary.zh,
+      ctaLabelEn: "Learn more",
+      ctaLabelZh: "了解更多",
+      ctaHref: `/releases/${item.slug}`,
+      leftImage: item.coverImage,
+      mainImage: item.coverImage,
+      rightImage: item.coverImage,
+      isActive: true,
+        sortOrder: index,
+      })),
+  });
+
+  await db.newsItem.createMany({
+    data: newsItems.map((item) => ({
+      slug: item.slug,
+      date: new Date(item.date.replace(/\./g, "-")),
+      titleEn: item.title.en,
+      titleZh: item.title.zh,
+      summaryEn: item.title.en,
+      summaryZh: item.title.zh,
+      href: item.href,
+      isPinned: false,
+      published: true,
+    })),
+  });
+
+  for (const [index, item] of releases.entries()) {
+    await db.release.create({
+      data: {
+        slug: item.slug,
+        titleEn: item.title.en,
+        titleZh: item.title.zh,
+        artistName: item.artistName,
+        releaseType: item.releaseType,
+        releaseDate: new Date(item.releaseDate.replace(/\./g, "-")),
+        coverImage: item.coverImage,
+        heroImage: item.heroImage,
+        summaryEn: item.summary.en,
+        summaryZh: item.summary.zh,
+        tracklistEn: item.tracklist.en,
+        tracklistZh: item.tracklist.zh,
+        isFeatured: item.isFeatured ?? false,
+        sortOrder: index,
+        published: true,
+        links: {
+          create: item.links.map((link, linkIndex) => ({
+            platform: link.platform,
+            url: link.url,
+            sortOrder: linkIndex,
+          })),
+        },
+      },
+    });
+  }
+
+  await db.pageContent.createMany({
+    data: Object.entries(pageContent).map(([pageKey, value]) => ({
+      pageKey,
+      titleEn: value.title.en,
+      titleZh: value.title.zh,
+      bodyEn: value.body.en,
+      bodyZh: value.body.zh,
+    })),
+  });
+
+  await db.projectItem.createMany({
+    data: projects.map((item, index) => ({
+      slug: item.slug,
+      titleEn: item.title.en,
+      titleZh: item.title.zh,
+      summaryEn: item.summary.en,
+      summaryZh: item.summary.zh,
+      coverImage: item.coverImage,
+      href: item.href,
+      published: true,
+      sortOrder: index,
+    })),
+  });
+}
+
+main()
+  .then(async () => {
+    await db.$disconnect();
+  })
+  .catch(async (error) => {
+    console.error(error);
+    await db.$disconnect();
+    process.exit(1);
+  });
