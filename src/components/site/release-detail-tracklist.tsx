@@ -1,50 +1,80 @@
+import Image from "next/image";
+import Link from "next/link";
+
 import { FadeIn } from "@/components/motion/fade-in";
+import { StaggerGroup, StaggerItem } from "@/components/motion/stagger-group";
+import { withBasePathAsset } from "@/lib/base-path";
+import type { ReleaseDetailViewModel } from "@/types/site";
 
-import type { ReleaseTrack } from "@/types/site";
-
-type ReleaseTracklistLabels = {
-  title: string;
-  number: string;
-  artist: string;
-};
+import styles from "./release-detail.module.css";
 
 export function ReleaseDetailTracklist({
-  tracks,
+  release,
   labels,
 }: {
-  tracks: ReleaseTrack[];
-  labels: ReleaseTracklistLabels;
+  release: ReleaseDetailViewModel;
+  labels: {
+    artworkDownload: string;
+  };
 }) {
   return (
-    <section id="tracklist" className="border-b border-neutral-200 bg-white">
-      <div className="site-nav-frame py-10 lg:py-12">
-        <div className="grid gap-6 lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-10">
-          <FadeIn>
-            <h2 className="type-section-title text-[#101010]">{labels.title}</h2>
-          </FadeIn>
-          <div className="border-t border-neutral-200">
-            <div className="type-meta grid grid-cols-[64px_minmax(0,1fr)] gap-4 border-b border-neutral-200 py-3 text-neutral-500 md:grid-cols-[64px_minmax(0,1fr)_minmax(160px,220px)]">
-              <p>{labels.number}</p>
-              <p>{labels.title}</p>
-              <p className="hidden md:block">{labels.artist}</p>
-            </div>
-            {tracks.map((track, index) => (
-              <FadeIn
-                key={`${track.disc ?? "disc"}-${track.number ?? index}-${track.title}`}
-                className="motion-surface grid grid-cols-[64px_minmax(0,1fr)] gap-4 border-b border-neutral-200 py-3 hover:border-neutral-400 md:grid-cols-[64px_minmax(0,1fr)_minmax(160px,220px)]"
-                delay={Math.min(index * 0.015, 0.14)}
-              >
-                <p className="text-[13px] leading-[1.35] font-medium text-neutral-500">{track.number ?? String(index + 1).padStart(2, "0")}</p>
-                <div>
-                  {track.disc ? (
-                    <p className="type-meta mb-1 text-neutral-500">{track.disc}</p>
-                  ) : null}
-                  <p className="text-[15px] leading-[1.4] font-medium tracking-[-0.012em] text-[#101010] md:text-[16px]">{track.title}</p>
-                  {track.artist ? <p className="mt-1 text-[14px] leading-[1.45] text-neutral-600 md:hidden">{track.artist}</p> : null}
+    <section className={styles.bodySection}>
+      <div className={styles.container}>
+        <div className={styles.bodyGrid}>
+          <div className={styles.playerColumn}>
+            <div className={styles.playerFrame}>
+              <div className={styles.coverFrame}>
+                <Image
+                  src={withBasePathAsset(release.coverImage)}
+                  alt={release.title}
+                  fill
+                  loading="eager"
+                  fetchPriority="high"
+                  decoding="async"
+                  priority
+                  className={styles.coverImage}
+                  sizes="(max-width: 1024px) 100vw, 390px"
+                />
+                <div className={styles.playButton} aria-hidden="true">
+                  <span className={styles.playTriangle} />
                 </div>
-                <p className="hidden text-[14px] leading-[1.45] text-neutral-600 md:block">{track.artist ?? "—"}</p>
-              </FadeIn>
-            ))}
+              </div>
+              <div className={styles.playerBar} aria-hidden="true">
+                <div className={styles.progressRail}>
+                  <span className={styles.progressDot} />
+                </div>
+                <div className={styles.volumeCluster}>
+                  <span className={styles.volumeIcon} />
+                  <span className={styles.volumeRail} />
+                </div>
+              </div>
+            </div>
+            {release.artworkDownloadUrl ? (
+              <Link
+                href={withBasePathAsset(release.artworkDownloadUrl)}
+                target="_blank"
+                rel="noreferrer"
+                className={styles.artworkLink}
+              >
+                {labels.artworkDownload}
+              </Link>
+            ) : null}
+          </div>
+          <div className={styles.trackColumn}>
+            <FadeIn delay={0.08} y={16} amount={0.16}>
+              <h2 className={styles.discTitle}>{release.discTitle}</h2>
+            </FadeIn>
+            <StaggerGroup className={styles.trackTable} density="tight" amount={0.08}>
+              {release.tracksDetailed.map((track, index) => (
+                <StaggerItem key={`${track.number ?? index}-${track.title}`}>
+                  <div className={styles.trackRow} data-track-row-active={index < 6 ? "true" : "false"}>
+                    <span className={styles.trackNumber}>{track.number ?? String(index + 1).padStart(2, "0")}</span>
+                    <span className={styles.trackTitle}>{track.title}</span>
+                    <span className={styles.trackArtist}>{track.artist ?? release.artistName}</span>
+                  </div>
+                </StaggerItem>
+              ))}
+            </StaggerGroup>
           </div>
         </div>
       </div>

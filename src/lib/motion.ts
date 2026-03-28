@@ -6,26 +6,26 @@ export const motionEasing = {
 };
 
 export const motionTokens = {
-  hover: 0.13,
+  hover: 0.16,
   tap: 0.1,
-  enterFast: 0.32,
-  enterBase: 0.42,
-  enterSlow: 0.56,
-  exitFast: 0.22,
-  pageEnter: 0.38,
-  pageExit: 0.28,
-  heroSlide: 0.64,
-  heroTrack: 0.72,
-  heroTrackFlow: 0.78,
-  heroPreview: 0.48,
-  heroContent: 0.38,
-  heroInitial: 0.52,
-  introBeat: 0.18,
-  introShort: 0.28,
-  introBase: 0.42,
-  introPanel: 0.56,
-  staggerTight: 0.04,
-  staggerBase: 0.07,
+  enterFast: 0.36,
+  enterBase: 0.46,
+  enterSlow: 0.62,
+  exitFast: 0.2,
+  pageEnter: 0.44,
+  pageExit: 0.24,
+  heroSlide: 0.68,
+  heroTrack: 0.76,
+  heroTrackFlow: 0.82,
+  heroPreview: 0.52,
+  heroContent: 0.42,
+  heroInitial: 0.58,
+  introBeat: 0.2,
+  introShort: 0.32,
+  introBase: 0.48,
+  introPanel: 0.6,
+  staggerTight: 0.03,
+  staggerBase: 0.055,
 } as const;
 
 export const motionDurations = {
@@ -38,7 +38,7 @@ export const motionDurations = {
 
 export const motionViewport = {
   once: true,
-  amount: 0.18,
+  amount: 0.14,
 } as const;
 
 export function createFadeUp(y = 18, delay = 0, duration: number = motionTokens.enterBase) {

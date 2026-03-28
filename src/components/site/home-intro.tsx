@@ -6,7 +6,7 @@ import Image from "next/image";
 import { withBasePathAsset } from "@/lib/base-path";
 import { motionEasing, motionTokens } from "@/lib/motion";
 
-const INTRO_TOTAL_MS = 1320;
+const INTRO_TOTAL_MS = 1240;
 
 export function HomeIntroOverlay() {
   const shouldReduceMotion = useReducedMotion();

@@ -22,15 +22,6 @@ vi.mock("next/link", () => ({
   ),
 }));
 
-vi.mock("@/components/motion/image-reveal", () => ({
-  ImageReveal: ({ children }: { children: React.ReactNode }) => <>{children}</>,
-}));
-
-vi.mock("@/components/motion/stagger-group", () => ({
-  StaggerGroup: ({ children }: { children: React.ReactNode }) => <>{children}</>,
-  StaggerItem: ({ children }: { children: React.ReactNode }) => <>{children}</>,
-}));
-
 vi.mock("@/components/motion/fade-in", () => ({
   FadeIn: ({ children }: { children: React.ReactNode }) => <>{children}</>,
 }));
@@ -43,34 +34,40 @@ const release: ReleaseDetailViewModel = {
   releaseType: "Compilation",
   releaseDateLabel: "2025.10.26",
   coverImage: "/images/releases/2000-invasion.jpg",
-  heroImage: "/images/releases/2000-invasion.jpg",
-  teaser: "A fifth-anniversary rush of 2000s club power, reviving rave euphoria with a full-scale all-star lineup.",
-  summary:
-    "For anyone who wants to hear the sound of the 2000s on the dancefloor once again, this is the answer.\n\nAcross fourteen tracks, Thoughost’s fifth-anniversary release brings back the rush of rave, eurobeat, bubblegum dance, happy hardcore, and disco.",
+  heroImage: "/images/releases/hero-variant.jpg",
+  teaser: "A fifth-anniversary rush of 2000s club power.",
+  summary: "First paragraph.\n\nSecond paragraph.",
+  heroEyebrow: "Thoughost Compilation",
+  discTitle: "DISC 1",
+  artworkDownloadUrl: "/images/releases/2000-invasion.jpg",
   purchaseLinks: [],
-  infoFields: [
-    { label: "Model Number", value: "THGO-0010" },
-    { label: "Release Date", value: "2025.10.26" },
+  heroPrimaryLinks: [
+    { label: "Bandcamp", url: "https://example.com/bandcamp", kind: "bandcamp" },
+    { label: "Dizzylab", url: "https://example.com/dizzylab", kind: "dizzylab" },
   ],
+  infoFields: [],
+  infoPanelFields: [],
+  creditPanelFields: [],
   tracksDetailed: [],
   trackPreview: { items: [], remainingCount: 0 },
   storeLinks: [],
+  relatedLinks: [],
   links: [],
 };
 
 describe("ReleaseDetailHeader", () => {
-  it("renders multi-paragraph summaries without credit headings", () => {
-    render(<ReleaseDetailHeader release={release} labels={{ linksTitle: "Links", metaTitle: "Release Information" }} />);
+  it("renders hero copy, primary links, and prefers hero image", () => {
+    render(<ReleaseDetailHeader release={release} />);
 
-    expect(screen.getByText("For anyone who wants to hear the sound of the 2000s on the dancefloor once again, this is the answer.")).toBeInTheDocument();
-    expect(
-      screen.getByText(
-        "Across fourteen tracks, Thoughost’s fifth-anniversary release brings back the rush of rave, eurobeat, bubblegum dance, happy hardcore, and disco.",
-      ),
-    ).toBeInTheDocument();
-    expect(screen.queryByText("CREDIT")).not.toBeInTheDocument();
-    expect(screen.queryByText("credits")).not.toBeInTheDocument();
+    expect(screen.getByText("Thoughost Compilation")).toBeInTheDocument();
+    expect(screen.getByText("2000% INVASION")).toBeInTheDocument();
+    expect(screen.getByText("First paragraph.")).toBeInTheDocument();
+    expect(screen.getByText("Second paragraph.")).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Bandcamp" })).toHaveAttribute("href", "https://example.com/bandcamp");
+    expect(screen.getByRole("link", { name: "Dizzylab" })).toHaveAttribute("href", "https://example.com/dizzylab");
+
     const cover = screen.getByAltText("2000% INVASION");
+    expect(cover).toHaveAttribute("src", expect.stringContaining("/images/releases/hero-variant.jpg"));
     expect(cover).toHaveAttribute("loading", "eager");
     expect(cover).toHaveAttribute("fetchpriority", "high");
   });

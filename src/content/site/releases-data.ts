@@ -732,6 +732,41 @@ Across twelve tracks, the record invites you to listen through a more inward, pr
     ]),
     links: createBandcampLinks("/album/16-48"),
     purchaseLinks: createPurchaseLinks("/album/16-48", "TGSL-001"),
+    detailMeta: {
+      heroEyebrow: {
+        en: "Joulez 1st Solo Album.",
+        zh: "Joulez 首张个人专辑。",
+        ja: "Joulez 1st Solo Album.",
+      },
+      discTitle: {
+        en: "DISC 1",
+        zh: "DISC 1",
+        ja: "DISC 1",
+      },
+      artworkDownloadUrl: "/images/releases/16-48.jpg",
+      credit: {
+        produceComposeArrangeMastering: {
+          en: "Joulez",
+          zh: "Joulez",
+          ja: "Joulez",
+        },
+        poetry: {
+          en: "Joulez, odorin, lola螺旯",
+          zh: "Joulez、odorin、lola螺旯",
+          ja: "Joulez, odorin, lola螺旯",
+        },
+        vocal: {
+          en: "lola螺旯 (9 & 12), 除名システム (2 & 9)",
+          zh: "lola螺旯（9、12），除名システム（2、9）",
+          ja: "lola螺旯 (9 & 12), 除名システム (2 & 9)",
+        },
+        design: {
+          en: "紺 aka Konseki Takane",
+          zh: "紺 aka Konseki Takane",
+          ja: "紺 aka Konseki Takane",
+        },
+      },
+    },
     isFeatured: true,
   },
   {

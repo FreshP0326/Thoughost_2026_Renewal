@@ -13,7 +13,7 @@ function SocialIcon({ iconKey, label, dark = false }: { iconKey: string; label: 
         alt={label}
         width={18}
         height={18}
-        className={cn(dark && "opacity-95 brightness-0 invert")}
+        className={cn("h-[16px] w-[16px]", dark && "opacity-95 brightness-0 invert")}
       />
     );
   }
@@ -29,7 +29,7 @@ export function SocialLinks({
   dark?: boolean;
 }) {
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-[var(--header-cluster-gap)]">
       {links.map((item) => (
         <Link
           key={item.platform}
@@ -38,11 +38,12 @@ export function SocialLinks({
           rel="noreferrer"
           aria-label={item.label}
           className={cn(
-            "motion-surface flex h-8 w-8 items-center justify-center border",
+            "motion-surface motion-image-group flex items-center justify-center border",
             dark
               ? "border-neutral-500 bg-white/[0.06] hover:border-neutral-300 hover:bg-white/[0.12]"
               : "border-transparent hover:border-neutral-300 hover:bg-neutral-100",
           )}
+          style={{ width: "var(--header-control-size)", height: "var(--header-control-size)" }}
         >
           <SocialIcon iconKey={item.iconKey} label={item.label} dark={dark} />
         </Link>

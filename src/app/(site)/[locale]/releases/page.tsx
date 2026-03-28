@@ -53,8 +53,6 @@ export default async function ReleasesPage({
       <PageIntro title={dictionary.pages.discographyHeading} body={body} />
       <ReleaseTabs
         locale={locale}
-        title={dictionary.home.releases}
-        moreLabel={dictionary.home.more}
         items={getReleases(locale)}
         labels={filterLabels}
       />

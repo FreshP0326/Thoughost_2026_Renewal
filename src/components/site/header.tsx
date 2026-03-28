@@ -28,12 +28,14 @@ export function SiteHeader({
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <header className="site-header z-50 border-b border-[var(--page-divider)] bg-white">
-      <div className="site-hero-frame">
-        <div className="col-span-full flex h-[var(--header-height)] items-center justify-between gap-6 px-4 sm:px-6 md:px-0 lg:col-start-2 lg:col-end-3">
+    <header className="site-header z-50 border-b border-[var(--page-divider)] bg-white/96 backdrop-blur-[10px]">
+      <div className="site-header-frame">
+        <div
+          className="site-header-inner flex min-h-[var(--header-height)] items-center justify-between gap-8 md:px-0"
+        >
           <SiteLogo locale={locale} />
-          <div className="flex items-center gap-2 md:gap-[10px]">
-            <nav className="hidden items-center gap-[28px] lg:flex xl:gap-[34px]">
+          <div className="flex items-center" style={{ gap: "var(--header-cluster-gap)" }}>
+            <nav className="hidden items-center lg:flex" style={{ gap: "var(--header-nav-gap)" }}>
               {navigation.map((item) => {
                 const isExternal = /^https?:\/\//.test(item.href);
                 const href = isExternal ? item.href : withLocale(locale, item.href);
@@ -47,7 +49,7 @@ export function SiteHeader({
                     rel={isExternal ? "noreferrer" : undefined}
                     style={item.key === "project" ? { color: "#f04034" } : undefined}
                     className={cn(
-                      "type-nav group relative text-[var(--page-ink)] uppercase motion-link hover:text-neutral-500",
+                      "type-nav group relative inline-flex h-[var(--header-control-size)] items-center text-[var(--page-ink)] uppercase motion-link hover:text-neutral-500",
                       item.key === "project" && "text-[#f04034] hover:text-[#f04034]",
                       active && "text-[#ce3f36]",
                     )}
@@ -55,15 +57,15 @@ export function SiteHeader({
                     {item.label}
                     <span
                       className={cn(
-                        "motion-surface absolute -bottom-[8px] left-0 h-px bg-current",
-                        active ? "w-full opacity-100" : "w-0 opacity-0 group-hover:w-full group-hover:opacity-100",
+                        "motion-surface absolute -bottom-[8px] left-0 h-px origin-left bg-current",
+                        active ? "w-full scale-x-100 opacity-100" : "w-full scale-x-0 opacity-0 group-hover:scale-x-100 group-hover:opacity-100",
                       )}
                     />
                   </Link>
                 );
               })}
             </nav>
-            <div className="hidden h-3.5 w-px bg-[var(--page-divider)] lg:block" />
+            <div className="hidden w-px bg-[var(--page-divider)] lg:block" style={{ height: "var(--header-divider-height)" }} />
             <div className="hidden lg:block">
               <SocialLinks links={socialLinks} />
             </div>
@@ -72,7 +74,8 @@ export function SiteHeader({
               type="button"
               aria-label={open ? "Close menu" : "Open menu"}
               onClick={() => setOpen((value) => !value)}
-              className="flex h-9 w-9 items-center justify-center border border-[var(--page-divider)] motion-surface lg:hidden"
+              className="flex items-center justify-center border border-[var(--page-divider)] bg-white/92 motion-surface hover:border-neutral-400 hover:bg-neutral-50 lg:hidden"
+              style={{ width: "var(--header-control-size)", height: "var(--header-control-size)" }}
             >
               <motion.span
                 key={open ? "open" : "closed"}
@@ -94,7 +97,7 @@ export function SiteHeader({
             animate="visible"
             exit="exit"
             variants={drawerContent}
-            className="overflow-hidden border-t border-[var(--page-divider)] bg-white lg:hidden"
+            className="overflow-hidden border-t border-[var(--page-divider)] bg-white/96 backdrop-blur-[10px] lg:hidden"
           >
             <motion.nav
               initial="hidden"
@@ -109,7 +112,8 @@ export function SiteHeader({
                   },
                 },
               }}
-              className="mx-auto flex max-w-[var(--content-max)] flex-col px-4 py-4 sm:px-6"
+              className="mx-auto flex max-w-[var(--content-max)] flex-col py-4"
+              style={{ paddingInline: "var(--mobile-header-pad-x)" }}
             >
               {navigation.map((item) => {
                 const isExternal = /^https?:\/\//.test(item.href);

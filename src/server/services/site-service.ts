@@ -163,6 +163,70 @@ function getInfoFields(locale: Locale, release: ReleaseEntry, purchaseLinks: Rel
   ];
 }
 
+function getDetailMetaInfoFields(locale: Locale, release: ReleaseEntry, purchaseLinks: ReleasePurchaseLink[]): ReleaseInfoField[] {
+  const labels = getInfoFieldLabels(locale);
+  const dash = "—";
+  const info = release.detailMeta?.info;
+
+  return [
+    { label: labels.modelNumber, value: info?.modelNumber ?? release.modelNumber ?? dash },
+    { label: labels.price, value: pickMaybeLocalized(locale, info?.price ?? release.price) ?? dash },
+    { label: labels.store, value: pickMaybeLocalized(locale, info?.store) ?? getStoreLabel(locale, release, purchaseLinks) ?? dash },
+    { label: labels.releaseDate, value: info?.releaseDate ?? release.releaseDate ?? dash },
+  ];
+}
+
+function getCreditPanelFieldLabels(locale: Locale) {
+  const labels = {
+    en: {
+      produceComposeArrangeMastering: "Mastering",
+      poetry: "Poetry",
+      vocal: "Vocal",
+      design: "Design",
+    },
+    zh: {
+      produceComposeArrangeMastering: "母带",
+      poetry: "诗作",
+      vocal: "人声",
+      design: "设计",
+    },
+    ja: {
+      produceComposeArrangeMastering: "Mastering",
+      poetry: "Poetry",
+      vocal: "Vocal",
+      design: "Design",
+    },
+  } as const;
+
+  return labels[locale];
+}
+
+function getCreditPanelFields(locale: Locale, release: ReleaseEntry): ReleaseInfoField[] {
+  const labels = getCreditPanelFieldLabels(locale);
+  const dash = "—";
+  const detailCredit = release.detailMeta?.credit;
+  const produceFallback = [release.credits?.producer, release.credits?.mastering].filter(Boolean).join(" / ");
+
+  return [
+    {
+      label: labels.produceComposeArrangeMastering,
+      value: pickMaybeLocalized(locale, detailCredit?.produceComposeArrangeMastering) ?? (produceFallback || dash),
+    },
+    {
+      label: labels.poetry,
+      value: pickMaybeLocalized(locale, detailCredit?.poetry) ?? dash,
+    },
+    {
+      label: labels.vocal,
+      value: pickMaybeLocalized(locale, detailCredit?.vocal) ?? dash,
+    },
+    {
+      label: labels.design,
+      value: pickMaybeLocalized(locale, detailCredit?.design) ?? release.credits?.designer ?? release.credits?.illustrator ?? dash,
+    },
+  ];
+}
+
 function getTracksDetailed(locale: Locale, release: ReleaseEntry): ReleaseTrack[] {
   if (release.tracks) {
     return pickText(locale, release.tracks);
@@ -222,6 +286,75 @@ function getStoreLinks(release: ReleaseEntry): ReleaseLink[] {
   }
 
   return deduped;
+}
+
+function getRelatedLinks(locale: Locale, release: ReleaseEntry, purchaseLinks: ReleasePurchaseLink[]): ReleaseLink[] {
+  const links: ReleaseLink[] = [
+    ...purchaseLinks.map((link) => ({
+      platform: link.label,
+      label: link.label,
+      url: link.url,
+    })),
+    ...release.links,
+    ...((release.detailMeta?.relatedLinks ?? []).map((link) => ({
+      platform: link.label,
+      label: link.label,
+      url: link.url,
+    })) satisfies ReleaseLink[]),
+  ];
+
+  if (release.specialLink) {
+    links.push({
+      platform: "Special",
+      label: "Special",
+      url: release.specialLink,
+    });
+  }
+
+  if (release.videoLink) {
+    links.push({
+      platform: "Video",
+      label: "Video",
+      url: release.videoLink,
+    });
+  }
+
+  if (release.circleLink) {
+    links.push({
+      platform: "Circle",
+      label: locale === "zh" ? "社团页" : locale === "ja" ? "Circle Page" : "Circle Page",
+      url: release.circleLink,
+    });
+  }
+
+  if (release.itemListLink) {
+    links.push({
+      platform: "Catalog",
+      label: locale === "zh" ? "条目列表" : locale === "ja" ? "Item List" : "Item List",
+      url: release.itemListLink,
+    });
+  }
+
+  const seen = new Set<string>();
+
+  return links.filter((link) => {
+    const key = `${link.label}:${link.url}`;
+
+    if (seen.has(key)) {
+      return false;
+    }
+
+    seen.add(key);
+    return true;
+  });
+}
+
+function getHeroEyebrow(locale: Locale, release: ReleaseEntry) {
+  return pickMaybeLocalized(locale, release.detailMeta?.heroEyebrow) ?? `${release.artistName} ${release.releaseType}`;
+}
+
+function getDiscTitle(locale: Locale, release: ReleaseEntry) {
+  return pickMaybeLocalized(locale, release.detailMeta?.discTitle) ?? "DISC 1";
 }
 
 function getRepresentativeTracks(
@@ -517,6 +650,10 @@ export function getReleaseBySlug(locale: Locale, slug: string): ReleaseDetailVie
 
   const purchaseLinks = getPurchaseLinks(release);
   const tracksDetailed = getTracksDetailed(locale, release);
+  const infoFields = getInfoFields(locale, release, purchaseLinks);
+  const infoPanelFields = getDetailMetaInfoFields(locale, release, purchaseLinks);
+  const creditPanelFields = getCreditPanelFields(locale, release);
+  const relatedLinks = getRelatedLinks(locale, release, purchaseLinks);
 
   return {
     slug: release.slug,
@@ -529,11 +666,18 @@ export function getReleaseBySlug(locale: Locale, slug: string): ReleaseDetailVie
     heroImage: release.heroImage,
     teaser: pickText(locale, release.teaser),
     summary: pickText(locale, release.summary),
+    heroEyebrow: getHeroEyebrow(locale, release),
+    discTitle: getDiscTitle(locale, release),
+    artworkDownloadUrl: release.detailMeta?.artworkDownloadUrl,
     purchaseLinks,
-    infoFields: getInfoFields(locale, release, purchaseLinks),
+    heroPrimaryLinks: purchaseLinks.slice(0, 2),
+    infoFields,
+    infoPanelFields,
+    creditPanelFields,
     tracksDetailed,
     trackPreview: getTrackPreview(tracksDetailed),
     storeLinks: getStoreLinks(release),
+    relatedLinks,
     circleLink: release.circleLink,
     itemListLink: release.itemListLink,
     videoLink: release.videoLink,

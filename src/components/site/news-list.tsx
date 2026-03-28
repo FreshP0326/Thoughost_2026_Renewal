@@ -34,10 +34,10 @@ export function NewsList({
             const delay = index < 8 ? Math.min(index * 0.04, 0.2) : 0.04;
 
             return (
-              <FadeIn key={item.slug} delay={delay}>
+              <FadeIn key={item.slug} delay={delay} y={14} amount={0.08}>
                 <Link
                   href={href}
-                  className="group grid gap-5 border-b border-[var(--page-divider)] py-6 md:grid-cols-[148px_1fr_188px] md:gap-8 md:py-8"
+                  className="group grid gap-5 border-b border-[var(--page-divider)] py-6 motion-surface hover:border-neutral-400 md:grid-cols-[148px_1fr_188px] md:gap-8 md:py-8"
                   target={item.isExternal ? "_blank" : undefined}
                   rel={item.isExternal ? "noreferrer" : undefined}
                 >
@@ -59,7 +59,7 @@ export function NewsList({
                   </div>
                   {item.coverImage ? (
                     <div className="hidden md:block">
-                      <div className="relative aspect-[4/3] overflow-hidden border border-[var(--page-divider)]">
+                      <div className="motion-image-group relative aspect-[4/3] overflow-hidden border border-[var(--page-divider)]">
                         <Image
                           src={withBasePathAsset(item.coverImage)}
                           alt={item.coverAlt ?? item.title}

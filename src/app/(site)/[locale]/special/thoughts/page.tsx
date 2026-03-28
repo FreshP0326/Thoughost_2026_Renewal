@@ -61,7 +61,7 @@ export default async function ThoughtsPage({
     <>
       <PageIntro title={content.title} body={content.body} />
       <section className="bg-white py-12 md:py-16">
-        <StaggerGroup className="mx-auto max-w-[820px] space-y-8 px-4 sm:px-6 lg:px-0">
+        <StaggerGroup className="mx-auto max-w-[820px] space-y-8 px-4 sm:px-6 lg:px-0" amount={0.08}>
           {entries[locale].map((entry) => (
             <StaggerItem key={entry.title}>
               <article className="motion-surface border-b border-neutral-200 pb-8 hover:border-neutral-400">

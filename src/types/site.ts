@@ -54,6 +54,34 @@ export type ReleaseInfoField = {
   value: string;
 };
 
+export type ReleaseDetailMetaLink = {
+  label: string;
+  url: string;
+};
+
+export type ReleaseDetailMetaInfo = {
+  modelNumber?: string;
+  price?: LocalizedText | string;
+  store?: LocalizedText | string;
+  releaseDate?: string;
+};
+
+export type ReleaseDetailMetaCredit = {
+  produceComposeArrangeMastering?: LocalizedText | string;
+  poetry?: LocalizedText | string;
+  vocal?: LocalizedText | string;
+  design?: LocalizedText | string;
+};
+
+export type ReleaseDetailMeta = {
+  info?: ReleaseDetailMetaInfo;
+  credit?: ReleaseDetailMetaCredit;
+  relatedLinks?: ReleaseDetailMetaLink[];
+  artworkDownloadUrl?: string;
+  discTitle?: LocalizedText | string;
+  heroEyebrow?: LocalizedText | string;
+};
+
 export type ReleaseTrackPreviewViewModel = {
   items: ReleaseTrack[];
   remainingCount: number;
@@ -95,6 +123,7 @@ export type ReleaseEntry = {
   isHero?: boolean;
   isFeatured?: boolean;
   heroTitle?: LocalizedText;
+  detailMeta?: ReleaseDetailMeta;
 };
 
 export type HeroSlide = {
@@ -199,11 +228,18 @@ export type ReleaseDetailViewModel = {
   heroImage?: string;
   teaser: string;
   summary: string;
+  heroEyebrow?: string;
+  discTitle: string;
+  artworkDownloadUrl?: string;
   purchaseLinks: ReleasePurchaseLink[];
+  heroPrimaryLinks: ReleasePurchaseLink[];
   infoFields: ReleaseInfoField[];
+  infoPanelFields: ReleaseInfoField[];
+  creditPanelFields: ReleaseInfoField[];
   tracksDetailed: ReleaseTrack[];
   trackPreview: ReleaseTrackPreviewViewModel;
   storeLinks: ReleaseLink[];
+  relatedLinks: ReleaseLink[];
   circleLink?: string;
   itemListLink?: string;
   videoLink?: string;

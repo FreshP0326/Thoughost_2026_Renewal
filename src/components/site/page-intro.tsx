@@ -10,13 +10,13 @@ export function PageIntro({
   return (
     <section className="border-b border-neutral-200 bg-white">
       <div className="site-nav-frame py-12 lg:py-16">
-        <FadeIn y={14}>
+        <FadeIn y={12} amount={0.12}>
           <h1 className="type-page-title max-w-[820px] text-[#101010]">
             {title}
           </h1>
         </FadeIn>
         {body ? (
-          <FadeIn delay={0.08} y={10}>
+          <FadeIn delay={0.05} y={8} amount={0.12}>
             <p className="type-summary mt-5 max-w-[760px]">{body}</p>
           </FadeIn>
         ) : null}

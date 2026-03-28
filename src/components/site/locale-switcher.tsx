@@ -8,7 +8,7 @@ import { useMemo, useState } from "react";
 
 import { localeDisplayNames } from "@/content/site/dictionaries";
 import { resolveSystemLocale, stripLocalePrefix } from "@/lib/locale";
-import { drawerContent } from "@/lib/motion";
+import { drawerContent, motionEasing, motionTokens } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 import type { Locale } from "@/types/site";
 
@@ -47,9 +47,16 @@ export function LocaleSwitcher({
         aria-expanded={open}
         aria-label="Change language"
         onClick={() => setOpen((value) => !value)}
-        className="motion-surface inline-flex h-8 w-8 items-center justify-center border border-[var(--page-divider)] bg-white text-[var(--page-ink)] hover:border-neutral-400"
+        className="motion-surface inline-flex items-center justify-center border border-[var(--page-divider)] bg-white/92 text-[var(--page-ink)] hover:border-neutral-400 hover:bg-neutral-50"
+        style={{ width: "var(--header-control-size)", height: "var(--header-control-size)" }}
       >
-        <Languages size={13} strokeWidth={1.8} />
+        <motion.span
+          animate={{ rotate: open ? 10 : 0, opacity: open ? 0.9 : 1 }}
+          transition={{ duration: motionTokens.hover, ease: motionEasing.emphasized }}
+          className="inline-flex"
+        >
+          <Languages size={13} strokeWidth={1.8} />
+        </motion.span>
       </button>
       <AnimatePresence initial={false}>
         {open ? (
@@ -58,7 +65,7 @@ export function LocaleSwitcher({
             animate="visible"
             exit="exit"
             variants={drawerContent}
-            className="absolute top-full right-0 z-50 mt-2 min-w-[172px] overflow-hidden border border-[var(--page-divider)] bg-white py-1 shadow-[0_14px_30px_rgba(0,0,0,0.08)]"
+            className="absolute top-full right-0 z-50 mt-2 min-w-[172px] overflow-hidden border border-[var(--page-divider)] bg-white/96 py-1 shadow-[0_14px_30px_rgba(0,0,0,0.08)] backdrop-blur-[10px]"
           >
             {localeItems.map((entry) =>
               entry.key === "system" ? (

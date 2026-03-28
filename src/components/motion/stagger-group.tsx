@@ -17,7 +17,7 @@ export function StaggerGroup({
   children,
   className,
   once = true,
-  amount = 0.1,
+  amount = 0.08,
   density = "base",
 }: StaggerGroupProps) {
   const shouldReduceMotion = useReducedMotion();

@@ -18,9 +18,9 @@ export function FadeIn({
   children,
   className,
   delay = 0,
-  y = 18,
+  y = 16,
   once = true,
-  amount = 0.2,
+  amount = 0.16,
 }: FadeInProps) {
   const shouldReduceMotion = useReducedMotion();
   const variant = shouldReduceMotion ? fadeIn : createFadeUp(y, delay);

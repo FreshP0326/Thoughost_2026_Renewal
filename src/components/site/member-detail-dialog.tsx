@@ -51,7 +51,7 @@ function ReleasePreview({
   return (
     <Link
       href={withLocale(locale, release.releaseHref)}
-      className="detail-panel group grid grid-cols-[88px_minmax(0,1fr)] gap-4 p-3 motion-surface hover:border-neutral-400"
+      className="detail-panel group motion-image-group grid grid-cols-[88px_minmax(0,1fr)] gap-4 p-3 motion-surface hover:border-neutral-400"
     >
       <div className="relative aspect-square overflow-hidden bg-neutral-100">
         <Image
@@ -148,7 +148,7 @@ export function MemberDetailDialog({
           animate="visible"
           exit="exit"
           variants={dialogOverlay}
-          className="fixed inset-0 z-[70] flex items-end bg-black/60 md:items-center md:justify-center"
+          className="fixed inset-0 z-[70] flex items-end bg-black/60 backdrop-blur-[6px] md:items-center md:justify-center"
           aria-hidden={selectedMember ? undefined : true}
           onClick={closeDialog}
         >
@@ -160,7 +160,7 @@ export function MemberDetailDialog({
             animate="visible"
             exit="exit"
             variants={dialogContent}
-            className="relative max-h-[92vh] w-full overflow-y-auto bg-white md:max-h-[88vh] md:max-w-[1024px]"
+            className="relative max-h-[92vh] w-full overflow-y-auto bg-white shadow-[0_24px_64px_rgba(0,0,0,0.2)] md:max-h-[88vh] md:max-w-[1024px]"
             onClick={(event) => event.stopPropagation()}
           >
             <div className="sticky top-0 z-20 border-b border-neutral-200 bg-white/95 backdrop-blur-sm">

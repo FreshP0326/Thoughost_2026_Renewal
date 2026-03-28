@@ -11,16 +11,39 @@ import { motionEasing, motionTokens } from "@/lib/motion";
 import type { HeroSlide, Locale } from "@/types/site";
 
 const AUTOPLAY_MS = 7000;
-const DESKTOP_TRANSITION_MS = 692;
-const DESKTOP_CHAINED_TRANSITION_MS = 548;
-const DESKTOP_CONTENT_DELAY_MS = 118;
-const DESKTOP_CHAINED_CONTENT_DELAY_MS = 64;
-const DESKTOP_STAGE_VEIL_MS = 420;
+const DESKTOP_TRANSITION_MS = 704;
+const DESKTOP_CHAINED_TRANSITION_MS = 564;
+const DESKTOP_CONTENT_DELAY_MS = 104;
+const DESKTOP_CHAINED_CONTENT_DELAY_MS = 56;
+const DESKTOP_STAGE_VEIL_MS = 396;
 
 type HeroDirection = -1 | 1;
 type PendingTransition = {
   index: number;
   direction: HeroDirection | null;
+};
+
+const HERO_TRACK_LEFT = "0px";
+const HERO_TRACK_SIDE_WIDTH = "var(--hero-side-width)";
+const HERO_TRACK_CENTER_WIDTH = "var(--hero-center-max)";
+const HERO_TRACK_CENTER_LEFT = "calc(var(--hero-side-width) + var(--hero-pane-gap))";
+const HERO_TRACK_RIGHT_LEFT = "calc(var(--hero-side-width) + var(--hero-pane-gap) + var(--hero-center-max) + var(--hero-pane-gap))";
+const HERO_TRACK_OUTGOING_LEFT = "calc((var(--hero-side-width) + var(--hero-pane-gap)) * -1)";
+const HERO_TRACK_INCOMING_RIGHT =
+  "calc(var(--hero-side-width) + var(--hero-pane-gap) + var(--hero-center-max) + var(--hero-pane-gap) + var(--hero-side-width) + var(--hero-pane-gap))";
+
+const desktopCenterContentStyle: CSSProperties = {
+  paddingTop: "var(--hero-center-pad-top)",
+  paddingRight: "var(--hero-center-pad-right)",
+  paddingBottom: "var(--hero-center-pad-bottom)",
+  paddingLeft: "var(--hero-center-pad-left)",
+};
+
+const mobileContentStyle: CSSProperties = {
+  paddingTop: "var(--hero-mobile-content-pad-top)",
+  paddingRight: "var(--hero-mobile-content-pad-x)",
+  paddingBottom: "var(--hero-mobile-content-pad-bottom)",
+  paddingLeft: "var(--hero-mobile-content-pad-x)",
 };
 
 function getWrappedIndex(index: number, length: number) {
@@ -49,6 +72,16 @@ function getSlideImagePositions(slide: HeroSlide) {
 
 function getCleanTitle(title: string) {
   return title.replace(/\n/g, " ");
+}
+
+function getHeroCtaLabel(label: string) {
+  if (!label) {
+    return label;
+  }
+
+  const trimmedLabel = label.trim();
+
+  return trimmedLabel.charAt(0).toUpperCase() + trimmedLabel.slice(1).toLowerCase();
 }
 
 type DesktopPaneDefinition = {
@@ -82,8 +115,8 @@ function getDesktopPaneDefinitions(activeIndex: number, targetIndex: number | nu
         fromSide: "left",
         toSide: "left",
         framePosition: "previous",
-        toLeft: "0%",
-        toWidth: "20%",
+        toLeft: HERO_TRACK_LEFT,
+        toWidth: HERO_TRACK_SIDE_WIDTH,
         zIndex: 2,
       },
       {
@@ -92,8 +125,8 @@ function getDesktopPaneDefinitions(activeIndex: number, targetIndex: number | nu
         fromEmphasis: "center",
         toEmphasis: "center",
         framePosition: "active",
-        toLeft: "20%",
-        toWidth: "60%",
+        toLeft: HERO_TRACK_CENTER_LEFT,
+        toWidth: HERO_TRACK_CENTER_WIDTH,
         zIndex: 4,
       },
       {
@@ -104,8 +137,8 @@ function getDesktopPaneDefinitions(activeIndex: number, targetIndex: number | nu
         fromSide: "right",
         toSide: "right",
         framePosition: "next",
-        toLeft: "80%",
-        toWidth: "20%",
+        toLeft: HERO_TRACK_RIGHT_LEFT,
+        toWidth: HERO_TRACK_SIDE_WIDTH,
         zIndex: 2,
       },
     ];
@@ -121,10 +154,10 @@ function getDesktopPaneDefinitions(activeIndex: number, targetIndex: number | nu
         fromSide: "left",
         toSide: "left",
         framePosition: "outgoing",
-        fromLeft: "0%",
-        fromWidth: "20%",
-        toLeft: "-20%",
-        toWidth: "20%",
+        fromLeft: HERO_TRACK_LEFT,
+        fromWidth: HERO_TRACK_SIDE_WIDTH,
+        toLeft: HERO_TRACK_OUTGOING_LEFT,
+        toWidth: HERO_TRACK_SIDE_WIDTH,
         zIndex: 1,
       },
       {
@@ -134,10 +167,10 @@ function getDesktopPaneDefinitions(activeIndex: number, targetIndex: number | nu
         toEmphasis: "side",
         toSide: "left",
         framePosition: "previous",
-        fromLeft: "20%",
-        fromWidth: "60%",
-        toLeft: "0%",
-        toWidth: "20%",
+        fromLeft: HERO_TRACK_CENTER_LEFT,
+        fromWidth: HERO_TRACK_CENTER_WIDTH,
+        toLeft: HERO_TRACK_LEFT,
+        toWidth: HERO_TRACK_SIDE_WIDTH,
         zIndex: 2,
       },
       {
@@ -147,10 +180,10 @@ function getDesktopPaneDefinitions(activeIndex: number, targetIndex: number | nu
         toEmphasis: "center",
         fromSide: "right",
         framePosition: "active",
-        fromLeft: "80%",
-        fromWidth: "20%",
-        toLeft: "20%",
-        toWidth: "60%",
+        fromLeft: HERO_TRACK_RIGHT_LEFT,
+        fromWidth: HERO_TRACK_SIDE_WIDTH,
+        toLeft: HERO_TRACK_CENTER_LEFT,
+        toWidth: HERO_TRACK_CENTER_WIDTH,
         zIndex: 5,
       },
       {
@@ -161,10 +194,10 @@ function getDesktopPaneDefinitions(activeIndex: number, targetIndex: number | nu
         fromSide: "right",
         toSide: "right",
         framePosition: "next",
-        fromLeft: "100%",
-        fromWidth: "20%",
-        toLeft: "80%",
-        toWidth: "20%",
+        fromLeft: HERO_TRACK_INCOMING_RIGHT,
+        fromWidth: HERO_TRACK_SIDE_WIDTH,
+        toLeft: HERO_TRACK_RIGHT_LEFT,
+        toWidth: HERO_TRACK_SIDE_WIDTH,
         zIndex: 1,
       },
     ];
@@ -179,10 +212,10 @@ function getDesktopPaneDefinitions(activeIndex: number, targetIndex: number | nu
       fromSide: "left",
       toSide: "left",
       framePosition: "previous",
-      fromLeft: "-20%",
-      fromWidth: "20%",
-      toLeft: "0%",
-      toWidth: "20%",
+      fromLeft: HERO_TRACK_OUTGOING_LEFT,
+      fromWidth: HERO_TRACK_SIDE_WIDTH,
+      toLeft: HERO_TRACK_LEFT,
+      toWidth: HERO_TRACK_SIDE_WIDTH,
       zIndex: 1,
     },
     {
@@ -192,10 +225,10 @@ function getDesktopPaneDefinitions(activeIndex: number, targetIndex: number | nu
       toEmphasis: "center",
       fromSide: "left",
       framePosition: "active",
-      fromLeft: "0%",
-      fromWidth: "20%",
-      toLeft: "20%",
-      toWidth: "60%",
+      fromLeft: HERO_TRACK_LEFT,
+      fromWidth: HERO_TRACK_SIDE_WIDTH,
+      toLeft: HERO_TRACK_CENTER_LEFT,
+      toWidth: HERO_TRACK_CENTER_WIDTH,
       zIndex: 5,
     },
     {
@@ -205,10 +238,10 @@ function getDesktopPaneDefinitions(activeIndex: number, targetIndex: number | nu
       toEmphasis: "side",
       toSide: "right",
       framePosition: "next",
-      fromLeft: "20%",
-      fromWidth: "60%",
-      toLeft: "80%",
-      toWidth: "20%",
+      fromLeft: HERO_TRACK_CENTER_LEFT,
+      fromWidth: HERO_TRACK_CENTER_WIDTH,
+      toLeft: HERO_TRACK_RIGHT_LEFT,
+      toWidth: HERO_TRACK_SIDE_WIDTH,
       zIndex: 2,
     },
     {
@@ -219,21 +252,36 @@ function getDesktopPaneDefinitions(activeIndex: number, targetIndex: number | nu
       fromSide: "right",
       toSide: "right",
       framePosition: "outgoing",
-      fromLeft: "80%",
-      fromWidth: "20%",
-      toLeft: "100%",
-      toWidth: "20%",
+      fromLeft: HERO_TRACK_RIGHT_LEFT,
+      fromWidth: HERO_TRACK_SIDE_WIDTH,
+      toLeft: HERO_TRACK_INCOMING_RIGHT,
+      toWidth: HERO_TRACK_SIDE_WIDTH,
       zIndex: 1,
     },
   ];
 }
 
-function HeroHeadline({ slide, includeSubtitle }: { slide: HeroSlide; includeSubtitle: boolean }) {
+function HeroHeadline({
+  slide,
+  includeSubtitle,
+  mode = "desktop",
+}: {
+  slide: HeroSlide;
+  includeSubtitle: boolean;
+  mode?: "desktop" | "mobile";
+}) {
   const titleLines = slide.title.split("\n");
+  const isMobile = mode === "mobile";
 
   return (
-    <div className="max-w-[440px]">
-      <h1 className="font-ulagadi inline-flex flex-col items-start gap-0 text-[34px] leading-[0.8] tracking-[-0.1em] text-white uppercase sm:text-[46px] md:text-[62px] lg:text-[76px]">
+    <div className={isMobile ? "max-w-[calc(100%-32px)]" : "max-w-[440px]"}>
+      <h1
+        className="font-display inline-flex flex-col items-start gap-0 tracking-[-0.08em] text-white uppercase font-semibold"
+        style={{
+          fontSize: isMobile ? "var(--hero-mobile-title-size)" : "var(--hero-title-size)",
+          lineHeight: isMobile ? "var(--hero-mobile-title-line)" : "var(--hero-title-line-height)",
+        }}
+      >
         {titleLines.map((line) => (
           <span key={`${slide.slug}-${line}`} className="inline-flex bg-black px-[2px] py-0">
             {line}
@@ -241,7 +289,7 @@ function HeroHeadline({ slide, includeSubtitle }: { slide: HeroSlide; includeSub
         ))}
       </h1>
       {includeSubtitle && slide.subtitle ? (
-        <p className="mt-4 hidden max-w-[430px] text-[13px] leading-[1.7] font-normal text-white/86 lg:block">
+        <p className="mt-4 hidden max-w-[430px] leading-[1.7] font-normal text-white/86 lg:block" style={{ fontSize: "var(--hero-subtitle-size)" }}>
           {slide.subtitle}
         </p>
       ) : null}
@@ -249,11 +297,59 @@ function HeroHeadline({ slide, includeSubtitle }: { slide: HeroSlide; includeSub
   );
 }
 
-function HeroFooter({ slide }: { slide: HeroSlide }) {
+function HeroFooter({ slide, mode = "desktop" }: { slide: HeroSlide; mode?: "desktop" | "mobile" }) {
+  if (mode === "mobile") {
+    return (
+      <div className="flex items-end justify-between gap-3">
+        <span
+          className="relative inline-flex shrink-0 bg-black text-white"
+          style={{
+            width: "var(--hero-mobile-cta-width)",
+            height: "var(--hero-mobile-cta-height)",
+          }}
+        >
+          <span
+            className="font-display pointer-events-none absolute whitespace-nowrap font-semibold tracking-[-0.03em]"
+            style={{
+              left: "-0.02em",
+              bottom: "-0.02em",
+              fontFamily: "var(--site-font-display)",
+              fontSize: "var(--hero-mobile-cta-size)",
+              lineHeight: "0.82",
+            }}
+          >
+            {getHeroCtaLabel(slide.ctaLabel)}
+          </span>
+        </span>
+        <div className="max-w-[40vw] text-right">
+          <p className="text-[10px] leading-none font-medium tracking-[0.08em] text-white/62 uppercase">Thoughost</p>
+          <p className="mt-1 text-[11px] leading-[1.28] font-medium text-white/74">{getCleanTitle(slide.title)}</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex items-end justify-between gap-4">
-      <span className="inline-flex bg-black px-[4px] py-[1px] text-[14px] leading-none font-semibold tracking-[-0.03em] text-white md:text-[16px]">
-        {slide.ctaLabel}
+      <span
+        className="relative inline-flex bg-black text-white"
+        style={{
+          width: "var(--hero-cta-box-width)",
+          height: "var(--hero-cta-box-height)",
+        }}
+      >
+        <span
+          className="font-display pointer-events-none absolute whitespace-nowrap font-semibold tracking-[-0.045em]"
+          style={{
+            left: "-0.035em",
+            bottom: "-0.06em",
+            fontFamily: "var(--site-font-display)",
+            fontSize: "var(--hero-cta-size)",
+            lineHeight: "0.78",
+          }}
+        >
+          {getHeroCtaLabel(slide.ctaLabel)}
+        </span>
       </span>
       <div className="hidden text-right md:block">
         <p className="text-[11px] leading-none font-medium tracking-[0.06em] text-white/72 uppercase">Thoughost</p>
@@ -358,9 +454,9 @@ function AnimatedDesktopPane({
   const centerContentDelay = toEmphasis === "center" ? (isChained ? 0.08 : 0.16) : 0;
   const sideLayerDuration = isChained ? 0.16 : 0.2;
   const sideChipDuration = isChained ? 0.18 : 0.22;
-  const centerEntryOffset = fromSide === "left" ? -14 : fromSide === "right" ? 14 : direction === 1 ? 10 : -10;
-  const centerExitOffset = toSide === "left" ? -10 : toSide === "right" ? 10 : direction === 1 ? -8 : 8;
-  const sideTravelOffset = sideForChip === "left" ? -8 : 8;
+  const centerEntryOffset = fromSide === "left" ? -8 : fromSide === "right" ? 8 : direction === 1 ? 6 : -6;
+  const centerExitOffset = toSide === "left" ? -6 : toSide === "right" ? 6 : direction === 1 ? -4 : 4;
+  const sideTravelOffset = sideForChip === "left" ? -4 : 4;
 
   return (
     <div
@@ -415,20 +511,19 @@ function AnimatedDesktopPane({
         transition={{ duration: centerLayerDuration, delay: centerLayerDelay, ease: motionEasing.soft }}
       >
         <div className="hero-pane-overlay absolute inset-0" data-pane-tone="center" />
-        <div className="absolute inset-y-0 left-0 w-px bg-white/88" />
-        <div className="absolute inset-y-0 right-0 w-px bg-white/88" />
         <motion.div
           className="hero-pane-content absolute inset-x-0 top-0 z-10 flex h-full flex-col justify-between p-4 sm:p-5 md:p-6 lg:p-8"
           data-pane-content="center"
+          style={desktopCenterContentStyle}
           initial={{
             opacity: fromEmphasis === "center" ? 1 : 0,
             x: fromEmphasis === "center" ? 0 : centerEntryOffset,
-            y: fromEmphasis === "center" ? 0 : 18,
+            y: fromEmphasis === "center" ? 0 : 10,
           }}
           animate={{
             opacity: toEmphasis === "center" ? 1 : 0,
             x: toEmphasis === "center" ? 0 : centerExitOffset,
-            y: toEmphasis === "center" ? 0 : 14,
+            y: toEmphasis === "center" ? 0 : 8,
           }}
           transition={{ duration: centerContentDuration, delay: centerContentDelay, ease: motionEasing.soft }}
         >
@@ -444,17 +539,16 @@ function AnimatedDesktopPane({
         transition={{ duration: sideLayerDuration, ease: motionEasing.soft }}
       >
         <div className="hero-pane-overlay absolute inset-0" data-pane-tone="side" />
-        <div className={`absolute inset-y-0 ${sideForChip === "left" ? "right-0" : "left-0"} w-px bg-white/88`} />
         <motion.div
           initial={{
             opacity: fromEmphasis === "side" ? 0.8 : toEmphasis === "side" ? 0.64 : 0,
             x: fromEmphasis === "side" ? 0 : sideTravelOffset,
-            y: fromEmphasis === "side" ? 4 : 6,
+            y: fromEmphasis === "side" ? 4 : 5,
           }}
           animate={{
             opacity: toEmphasis === "side" ? 0.8 : 0,
             x: toEmphasis === "side" ? 0 : sideTravelOffset * 0.5,
-            y: toEmphasis === "side" ? 4 : 6,
+            y: toEmphasis === "side" ? 4 : 5,
           }}
           transition={{ duration: sideChipDuration, ease: motionEasing.soft }}
         >
@@ -488,7 +582,6 @@ function HeroDesktopPane({
   const isCenter = emphasis === "center";
   const imageSrc = isCenter ? slide.mainImage : side === "left" ? slide.leftImage : slide.rightImage;
   const imagePosition = isCenter ? positions.main : side === "left" ? positions.left : positions.right;
-  const dividerClass = side === "left" ? "right-0" : "left-0";
   const alignmentClass = side === "left" ? "items-start text-left" : "items-end text-right";
 
   const content = (
@@ -505,15 +598,11 @@ function HeroDesktopPane({
       />
       <div className="hero-pane-overlay absolute inset-0" data-pane-tone={emphasis} />
       {isCenter ? (
-        <>
-          <div className="absolute inset-y-0 left-0 w-px bg-white/88" />
-          <div className="absolute inset-y-0 right-0 w-px bg-white/88" />
-        </>
-      ) : (
-        <div className={`absolute inset-y-0 ${dividerClass} w-px bg-white/88`} />
-      )}
-      {isCenter ? (
-        <div className="hero-pane-content absolute inset-x-0 top-0 z-10 flex h-full flex-col justify-between p-4 sm:p-5 md:p-6 lg:p-8" data-pane-content="center">
+        <div
+          className="hero-pane-content absolute inset-x-0 top-0 z-10 flex h-full flex-col justify-between p-4 sm:p-5 md:p-6 lg:p-8"
+          data-pane-content="center"
+          style={desktopCenterContentStyle}
+        >
           <HeroHeadline slide={slide} includeSubtitle />
           <HeroFooter slide={slide} />
         </div>
@@ -714,30 +803,67 @@ function MobileHeroSlide({
   slide,
   locale,
   priority,
+  direction,
+  reducedMotion,
 }: {
   slide: HeroSlide;
   locale: Locale;
   priority: boolean;
+  direction: HeroDirection;
+  reducedMotion: boolean;
 }) {
   const positions = getSlideImagePositions(slide);
+  const motionDistance = reducedMotion ? 0 : direction === 1 ? 26 : -26;
+  const veilStart = reducedMotion ? 0 : direction === 1 ? 0.2 : 0.16;
 
   return (
-    <Link href={withLocale(locale, slide.ctaHref)} aria-label={slide.title} className="block h-full w-full">
-      <Image
-        src={withBasePathAsset(slide.mainImage)}
-        alt={slide.title}
-        fill
-        loading={priority ? "eager" : "lazy"}
-        fetchPriority={priority ? "high" : undefined}
-        sizes="100vw"
-        className="hero-pane-image object-cover"
-        style={{ objectPosition: positions.mobile }}
+    <Link href={withLocale(locale, slide.ctaHref)} aria-label={slide.title} className="relative block h-full w-full">
+      <motion.div
+        className="absolute inset-0"
+        initial={reducedMotion ? false : { x: motionDistance, scale: 1.035, filter: "blur(4px)", opacity: 0.84 }}
+        animate={{ x: 0, scale: 1, filter: "blur(0px)", opacity: 1 }}
+        exit={reducedMotion ? undefined : { x: motionDistance * -0.72, scale: 1.014, filter: "blur(3px)", opacity: 0.78 }}
+        transition={{ duration: reducedMotion ? motionTokens.tap : 0.72, ease: motionEasing.emphasized }}
+      >
+        <Image
+          src={withBasePathAsset(slide.mainImage)}
+          alt={slide.title}
+          fill
+          loading={priority ? "eager" : "lazy"}
+          fetchPriority={priority ? "high" : undefined}
+          sizes="100vw"
+          className="hero-pane-image object-cover"
+          style={{ objectPosition: positions.mobile }}
+        />
+      </motion.div>
+      <motion.div
+        className="hero-mobile-veil absolute inset-0 z-[1]"
+        initial={reducedMotion ? false : { opacity: veilStart }}
+        animate={{ opacity: 0 }}
+        exit={reducedMotion ? undefined : { opacity: 0.08 }}
+        transition={{ duration: reducedMotion ? motionTokens.tap : 0.34, ease: motionEasing.soft }}
       />
-      <div className="hero-pane-overlay absolute inset-0" data-pane-tone="center" />
-      <div className="hero-pane-content absolute inset-x-0 top-0 z-10 flex h-full flex-col justify-between p-4 sm:p-5 md:p-6" data-pane-content="center">
-        <HeroHeadline slide={slide} includeSubtitle={false} />
-        <HeroFooter slide={slide} />
-      </div>
+      <div className="hero-pane-overlay absolute inset-0 z-[2]" data-pane-tone="center" />
+      <motion.div
+        className="hero-pane-content absolute inset-x-0 top-0 z-10 flex h-full flex-col justify-between"
+        data-pane-content="center"
+        style={mobileContentStyle}
+        initial={reducedMotion ? false : { opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={reducedMotion ? undefined : { opacity: 0, y: 8 }}
+        transition={{
+          duration: reducedMotion ? motionTokens.tap : 0.42,
+          delay: reducedMotion ? 0 : 0.06,
+          ease: motionEasing.emphasized,
+        }}
+      >
+        <HeroHeadline slide={slide} includeSubtitle={false} mode="mobile" />
+        <HeroFooter slide={slide} mode="mobile" />
+      </motion.div>
+      <div className="hero-mobile-bottom-fade absolute inset-x-0 bottom-0 z-[3]" aria-hidden="true" />
+      <div className="hero-mobile-top-fade absolute inset-x-0 top-0 z-[3]" aria-hidden="true" />
+      <div className="hero-mobile-edge absolute inset-y-0 left-0 z-[3]" aria-hidden="true" />
+      <div className="hero-mobile-edge absolute inset-y-0 right-0 z-[3]" aria-hidden="true" />
     </Link>
   );
 }
@@ -756,8 +882,8 @@ function HeroIndicators({
   onSelect: (slideIndex: number) => void;
 }) {
   return (
-    <div className="hero-indicators absolute inset-x-0 bottom-0 z-20 flex justify-center px-4 pb-4 sm:px-5 sm:pb-5 md:px-6 md:pb-4 lg:pb-3">
-      <div className="flex items-center gap-[6px]">
+    <div className="hero-indicators absolute inset-x-0 bottom-0 z-20 flex justify-center px-4 sm:px-5 md:px-6 lg:pb-3">
+      <div className="flex items-center">
         {slides.map((slide, slideIndex) => {
           const isActive = slideIndex === activeIndex;
 
@@ -1039,8 +1165,8 @@ export function HeroSection({
   const mobileVariants = {
     enter: (entryDirection: HeroDirection) => ({
       opacity: shouldReduceMotion ? 1 : 0,
-      x: shouldReduceMotion ? "0%" : entryDirection === 1 ? "2.2%" : "-2.2%",
-      scale: 1,
+      x: shouldReduceMotion ? "0%" : entryDirection === 1 ? "6.5%" : "-6.5%",
+      scale: shouldReduceMotion ? 1 : 1.015,
       filter: "blur(0px)",
     }),
     center: {
@@ -1049,18 +1175,18 @@ export function HeroSection({
       scale: 1,
       filter: "blur(0px)",
       transition: {
-        duration: shouldReduceMotion ? motionTokens.tap : 0.38,
-        ease: motionEasing.soft,
+        duration: shouldReduceMotion ? motionTokens.tap : 0.62,
+        ease: motionEasing.emphasized,
       },
     },
     exit: (entryDirection: HeroDirection) => ({
       opacity: shouldReduceMotion ? 1 : 0,
-      x: shouldReduceMotion ? "0%" : entryDirection === 1 ? "-1.6%" : "1.6%",
-      scale: 1,
+      x: shouldReduceMotion ? "0%" : entryDirection === 1 ? "-5.5%" : "5.5%",
+      scale: shouldReduceMotion ? 1 : 1.01,
       filter: "blur(0px)",
       transition: {
-        duration: shouldReduceMotion ? motionTokens.tap : 0.3,
-        ease: motionEasing.soft,
+        duration: shouldReduceMotion ? motionTokens.tap : 0.54,
+        ease: motionEasing.emphasized,
       },
     }),
   };
@@ -1072,7 +1198,7 @@ export function HeroSection({
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
       >
-        <div className="relative min-h-[var(--hero-height-mobile)] overflow-hidden md:min-h-[var(--hero-height-tablet)] lg:min-h-[var(--hero-height-desktop)]">
+        <div className="relative min-h-[var(--hero-mobile-height)] overflow-hidden md:min-h-[var(--hero-height-tablet)] lg:min-h-[var(--hero-height-desktop)]">
           <DesktopHeroTrack
             slides={safeSlides}
             activeIndex={activeIndex}
@@ -1088,7 +1214,7 @@ export function HeroSection({
             onNext={() => requestTransition(activeIndex + 1, 1)}
           />
 
-          <div className="relative min-h-[var(--hero-height-mobile)] md:min-h-[var(--hero-height-tablet)] lg:hidden">
+          <div className="relative min-h-[var(--hero-mobile-height)] lg:hidden">
             <AnimatePresence initial={false} custom={direction} mode="sync">
               <motion.div
                 key={safeSlides[activeIndex].slug}
@@ -1101,11 +1227,17 @@ export function HeroSection({
               >
                 <motion.div
                   className="hero-stage-veil absolute inset-0 z-10"
-                  initial={{ opacity: shouldReduceMotion ? 0 : 0.06 }}
+                  initial={{ opacity: shouldReduceMotion ? 0 : 0.08 }}
                   animate={{ opacity: 0 }}
-                  transition={{ duration: shouldReduceMotion ? motionTokens.tap : 0.18, ease: motionEasing.soft }}
+                  transition={{ duration: shouldReduceMotion ? motionTokens.tap : 0.26, ease: motionEasing.soft }}
                 />
-                <MobileHeroSlide slide={safeSlides[activeIndex]} locale={locale} priority />
+                <MobileHeroSlide
+                  slide={safeSlides[activeIndex]}
+                  locale={locale}
+                  priority
+                  direction={direction}
+                  reducedMotion={shouldReduceMotion}
+                />
               </motion.div>
             </AnimatePresence>
           </div>

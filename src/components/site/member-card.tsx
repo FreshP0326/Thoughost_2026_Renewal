@@ -18,7 +18,7 @@ export function MemberCard({
   imageLoading?: "eager" | "lazy";
 }) {
   return (
-    <FadeIn>
+    <FadeIn y={14} amount={0.08}>
       <Link
         href={withLocale(locale, `/about?member=${member.slug}`)}
         scroll={false}

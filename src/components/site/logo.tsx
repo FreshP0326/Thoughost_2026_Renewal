@@ -13,7 +13,7 @@ export function SiteLogo({ locale }: { locale: Locale }) {
         width={132}
         height={29}
         priority
-        className="h-[26px] w-auto md:h-[29px]"
+        className="h-[var(--header-logo-height)] w-auto"
       />
     </Link>
   );

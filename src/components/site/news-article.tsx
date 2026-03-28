@@ -25,7 +25,7 @@ export function NewsArticle({
     <article className="bg-white pb-14 md:pb-20">
       <section className="border-b border-[var(--page-divider)] bg-white">
         <div className="site-nav-frame py-12 lg:py-16">
-          <FadeIn y={14}>
+          <FadeIn y={12} amount={0.12}>
             <Link
               href={withLocale(locale, "/news")}
               className="type-meta inline-flex text-neutral-500 uppercase motion-link hover:text-[var(--page-ink)]"
@@ -33,7 +33,7 @@ export function NewsArticle({
               {backLabel}
             </Link>
           </FadeIn>
-          <FadeIn delay={0.04} y={12}>
+          <FadeIn delay={0.04} y={12} amount={0.12}>
             <div className="mt-5 flex flex-wrap items-center gap-3">
               {article.pinned ? (
                 <span className="type-meta inline-flex border border-[var(--page-ink)] px-2 py-[3px] text-[var(--page-ink)] uppercase">
@@ -55,8 +55,8 @@ export function NewsArticle({
       {article.coverImage ? (
         <section className="bg-white pt-8 md:pt-10">
           <div className="site-nav-frame">
-            <FadeIn>
-              <div className="relative aspect-[16/9] overflow-hidden border border-[var(--page-divider)]">
+            <FadeIn y={16} amount={0.1}>
+              <div className="motion-image-group relative aspect-[16/9] overflow-hidden border border-[var(--page-divider)]">
                 <Image
                   src={withBasePathAsset(article.coverImage)}
                   alt={article.coverAlt ?? article.title}
@@ -64,7 +64,7 @@ export function NewsArticle({
                   loading="eager"
                   fetchPriority="high"
                   sizes="(max-width: 768px) 100vw, 1100px"
-                  className="object-cover"
+                  className="object-cover motion-image"
                 />
               </div>
             </FadeIn>
@@ -74,7 +74,7 @@ export function NewsArticle({
 
       <section className="bg-white pt-10 md:pt-12">
         <div className="site-nav-frame">
-          <FadeIn>
+          <FadeIn y={18} amount={0.08}>
             <div
               className="news-prose max-w-[760px]"
               dangerouslySetInnerHTML={{ __html: article.html }}
@@ -88,21 +88,22 @@ export function NewsArticle({
           <div className="site-nav-frame">
             <div className="grid gap-4 border-t border-[var(--page-divider)] pt-6 md:grid-cols-2">
               {[adjacent.previous, adjacent.next].filter(Boolean).map((item) => (
-                <Link
-                  key={item?.slug}
-                  href={item && item.isExternal ? item.href : withLocale(locale, item!.href)}
-                  className="group border-b border-[var(--page-divider)] py-4 md:border-b-0"
-                  target={item?.isExternal ? "_blank" : undefined}
-                  rel={item?.isExternal ? "noreferrer" : undefined}
-                >
-                  <p className="type-meta text-neutral-500 uppercase">
-                    {moreLabel}
-                  </p>
-                  <h2 className="mt-3 text-[20px] leading-[1.16] font-semibold tracking-[-0.024em] text-[var(--page-ink)] motion-surface group-hover:text-neutral-600">
-                    {item?.title}
-                  </h2>
-                  <p className="mt-2 text-[12px] leading-[1.3] font-medium text-neutral-500">{item?.dateLabel}</p>
-                </Link>
+                <FadeIn key={item?.slug} delay={0.04} y={12} amount={0.12}>
+                  <Link
+                    href={item && item.isExternal ? item.href : withLocale(locale, item!.href)}
+                    className="group border-b border-[var(--page-divider)] py-4 motion-surface hover:border-neutral-400 md:border-b-0"
+                    target={item?.isExternal ? "_blank" : undefined}
+                    rel={item?.isExternal ? "noreferrer" : undefined}
+                  >
+                    <p className="type-meta text-neutral-500 uppercase">
+                      {moreLabel}
+                    </p>
+                    <h2 className="mt-3 text-[20px] leading-[1.16] font-semibold tracking-[-0.024em] text-[var(--page-ink)] motion-surface group-hover:text-neutral-600">
+                      {item?.title}
+                    </h2>
+                    <p className="mt-2 text-[12px] leading-[1.3] font-medium text-neutral-500">{item?.dateLabel}</p>
+                  </Link>
+                </FadeIn>
               ))}
             </div>
           </div>

@@ -48,7 +48,7 @@ export default async function BlackHolePage({
 
       <div className="relative mx-auto flex min-h-[calc(100svh-72px)] max-w-[1400px] items-center px-4 py-16 sm:px-6 lg:px-10">
         <div className="w-full">
-          <StaggerGroup className="mx-auto flex max-w-[900px] flex-col items-center text-center">
+          <StaggerGroup className="mx-auto flex max-w-[900px] flex-col items-center text-center" amount={0.08}>
             <StaggerItem>
               <h1 className="black-hole-enter text-[60px] leading-[0.82] font-semibold tracking-[-0.09em] text-white sm:text-[86px] md:text-[120px] lg:text-[158px]">
                 {content.title}

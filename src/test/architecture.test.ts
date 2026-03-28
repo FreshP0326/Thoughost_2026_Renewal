@@ -10,6 +10,7 @@ vi.mock("next/font/google", () => ({
   Archivo: () => ({ variable: "--font-archivo" }),
   Noto_Sans_JP: () => ({ variable: "--font-noto-sans-jp" }),
   Noto_Sans_SC: () => ({ variable: "--font-noto-sans-sc" }),
+  Poppins: () => ({ variable: "--font-poppins" }),
 }));
 
 vi.mock("next/script", () => ({

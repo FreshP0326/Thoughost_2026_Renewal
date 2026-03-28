@@ -22,6 +22,7 @@ export function PageShell({
   const socialLinks = getSocialLinks();
   const footer = getFooter(locale);
   const isHomeRoute = pathname === `/${locale}` || pathname === `/${locale}/`;
+  const isReleaseDetailRoute = Boolean(pathname?.match(new RegExp(`^/${locale}/releases/[^/]+/?$`)));
 
   return (
     <>
@@ -45,6 +46,7 @@ export function PageShell({
         quote={footer.quote}
         copyrightText={footer.copyrightText}
         alignToHero={isHomeRoute}
+        variant={isReleaseDetailRoute ? "release-detail" : "default"}
       />
       <BackToTop />
     </>

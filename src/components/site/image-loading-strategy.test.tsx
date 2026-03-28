@@ -89,6 +89,14 @@ describe("image loading strategy", () => {
     expect(screen.getByAltText("Release 6")).toHaveAttribute("loading", "lazy");
   });
 
+  it("can render release covers without heading and more link", () => {
+    render(<ReleasesGridSection locale="en" items={releaseItems} />);
+
+    expect(screen.queryByText("RELEASES")).not.toBeInTheDocument();
+    expect(screen.queryByText("MORE →")).not.toBeInTheDocument();
+    expect(screen.getByAltText("Release 1")).toBeInTheDocument();
+  });
+
   it("eager loads the first two project covers and first two news covers", () => {
     render(
       <>

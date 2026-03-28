@@ -32,11 +32,11 @@ export function BackToTop() {
       initial={false}
       animate={
         visible
-          ? { opacity: 1, y: 0, pointerEvents: "auto" as const }
-          : { opacity: 0, y: 10, pointerEvents: "none" as const }
+          ? { opacity: 1, y: 0, scale: 1, pointerEvents: "auto" as const }
+          : { opacity: 0, y: 12, scale: 0.94, pointerEvents: "none" as const }
       }
       transition={{ duration: motionTokens.enterFast, ease: motionEasing.soft }}
-      className="motion-surface fixed right-5 bottom-5 z-40 flex h-10 w-10 items-center justify-center border border-neutral-700 bg-[#1a1a1a] text-white hover:border-neutral-600 hover:bg-[#262626]"
+      className="motion-surface fixed right-5 bottom-5 z-40 flex h-10 w-10 items-center justify-center border border-neutral-700 bg-[#171717]/96 text-white shadow-[0_10px_24px_rgba(0,0,0,0.16)] hover:border-neutral-600 hover:bg-[#262626] hover:shadow-[0_14px_28px_rgba(0,0,0,0.2)]"
     >
       <ArrowUp size={18} strokeWidth={2} />
     </motion.button>

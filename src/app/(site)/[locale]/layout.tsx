@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Archivo, Noto_Sans_JP, Noto_Sans_SC } from "next/font/google";
+import { Archivo, Noto_Sans_JP, Noto_Sans_SC, Poppins } from "next/font/google";
 
 import "../../globals.css";
 import { PageShell } from "@/components/site/page-shell";
@@ -26,6 +26,12 @@ const notoSansSc = Noto_Sans_SC({
   variable: "--font-noto-sans-sc",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+});
+
+const poppins = Poppins({
+  variable: "--font-poppins",
+  subsets: ["latin"],
+  weight: ["500", "600", "700", "800"],
 });
 
 export function generateStaticParams() {
@@ -74,7 +80,7 @@ export default async function LocaleLayout({
     <html
       lang={locale}
       data-scroll-behavior="smooth"
-      className={`${archivo.variable} ${notoSansJp.variable} ${notoSansSc.variable} h-full antialiased`}
+      className={`${archivo.variable} ${notoSansJp.variable} ${notoSansSc.variable} ${poppins.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <PageShell locale={locale}>{children}</PageShell>

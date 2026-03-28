@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Archivo, Noto_Sans_JP, Noto_Sans_SC } from "next/font/google";
+import { Archivo, Noto_Sans_JP, Noto_Sans_SC, Poppins } from "next/font/google";
 import Script from "next/script";
 
 import "../globals.css";
@@ -24,6 +24,12 @@ const notoSansSc = Noto_Sans_SC({
   weight: ["400", "500", "600", "700"],
 });
 
+const poppins = Poppins({
+  variable: "--font-poppins",
+  subsets: ["latin"],
+  weight: ["500", "600", "700", "800"],
+});
+
 export const metadata: Metadata = {
   title: "Thoughost",
   description: "Thoughost rebuilt with a restrained, image-led presentation.",
@@ -39,7 +45,7 @@ export default function RootLayout({
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${archivo.variable} ${notoSansJp.variable} ${notoSansSc.variable} h-full antialiased`}
+      className={`${archivo.variable} ${notoSansJp.variable} ${notoSansSc.variable} ${poppins.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <Script id="root-redirect" strategy="beforeInteractive">

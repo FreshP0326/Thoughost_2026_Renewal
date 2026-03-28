@@ -1,30 +1,28 @@
 import type { Locale, ReleaseDetailViewModel } from "@/types/site";
 
 import { ReleaseDetailHeader } from "@/components/site/release-detail-header";
+import { ReleaseDetailMeta } from "@/components/site/release-detail-meta";
 import { ReleaseDetailTracklist } from "@/components/site/release-detail-tracklist";
 
 function getLabels(locale: Locale) {
   const labels = {
     en: {
-      linksTitle: "Links",
-      meta: "Release Information",
-      tracklist: "Tracklist",
-      trackNumber: "Track",
-      trackArtist: "Artist / Contributor",
+      infoTitle: "INFO",
+      creditTitle: "CREDIT",
+      relatedLinksTitle: "RELATED LINKS",
+      artworkDownload: "ARTWORK DOWNLOAD",
     },
     zh: {
-      linksTitle: "外部链接",
-      meta: "发行信息",
-      tracklist: "曲目列表",
-      trackNumber: "曲目",
-      trackArtist: "作者 / 参与者",
+      infoTitle: "INFO",
+      creditTitle: "CREDIT",
+      relatedLinksTitle: "RELATED LINKS",
+      artworkDownload: "ARTWORK DOWNLOAD",
     },
     ja: {
-      linksTitle: "リンク",
-      meta: "リリース情報",
-      tracklist: "トラックリスト",
-      trackNumber: "Track",
-      trackArtist: "Artist / Contributor",
+      infoTitle: "INFO",
+      creditTitle: "CREDIT",
+      relatedLinksTitle: "RELATED LINKS",
+      artworkDownload: "ARTWORK DOWNLOAD",
     },
   } as const;
 
@@ -42,19 +40,19 @@ export function ReleaseDetail({
 
   return (
     <>
-      <ReleaseDetailHeader
+      <ReleaseDetailHeader release={release} />
+      <ReleaseDetailTracklist
         release={release}
         labels={{
-          linksTitle: labels.linksTitle,
-          metaTitle: labels.meta,
+          artworkDownload: labels.artworkDownload,
         }}
       />
-      <ReleaseDetailTracklist
-        tracks={release.tracksDetailed}
+      <ReleaseDetailMeta
+        release={release}
         labels={{
-          title: labels.tracklist,
-          number: labels.trackNumber,
-          artist: labels.trackArtist,
+          infoTitle: labels.infoTitle,
+          creditTitle: labels.creditTitle,
+          relatedLinksTitle: labels.relatedLinksTitle,
         }}
       />
     </>

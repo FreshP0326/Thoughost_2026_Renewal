@@ -122,11 +122,14 @@ describe("HeroSection", () => {
   });
 
   it("renders desktop preview buttons and keeps the center CTA link active", () => {
-    render(<HeroSection locale="en" slides={slides} />);
+    const { container } = render(<HeroSection locale="en" slides={slides} />);
 
     expect(screen.getAllByRole("button", { name: "Show Third Slide" })[0]).toBeInTheDocument();
     expect(screen.getAllByRole("button", { name: "Show Second Slide" })[0]).toBeInTheDocument();
     expect(screen.getAllByRole("link", { name: /First\s*Slide/i }).some((link) => link.getAttribute("href") === "/en/releases/slide-1")).toBe(true);
+    expect(
+      Array.from(container.querySelectorAll("div")).filter((element) => typeof element.className === "string" && element.className.includes("bg-white/88")),
+    ).toHaveLength(0);
   });
 
   it("moves to adjacent slides from desktop preview buttons", () => {
