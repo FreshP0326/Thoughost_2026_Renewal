@@ -3,16 +3,25 @@
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 
 import { withBasePathAsset } from "@/lib/base-path";
 import { withLocale } from "@/lib/locale";
 import { motionEasing, motionTokens } from "@/lib/motion";
 import type { HeroSlide, Locale } from "@/types/site";
 
-const AUTOPLAY_MS = 6000;
+const AUTOPLAY_MS = 7000;
+const DESKTOP_TRANSITION_MS = 692;
+const DESKTOP_CHAINED_TRANSITION_MS = 548;
+const DESKTOP_CONTENT_DELAY_MS = 118;
+const DESKTOP_CHAINED_CONTENT_DELAY_MS = 64;
+const DESKTOP_STAGE_VEIL_MS = 420;
 
 type HeroDirection = -1 | 1;
+type PendingTransition = {
+  index: number;
+  direction: HeroDirection | null;
+};
 
 function getWrappedIndex(index: number, length: number) {
   return ((index % length) + length) % length;
@@ -40,6 +49,183 @@ function getSlideImagePositions(slide: HeroSlide) {
 
 function getCleanTitle(title: string) {
   return title.replace(/\n/g, " ");
+}
+
+type DesktopPaneDefinition = {
+  key: string;
+  slideIndex: number;
+  fromEmphasis: "side" | "center";
+  toEmphasis: "side" | "center";
+  fromSide?: "left" | "right";
+  toSide?: "left" | "right";
+  framePosition: "previous" | "active" | "next" | "outgoing";
+  fromLeft?: string;
+  fromWidth?: string;
+  toLeft: string;
+  toWidth: string;
+  zIndex: number;
+};
+
+function getDesktopPaneDefinitions(activeIndex: number, targetIndex: number | null, direction: HeroDirection, length: number): DesktopPaneDefinition[] {
+  const previous = getWrappedIndex(activeIndex - 1, length);
+  const previousOuter = getWrappedIndex(activeIndex - 2, length);
+  const next = getWrappedIndex(activeIndex + 1, length);
+  const nextOuter = getWrappedIndex(activeIndex + 2, length);
+
+  if (targetIndex === null) {
+    return [
+      {
+        key: `previous-${previous}`,
+        slideIndex: previous,
+        fromEmphasis: "side",
+        toEmphasis: "side",
+        fromSide: "left",
+        toSide: "left",
+        framePosition: "previous",
+        toLeft: "0%",
+        toWidth: "20%",
+        zIndex: 2,
+      },
+      {
+        key: `active-${activeIndex}`,
+        slideIndex: activeIndex,
+        fromEmphasis: "center",
+        toEmphasis: "center",
+        framePosition: "active",
+        toLeft: "20%",
+        toWidth: "60%",
+        zIndex: 4,
+      },
+      {
+        key: `next-${next}`,
+        slideIndex: next,
+        fromEmphasis: "side",
+        toEmphasis: "side",
+        fromSide: "right",
+        toSide: "right",
+        framePosition: "next",
+        toLeft: "80%",
+        toWidth: "20%",
+        zIndex: 2,
+      },
+    ];
+  }
+
+  if (direction === 1) {
+    return [
+      {
+        key: `outgoing-left-${previous}`,
+        slideIndex: previous,
+        fromEmphasis: "side",
+        toEmphasis: "side",
+        fromSide: "left",
+        toSide: "left",
+        framePosition: "outgoing",
+        fromLeft: "0%",
+        fromWidth: "20%",
+        toLeft: "-20%",
+        toWidth: "20%",
+        zIndex: 1,
+      },
+      {
+        key: `shift-left-${activeIndex}`,
+        slideIndex: activeIndex,
+        fromEmphasis: "center",
+        toEmphasis: "side",
+        toSide: "left",
+        framePosition: "previous",
+        fromLeft: "20%",
+        fromWidth: "60%",
+        toLeft: "0%",
+        toWidth: "20%",
+        zIndex: 2,
+      },
+      {
+        key: `expand-center-${targetIndex}`,
+        slideIndex: targetIndex,
+        fromEmphasis: "side",
+        toEmphasis: "center",
+        fromSide: "right",
+        framePosition: "active",
+        fromLeft: "80%",
+        fromWidth: "20%",
+        toLeft: "20%",
+        toWidth: "60%",
+        zIndex: 5,
+      },
+      {
+        key: `incoming-right-${nextOuter}`,
+        slideIndex: nextOuter,
+        fromEmphasis: "side",
+        toEmphasis: "side",
+        fromSide: "right",
+        toSide: "right",
+        framePosition: "next",
+        fromLeft: "100%",
+        fromWidth: "20%",
+        toLeft: "80%",
+        toWidth: "20%",
+        zIndex: 1,
+      },
+    ];
+  }
+
+  return [
+    {
+      key: `incoming-left-${previousOuter}`,
+      slideIndex: previousOuter,
+      fromEmphasis: "side",
+      toEmphasis: "side",
+      fromSide: "left",
+      toSide: "left",
+      framePosition: "previous",
+      fromLeft: "-20%",
+      fromWidth: "20%",
+      toLeft: "0%",
+      toWidth: "20%",
+      zIndex: 1,
+    },
+    {
+      key: `expand-center-${targetIndex}`,
+      slideIndex: targetIndex,
+      fromEmphasis: "side",
+      toEmphasis: "center",
+      fromSide: "left",
+      framePosition: "active",
+      fromLeft: "0%",
+      fromWidth: "20%",
+      toLeft: "20%",
+      toWidth: "60%",
+      zIndex: 5,
+    },
+    {
+      key: `shift-right-${activeIndex}`,
+      slideIndex: activeIndex,
+      fromEmphasis: "center",
+      toEmphasis: "side",
+      toSide: "right",
+      framePosition: "next",
+      fromLeft: "20%",
+      fromWidth: "60%",
+      toLeft: "80%",
+      toWidth: "20%",
+      zIndex: 2,
+    },
+    {
+      key: `outgoing-right-${next}`,
+      slideIndex: next,
+      fromEmphasis: "side",
+      toEmphasis: "side",
+      fromSide: "right",
+      toSide: "right",
+      framePosition: "outgoing",
+      fromLeft: "80%",
+      fromWidth: "20%",
+      toLeft: "100%",
+      toWidth: "20%",
+      zIndex: 1,
+    },
+  ];
 }
 
 function HeroHeadline({ slide, includeSubtitle }: { slide: HeroSlide; includeSubtitle: boolean }) {
@@ -87,66 +273,282 @@ function HeroProgressBar({
   const clampedProgress = Math.max(0, Math.min(progress, 1));
 
   return (
-    <span className="hero-progress-track relative block h-[var(--hero-dot-height)] w-[var(--hero-dot-width)] overflow-hidden bg-white/24">
-      {active ? (
-        <motion.span
-          className="hero-progress-fill absolute inset-y-0 left-0 bg-white"
-          animate={{ scaleX: clampedProgress, opacity: 1 }}
-          transition={{ duration: 0.08, ease: "linear" }}
-          style={{ width: "100%", transformOrigin: "left center" }}
-        />
-      ) : (
-        <motion.span
-          className="absolute inset-y-0 left-0 w-[38%] bg-white/54"
-          animate={{ opacity: 0.64, scaleX: 0.96 }}
-          transition={{ duration: 0.24, ease: motionEasing.soft }}
-        />
-      )}
+    <span
+      className="hero-progress-track hero-indicator-track relative block h-[var(--hero-dot-height)] w-[var(--hero-dot-width)] overflow-hidden"
+      data-progress-active={active ? "true" : "false"}
+    >
+      <span
+        className="hero-progress-fill hero-indicator-fill absolute inset-y-0 left-0 bg-white"
+        aria-hidden="true"
+        style={{
+          width: "100%",
+          opacity: active ? 1 : 0,
+          transform: `scaleX(${active ? clampedProgress : 0})`,
+          transformOrigin: "left center",
+          transition: active ? "none" : "opacity 180ms linear, transform 180ms linear",
+        }}
+      />
     </span>
   );
 }
 
-function DesktopSidePane({
+function getDesktopAssetSource(slide: HeroSlide, emphasis: "side" | "center", side?: "left" | "right") {
+  if (emphasis === "center") {
+    return {
+      src: slide.mainImage,
+      position: getSlideImagePositions(slide).main,
+    };
+  }
+
+  const positions = getSlideImagePositions(slide);
+
+  return {
+    src: side === "left" ? slide.leftImage : slide.rightImage,
+    position: side === "left" ? positions.left : positions.right,
+  };
+}
+
+function HeroSideChip({
   slide,
+  side,
+}: {
+  slide: HeroSlide;
+  side: "left" | "right";
+}) {
+  const alignmentClass = side === "left" ? "items-start text-left" : "items-end text-right";
+
+  return (
+    <div className={`hero-pane-content absolute inset-x-0 bottom-0 z-10 flex p-4 ${alignmentClass}`} data-pane-content="side">
+      <span className="hero-pane-chip">{getCleanTitle(slide.title)}</span>
+    </div>
+  );
+}
+
+function AnimatedDesktopPane({
+  slide,
+  locale,
+  fromEmphasis,
+  toEmphasis,
+  fromSide,
+  toSide,
+  direction,
+  transitionMode,
+}: {
+  slide: HeroSlide;
+  locale: Locale;
+  fromEmphasis: "side" | "center";
+  toEmphasis: "side" | "center";
+  fromSide?: "left" | "right";
+  toSide?: "left" | "right";
+  direction: HeroDirection;
+  transitionMode: "normal" | "chained";
+}) {
+  const fromAsset = getDesktopAssetSource(slide, fromEmphasis, fromSide);
+  const toAsset = getDesktopAssetSource(slide, toEmphasis, toSide);
+  const isPromoting = fromEmphasis === "side" && toEmphasis === "center";
+  const isDemoting = fromEmphasis === "center" && toEmphasis === "side";
+  const sideForChip = toSide ?? fromSide ?? "left";
+  const isChained = transitionMode === "chained";
+  const assetFadeDuration = isChained ? 0.26 : 0.34;
+  const assetRevealDuration = isChained ? 0.34 : 0.44;
+  const assetRevealDelay = fromAsset.src === toAsset.src ? 0 : isChained ? 0.02 : 0.06;
+  const centerLayerDuration = isChained ? 0.22 : 0.28;
+  const centerLayerDelay = toEmphasis === "center" ? (isChained ? 0.06 : 0.12) : 0;
+  const centerContentDuration = isChained ? 0.28 : 0.34;
+  const centerContentDelay = toEmphasis === "center" ? (isChained ? 0.08 : 0.16) : 0;
+  const sideLayerDuration = isChained ? 0.16 : 0.2;
+  const sideChipDuration = isChained ? 0.18 : 0.22;
+  const centerEntryOffset = fromSide === "left" ? -14 : fromSide === "right" ? 14 : direction === 1 ? 10 : -10;
+  const centerExitOffset = toSide === "left" ? -10 : toSide === "right" ? 10 : direction === 1 ? -8 : 8;
+  const sideTravelOffset = sideForChip === "left" ? -8 : 8;
+
+  return (
+    <div
+      className={`hero-pane hero-pane-animated relative h-full overflow-hidden bg-black ${
+        toEmphasis === "center" ? "hero-pane-center" : "hero-pane-side"
+      }`}
+      data-pane-emphasis={toEmphasis}
+      data-pane-from-emphasis={fromEmphasis}
+      data-pane-to-emphasis={toEmphasis}
+    >
+      <motion.div
+        className="hero-pane-asset-layer absolute inset-0"
+        data-asset-role="from"
+        initial={{ opacity: 1 }}
+        animate={{ opacity: fromAsset.src === toAsset.src ? 1 : isDemoting ? 0 : 0 }}
+        transition={{ duration: assetFadeDuration, ease: motionEasing.soft }}
+      >
+        <Image
+          src={withBasePathAsset(fromAsset.src)}
+          alt=""
+          fill
+          loading="eager"
+          sizes="(max-width: 1023px) 100vw, 60vw"
+          className="hero-pane-image object-cover"
+          style={{ objectPosition: fromAsset.position }}
+        />
+      </motion.div>
+
+      <motion.div
+        className="hero-pane-asset-layer absolute inset-0"
+        data-asset-role="to"
+        initial={{ opacity: fromAsset.src === toAsset.src ? 1 : isPromoting ? 0 : 1 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: assetRevealDuration, delay: assetRevealDelay, ease: motionEasing.soft }}
+      >
+        <Image
+          src={withBasePathAsset(toAsset.src)}
+          alt={toEmphasis === "center" ? slide.title : ""}
+          fill
+          loading="eager"
+          fetchPriority={toEmphasis === "center" ? "high" : undefined}
+          sizes={toEmphasis === "center" ? "(max-width: 1023px) 100vw, 60vw" : "20vw"}
+          className="hero-pane-image object-cover"
+          style={{ objectPosition: toAsset.position }}
+        />
+      </motion.div>
+
+      <motion.div
+        className="absolute inset-0"
+        initial={{ opacity: fromEmphasis === "center" ? 1 : 0 }}
+        animate={{ opacity: toEmphasis === "center" ? 1 : 0 }}
+        transition={{ duration: centerLayerDuration, delay: centerLayerDelay, ease: motionEasing.soft }}
+      >
+        <div className="hero-pane-overlay absolute inset-0" data-pane-tone="center" />
+        <div className="absolute inset-y-0 left-0 w-px bg-white/88" />
+        <div className="absolute inset-y-0 right-0 w-px bg-white/88" />
+        <motion.div
+          className="hero-pane-content absolute inset-x-0 top-0 z-10 flex h-full flex-col justify-between p-4 sm:p-5 md:p-6 lg:p-8"
+          data-pane-content="center"
+          initial={{
+            opacity: fromEmphasis === "center" ? 1 : 0,
+            x: fromEmphasis === "center" ? 0 : centerEntryOffset,
+            y: fromEmphasis === "center" ? 0 : 18,
+          }}
+          animate={{
+            opacity: toEmphasis === "center" ? 1 : 0,
+            x: toEmphasis === "center" ? 0 : centerExitOffset,
+            y: toEmphasis === "center" ? 0 : 14,
+          }}
+          transition={{ duration: centerContentDuration, delay: centerContentDelay, ease: motionEasing.soft }}
+        >
+          <HeroHeadline slide={slide} includeSubtitle />
+          <HeroFooter slide={slide} />
+        </motion.div>
+      </motion.div>
+
+      <motion.div
+        className="absolute inset-0"
+        initial={{ opacity: fromEmphasis === "side" ? 1 : 0 }}
+        animate={{ opacity: toEmphasis === "side" ? 1 : 0 }}
+        transition={{ duration: sideLayerDuration, ease: motionEasing.soft }}
+      >
+        <div className="hero-pane-overlay absolute inset-0" data-pane-tone="side" />
+        <div className={`absolute inset-y-0 ${sideForChip === "left" ? "right-0" : "left-0"} w-px bg-white/88`} />
+        <motion.div
+          initial={{
+            opacity: fromEmphasis === "side" ? 0.8 : toEmphasis === "side" ? 0.64 : 0,
+            x: fromEmphasis === "side" ? 0 : sideTravelOffset,
+            y: fromEmphasis === "side" ? 4 : 6,
+          }}
+          animate={{
+            opacity: toEmphasis === "side" ? 0.8 : 0,
+            x: toEmphasis === "side" ? 0 : sideTravelOffset * 0.5,
+            y: toEmphasis === "side" ? 4 : 6,
+          }}
+          transition={{ duration: sideChipDuration, ease: motionEasing.soft }}
+        >
+          <HeroSideChip slide={slide} side={sideForChip} />
+        </motion.div>
+      </motion.div>
+
+      {toEmphasis === "center" ? (
+        <Link href={withLocale(locale, slide.ctaHref)} aria-label={slide.title} className="absolute inset-0 z-20" tabIndex={-1} />
+      ) : null}
+    </div>
+  );
+}
+
+function HeroDesktopPane({
+  slide,
+  locale,
+  emphasis,
   side,
   interactive,
   onClick,
 }: {
   slide: HeroSlide;
-  side: "left" | "right";
+  locale: Locale;
+  emphasis: "side" | "center";
+  side?: "left" | "right";
   interactive: boolean;
-  onClick: () => void;
+  onClick?: () => void;
 }) {
   const positions = getSlideImagePositions(slide);
-  const imagePosition = side === "left" ? positions.left : positions.right;
-  const imageSrc = side === "left" ? slide.leftImage : slide.rightImage;
-  const alignmentClass = side === "left" ? "items-start text-left" : "items-end text-right";
+  const isCenter = emphasis === "center";
+  const imageSrc = isCenter ? slide.mainImage : side === "left" ? slide.leftImage : slide.rightImage;
+  const imagePosition = isCenter ? positions.main : side === "left" ? positions.left : positions.right;
   const dividerClass = side === "left" ? "right-0" : "left-0";
+  const alignmentClass = side === "left" ? "items-start text-left" : "items-end text-right";
 
   const content = (
     <>
       <Image
         src={withBasePathAsset(imageSrc)}
-        alt=""
+        alt={isCenter ? slide.title : ""}
         fill
         loading="eager"
-        sizes="20vw"
+        fetchPriority={isCenter ? "high" : undefined}
+        sizes={isCenter ? "(max-width: 1023px) 100vw, 60vw" : "20vw"}
         className="hero-pane-image object-cover"
         style={{ objectPosition: imagePosition }}
       />
-      <div className="hero-pane-overlay absolute inset-0" data-pane-tone="side" />
-      <div className={`absolute inset-y-0 ${dividerClass} w-px bg-white/88`} />
-      <div className={`hero-pane-content absolute inset-x-0 bottom-0 z-10 flex p-4 ${alignmentClass}`} data-pane-content="side">
-        <span className="hero-pane-chip">
-          {getCleanTitle(slide.title)}
-        </span>
-      </div>
+      <div className="hero-pane-overlay absolute inset-0" data-pane-tone={emphasis} />
+      {isCenter ? (
+        <>
+          <div className="absolute inset-y-0 left-0 w-px bg-white/88" />
+          <div className="absolute inset-y-0 right-0 w-px bg-white/88" />
+        </>
+      ) : (
+        <div className={`absolute inset-y-0 ${dividerClass} w-px bg-white/88`} />
+      )}
+      {isCenter ? (
+        <div className="hero-pane-content absolute inset-x-0 top-0 z-10 flex h-full flex-col justify-between p-4 sm:p-5 md:p-6 lg:p-8" data-pane-content="center">
+          <HeroHeadline slide={slide} includeSubtitle />
+          <HeroFooter slide={slide} />
+        </div>
+      ) : (
+        <div className={`hero-pane-content absolute inset-x-0 bottom-0 z-10 flex p-4 ${alignmentClass}`} data-pane-content="side">
+          <span className="hero-pane-chip">{getCleanTitle(slide.title)}</span>
+        </div>
+      )}
     </>
   );
 
+  if (isCenter) {
+    if (!interactive) {
+      return (
+        <div aria-hidden="true" className="hero-pane hero-pane-center relative overflow-hidden bg-black" data-pane-emphasis="center">
+          {content}
+        </div>
+      );
+    }
+
+    return (
+      <Link
+        href={withLocale(locale, slide.ctaHref)}
+        aria-label={slide.title}
+        className="hero-pane hero-pane-center hero-pane-hit relative overflow-hidden bg-black"
+        data-pane-emphasis="center"
+      >
+        {content}
+      </Link>
+    );
+  }
+
   if (!interactive) {
     return (
-      <div aria-hidden="true" className="hero-pane hero-pane-side relative hidden overflow-hidden bg-black lg:block" data-pane-emphasis="side">
+      <div aria-hidden="true" className="hero-pane hero-pane-side relative overflow-hidden bg-black" data-pane-emphasis="side">
         {content}
       </div>
     );
@@ -157,7 +559,7 @@ function DesktopSidePane({
       type="button"
       aria-label={`Show ${getCleanTitle(slide.title)}`}
       onClick={onClick}
-      className="hero-pane hero-pane-side hero-pane-hit relative hidden overflow-hidden bg-black lg:block"
+      className="hero-pane hero-pane-side hero-pane-hit relative overflow-hidden bg-black"
       data-pane-emphasis="side"
     >
       {content}
@@ -165,66 +567,11 @@ function DesktopSidePane({
   );
 }
 
-function DesktopCenterPane({
-  slide,
-  locale,
-  interactive,
-}: {
-  slide: HeroSlide;
-  locale: Locale;
-  interactive: boolean;
-}) {
-  const positions = getSlideImagePositions(slide);
-
-  const content = (
-    <>
-      <Image
-        src={withBasePathAsset(slide.mainImage)}
-        alt={slide.title}
-        fill
-        loading="eager"
-        fetchPriority="high"
-        sizes="(max-width: 1023px) 100vw, 60vw"
-        className="hero-pane-image object-cover"
-        style={{ objectPosition: positions.main }}
-      />
-      <div className="hero-pane-overlay absolute inset-0" data-pane-tone="center" />
-      <div className="absolute inset-y-0 left-0 w-px bg-white/88" />
-      <div className="absolute inset-y-0 right-0 w-px bg-white/88" />
-      <div className="hero-pane-content absolute inset-x-0 top-0 z-10 flex h-full flex-col justify-between p-4 sm:p-5 md:p-6 lg:p-8" data-pane-content="center">
-        <HeroHeadline slide={slide} includeSubtitle />
-        <HeroFooter slide={slide} />
-      </div>
-    </>
-  );
-
-  if (!interactive) {
-    return (
-      <div aria-hidden="true" className="hero-pane hero-pane-center relative hidden overflow-hidden bg-black lg:block" data-pane-emphasis="center">
-        {content}
-      </div>
-    );
-  }
-
-  return (
-    <Link
-      href={withLocale(locale, slide.ctaHref)}
-      aria-label={slide.title}
-      className="hero-pane hero-pane-center hero-pane-hit relative hidden overflow-hidden bg-black lg:block"
-      data-pane-emphasis="center"
-    >
-      {content}
-    </Link>
-  );
-}
-
-function DesktopHeroLayer({
+function DesktopHeroFrame({
   slides,
   activeIndex,
   locale,
   interactive,
-  direction,
-  shouldReduceMotion,
   onPrevious,
   onNext,
 }: {
@@ -232,57 +579,135 @@ function DesktopHeroLayer({
   activeIndex: number;
   locale: Locale;
   interactive: boolean;
-  direction: HeroDirection;
-  shouldReduceMotion: boolean;
   onPrevious: () => void;
   onNext: () => void;
 }) {
   const previousIndex = getWrappedIndex(activeIndex - 1, slides.length);
   const nextIndex = getWrappedIndex(activeIndex + 1, slides.length);
-  const frameInitialX = getPaneEntryOffset(direction, "center", shouldReduceMotion);
 
   return (
-    <motion.div
-      className="site-hero-frame h-full min-h-[var(--hero-height-desktop)] min-w-full"
-      animate={{ x: "0%" }}
-      initial={{ x: frameInitialX, opacity: shouldReduceMotion ? 1 : 0.86 }}
-      transition={{ duration: shouldReduceMotion ? motionTokens.tap : motionTokens.heroPreview, ease: motionEasing.soft }}
-    >
-      <DesktopSidePane
+    <div className="site-hero-frame h-full min-h-[var(--hero-height-desktop)] min-w-full">
+      <HeroDesktopPane
         slide={slides[previousIndex]}
+        locale={locale}
+        emphasis="side"
         side="left"
         interactive={interactive}
         onClick={onPrevious}
       />
-      <DesktopCenterPane
+      <HeroDesktopPane
         slide={slides[activeIndex]}
         locale={locale}
+        emphasis="center"
         interactive={interactive}
       />
-      <DesktopSidePane
+      <HeroDesktopPane
         slide={slides[nextIndex]}
+        locale={locale}
+        emphasis="side"
         side="right"
         interactive={interactive}
         onClick={onNext}
       />
-    </motion.div>
+    </div>
   );
 }
 
-function getPaneEntryOffset(direction: HeroDirection, pane: "left" | "center" | "right", shouldReduceMotion: boolean) {
-  if (shouldReduceMotion) {
-    return "0%";
-  }
+function DesktopHeroTrack({
+  slides,
+  activeIndex,
+  staticActiveIndex,
+  targetIndex,
+  direction,
+  overlayPhase,
+  transitionDurationMs,
+  transitionMode,
+  locale,
+  interactive,
+  onPrevious,
+  onNext,
+}: {
+  slides: HeroSlide[];
+  activeIndex: number;
+  staticActiveIndex: number;
+  targetIndex: number | null;
+  direction: HeroDirection;
+  overlayPhase: "idle" | "setup" | "running";
+  transitionDurationMs: number;
+  transitionMode: "normal" | "chained";
+  locale: Locale;
+  interactive: boolean;
+  onPrevious: () => void;
+  onNext: () => void;
+}) {
+  const panes = useMemo(
+    () => getDesktopPaneDefinitions(activeIndex, targetIndex, direction, slides.length),
+    [activeIndex, direction, slides.length, targetIndex],
+  );
 
-  if (pane === "center") {
-    return direction === 1 ? "1.1%" : "-1.1%";
-  }
+  return (
+    <div data-testid="hero-desktop-stage" className="hero-track-viewport relative hidden min-h-[var(--hero-height-desktop)] overflow-hidden lg:block">
+      <div className={`hero-static-layer ${targetIndex !== null ? "is-hidden" : ""}`}>
+        <DesktopHeroFrame
+          slides={slides}
+          activeIndex={staticActiveIndex}
+          locale={locale}
+          interactive={interactive}
+          onPrevious={onPrevious}
+          onNext={onNext}
+        />
+      </div>
 
-  if (pane === "left") {
-    return direction === 1 ? "-1.6%" : "-0.8%";
-  }
-
-  return direction === 1 ? "0.8%" : "1.6%";
+      {targetIndex !== null ? (
+        <div
+          className="hero-track hero-track-overlay"
+          data-track-state={direction === 1 ? "next" : "prev"}
+          data-overlay-phase={overlayPhase}
+          data-transition-mode={transitionMode}
+          style={{
+            "--hero-track-duration": `${transitionDurationMs}ms`,
+            "--hero-stage-veil-duration": `${DESKTOP_STAGE_VEIL_MS}ms`,
+            "--hero-content-delay": `${transitionMode === "chained" ? DESKTOP_CHAINED_CONTENT_DELAY_MS : DESKTOP_CONTENT_DELAY_MS}ms`,
+          } as CSSProperties}
+        >
+          {panes.map((pane) => (
+            <div
+              key={pane.key}
+              data-hero-pane-motion="true"
+              className="hero-track-pane"
+              data-frame-position={pane.framePosition}
+              data-pane-emphasis={pane.toEmphasis}
+              style={
+                {
+                  left: overlayPhase === "running" ? pane.toLeft : pane.fromLeft,
+                  width: overlayPhase === "running" ? pane.toWidth : pane.fromWidth,
+                  zIndex: pane.zIndex,
+                  "--pane-from-left": pane.fromLeft,
+                  "--pane-from-width": pane.fromWidth,
+                  "--pane-to-left": pane.toLeft,
+                  "--pane-to-width": pane.toWidth,
+                } as CSSProperties
+              }
+            >
+              <div className="hero-track-frame-shell">
+                <div className="hero-stage-veil absolute inset-0 z-10" />
+                <AnimatedDesktopPane
+                  slide={slides[pane.slideIndex]}
+                  locale={locale}
+                  fromEmphasis={pane.fromEmphasis}
+                  toEmphasis={pane.toEmphasis}
+                  fromSide={pane.fromSide}
+                  toSide={pane.toSide}
+                  direction={direction}
+                  transitionMode={transitionMode}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : null}
+    </div>
+  );
 }
 
 function MobileHeroSlide({
@@ -317,6 +742,44 @@ function MobileHeroSlide({
   );
 }
 
+function HeroIndicators({
+  slides,
+  activeIndex,
+  progressValue,
+  isAnimating,
+  onSelect,
+}: {
+  slides: HeroSlide[];
+  activeIndex: number;
+  progressValue: number;
+  isAnimating: boolean;
+  onSelect: (slideIndex: number) => void;
+}) {
+  return (
+    <div className="hero-indicators absolute inset-x-0 bottom-0 z-20 flex justify-center px-4 pb-4 sm:px-5 sm:pb-5 md:px-6 md:pb-4 lg:pb-3">
+      <div className="flex items-center gap-[6px]">
+        {slides.map((slide, slideIndex) => {
+          const isActive = slideIndex === activeIndex;
+
+          return (
+            <button
+              key={slide.slug}
+              type="button"
+              aria-label={`Go to slide ${slideIndex + 1}`}
+              aria-current={isActive ? "true" : undefined}
+              onClick={() => onSelect(slideIndex)}
+              disabled={isAnimating}
+              className="group flex items-center disabled:cursor-default"
+            >
+              <HeroProgressBar active={isActive} progress={isActive ? progressValue : 0} />
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 export function HeroSection({
   locale,
   slides,
@@ -327,38 +790,203 @@ export function HeroSection({
   introComplete?: boolean;
 }) {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [paused, setPaused] = useState(false);
   const [direction, setDirection] = useState<HeroDirection>(1);
-  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [targetIndex, setTargetIndex] = useState<number | null>(null);
+  const [overlayPhase, setOverlayPhase] = useState<"idle" | "setup" | "running">("idle");
+  const [transitionMode, setTransitionMode] = useState<"normal" | "chained">("normal");
+  const [isPaused, setIsPaused] = useState(false);
   const [progressValue, setProgressValue] = useState(0);
-  const reduceMotionPreference = useReducedMotion();
-  const shouldReduceMotion = Boolean(reduceMotionPreference);
+  const shouldReduceMotion = Boolean(useReducedMotion());
   const safeSlides = Array.isArray(slides) ? slides.slice(0, 5) : [];
   const progressFrame = useRef<number | null>(null);
   const progressStartAt = useRef<number | null>(null);
   const progressValueRef = useRef(0);
   const lastFrameAt = useRef<number | null>(null);
-  const transitionTimer = useRef<number | null>(null);
+  const finalizeTimer = useRef<number | null>(null);
+  const hasSettledRef = useRef(true);
+  const overlayFrame = useRef<number | null>(null);
+  const targetIndexRef = useRef<number | null>(null);
+  const pendingTransitionRef = useRef<PendingTransition | null>(null);
+  const chainedTransitionRef = useRef(false);
+  const chainTimerRef = useRef<number | null>(null);
+  const startTransitionRef = useRef<(fromIndex: number, requestedIndex: number, forcedDirection?: HeroDirection | null) => void>(() => {});
 
-  const transitionDurationMs = shouldReduceMotion ? 20 : 560;
+  const isAnimating = targetIndex !== null;
+  const transitionDurationMs = shouldReduceMotion ? 20 : transitionMode === "chained" ? DESKTOP_CHAINED_TRANSITION_MS : DESKTOP_TRANSITION_MS;
 
-  const finishTransitionWindow = useCallback(() => {
-    if (transitionTimer.current !== null) {
-      window.clearTimeout(transitionTimer.current);
+  const resetProgressState = useCallback(() => {
+    progressValueRef.current = 0;
+    progressStartAt.current = null;
+    lastFrameAt.current = null;
+    setProgressValue(0);
+  }, []);
+
+  const clearFinalizeTimer = useCallback(() => {
+    if (finalizeTimer.current !== null) {
+      window.clearTimeout(finalizeTimer.current);
+      finalizeTimer.current = null;
     }
+  }, []);
 
-    transitionTimer.current = window.setTimeout(() => {
-      setIsTransitioning(false);
-      transitionTimer.current = null;
-    }, transitionDurationMs);
-  }, [transitionDurationMs]);
+  const clearOverlayFrame = useCallback(() => {
+    if (overlayFrame.current !== null) {
+      window.cancelAnimationFrame(overlayFrame.current);
+      overlayFrame.current = null;
+    }
+  }, []);
 
-  useEffect(() => {
-    if (safeSlides.length <= 1 || shouldReduceMotion || !introComplete) {
+  const clearChainTimer = useCallback(() => {
+    if (chainTimerRef.current !== null) {
+      window.clearTimeout(chainTimerRef.current);
+      chainTimerRef.current = null;
+    }
+  }, []);
+
+  const finalizeTransition = useCallback(() => {
+    if (hasSettledRef.current) {
       return;
     }
 
-    if (paused || isTransitioning) {
+    hasSettledRef.current = true;
+    const resolvedIndex = targetIndexRef.current;
+    const pendingTransition = pendingTransitionRef.current;
+    targetIndexRef.current = null;
+
+    clearFinalizeTimer();
+    clearOverlayFrame();
+    clearChainTimer();
+
+    if (resolvedIndex === null) {
+      chainedTransitionRef.current = false;
+      setTransitionMode("normal");
+      setTargetIndex(null);
+      setOverlayPhase("idle");
+      return;
+    }
+
+    if (pendingTransition !== null && pendingTransition.index !== resolvedIndex) {
+      pendingTransitionRef.current = null;
+      chainedTransitionRef.current = true;
+      setTransitionMode("chained");
+      setActiveIndex(resolvedIndex);
+      setTargetIndex(null);
+      setOverlayPhase("idle");
+
+      chainTimerRef.current = window.setTimeout(() => {
+        chainTimerRef.current = null;
+        startTransitionRef.current(resolvedIndex, pendingTransition.index, pendingTransition.direction);
+      }, 0);
+
+      return;
+    }
+
+    chainedTransitionRef.current = false;
+    setTransitionMode("normal");
+    setTargetIndex(null);
+    setActiveIndex(resolvedIndex);
+    setOverlayPhase("idle");
+  }, [clearChainTimer, clearFinalizeTimer, clearOverlayFrame]);
+
+  const startTransition = useCallback(
+    (fromIndex: number, requestedIndex: number, forcedDirection?: HeroDirection | null) => {
+      const nextIndex = getWrappedIndex(requestedIndex, safeSlides.length);
+
+      if (nextIndex === fromIndex) {
+        pendingTransitionRef.current = null;
+        return;
+      }
+
+      const nextDirection = forcedDirection ?? getDirection(fromIndex, nextIndex, safeSlides.length);
+      const distance = forcedDirection === 1
+        ? nextIndex >= fromIndex
+          ? nextIndex - fromIndex
+          : nextIndex + safeSlides.length - fromIndex
+        : forcedDirection === -1
+          ? fromIndex >= nextIndex
+            ? fromIndex - nextIndex
+            : fromIndex + safeSlides.length - nextIndex
+          : nextDirection === 1
+            ? (nextIndex - fromIndex + safeSlides.length) % safeSlides.length
+            : (fromIndex - nextIndex + safeSlides.length) % safeSlides.length;
+      const steppedTarget = distance > 1 ? getWrappedIndex(fromIndex + nextDirection, safeSlides.length) : nextIndex;
+
+      pendingTransitionRef.current = steppedTarget === nextIndex ? null : { index: nextIndex, direction: nextDirection };
+      hasSettledRef.current = false;
+      setTransitionMode(chainedTransitionRef.current ? "chained" : "normal");
+      setDirection(nextDirection);
+      targetIndexRef.current = steppedTarget;
+      setTargetIndex(steppedTarget);
+      setOverlayPhase(shouldReduceMotion ? "running" : "setup");
+      resetProgressState();
+      clearFinalizeTimer();
+
+      finalizeTimer.current = window.setTimeout(
+        () => {
+          finalizeTransition();
+        },
+        shouldReduceMotion ? transitionDurationMs + 16 : transitionDurationMs + 8,
+      );
+    },
+    [clearFinalizeTimer, finalizeTransition, resetProgressState, safeSlides.length, shouldReduceMotion, transitionDurationMs],
+  );
+
+  useEffect(() => {
+    startTransitionRef.current = startTransition;
+  }, [startTransition]);
+
+  const requestTransition = useCallback(
+    (requestedIndex: number, directionHint?: HeroDirection | null) => {
+      if (safeSlides.length <= 1) {
+        return;
+      }
+
+      const nextIndex = getWrappedIndex(requestedIndex, safeSlides.length);
+
+      if (nextIndex === activeIndex && !isAnimating) {
+        pendingTransitionRef.current = null;
+        return;
+      }
+
+      if (isAnimating) {
+        pendingTransitionRef.current = { index: nextIndex, direction: directionHint ?? null };
+        return;
+      }
+
+      startTransition(activeIndex, nextIndex, directionHint);
+    },
+    [activeIndex, isAnimating, safeSlides.length, startTransition],
+  );
+
+  useEffect(() => {
+    if (targetIndex === null || overlayPhase !== "setup" || shouldReduceMotion) {
+      return;
+    }
+
+    clearOverlayFrame();
+    overlayFrame.current = window.requestAnimationFrame(() => {
+      setOverlayPhase("running");
+      overlayFrame.current = null;
+    });
+
+    return () => {
+      clearOverlayFrame();
+    };
+  }, [clearOverlayFrame, overlayPhase, shouldReduceMotion, targetIndex]);
+
+  useEffect(() => {
+    return () => {
+      if (progressFrame.current !== null) {
+        window.cancelAnimationFrame(progressFrame.current);
+      }
+
+      clearFinalizeTimer();
+      clearOverlayFrame();
+      clearChainTimer();
+    };
+  }, [clearChainTimer, clearFinalizeTimer, clearOverlayFrame]);
+
+  useEffect(() => {
+    if (safeSlides.length <= 1 || shouldReduceMotion || !introComplete || isPaused || isAnimating) {
       if (progressFrame.current !== null) {
         window.cancelAnimationFrame(progressFrame.current);
         progressFrame.current = null;
@@ -380,19 +1008,12 @@ export function HeroSection({
       lastFrameAt.current = timestamp;
       const elapsed = timestamp - progressStartAt.current;
       const nextProgress = Math.min(elapsed / AUTOPLAY_MS, 1);
+
       progressValueRef.current = nextProgress;
       setProgressValue(nextProgress);
 
       if (nextProgress >= 1) {
-        setDirection(1);
-        setIsTransitioning(true);
-        setActiveIndex((current) => getWrappedIndex(current + 1, safeSlides.length));
-        progressValueRef.current = 0;
-        setProgressValue(0);
-        progressStartAt.current = null;
-        lastFrameAt.current = null;
-        finishTransitionWindow();
-        progressFrame.current = window.requestAnimationFrame(step);
+        requestTransition(activeIndex + 1);
         return;
       }
 
@@ -406,65 +1027,14 @@ export function HeroSection({
         window.cancelAnimationFrame(progressFrame.current);
         progressFrame.current = null;
       }
+
       lastFrameAt.current = null;
     };
-  }, [finishTransitionWindow, introComplete, isTransitioning, paused, safeSlides.length, shouldReduceMotion]);
-
-  useEffect(() => {
-    return () => {
-      if (transitionTimer.current !== null) {
-        window.clearTimeout(transitionTimer.current);
-      }
-    };
-  }, []);
+  }, [activeIndex, introComplete, isAnimating, isPaused, requestTransition, safeSlides.length, shouldReduceMotion]);
 
   if (!safeSlides.length) {
     return null;
   }
-
-  const requestTransition = (targetIndex: number) => {
-    if (safeSlides.length <= 1 || targetIndex === activeIndex || isTransitioning) {
-      return;
-    }
-
-    setDirection(getDirection(activeIndex, targetIndex, safeSlides.length));
-    setIsTransitioning(true);
-    setActiveIndex(targetIndex);
-    progressValueRef.current = 0;
-    setProgressValue(0);
-    progressStartAt.current = null;
-    lastFrameAt.current = null;
-    finishTransitionWindow();
-  };
-
-  const desktopVariants = {
-    enter: (entryDirection: HeroDirection) => ({
-      opacity: shouldReduceMotion ? 1 : 0.24,
-      x: shouldReduceMotion ? "0%" : entryDirection === 1 ? "0.9%" : "-0.9%",
-      scale: 1,
-      filter: "blur(0px)",
-    }),
-    center: {
-      opacity: 1,
-      x: "0%",
-      scale: 1,
-      filter: "blur(0px)",
-      transition: {
-        duration: shouldReduceMotion ? motionTokens.tap : 0.4,
-        ease: motionEasing.soft,
-      },
-    },
-    exit: (entryDirection: HeroDirection) => ({
-      opacity: shouldReduceMotion ? 1 : 0,
-      x: shouldReduceMotion ? "0%" : entryDirection === 1 ? "-0.7%" : "0.7%",
-      scale: 1,
-      filter: "blur(0px)",
-      transition: {
-        duration: shouldReduceMotion ? motionTokens.tap : 0.28,
-        ease: motionEasing.soft,
-      },
-    }),
-  };
 
   const mobileVariants = {
     enter: (entryDirection: HeroDirection) => ({
@@ -499,40 +1069,24 @@ export function HeroSection({
     <section className="relative left-1/2 w-screen -translate-x-1/2 overflow-hidden border-b border-[var(--page-divider)] bg-white">
       <div
         className="w-screen"
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
       >
         <div className="relative min-h-[var(--hero-height-mobile)] overflow-hidden md:min-h-[var(--hero-height-tablet)] lg:min-h-[var(--hero-height-desktop)]">
-          <div className="relative hidden min-h-[var(--hero-height-desktop)] lg:block">
-            <AnimatePresence initial={false} custom={direction} mode="sync">
-              <motion.div
-                key={safeSlides[activeIndex].slug}
-                custom={direction}
-                variants={desktopVariants}
-                initial="enter"
-                animate="center"
-                exit="exit"
-                className="absolute inset-0"
-              >
-                <motion.div
-                  className="hero-stage-veil absolute inset-0 z-10"
-                  initial={{ opacity: shouldReduceMotion ? 0 : 0.08 }}
-                  animate={{ opacity: 0 }}
-                  transition={{ duration: shouldReduceMotion ? motionTokens.tap : 0.18, ease: motionEasing.soft }}
-                />
-                <DesktopHeroLayer
-                  slides={safeSlides}
-                  activeIndex={activeIndex}
-                  locale={locale}
-                  interactive={!isTransitioning}
-                  direction={direction}
-                  shouldReduceMotion={shouldReduceMotion}
-                  onPrevious={() => requestTransition(getWrappedIndex(activeIndex - 1, safeSlides.length))}
-                  onNext={() => requestTransition(getWrappedIndex(activeIndex + 1, safeSlides.length))}
-                />
-              </motion.div>
-            </AnimatePresence>
-          </div>
+          <DesktopHeroTrack
+            slides={safeSlides}
+            activeIndex={activeIndex}
+            staticActiveIndex={targetIndex ?? activeIndex}
+            targetIndex={targetIndex}
+            direction={direction}
+            overlayPhase={overlayPhase}
+            transitionDurationMs={transitionDurationMs}
+            transitionMode={transitionMode}
+            locale={locale}
+            interactive={!isAnimating}
+            onPrevious={() => requestTransition(activeIndex - 1, -1)}
+            onNext={() => requestTransition(activeIndex + 1, 1)}
+          />
 
           <div className="relative min-h-[var(--hero-height-mobile)] md:min-h-[var(--hero-height-tablet)] lg:hidden">
             <AnimatePresence initial={false} custom={direction} mode="sync">
@@ -556,27 +1110,16 @@ export function HeroSection({
             </AnimatePresence>
           </div>
 
-          <div className="absolute inset-x-0 bottom-0 z-20 flex justify-center px-4 pb-4 sm:px-5 sm:pb-5 md:px-6 md:pb-4 lg:pb-3">
-            <div className="flex items-center gap-[6px]">
-              {safeSlides.map((slide, slideIndex) => {
-                const isActive = slideIndex === activeIndex;
-
-                return (
-                  <button
-                    key={slide.slug}
-                    type="button"
-                    aria-label={`Go to slide ${slideIndex + 1}`}
-                    aria-current={isActive ? "true" : undefined}
-                    onClick={() => requestTransition(slideIndex)}
-                    disabled={isTransitioning}
-                    className="group flex items-center disabled:cursor-default"
-                  >
-                    <HeroProgressBar active={isActive} progress={isActive ? progressValue : 0} />
-                  </button>
-                );
-              })}
-            </div>
-          </div>
+          <HeroIndicators
+            slides={safeSlides}
+            activeIndex={activeIndex}
+            progressValue={progressValue}
+            isAnimating={isAnimating}
+            onSelect={(slideIndex) => {
+              const nextDirection = slideIndex === activeIndex ? null : slideIndex > activeIndex ? 1 : -1;
+              requestTransition(slideIndex, nextDirection);
+            }}
+          />
         </div>
       </div>
     </section>

@@ -22,6 +22,14 @@
   --hero-dot-width: 38px;
   --hero-dot-height: 8px;
   --hero-autoplay-duration: 6s;
+  --hero-side-content-opacity: 0.8;
+  --hero-side-content-offset: 4px;
+  --hero-center-overlay-opacity: 0.92;
+  --hero-side-overlay-start: rgb(0 0 0 / 34%);
+  --hero-side-overlay-end: rgb(0 0 0 / 54%);
+  --hero-center-overlay-start: rgb(0 0 0 / 04%);
+  --hero-center-overlay-mid: rgb(0 0 0 / 08%);
+  --hero-center-overlay-end: rgb(0 0 0 / 14%);
   --motion-hover: 130ms;
   --motion-fast: 320ms;
   --motion-base: 420ms;
@@ -267,9 +275,132 @@ img {
 
 .hero-progress-track {
   border-radius: 999px;
-  background: rgb(255 255 255 / 24%);
+  background: rgb(255 255 255 / 12%);
   backdrop-filter: blur(1px);
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.08);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.05);
+  transition:
+    background-color 180ms linear,
+    box-shadow 180ms linear,
+    opacity 180ms linear;
+}
+
+.hero-progress-track[data-progress-active="true"] {
+  background: rgb(255 255 255 / 20%);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.1);
+}
+
+.hero-track-viewport {
+  position: relative;
+}
+
+.hero-static-layer {
+  position: relative;
+  z-index: 1;
+  min-height: var(--hero-height-desktop);
+  opacity: 1;
+}
+
+.hero-static-layer.is-hidden {
+  pointer-events: none;
+}
+
+.hero-track {
+  position: relative;
+  width: 100%;
+  height: var(--hero-height-desktop);
+  min-height: var(--hero-height-desktop);
+}
+
+.hero-track-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.hero-track-overlay .hero-pane-hit {
+  pointer-events: none;
+}
+
+.hero-track-overlay[data-overlay-phase="setup"] .hero-track-pane {
+  transition: none;
+}
+
+.hero-track-overlay[data-overlay-phase="running"] .hero-track-pane {
+  transition:
+    left var(--hero-track-duration, 680ms) cubic-bezier(0.2, 0.82, 0.24, 1),
+    width var(--hero-track-duration, 680ms) cubic-bezier(0.2, 0.82, 0.24, 1);
+}
+
+.hero-track-pane {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  min-height: var(--hero-height-desktop);
+  overflow: hidden;
+  will-change: left, width, transform, opacity;
+}
+
+.hero-track-frame-shell {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  transition:
+    transform calc(var(--hero-track-duration, 680ms) + 72ms) cubic-bezier(0.2, 0.82, 0.24, 1),
+    opacity 300ms var(--motion-ease-emphasized),
+    filter 380ms var(--motion-ease-emphasized);
+  will-change: transform, opacity, filter;
+}
+
+.hero-track[data-track-state="idle"] .hero-track-frame-shell {
+  transform: translate3d(0, 0, 0) scale(1);
+  opacity: 1;
+  filter: none;
+}
+
+.hero-track[data-track-state="next"] .hero-track-pane[data-frame-position="previous"] .hero-track-frame-shell {
+  transform: translate3d(0, 0, 0) scale(1);
+  opacity: 1;
+  filter: none;
+}
+
+.hero-track[data-track-state="next"] .hero-track-pane[data-frame-position="active"] .hero-track-frame-shell {
+  transform: translate3d(0, 0, 0) scale(1);
+  opacity: 1;
+  filter: none;
+}
+
+.hero-track[data-track-state="next"] .hero-track-pane[data-frame-position="next"] .hero-track-frame-shell,
+.hero-track[data-track-state="prev"] .hero-track-pane[data-frame-position="previous"] .hero-track-frame-shell {
+  transform: translate3d(0, 0, 0) scale(1);
+  opacity: 1;
+  filter: none;
+}
+
+.hero-track[data-track-state="prev"] .hero-track-pane[data-frame-position="next"] .hero-track-frame-shell {
+  transform: translate3d(0, 0, 0) scale(1);
+  opacity: 1;
+  filter: none;
+}
+
+.hero-track[data-track-state="next"] .hero-track-pane[data-frame-position="outgoing"] .hero-track-frame-shell,
+.hero-track[data-track-state="prev"] .hero-track-pane[data-frame-position="outgoing"] .hero-track-frame-shell {
+  opacity: 0.82;
+  filter: saturate(0.92) brightness(0.9);
+}
+
+.hero-track[data-track-state="next"] .hero-track-pane[data-frame-position="previous"] .hero-pane[data-pane-emphasis="center"] .hero-pane-image {
+  transform: scale(1);
+  opacity: 1;
+  filter: saturate(1) brightness(1);
+}
+
+.hero-track[data-track-state="prev"] .hero-track-pane[data-frame-position="next"] .hero-pane[data-pane-emphasis="center"] .hero-pane-image {
+  transform: scale(1);
+  opacity: 1;
+  filter: saturate(1) brightness(1);
 }
 
 .hero-pane {
@@ -303,25 +434,25 @@ img {
 
 .hero-pane-image {
   transition:
-    transform var(--motion-hero-pane) var(--motion-ease-emphasized),
-    filter var(--motion-hero-pane) var(--motion-ease-emphasized),
-    opacity var(--motion-hero-pane) var(--motion-ease-emphasized);
+    transform var(--hero-track-duration, 680ms) cubic-bezier(0.18, 0.82, 0.24, 1),
+    filter 180ms cubic-bezier(0.2, 0.76, 0.22, 1),
+    opacity 180ms cubic-bezier(0.2, 0.76, 0.22, 1);
   will-change: transform, filter, opacity;
   backface-visibility: hidden;
 }
 
 .hero-pane-overlay {
   transition:
-    opacity var(--motion-hero-pane) var(--motion-ease-emphasized),
-    background-color var(--motion-hero-pane) var(--motion-ease-emphasized);
+    opacity 220ms cubic-bezier(0.2, 0.76, 0.22, 1) 520ms,
+    background-color 180ms cubic-bezier(0.2, 0.76, 0.22, 1) 520ms;
 }
 
 .hero-pane-content {
   transition:
-    opacity var(--motion-hero-content) var(--motion-ease-emphasized),
-    filter var(--motion-hero-content) var(--motion-ease-emphasized),
-    transform var(--motion-hero-content) var(--motion-ease-emphasized);
-  transition-delay: 12ms;
+    opacity 220ms var(--motion-ease-emphasized),
+    filter 240ms var(--motion-ease-emphasized),
+    transform 320ms cubic-bezier(0.2, 0.78, 0.24, 1);
+  transition-delay: 0ms;
   will-change: transform, opacity, filter;
 }
 
@@ -338,8 +469,8 @@ img {
 }
 
 .hero-pane[data-pane-emphasis="side"] .hero-pane-image {
-  transform: scale(1.024);
-  filter: saturate(0.84) brightness(0.82);
+  transform: scale(1);
+  filter: saturate(1) brightness(1);
 }
 
 .hero-pane[data-pane-emphasis="center"] .hero-pane-image {
@@ -348,9 +479,9 @@ img {
 }
 
 .hero-pane[data-pane-emphasis="side"] .hero-pane-content {
-  opacity: 0.8;
+  opacity: var(--hero-side-content-opacity);
   filter: none;
-  transform: translateY(4px);
+  transform: translateY(var(--hero-side-content-offset));
 }
 
 .hero-pane[data-pane-emphasis="center"] .hero-pane-content {
@@ -360,11 +491,12 @@ img {
 }
 
 .hero-pane-overlay[data-pane-tone="side"] {
-  background: linear-gradient(180deg, rgb(0 0 0 / 34%) 0%, rgb(0 0 0 / 54%) 100%);
+  background: linear-gradient(180deg, var(--hero-side-overlay-start) 0%, var(--hero-side-overlay-end) 100%);
 }
 
 .hero-pane-overlay[data-pane-tone="center"] {
-  background: linear-gradient(90deg, rgb(0 0 0 / 04%) 0%, rgb(0 0 0 / 08%) 24%, rgb(0 0 0 / 14%) 100%);
+  background: linear-gradient(90deg, var(--hero-center-overlay-start) 0%, var(--hero-center-overlay-mid) 24%, var(--hero-center-overlay-end) 100%);
+  opacity: var(--hero-center-overlay-opacity);
 }
 
 .hero-pane-side:hover .hero-pane-image,
@@ -383,6 +515,59 @@ img {
   opacity: 0.88;
   filter: none;
   transform: translateY(2px);
+}
+
+.hero-track[data-track-state="next"] .hero-track-pane[data-frame-position="previous"] .hero-pane-center .hero-pane-content,
+.hero-track[data-track-state="prev"] .hero-track-pane[data-frame-position="next"] .hero-pane-center .hero-pane-content {
+  opacity: 0.72;
+  transform: translateY(14px);
+}
+
+.hero-track[data-track-state="next"] .hero-track-pane[data-frame-position="active"] .hero-pane-center .hero-pane-content,
+.hero-track[data-track-state="prev"] .hero-track-pane[data-frame-position="active"] .hero-pane-center .hero-pane-content {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 12ms;
+}
+
+.hero-track[data-track-state="next"] .hero-track-pane[data-frame-position="active"] .hero-pane-center .hero-pane-image,
+.hero-track[data-track-state="prev"] .hero-track-pane[data-frame-position="active"] .hero-pane-center .hero-pane-image {
+  transform: scale(1);
+  filter: saturate(1) brightness(1);
+}
+
+.hero-pane-asset-layer {
+  transition:
+    opacity 220ms cubic-bezier(0.2, 0.76, 0.22, 1),
+    filter 180ms cubic-bezier(0.2, 0.76, 0.22, 1);
+  will-change: opacity, filter;
+}
+
+.hero-pane[data-pane-from-emphasis="side"][data-pane-to-emphasis="center"] .hero-pane-asset-layer[data-asset-role="to"] .hero-pane-image {
+  transition:
+    transform var(--hero-track-duration, 680ms) cubic-bezier(0.18, 0.82, 0.24, 1),
+    filter 180ms cubic-bezier(0.16, 0.8, 0.2, 1),
+    opacity 180ms cubic-bezier(0.2, 0.76, 0.22, 1);
+}
+
+.hero-pane[data-pane-from-emphasis="center"][data-pane-to-emphasis="side"] .hero-pane-asset-layer[data-asset-role="from"] .hero-pane-image,
+.hero-pane[data-pane-from-emphasis="side"][data-pane-to-emphasis="side"] .hero-pane-asset-layer[data-asset-role="from"] .hero-pane-image {
+  transition:
+    transform calc(var(--hero-track-duration, 680ms) - 56ms) cubic-bezier(0.18, 0.82, 0.24, 1),
+    filter 120ms cubic-bezier(0.2, 0.76, 0.22, 1),
+    opacity 180ms cubic-bezier(0.2, 0.76, 0.22, 1);
+}
+
+.hero-pane[data-pane-from-emphasis="center"][data-pane-to-emphasis="side"] .hero-pane-asset-layer[data-asset-role="from"],
+.hero-pane[data-pane-from-emphasis="side"][data-pane-to-emphasis="side"] .hero-pane-asset-layer[data-asset-role="from"] {
+  transition:
+    opacity 220ms cubic-bezier(0.2, 0.76, 0.22, 1),
+    filter 120ms cubic-bezier(0.2, 0.76, 0.22, 1);
+}
+
+.hero-track[data-track-state="next"] .hero-track-pane[data-frame-position="active"] .hero-pane-center .hero-pane-overlay,
+.hero-track[data-track-state="prev"] .hero-track-pane[data-frame-position="active"] .hero-pane-center .hero-pane-overlay {
+  opacity: var(--hero-center-overlay-opacity);
 }
 
 .black-hole-enter {
@@ -583,6 +768,14 @@ img {
     grid-template-columns: 1fr;
   }
 
+  .hero-track,
+  .hero-static-layer,
+  .hero-track-pane,
+  .hero-track-frame-shell {
+    height: var(--hero-height-tablet);
+    min-height: var(--hero-height-tablet);
+  }
+
   .hero-pane-overlay[data-pane-tone="center"] {
     background: linear-gradient(90deg, rgb(0 0 0 / 58%) 0%, rgb(0 0 0 / 18%) 34%, rgb(0 0 0 / 28%) 100%);
   }
@@ -628,7 +821,8 @@ img {
 
   .hero-pane-image,
   .hero-pane-content,
-  .hero-pane-overlay {
+  .hero-pane-overlay,
+  .hero-track-frame-shell {
     transition: none !important;
   }
 }
