@@ -21,7 +21,7 @@ export default async function AboutPage({
     <>
       <PageIntro title={aboutPage.introTitle} />
       <section className="bg-white py-12 md:py-16">
-        <div className="mx-auto max-w-[1100px] px-4 sm:px-6 lg:px-0">
+        <div className="site-nav-frame">
           <FadeIn>
             <p className="mb-8 max-w-[760px] text-[14px] leading-7 text-neutral-600 md:mb-10">
               {aboutPage.introBody}

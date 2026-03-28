@@ -47,7 +47,7 @@ export function SiteHeader({
                     rel={isExternal ? "noreferrer" : undefined}
                     style={item.key === "project" ? { color: "#f04034" } : undefined}
                     className={cn(
-                      "group relative text-[10px] leading-none font-semibold tracking-[0.03em] text-[var(--page-ink)] uppercase motion-link hover:text-neutral-500",
+                      "type-nav group relative text-[var(--page-ink)] uppercase motion-link hover:text-neutral-500",
                       item.key === "project" && "text-[#f04034] hover:text-[#f04034]",
                       active && "text-[#ce3f36]",
                     )}
@@ -135,7 +135,7 @@ export function SiteHeader({
                       onClick={() => setOpen(false)}
                       style={item.key === "project" ? { color: "#f04034" } : undefined}
                       className={cn(
-                        "block border-b border-neutral-100 py-4 text-[13px] font-semibold tracking-[0.08em] text-[var(--page-ink)] uppercase motion-link hover:text-neutral-500",
+                        "block border-b border-neutral-100 py-4 text-[12px] leading-none font-semibold tracking-[0.05em] text-[var(--page-ink)] uppercase motion-link hover:text-neutral-500",
                         item.key === "project" && "text-[#f04034]",
                         active && "text-[#ce3f36]",
                       )}

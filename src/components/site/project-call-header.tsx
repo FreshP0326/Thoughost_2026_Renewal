@@ -6,7 +6,7 @@ const submitButtonClass =
 export function ProjectCallHeader({ project }: { project: ProjectCallViewModel }) {
   return (
     <section className="border-b border-neutral-200 bg-white">
-      <div className="mx-auto max-w-[1100px] px-4 py-12 sm:px-6 lg:px-0 lg:py-16">
+      <div className="site-nav-frame py-12 lg:py-16">
         <p className="text-[11px] font-semibold tracking-[0.14em] text-neutral-500">{project.sectionLabel}</p>
         <div className="mt-5 grid gap-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(300px,0.9fr)] lg:items-end">
           <div>

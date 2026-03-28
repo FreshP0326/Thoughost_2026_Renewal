@@ -21,7 +21,7 @@ export function ProjectList({
 }) {
   return (
     <section className="bg-white py-12 md:py-16">
-      <StaggerGroup className="mx-auto max-w-[1100px] space-y-6 px-4 sm:px-6 lg:px-0" density="base">
+      <StaggerGroup className="site-nav-frame space-y-6" density="base">
         {items.map((item, index) => (
           <StaggerItem key={item.slug}>
             <Link

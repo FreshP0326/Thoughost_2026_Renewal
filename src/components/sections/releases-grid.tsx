@@ -21,7 +21,7 @@ export function ReleasesGridSection({
 }) {
   return (
     <section id="releases" className="bg-[#f2f2f2] pt-[40px] pb-[50px] md:pt-[44px] md:pb-[56px]">
-      <div className="site-content-frame">
+      <div className="site-nav-frame">
         <FadeIn>
           <SectionHeading title={title} />
         </FadeIn>
@@ -43,15 +43,15 @@ export function ReleasesGridSection({
                   />
                 </div>
                 <div className="motion-overlay absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/72 via-black/22 to-transparent p-3 opacity-0 group-hover:opacity-100">
-                  <p className="text-[13px] font-semibold text-white">{item.title}</p>
-                  <p className="mt-1 text-[11px] text-white/80">{item.artistName}</p>
+                  <p className="text-[15px] leading-[1.2] font-semibold tracking-[-0.018em] text-white">{item.title}</p>
+                  <p className="mt-1 text-[12px] leading-[1.35] font-medium text-white/84">{item.artistName}</p>
                 </div>
               </Link>
             </StaggerItem>
           ))}
         </StaggerGroup>
         <FadeIn className="mt-[8px] flex justify-end" delay={0.08}>
-          <Link href={withLocale(locale, "/releases")} className="text-[10px] font-semibold tracking-[0.03em] text-[#101010] uppercase motion-surface hover:text-neutral-500">
+          <Link href={withLocale(locale, "/releases")} className="type-nav text-[#101010] uppercase motion-surface hover:text-neutral-500">
             {moreLabel} →
           </Link>
         </FadeIn>

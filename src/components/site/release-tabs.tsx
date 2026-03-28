@@ -34,7 +34,7 @@ export function ReleaseTabs({
 
   return (
     <div className="bg-[#f2f2f2]">
-      <div className="mx-auto max-w-[1100px] px-4 pt-10 sm:px-6 lg:px-0">
+      <div className="site-nav-frame pt-10">
         <div className="flex flex-wrap gap-4 border-b border-neutral-300 pb-4">
           {filterKeys.map((filter) => (
             <button

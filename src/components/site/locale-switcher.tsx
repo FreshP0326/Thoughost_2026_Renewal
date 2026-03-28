@@ -66,10 +66,10 @@ export function LocaleSwitcher({
                   key={entry.key}
                   type="button"
                   onClick={goSystemLocale}
-                  className="motion-surface flex w-full items-center justify-between px-4 py-3 text-left text-[12px] font-medium text-[var(--page-ink)] hover:bg-neutral-100"
+                  className="motion-surface flex w-full items-center justify-between px-4 py-3 text-left text-[13px] leading-none font-medium text-[var(--page-ink)] hover:bg-neutral-100"
                 >
                   <span>{entry.label}</span>
-                  <span className="text-[10px] tracking-[0.08em] text-neutral-500 uppercase">Auto</span>
+                  <span className="type-meta text-neutral-500 uppercase">Auto</span>
                 </button>
               ) : (
                 <Link
@@ -78,13 +78,13 @@ export function LocaleSwitcher({
                   onClick={() => setOpen(false)}
                   aria-current={entry.key === locale ? "page" : undefined}
                   className={cn(
-                    "motion-surface flex items-center justify-between px-4 py-3 text-[12px] font-medium hover:bg-neutral-100",
+                    "motion-surface flex items-center justify-between px-4 py-3 text-[13px] leading-none font-medium hover:bg-neutral-100",
                     entry.key === locale ? "bg-neutral-100 text-[var(--page-ink)]" : "text-[var(--page-ink-soft)]",
                   )}
                 >
                   <span>{entry.label}</span>
                   {entry.key === locale ? (
-                    <span className="text-[10px] font-semibold tracking-[0.08em] text-[var(--page-ink)] uppercase">Now</span>
+                    <span className="type-meta text-[var(--page-ink)] uppercase">Now</span>
                   ) : null}
                 </Link>
               ),

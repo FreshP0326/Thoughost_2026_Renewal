@@ -21,6 +21,7 @@ export function PageShell({
   const navigation = getNavigation(locale);
   const socialLinks = getSocialLinks();
   const footer = getFooter(locale);
+  const isHomeRoute = pathname === `/${locale}` || pathname === `/${locale}/`;
 
   return (
     <>
@@ -43,6 +44,7 @@ export function PageShell({
         followUsLabel={footer.followUsLabel}
         quote={footer.quote}
         copyrightText={footer.copyrightText}
+        alignToHero={isHomeRoute}
       />
       <BackToTop />
     </>

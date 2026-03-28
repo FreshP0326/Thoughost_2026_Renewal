@@ -12,7 +12,7 @@ export default function NewsArticleNotFound() {
 
   return (
     <section className="bg-white py-18 md:py-24">
-      <div className="mx-auto max-w-[1100px] px-4 sm:px-6 lg:px-0">
+      <div className="site-nav-frame">
         <FadeIn>
           <div className="max-w-[620px] border-t border-[var(--page-divider)] pt-6">
             <p className="text-[11px] leading-none font-semibold tracking-[0.08em] text-neutral-500 uppercase">404</p>

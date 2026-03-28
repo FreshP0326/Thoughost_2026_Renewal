@@ -18,8 +18,8 @@ export function NewsList({
   if (!items.length) {
     return (
       <section className="bg-white py-12 md:py-16">
-        <div className="mx-auto max-w-[1100px] border-t border-[var(--page-divider)] px-4 pt-6 sm:px-6 lg:px-0">
-          <p className="text-[14px] leading-7 text-neutral-500">{emptyLabel}</p>
+        <div className="site-nav-frame border-t border-[var(--page-divider)] pt-6">
+          <p className="type-body">{emptyLabel}</p>
         </div>
       </section>
     );
@@ -27,7 +27,7 @@ export function NewsList({
 
   return (
     <section className="bg-white py-10 md:py-14">
-      <div className="mx-auto max-w-[1100px] px-4 sm:px-6 lg:px-0">
+      <div className="site-nav-frame">
         <div className="border-t border-[var(--page-divider)]">
           {items.map((item, index) => {
             const href = item.isExternal ? item.href : withLocale(locale, item.href);
@@ -43,19 +43,19 @@ export function NewsList({
                 >
                   <div className="space-y-2">
                     {item.pinned ? (
-                      <div className="inline-flex border border-[var(--page-ink)] px-2 py-[3px] text-[10px] font-semibold tracking-[0.08em] text-[var(--page-ink)] uppercase">
+                      <div className="type-meta inline-flex border border-[var(--page-ink)] px-2 py-[3px] text-[var(--page-ink)] uppercase">
                         Pin
                       </div>
                     ) : null}
-                    <p className="text-[11px] leading-none font-semibold tracking-[0.08em] text-neutral-500 uppercase">
+                    <p className="type-meta text-neutral-500 uppercase">
                       {item.dateLabel}
                     </p>
                   </div>
                   <div className="min-w-0 space-y-3">
-                    <h2 className="max-w-[720px] text-[22px] leading-[1.08] font-semibold tracking-[-0.04em] text-[var(--page-ink)] motion-surface group-hover:text-neutral-600 md:text-[31px]">
+                    <h2 className="max-w-[720px] text-[24px] leading-[1.1] font-semibold tracking-[-0.032em] text-[var(--page-ink)] motion-surface group-hover:text-neutral-600 md:text-[30px]">
                       {item.title}
                     </h2>
-                    <p className="max-w-[700px] text-[14px] leading-7 text-neutral-600 md:text-[15px]">{item.summary}</p>
+                    <p className="type-summary max-w-[700px]">{item.summary}</p>
                   </div>
                   {item.coverImage ? (
                     <div className="hidden md:block">

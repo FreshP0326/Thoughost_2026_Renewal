@@ -18,7 +18,7 @@ function SocialIcon({ iconKey, label, dark = false }: { iconKey: string; label: 
     );
   }
 
-  return <span className={cn("text-[11px] font-semibold uppercase", dark && "text-white")}>{label.slice(0, 2)}</span>;
+  return <span className={cn("text-[11px] leading-none font-medium uppercase", dark && "text-white")}>{label.slice(0, 2)}</span>;
 }
 
 export function SocialLinks({

@@ -6,7 +6,7 @@ const submitButtonClass =
 export function ProjectCallCta({ project }: { project: ProjectCallViewModel }) {
   return (
     <section className="bg-[#f3f3f3]">
-      <div className="mx-auto max-w-[1100px] px-4 py-12 sm:px-6 lg:px-0 lg:py-14">
+      <div className="site-nav-frame py-12 lg:py-14">
         <div className="grid gap-8 border-t border-[#101010] pt-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
           <div>
             <h2 className="text-[30px] leading-[1.04] font-semibold tracking-[-0.04em] text-[#101010] md:text-[42px]">
