@@ -20,6 +20,7 @@ export function PageShell({
   const pathname = usePathname();
   const navigation = getNavigation(locale);
   const socialLinks = getSocialLinks();
+  const headerSocialLinks = socialLinks.filter((link) => link.iconKey !== "bilibili" && link.iconKey !== "dizzylab");
   const footer = getFooter(locale);
   const isHomeRoute = pathname === `/${locale}` || pathname === `/${locale}/`;
   const isReleaseDetailRoute = Boolean(pathname?.match(new RegExp(`^/${locale}/releases/[^/]+/?$`)));
@@ -31,7 +32,7 @@ export function PageShell({
         locale={locale}
         pathname={pathname ?? `/${locale}`}
         navigation={navigation}
-        socialLinks={socialLinks}
+        socialLinks={headerSocialLinks}
       />
       <main className="flex-1">
         <PageTransitionShell>{children}</PageTransitionShell>
