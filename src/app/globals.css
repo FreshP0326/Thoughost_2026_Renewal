@@ -22,9 +22,13 @@
   --header-edge-block: clamp(10px, 0.9375vw, 24px);
   --header-control-size: clamp(32px, 1.40625vw, 36px);
   --header-logo-height: clamp(26px, 1.25vw, 32px);
-  --header-nav-gap: clamp(26px, 1.484375vw, 38px);
+  --header-nav-gap: clamp(24px, 1.5625vw, 40px);
+  --header-nav-text-size: clamp(11.8px, 0.7864583333vw, 15.1px);
   --header-cluster-gap: clamp(10px, 0.46875vw, 12px);
-  --header-divider-height: clamp(15px, 0.546875vw, 18px);
+  --header-divider-height: clamp(15px, 0.9765625vw, 25px);
+  --header-social-gap: clamp(10px, 1.015625vw, 26px);
+  --header-social-icon-size: clamp(10px, 0.46875vw, 12px);
+  --header-soundcloud-icon-size: clamp(12px, 0.5729166667vw, 14px);
   --hero-height-desktop: clamp(500px, 25.3125vw, 648px);
   --hero-height-tablet: 430px;
   --hero-height-mobile: 340px;
@@ -70,19 +74,22 @@
   --releases-section-top: clamp(40px, 2.9296875vw, 75px);
   --releases-heading-size: clamp(20px, 1.140625vw, 29.2px);
   --release-cover-size: clamp(164px, 10.859375vw, 278px);
-  --release-cover-gap: clamp(4px, 0.46875vw, 12px);
+  --release-cover-gap: clamp(4px, 1.015625vw, 26px);
   --footer-muted: #909090;
-  --footer-nav-size: clamp(13px, 0.671875vw, 17.2px);
+  --footer-nav-size: clamp(10px, 0.46875vw, 12px);
   --footer-email-size: clamp(10px, 0.45703125vw, 11.7px);
   --footer-meta-size: clamp(10px, 0.45703125vw, 11.7px);
   --footer-icon-size: clamp(18px, 1.015625vw, 26px);
+  --footer-social-gap: clamp(10px, 1.015625vw, 26px);
+  --footer-social-icon-size: clamp(10px, 0.46875vw, 12px);
+  --footer-soundcloud-icon-size: clamp(12px, 0.546875vw, 14px);
   --footer-logo-height: clamp(20px, 1.2890625vw, 33px);
   --footer-logo-top-gap: clamp(28px, 2.265625vw, 58px);
-  --footer-logo-bottom-gap: clamp(34px, 3.046875vw, 78px);
+  --footer-logo-bottom-gap: clamp(24px, 1.4453125vw, 37px);
   --footer-divider-bottom-gap: clamp(34px, 3.046875vw, 78px);
   --footer-icon-bg: #a7a7a7;
-  --hero-dot-width: 38px;
-  --hero-dot-height: 8px;
+  --hero-dot-width: 21px;
+  --hero-dot-height: 3px;
   --hero-autoplay-duration: 6s;
   --hero-side-content-opacity: 0.8;
   --hero-side-content-offset: 4px;
@@ -104,8 +111,8 @@
   --motion-ease-out: ease-out;
   --motion-ease-emphasized: cubic-bezier(0.22, 1, 0.36, 1);
   --site-font-body: var(--font-archivo), var(--font-noto-sans-jp), var(--font-noto-sans-sc), sans-serif;
-  --site-font-display: var(--font-poppins), var(--font-archivo), var(--font-noto-sans-jp), var(--font-noto-sans-sc), sans-serif;
-  --type-nav-size: clamp(11px, 0.5703125vw, 14.6px);
+  --site-font-display: var(--font-archivo), var(--font-noto-sans-jp), var(--font-noto-sans-sc), sans-serif;
+  --type-nav-size: clamp(8px, 0.390625vw, 10px);
   --type-nav-weight: 600;
   --type-meta-size: 11px;
   --type-meta-weight: 500;
@@ -161,6 +168,13 @@ body {
   letter-spacing: 0.025em;
 }
 
+.site-header-nav-link {
+  font-size: var(--header-nav-text-size);
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: 0.018em;
+}
+
 .type-meta {
   font-size: var(--type-meta-size);
   line-height: 1.15;
@@ -213,6 +227,7 @@ body {
   display: grid;
   width: 100%;
   column-gap: var(--hero-pane-gap);
+  background: #ffffff;
   grid-template-columns:
     minmax(0, var(--hero-side-width))
     minmax(0, var(--hero-center-max))
@@ -455,24 +470,38 @@ img {
   transform-origin: left center;
   will-change: transform, opacity;
   border-radius: 999px;
-  box-shadow: 0 0 16px rgb(255 255 255 / 0.08);
-  background-image: linear-gradient(90deg, rgb(255 255 255 / 0.98) 0%, rgb(255 255 255 / 0.86) 100%);
+  box-shadow:
+    0 0 10px rgb(255 255 255 / 0.28),
+    0 0 18px rgb(255 255 255 / 0.14);
+  background-image: linear-gradient(90deg, rgb(255 255 255 / 0.98) 0%, rgb(255 255 255 / 0.92) 56%, rgb(255 255 255 / 0.74) 100%);
 }
 
 .hero-progress-track {
   border-radius: 999px;
-  background: rgb(255 255 255 / 12%);
+  background: rgb(255 255 255 / 0.08);
   backdrop-filter: blur(1px);
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.05);
+  box-shadow:
+    inset 0 0 0 1px rgb(255 255 255 / 0.04),
+    0 0 0 1px rgb(0 0 0 / 0.03);
   transition:
     background-color 180ms linear,
     box-shadow 180ms linear,
-    opacity 180ms linear;
+    opacity 180ms linear,
+    filter 180ms linear;
 }
 
 .hero-progress-track[data-progress-active="true"] {
-  background: rgb(255 255 255 / 20%);
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.1);
+  background: rgb(255 255 255 / 0.22);
+  box-shadow:
+    inset 0 0 0 1px rgb(255 255 255 / 0.12),
+    0 0 18px rgb(255 255 255 / 0.1);
+  filter: brightness(1.06);
+}
+
+.hero-progress-sheen {
+  background: linear-gradient(90deg, transparent 0%, rgb(255 255 255 / 0.04) 36%, rgb(255 255 255 / 0.66) 52%, transparent 72%);
+  mix-blend-mode: screen;
+  animation: hero-progress-sheen 1.15s cubic-bezier(0.22, 1, 0.36, 1) infinite;
 }
 
 .hero-indicators {
@@ -485,6 +514,7 @@ img {
 
 .hero-track-viewport {
   position: relative;
+  background: #ffffff;
 }
 
 .hero-static-layer {
@@ -496,6 +526,8 @@ img {
 
 .hero-static-layer.is-hidden {
   pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
 }
 
 .hero-track {
@@ -606,7 +638,7 @@ img {
 .hero-stage-veil {
   pointer-events: none;
   background:
-    linear-gradient(180deg, rgb(0 0 0 / 0.03) 0%, rgb(0 0 0 / 0.01) 24%, transparent 54%),
+    linear-gradient(180deg, transparent 0%, rgb(0 0 0 / 0.01) 24%, transparent 54%),
     linear-gradient(90deg, rgb(255 255 255 / 0.02) 0%, transparent 22%, transparent 78%, rgb(255 255 255 / 0.015) 100%);
 }
 
@@ -695,7 +727,7 @@ img {
 
 .hero-mobile-veil {
   background:
-    linear-gradient(180deg, rgb(255 255 255 / 0.05) 0%, transparent 24%),
+    linear-gradient(180deg, transparent 0%, transparent 24%),
     linear-gradient(120deg, rgb(0 0 0 / 0.18) 0%, rgb(0 0 0 / 0.04) 42%, transparent 100%);
   mix-blend-mode: screen;
   pointer-events: none;
@@ -919,6 +951,26 @@ img {
   }
 }
 
+@keyframes hero-progress-sheen {
+  0% {
+    transform: translateX(-128%);
+    opacity: 0;
+  }
+
+  12% {
+    opacity: 0.85;
+  }
+
+  58% {
+    opacity: 0.72;
+  }
+
+  100% {
+    transform: translateX(132%);
+    opacity: 0;
+  }
+}
+
 @keyframes black-hole-enter {
   from {
     opacity: 0;
@@ -989,6 +1041,8 @@ img {
     --header-nav-gap: 26px;
     --header-cluster-gap: 10px;
     --header-divider-height: 15px;
+    --header-social-gap: 14px;
+    --header-social-icon-size: 10px;
     --hero-center-pad-top: 16px;
     --hero-center-pad-right: 16px;
     --hero-center-pad-bottom: 16px;
@@ -1016,13 +1070,16 @@ img {
     --releases-heading-size: 20px;
     --release-cover-size: 164px;
     --release-cover-gap: 4px;
-    --footer-nav-size: 14px;
+    --footer-nav-size: 11px;
     --footer-email-size: 11px;
     --footer-meta-size: 11px;
     --footer-icon-size: 20px;
+    --footer-social-gap: 14px;
+    --footer-social-icon-size: 10px;
+    --footer-soundcloud-icon-size: 12px;
     --footer-logo-height: 24px;
     --footer-logo-top-gap: 32px;
-    --footer-logo-bottom-gap: 40px;
+    --footer-logo-bottom-gap: 28px;
     --footer-divider-bottom-gap: 40px;
     --footer-icon-bg: #a7a7a7;
   }

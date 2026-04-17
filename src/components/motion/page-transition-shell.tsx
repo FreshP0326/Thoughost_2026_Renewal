@@ -4,15 +4,24 @@ import { motion, useReducedMotion } from "framer-motion";
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
 
+import { isSiteHomePath } from "@/lib/locale";
 import { motionTokens, pageOverlay } from "@/lib/motion";
+import type { Locale } from "@/types/site";
 
-export function PageTransitionShell({ children }: { children: ReactNode }) {
+export function PageTransitionShell({
+  children,
+  locale,
+}: {
+  children: ReactNode;
+  locale: Locale;
+}) {
   const pathname = usePathname();
   const shouldReduceMotion = useReducedMotion();
+  const isHomeRoute = isSiteHomePath(pathname, locale);
 
   return (
     <div key={pathname ?? "page"} className="relative min-h-full">
-      {!shouldReduceMotion ? (
+      {!shouldReduceMotion && !isHomeRoute ? (
         <motion.div
           key={`page-overlay-${pathname ?? "page"}`}
           aria-hidden="true"

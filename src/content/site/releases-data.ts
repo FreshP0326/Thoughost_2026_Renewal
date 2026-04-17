@@ -80,6 +80,97 @@ function createUniformArtistTracks(tracks: string[], artist: string) {
 
 export const releases: ReleaseEntry[] = [
   {
+    slug: "thoughts-2",
+    title: {
+      en: "thoughts 2",
+      zh: "thoughts 2",
+      ja: "thoughts 2",
+    },
+    heroTitle: {
+      en: "thoughts\n2",
+      zh: "thoughts\n2",
+      ja: "thoughts\n2",
+    },
+    artistName: "Thoughost",
+    releaseType: "Compilation",
+    releaseDate: "2026.04.26",
+    modelNumber: "THGO-0011",
+    price: {
+      en: "Venue ¥1,500 / Mail order ¥1,980",
+      zh: "场贩 ¥1,500 / 通贩 ¥1,980",
+      ja: "会場 ¥1,500 / 通販 ¥1,980",
+    },
+    store: {
+      en: "M3-2026 Spring venue sale / Mail order page (TBA)",
+      zh: "M3-2026 春场贩 / 通贩页面准备中",
+      ja: "M3-2026春 会場頒布 / 通販ページ準備中",
+    },
+    coverImage: "/images/releases/thoughts-2.png",
+    heroImage: "/images/releases/thoughts-2.png",
+    teaser: {
+      en: "Fourteen tracks drifting through hesitation, afterimages, and pale-green residue as the thoughts series turns further inward.",
+      zh: "14 首曲目沿着迟疑、残像与雾绿余波缓慢推进，让 thoughts 系列进一步向内折叠。",
+      ja: "ためらい、残像、淡いグリーンの余波を14曲でなぞりながら、thoughts シリーズをさらに内側へ折り込んでいく一作。",
+    },
+    summary: {
+      en: `"Discover our own sound."
+
+thoughts 2 is the second chapter in the series, keeping the page and the package equally quiet while the music drifts through hesitation, code, residue, and disappearing light.
+
+Across fourteen tracks, circle members and guests move between fragile melody, suspended tension, and dissolving edges. The result is less a loud statement than a long inward echo.`,
+      zh: `“Discover our own sound.”
+
+《thoughts 2》是这个系列的第二章。它延续了包装与页面都主动后退的姿态，让音乐在迟疑、代码、余波与逐渐消散的光里继续向内推进。
+
+14 首曲目由社团成员与 Guest 共同完成，在脆弱的旋律、悬置的张力与缓慢溶解的边界之间来回移动。它不是一次高声宣告，更像一次很长的内向回响。`,
+      ja: `“Discover our own sound.”
+
+『thoughts 2』はシリーズの第2章です。パッケージもページも一歩引いたまま、音だけがためらい、コード、残響、消えていく光の中をさらに内側へ進みます。
+
+14曲ではサークルメンバーとゲストが、かすかな旋律、宙吊りの緊張、ほどけていく輪郭のあいだを行き来します。大きな宣言というより、長く残る内向きの反響に近い作品です。`,
+    },
+    credits: {
+      mastering: "Joulez",
+      illustrator: "TARA#376",
+      designer: "Konseki Takane",
+    },
+    tracklist: createTracklist([
+      "Fading Echoes",
+      "Fluorescent",
+      "landingfailure.orz",
+      "winding stairs",
+      "stutter and dissolve",
+      "Seven...",
+      "Valkyrie",
+      "循環の果てにて、",
+      "DEPICT CODE",
+      "間",
+      "Drown...",
+      "Southern Barbarian in Oversized Clothes",
+      "Don't Leave Me",
+      "ending",
+    ]),
+    tracks: createDetailedTracks([
+      { number: "01", title: "Fading Echoes", artist: "ARMYTOM" },
+      { number: "02", title: "Fluorescent", artist: "wheatfox" },
+      { number: "03", title: "landingfailure.orz", artist: "nova+z" },
+      { number: "04", title: "winding stairs", artist: "Aki Sz" },
+      { number: "05", title: "stutter and dissolve", artist: "イベライ / Emelia" },
+      { number: "06", title: "Seven...", artist: "sanmal" },
+      { number: "07", title: "Valkyrie", artist: "Joulez" },
+      { number: "08", title: "循環の果てにて、", artist: "潮音きつね" },
+      { number: "09", title: "DEPICT CODE", artist: "Nirotiy" },
+      { number: "10", title: "間", artist: "四度夜 霊" },
+      { number: "11", title: "Drown...", artist: "望月真白" },
+      { number: "12", title: "Southern Barbarian in Oversized Clothes", artist: "Kolaa ft. Money Master" },
+      { number: "13", title: "Don't Leave Me", artist: "Irish Kappa" },
+      { number: "14", title: "ending", artist: "VeetaCrush" },
+    ]),
+    links: [],
+    specialLink: "https://thoughost.com/special/thoughts-2/1",
+    isFeatured: true,
+  },
+  {
     slug: "2000-invasion",
     title: {
       en: "2000% INVASION",

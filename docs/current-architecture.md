@@ -58,4 +58,5 @@ Important:
 - Static export is enabled with `output: "export"` in `next.config.ts`.
 - `NEXT_PUBLIC_BASE_PATH` is supported for subpath deployments.
 - `NEXT_PUBLIC_SITE_URL` is used for metadata base URLs.
-- The root entry currently uses a client-side redirect to the default locale and also renders a fallback link.
+- The root entry renders the default English home page directly.
+- No client-side redirect is required for the root route.

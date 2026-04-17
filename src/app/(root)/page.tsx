@@ -1,11 +1,22 @@
-import Link from "next/link";
+import { HomeLanding } from "@/components/site/home-landing";
+import { getDictionary } from "@/content/site/dictionaries";
+import { getNewsPreview } from "@/server/services/news-service";
+import { getHero, getHomeReleases } from "@/server/services/site-service";
 
 export default function RootPage() {
+  const locale = "en";
+  const dictionary = getDictionary(locale);
+
   return (
-    <main className="flex min-h-screen items-center justify-center bg-white px-6">
-      <Link href="/en" className="text-sm font-medium text-neutral-700 underline-offset-4 hover:text-neutral-900 hover:underline">
-        Continue to Thoughost
-      </Link>
-    </main>
+    <HomeLanding
+      locale={locale}
+      heroSlides={getHero(locale)}
+      newsTitle={dictionary.home.news}
+      newsMoreLabel={dictionary.home.more}
+      newsItems={getNewsPreview(locale)}
+      releasesTitle={dictionary.home.releases}
+      releasesMoreLabel={dictionary.home.more}
+      releaseItems={getHomeReleases(locale)}
+    />
   );
 }

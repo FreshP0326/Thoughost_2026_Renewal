@@ -408,7 +408,6 @@ export type ProjectCallRuleGroup = {
 export type ProjectCallViewModel = {
   sectionLabel: string;
   title: string;
-  summary: string;
   intro: string;
   deadlineLabel: string;
   deadline: string;
@@ -416,7 +415,7 @@ export type ProjectCallViewModel = {
   release: string;
   submitLabel: string;
   submitHref: string;
-  projectBriefLabel: string;
+  detailedRulesHeading: string;
   projectRulesLabel: string;
   projectRules: string[];
   commonRulesHeading: string;
@@ -427,10 +426,6 @@ export type ProjectCallViewModel = {
   rewards: ProjectCallRuleGroup;
   judgment: ProjectCallRuleGroup;
   warning: string;
-  finalCtaTitle: string;
-  finalCtaBody: string;
-  fallbackLabel: string;
-  contactEmail: string;
 };
 
 export type BlackHolePageViewModel = {

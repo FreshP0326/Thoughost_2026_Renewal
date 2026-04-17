@@ -56,7 +56,7 @@
 
 .heroTitle {
   margin: 0;
-  font-family: var(--font-poppins), sans-serif;
+  font-family: var(--site-font-display);
   font-size: clamp(50px, 4vw, 62px);
   line-height: 0.94;
   font-weight: 700;
@@ -301,7 +301,7 @@
 
 .discTitle {
   margin: -2px 0 28px;
-  font-family: var(--font-poppins), sans-serif;
+  font-family: var(--site-font-display);
   font-size: clamp(44px, 3.5vw, 56px);
   line-height: 0.96;
   font-weight: 700;
@@ -372,7 +372,7 @@
 
 .infoHeading {
   margin: 0 0 22px;
-  font-family: var(--font-poppins), sans-serif;
+  font-family: var(--site-font-display);
   font-size: 18px;
   line-height: 1;
   font-weight: 700;

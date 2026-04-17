@@ -22,6 +22,37 @@ part of the current rendered site path.
 - `src/app/api/trpc/[trpc]` intentionally contains no `route.ts` yet; its local
   `README.md` is a placeholder to avoid implying that a live endpoint already exists.
 
+## Exit criteria
+
+Each reserved area must be handled with one of two outcomes within 90 days of the next architecture review:
+
+- keep it and connect it to a real production read path, with handler, consumer, and tests
+- remove it, including generated artifacts, if no production consumer is scheduled
+
+### `prisma/**`
+
+- Keep only if DB-backed reads are scheduled for the rendered site within 90 days.
+- Before keeping it, define which `src/server/services/**` reads will move to Prisma and add tests for those reads.
+- Otherwise delete the schema, seed, and any generated Prisma output tied to that unused path.
+
+### `src/server/db.ts`
+
+- Keep only if an actual runtime consumer imports it from a production read path within 90 days.
+- Before keeping it, document which service or route depends on it and add runtime coverage.
+- Otherwise remove it so the repo no longer implies a live DB client.
+
+### `src/server/api/**`
+
+- Keep only if a real API contract will be exposed within 90 days.
+- Before keeping it, add a connected route handler, at least one runtime consumer, and tests for the boundary.
+- Otherwise remove the unused routers and procedures.
+
+### `src/app/api/trpc/[trpc]`
+
+- Keep only if a real App Router handler will be added within 90 days.
+- Before keeping it, add `route.ts`, connect it to `src/server/api/**`, and document the supported endpoint.
+- Otherwise remove the placeholder directory so the repo stops implying an imminent live endpoint.
+
 ## Rules for future changes
 
 If you add a new locale or change a localized field in `src/content/**`, update:

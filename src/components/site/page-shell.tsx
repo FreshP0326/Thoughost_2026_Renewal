@@ -7,6 +7,7 @@ import { BackToTop } from "@/components/site/back-to-top";
 import { DevRuntimeGuard } from "@/components/site/dev-runtime-guard";
 import { SiteFooter } from "@/components/site/footer";
 import { SiteHeader } from "@/components/site/header";
+import { isSiteHomePath } from "@/lib/locale";
 import { getFooter, getNavigation, getSocialLinks } from "@/server/services/site-service";
 import type { Locale } from "@/types/site";
 
@@ -22,7 +23,7 @@ export function PageShell({
   const socialLinks = getSocialLinks();
   const headerSocialLinks = socialLinks.filter((link) => link.iconKey !== "bilibili" && link.iconKey !== "dizzylab");
   const footer = getFooter(locale);
-  const isHomeRoute = pathname === `/${locale}` || pathname === `/${locale}/`;
+  const isHomeRoute = isSiteHomePath(pathname, locale);
   const isReleaseDetailRoute = Boolean(pathname?.match(new RegExp(`^/${locale}/releases/[^/]+/?$`)));
 
   return (
@@ -35,7 +36,7 @@ export function PageShell({
         socialLinks={headerSocialLinks}
       />
       <main className="flex-1">
-        <PageTransitionShell>{children}</PageTransitionShell>
+        <PageTransitionShell locale={locale}>{children}</PageTransitionShell>
       </main>
       <SiteFooter
         locale={locale}

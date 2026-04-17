@@ -19,6 +19,10 @@ export function withLocale(locale: Locale, href: string) {
   return `/${locale}${href === "/" ? "" : href}`;
 }
 
+export function isSiteHomePath(pathname: string | null | undefined, locale: Locale) {
+  return pathname === "/" || pathname === `/${locale}` || pathname === `/${locale}/`;
+}
+
 export function stripLocalePrefix(pathname: string) {
   return pathname.replace(/^\/(en|zh|ja)(?=\/|$)/, "") || "";
 }

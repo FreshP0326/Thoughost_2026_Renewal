@@ -58,6 +58,17 @@ function castReleaseType(value: string): ReleaseType {
   return value as ReleaseType;
 }
 
+function toReleaseGridItem(locale: Locale, item: ReleaseEntry): ReleaseGridItem {
+  return {
+    slug: item.slug,
+    title: pickText(locale, item.title),
+    artistName: item.artistName,
+    releaseType: castReleaseType(item.releaseType),
+    releaseDateLabel: item.releaseDate,
+    coverImage: item.coverImage,
+  };
+}
+
 function inferPurchaseKind(platform: string): ReleasePurchaseLinkKind {
   const lowered = platform.toLowerCase();
 
@@ -618,27 +629,15 @@ export function getNews(locale: Locale): NewsCardItem[] {
 }
 
 export function getReleases(locale: Locale): ReleaseGridItem[] {
-  return releases.map((item) => ({
-    slug: item.slug,
-    title: pickText(locale, item.title),
-    artistName: item.artistName,
-    releaseType: castReleaseType(item.releaseType),
-    releaseDateLabel: item.releaseDate,
-    coverImage: item.coverImage,
-  }));
+  return releases.map((item) => toReleaseGridItem(locale, item));
+}
+
+export function getHomeReleases(locale: Locale, limit = 10): ReleaseGridItem[] {
+  return releases.slice(0, limit).map((item) => toReleaseGridItem(locale, item));
 }
 
 export function getFeaturedReleases(locale: Locale): ReleaseGridItem[] {
-  const featured = releases.filter((item) => item.isFeatured);
-
-  return featured.map((item) => ({
-    slug: item.slug,
-    title: pickText(locale, item.title),
-    artistName: item.artistName,
-    releaseType: castReleaseType(item.releaseType),
-    releaseDateLabel: item.releaseDate,
-    coverImage: item.coverImage,
-  }));
+  return getHomeReleases(locale);
 }
 
 export function getReleaseBySlug(locale: Locale, slug: string): ReleaseDetailViewModel | null {
@@ -700,7 +699,6 @@ export function getProjectCall(locale: Locale): ProjectCallViewModel {
   return {
     sectionLabel: pickText(locale, projectCall.labels.section),
     title: pickText(locale, projectCall.title),
-    summary: pickText(locale, projectCall.summary),
     intro: pickText(locale, projectCall.intro),
     deadlineLabel: pickText(locale, projectCall.labels.deadline),
     deadline: pickText(locale, projectCall.deadline),
@@ -708,7 +706,7 @@ export function getProjectCall(locale: Locale): ProjectCallViewModel {
     release: pickText(locale, projectCall.release),
     submitLabel: pickText(locale, projectCall.labels.submit),
     submitHref: projectCall.submitHref,
-    projectBriefLabel: pickText(locale, projectCall.labels.projectBrief),
+    detailedRulesHeading: pickText(locale, projectCall.labels.detailedRules),
     projectRulesLabel: pickText(locale, projectCall.labels.projectRules),
     projectRules: projectCall.projectRules.map((rule) => pickText(locale, rule)),
     commonRulesHeading: pickText(locale, projectCall.labels.commonRules),
@@ -739,10 +737,6 @@ export function getProjectCall(locale: Locale): ProjectCallViewModel {
       body: pickText(locale, projectCall.judgment.body),
     },
     warning: pickText(locale, projectCall.labels.warning),
-    finalCtaTitle: pickText(locale, projectCall.labels.finalCtaTitle),
-    finalCtaBody: pickText(locale, projectCall.labels.finalCtaBody),
-    fallbackLabel: pickText(locale, projectCall.labels.fallback),
-    contactEmail: siteConfig.contactEmail,
   };
 }
 

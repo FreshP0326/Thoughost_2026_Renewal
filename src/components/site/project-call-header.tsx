@@ -9,16 +9,16 @@ export function ProjectCallHeader({ project }: { project: ProjectCallViewModel }
     <section className="border-b border-neutral-200 bg-white">
       <div className="site-nav-frame py-12 lg:py-16">
         <FadeIn y={10} amount={0.12}>
-          <p className="text-[11px] font-semibold tracking-[0.14em] text-neutral-500">{project.sectionLabel}</p>
+          <h1 className="text-[19px] font-semibold tracking-[-0.03em] text-[#101010]">{project.sectionLabel}</h1>
         </FadeIn>
         <div className="mt-5 grid gap-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(300px,0.9fr)] lg:items-end">
           <FadeIn y={14} amount={0.12}>
             <div>
-              <h1 className="max-w-[720px] text-[34px] leading-[0.98] font-semibold tracking-[-0.05em] text-[#101010] md:text-[56px]">
+              <h2 className="max-w-[720px] text-[34px] leading-[0.98] font-semibold tracking-[-0.05em] text-[#101010] md:text-[56px]">
                 {project.title}
-              </h1>
+              </h2>
               <p className="mt-5 max-w-[720px] text-[15px] leading-7 text-neutral-700 md:text-[16px]">
-                {project.summary}
+                {project.intro}
               </p>
             </div>
           </FadeIn>

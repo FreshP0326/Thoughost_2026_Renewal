@@ -384,6 +384,7 @@ function HeroProgressBar({
           transition: active ? "none" : "opacity 180ms linear, transform 180ms linear",
         }}
       />
+      {active ? <span className="hero-progress-sheen absolute inset-y-0 left-0 w-[52%]" aria-hidden="true" /> : null}
     </span>
   );
 }
@@ -527,8 +528,47 @@ function AnimatedDesktopPane({
           }}
           transition={{ duration: centerContentDuration, delay: centerContentDelay, ease: motionEasing.soft }}
         >
-          <HeroHeadline slide={slide} includeSubtitle />
-          <HeroFooter slide={slide} />
+          <motion.div
+            initial={{
+              opacity: fromEmphasis === "center" ? 1 : 0,
+              x: fromEmphasis === "center" ? 0 : -44,
+              clipPath: fromEmphasis === "center" ? "inset(0% 0% 0% 0%)" : "inset(0% 100% 0% 0%)",
+              filter: fromEmphasis === "center" ? "blur(0px)" : "blur(4px)",
+            }}
+            animate={{
+              opacity: toEmphasis === "center" ? 1 : 0,
+              x: toEmphasis === "center" ? 0 : 18,
+              clipPath: toEmphasis === "center" ? "inset(0% 0% 0% 0%)" : "inset(0% 0% 0% 0%)",
+              filter: toEmphasis === "center" ? "blur(0px)" : "blur(2px)",
+            }}
+            transition={{
+              duration: transitionMode === "chained" ? 0.46 : 0.56,
+              delay: fromEmphasis === "center" ? 0 : centerContentDelay / 1000,
+              ease: motionEasing.emphasized,
+            }}
+            style={{ willChange: "transform, opacity, clip-path, filter" }}
+          >
+            <HeroHeadline slide={slide} includeSubtitle />
+          </motion.div>
+          <motion.div
+            initial={{
+              opacity: fromEmphasis === "center" ? 1 : 0,
+              x: fromEmphasis === "center" ? 0 : -20,
+              y: fromEmphasis === "center" ? 0 : 8,
+            }}
+            animate={{
+              opacity: toEmphasis === "center" ? 1 : 0,
+              x: toEmphasis === "center" ? 0 : 16,
+              y: toEmphasis === "center" ? 0 : 6,
+            }}
+            transition={{
+              duration: transitionMode === "chained" ? 0.4 : 0.5,
+              delay: fromEmphasis === "center" ? 0.04 : (centerContentDelay / 1000) + 0.08,
+              ease: motionEasing.soft,
+            }}
+          >
+            <HeroFooter slide={slide} />
+          </motion.div>
         </motion.div>
       </motion.div>
 
@@ -1192,9 +1232,9 @@ export function HeroSection({
   };
 
   return (
-    <section className="relative left-1/2 w-screen -translate-x-1/2 overflow-hidden border-b border-[var(--page-divider)] bg-white">
+    <section className="relative left-1/2 -mt-px w-screen -translate-x-1/2 overflow-hidden bg-black">
       <div
-        className="w-screen"
+        className="w-screen bg-black"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
       >

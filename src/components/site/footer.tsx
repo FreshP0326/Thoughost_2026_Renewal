@@ -108,7 +108,7 @@ export function SiteFooter({
                 <Image src={withBasePathAsset("/icons/followus.svg")} alt="" width={18} height={18} className="h-[18px] w-[18px] opacity-90" />
                 <span style={{ fontSize: "var(--footer-nav-size)", lineHeight: 1.2, fontWeight: 600 }}>{followUsLabel}</span>
               </div>
-              <div className="flex items-center gap-[8px]">
+              <div className="flex items-center gap-[var(--footer-social-gap)]">
                 {socialLinks.map((item) => (
                   <Link
                     key={item.platform}
@@ -124,7 +124,11 @@ export function SiteFooter({
                       alt=""
                       width={18}
                       height={18}
-                      className="h-[65%] w-[65%] brightness-0"
+                      className="brightness-0"
+                      style={{
+                        width: item.iconKey === "soundcloud" ? "var(--footer-soundcloud-icon-size)" : "var(--footer-social-icon-size)",
+                        height: item.iconKey === "soundcloud" ? "var(--footer-soundcloud-icon-size)" : "var(--footer-social-icon-size)",
+                      }}
                     />
                   </Link>
                 ))}
@@ -134,11 +138,10 @@ export function SiteFooter({
         </div>
         <FadeIn className="mt-0" delay={0.08}>
           <div
-            className="flex flex-col justify-between gap-3 border-t pt-5 leading-[1.45] md:flex-row md:items-center"
+            className="flex flex-col justify-between gap-3 pt-5 leading-[1.45] md:flex-row md:items-center"
             style={{
               marginTop: "var(--footer-logo-bottom-gap)",
               paddingTop: "var(--footer-divider-bottom-gap)",
-              borderColor: "var(--footer-muted)",
               color: "#ffffff",
               fontSize: "var(--footer-meta-size)",
             }}

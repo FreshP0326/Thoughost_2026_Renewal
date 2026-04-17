@@ -5,6 +5,7 @@ import {
   getBlackHolePage,
   getFooter,
   getHero,
+  getHomeReleases,
   getNavigation,
   getNews,
   getPageContent,
@@ -88,7 +89,7 @@ describe("site-service", () => {
     expect(rmdyh?.metrics).toBeUndefined();
     expect(rmdyh?.selectedReleases).toEqual([]);
     expect(nirotiy?.selectedReleases.some((release) => release.releaseSlug === "s-l-v-t-mixture")).toBe(true);
-    expect(nirotiy?.metrics?.latestReleaseDateLabel).toBe("2025.10.26");
+    expect(nirotiy?.metrics?.latestReleaseDateLabel).toBe("2026.04.26");
   });
 
   it("dedupes and sorts selected releases while preserving manual representative track order", () => {
@@ -149,7 +150,18 @@ describe("site-service", () => {
     const jpProject = getProjectCall("ja");
 
     expect(enProject.title).toBe("KAKUSATSU SHOUJO 4");
-    expect(zhProject.deadline).toContain("2026");
+    expect(enProject.intro).toContain("We're looking forward to your creative sound!");
+    expect(enProject.warning).toBe("Failure to adhere to these rules will result in the disqualification of your submission.");
+    expect(enProject.rewards.bullets?.[2]).toContain("PayPal");
+    expect(enProject.rewards.bullets?.[2]).toContain("Amazon Giftcard");
+    expect(zhProject.intro).toContain("一如既往，风格不限");
+    expect(zhProject.intro).not.toBe(enProject.intro);
+    expect(zhProject.deadline).toBe("2026 年 6 月 30 日");
+    expect(zhProject.warning).toBe("请注意，如果您的曲目不符合以上规则，我们将不会进行收录。");
+    expect(zhProject.rewards.bullets?.[2]).toContain("支付宝");
+    expect(jpProject.intro).toContain("いつも通りジャンルは自由です");
+    expect(jpProject.commonRules.musicSubmission.introLabel).toBe("WHAT WE WANT:（サウンドについて）");
+    expect(jpProject.commonRules.musicSubmission.bullets?.[4]).toContain("権利を保持しません");
     expect(jpProject.commonRules.aboutSubmission.requiredInfo).toHaveLength(6);
     expect(jpProject.submitHref).toMatch(/^https:\/\/forms\.gle\//);
   });
@@ -184,10 +196,39 @@ describe("site-service", () => {
   it("returns all releases in descending chronology", () => {
     const releases = getReleases("en");
 
-    expect(releases).toHaveLength(18);
-    expect(releases[0]?.slug).toBe("2000-invasion");
-    expect(releases[1]?.slug).toBe("moonshine-001");
-    expect(releases[17]?.slug).toBe("kakusatsu-shoujo");
+    expect(releases).toHaveLength(19);
+    expect(releases[0]?.slug).toBe("thoughts-2");
+    expect(releases[1]?.slug).toBe("2000-invasion");
+    expect(releases[18]?.slug).toBe("kakusatsu-shoujo");
+  });
+
+  it("returns the latest 10 releases for the home page", () => {
+    const homeReleases = getHomeReleases("en");
+    const allReleases = getReleases("en");
+
+    expect(homeReleases).toHaveLength(10);
+    expect(homeReleases).toEqual(allReleases.slice(0, 10));
+    expect(homeReleases[0]?.slug).toBe("thoughts-2");
+    expect(homeReleases[1]?.slug).toBe("2000-invasion");
+  });
+
+  it("maps thoughts 2 release details and preserves its special entry point", () => {
+    const release = getReleaseBySlug("en", "thoughts-2");
+
+    expect(release).not.toBeNull();
+    expect(release?.releaseDateLabel).toBe("2026.04.26");
+    expect(release?.title).toBe("thoughts 2");
+    expect(release?.summary).toContain("Discover our own sound.");
+    expect(release?.tracksDetailed).toHaveLength(14);
+    expect(release?.tracksDetailed[0]).toMatchObject({
+      number: "01",
+      title: "Fading Echoes",
+      artist: "ARMYTOM",
+    });
+    expect(release?.tracksDetailed[9]?.title).toBe("間");
+    expect(release?.infoFields[0]?.value).toBe("THGO-0011");
+    expect(release?.infoFields[2]?.value).toBe("Venue ¥1,500 / Mail order ¥1,980");
+    expect(release?.specialLink).toBe("https://thoughost.com/special/thoughts-2/1");
   });
 
   it("keeps singles and collaborations distinct", () => {

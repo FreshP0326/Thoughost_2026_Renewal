@@ -1,7 +1,7 @@
 import { HomeLanding } from "@/components/site/home-landing";
 import { getDictionary } from "@/content/site/dictionaries";
 import { assertLocale } from "@/lib/locale";
-import { getFeaturedReleases, getHero } from "@/server/services/site-service";
+import { getHero, getHomeReleases } from "@/server/services/site-service";
 import { getNewsPreview } from "@/server/services/news-service";
 
 export default async function HomePage({
@@ -22,7 +22,7 @@ export default async function HomePage({
       newsItems={getNewsPreview(locale)}
       releasesTitle={dictionary.home.releases}
       releasesMoreLabel={dictionary.home.more}
-      releaseItems={getFeaturedReleases(locale)}
+      releaseItems={getHomeReleases(locale)}
     />
   );
 }

@@ -1,11 +1,17 @@
 import { FadeIn } from "@/components/motion/fade-in";
 import type { ProjectCallRuleGroup } from "@/types/site";
 
-export function ProjectCallRuleGroup({ group }: { group: ProjectCallRuleGroup }) {
+export function ProjectCallRuleGroup({
+  group,
+  hideTitle = false,
+}: {
+  group: ProjectCallRuleGroup;
+  hideTitle?: boolean;
+}) {
   return (
     <FadeIn y={14} amount={0.08}>
       <article className="border-t border-neutral-200 pt-5">
-        <h3 className="text-[16px] font-semibold tracking-[-0.02em] text-[#101010]">{group.title}</h3>
+        {hideTitle ? null : <h3 className="text-[16px] font-semibold tracking-[-0.02em] text-[#101010]">{group.title}</h3>}
         {group.introLabel ? <p className="mt-4 text-[11px] font-semibold tracking-[0.08em] text-neutral-500">{group.introLabel}</p> : null}
         {group.intro ? <p className="mt-2 text-[15px] leading-7 text-neutral-700">{group.intro}</p> : null}
         {group.body ? <p className="mt-4 text-[15px] leading-7 text-neutral-700">{group.body}</p> : null}

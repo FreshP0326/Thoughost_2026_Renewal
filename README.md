@@ -1,6 +1,11 @@
 ## Thoughost
 
-Thoughost is currently implemented as a static-exported `Next.js 16` App Router site. The rendered site reads from local content files under `src/content/**`, then maps that content through server-side view-model helpers in `src/server/services/**` during build.
+Thoughost is a static-exported `Next.js 16` App Router site.
+
+- The production content source of truth is `src/content/**`.
+- The rendered build path is `src/content/** -> src/server/services/** -> src/app/** -> next build -> out/`.
+- The current shipped site supports `en`, `zh`, and `ja`.
+- `Prisma`, `src/server/db.ts`, `src/server/api/**`, and `src/app/api/trpc/[trpc]` are reserved scaffolding only, not live runtime dependencies.
 
 ## Current Architecture
 
@@ -63,7 +68,7 @@ pnpm db:seed
 pnpm dev
 ```
 
-Open `http://localhost:3000`. The root entry renders a fallback link to `/en` and injects a client-side redirect toward the default locale.
+Open `http://localhost:3000`. The root route `/` renders the default English home page directly, while localized routes remain available at `/en`, `/zh`, and `/ja`.
 
 ## Locales
 
@@ -110,7 +115,8 @@ Defined or supported by the current app:
 - `next.config.ts` uses `output: "export"`, so deployment target must be able to serve static HTML/CSS/JS from the generated `out/` directory.
 - Images are configured with `unoptimized: true`, so no server-side image optimizer is required.
 - If deploying under a subpath, set `NEXT_PUBLIC_BASE_PATH` consistently at build time.
-- The root locale redirect currently relies on a client-side script plus a fallback link.
+- The root route renders the default English home page directly and does not depend on a client-side redirect.
+- On GitHub Pages or any subpath deployment, the root page and localized links continue to respect the configured `basePath`.
 
 ## Quality Checks
 

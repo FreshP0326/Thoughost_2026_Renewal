@@ -8,7 +8,7 @@ import { useState } from "react";
 import { LocaleSwitcher } from "@/components/site/locale-switcher";
 import { SiteLogo } from "@/components/site/logo";
 import { SocialLinks } from "@/components/site/social-links";
-import { withLocale } from "@/lib/locale";
+import { isSiteHomePath, withLocale } from "@/lib/locale";
 import { drawerContent, motionEasing, motionTokens } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 import type { Locale, NavItem, SocialIconLink } from "@/types/site";
@@ -26,9 +26,15 @@ export function SiteHeader({
 }) {
   const [open, setOpen] = useState(false);
   const shouldReduceMotion = useReducedMotion();
+  const isHomeRoute = isSiteHomePath(pathname, locale);
 
   return (
-    <header className="site-header z-50 border-b border-[var(--page-divider)] bg-white/96 backdrop-blur-[10px]">
+    <header
+      className={cn(
+        "site-header z-50",
+        isHomeRoute ? "bg-white backdrop-blur-0" : "bg-white/96 backdrop-blur-[10px] border-b border-[var(--page-divider)]",
+      )}
+    >
       <div className="site-header-frame">
         <div
           className="site-header-inner flex min-h-[var(--header-height)] items-center justify-between gap-8 md:px-0"
@@ -49,18 +55,20 @@ export function SiteHeader({
                     rel={isExternal ? "noreferrer" : undefined}
                     style={item.key === "project" ? { color: "#f04034" } : undefined}
                     className={cn(
-                      "type-nav group relative inline-flex h-[var(--header-control-size)] items-center text-[var(--page-ink)] uppercase motion-link hover:text-neutral-500",
+                      "type-nav site-header-nav-link group relative inline-flex h-[var(--header-control-size)] items-center text-[var(--page-ink)] uppercase motion-link hover:text-neutral-500",
                       item.key === "project" && "text-[#f04034] hover:text-[#f04034]",
                       active && "text-[#ce3f36]",
                     )}
                   >
-                    {item.label}
-                    <span
-                      className={cn(
-                        "motion-surface absolute -bottom-[8px] left-0 h-px origin-left bg-current",
-                        active ? "w-full scale-x-100 opacity-100" : "w-full scale-x-0 opacity-0 group-hover:scale-x-100 group-hover:opacity-100",
-                      )}
-                    />
+                    <span className="relative inline-flex items-center">
+                      {item.label}
+                      <span
+                        className={cn(
+                          "motion-surface absolute top-[calc(100%+1px)] left-0 h-px origin-left bg-current",
+                          active ? "w-full scale-x-100 opacity-100" : "w-full scale-x-0 opacity-0 group-hover:scale-x-100 group-hover:opacity-100",
+                        )}
+                      />
+                    </span>
                   </Link>
                 );
               })}
