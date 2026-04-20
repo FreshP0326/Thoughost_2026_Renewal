@@ -4,11 +4,14 @@ import type { ReactNode } from "react";
 
 import { FadeIn } from "@/components/motion/fade-in";
 import { StaggerGroup, StaggerItem } from "@/components/motion/stagger-group";
+import { ThoughtsSpecial } from "@/components/site/thoughts-special";
+import { getThoughtsSpecial } from "@/content/site/thoughts-special";
 import type { Thoughts2Edition, getThoughts2Special } from "@/content/site/thoughts2-special";
 import { withBasePathAsset } from "@/lib/base-path";
 import { withLocale } from "@/lib/locale";
 import type { Locale, ReleaseDetailViewModel } from "@/types/site";
 import { Thoughts2Share } from "@/components/site/thoughts-2-share";
+import { getReleaseBySlug } from "@/server/services/site-service";
 
 import styles from "./thoughts-2-special.module.css";
 
@@ -27,11 +30,20 @@ export function Thoughts2Special({
   const contributors = Array.from(
     new Set(release.tracksDetailed.map((track) => track.artist).filter((artist): artist is string => Boolean(artist))),
   );
+  const linkedThoughtsRelease = page.edition === "3" ? getReleaseBySlug(locale, "thoughts") : null;
+  const linkedThoughtsPage = linkedThoughtsRelease ? getThoughtsSpecial(locale) : null;
 
   return (
     <div className={styles.shell} data-edition={page.edition}>
-      <VersionSwitcher locale={locale} page={page} />
-      <EditionLayout locale={locale} release={release} page={page} contributors={contributors} />
+      {page.editions.length > 1 ? <VersionSwitcher locale={locale} page={page} /> : null}
+      <EditionLayout
+        locale={locale}
+        release={release}
+        page={page}
+        contributors={contributors}
+        linkedThoughtsRelease={linkedThoughtsRelease}
+        linkedThoughtsPage={linkedThoughtsPage}
+      />
     </div>
   );
 }
@@ -41,11 +53,15 @@ function EditionLayout({
   release,
   page,
   contributors,
+  linkedThoughtsRelease,
+  linkedThoughtsPage,
 }: {
   locale: Locale;
   release: ReleaseDetailViewModel;
   page: Thoughts2SpecialData;
   contributors: string[];
+  linkedThoughtsRelease: ReleaseDetailViewModel | null;
+  linkedThoughtsPage: ReturnType<typeof getThoughtsSpecial> | null;
 }) {
   const layouts: Record<Thoughts2Edition, ReactNode> = {
     1: (
@@ -111,10 +127,11 @@ function EditionLayout({
         <OverviewSection locale={locale} release={release} page={page} variant="echo" />
         <AboutSection page={page} variant="echo" />
         <TracklistSection page={page} release={release} variant="echo" emphasis />
-        <section className={styles.echoBottom}>
-          <GallerySection page={page} materials={[page.materials[4], page.materials[3], page.materials[5]]} variant="echo" />
-          <StaffSection page={page} contributors={contributors} variant="echo" />
-        </section>
+        {linkedThoughtsRelease && linkedThoughtsPage ? (
+          <section className={styles.echoThoughtsEmbed}>
+            <ThoughtsSpecial release={linkedThoughtsRelease} page={linkedThoughtsPage} showTitle={false} includeIntro={false} />
+          </section>
+        ) : null}
       </>
     ),
     4: (
@@ -422,12 +439,16 @@ function AboutSection({
   page: Thoughts2SpecialData;
   variant: string;
 }) {
+  const isEcho = variant === "echo";
+  const title = isEcho ? page.echoProductionNotes.title : page.labels.about;
+  const paragraphs = isEcho ? page.echoProductionNotes.paragraphs : page.manifesto;
+
   return (
     <section id="about" className={styles.copyBlock} data-variant={variant}>
-      <h2 className={styles.sectionTitle}>{page.labels.about}</h2>
-      <p className={styles.sectionLabel}>{page.labels.manifesto}</p>
+      <h2 className={styles.sectionTitle}>{title}</h2>
+      {!isEcho ? <p className={styles.sectionLabel}>{page.labels.manifesto}</p> : null}
       <div className={styles.copyText}>
-        {page.manifesto.map((paragraph) => (
+        {paragraphs.map((paragraph) => (
           <p key={paragraph}>{paragraph}</p>
         ))}
       </div>

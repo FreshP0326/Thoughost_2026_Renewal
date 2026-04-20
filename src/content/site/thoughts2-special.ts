@@ -3,6 +3,8 @@ import type { Locale, LocalizedText } from "@/types/site";
 export const thoughts2ReleaseSlug = "thoughts-2";
 
 export const thoughts2Editions = ["1", "2", "3", "4", "5"] as const;
+export const featuredThoughts2Edition = "3" as const;
+const visibleThoughts2Editions = [featuredThoughts2Edition] as const;
 
 export type Thoughts2Edition = (typeof thoughts2Editions)[number];
 
@@ -71,6 +73,42 @@ const sharedManifesto = {
     "このパッケージは大声で主張しません。ためらいながら距離を取り、絵そのものに呼吸を残しています。ページもその節度を守るべきです。",
     "人物、円環の痕跡、洗い流したようなペーパーグリーン。その三つで作品の温度はすでに決まっています。ウェブでは、その温度を動きと順序、そして余白へ引き延ばします。",
     "販売リンクや試聴素材がまだ確定していない部分は、無理に埋めず、Coming Soon として正直に置いておく前提です。",
+  ],
+} satisfies LocalizedParagraphs;
+
+const echoProductionNotesTitle = {
+  en: "制作历程",
+  zh: "制作历程",
+  ja: "制作历程",
+} satisfies LocalizedText;
+
+const echoProductionNotes = {
+  en: [
+    "thoughts 这个系列的想法大约在两年前开始浮现。 我们一直是比较胡来的创作思路，五年间，几乎是想到哪里就做到哪里。 但随着时间的推移，渐渐地也想分享给你属于我们自己的声音。",
+    'thoughts 的创作逻辑是一种逆向思维。 先征集成员们想实现怎样的声音方向，汇总后经过讨论和细微的调整，得出专辑的主题和方向。 这样的好处在于可以不用被主题所限制，可以最大程度的发挥所思所想，专辑也不会过于发散。 可以说是真正的展现出我们的 "thoughts"。',
+    "当然，作为首张专辑，还是不可避免地出现了一些过于命题作文的情况，在未来会逐渐调整。",
+    '总之，thoughts 今后将作为 Thoughost "直接"传达给你们我们所构想声音的系列，也就是所谓的 Thoughost Compilation Series 。 当然，这不意味着 Thoughost 的胡来结束了，我们正准备更尽情的发疯。',
+    '第一张顺理成章地将主题定为了 "rebirth"。 既象征这是 Thoughost 的下一步，也说明了本次整体的声音方向。 听起来有些忧伤，仿佛被灰色笼罩的世界，在这之中抓住了一丝光亮。 虽然是很不具象的画面，但大家都从不同的角度诠释了这一主题。',
+    "更详细的创作幕后，请见下方各位的自我说明。",
+    "感谢你们的支持。",
+  ],
+  zh: [
+    "thoughts 这个系列的想法大约在两年前开始浮现。 我们一直是比较胡来的创作思路，五年间，几乎是想到哪里就做到哪里。 但随着时间的推移，渐渐地也想分享给你属于我们自己的声音。",
+    'thoughts 的创作逻辑是一种逆向思维。 先征集成员们想实现怎样的声音方向，汇总后经过讨论和细微的调整，得出专辑的主题和方向。 这样的好处在于可以不用被主题所限制，可以最大程度的发挥所思所想，专辑也不会过于发散。 可以说是真正的展现出我们的 "thoughts"。',
+    "当然，作为首张专辑，还是不可避免地出现了一些过于命题作文的情况，在未来会逐渐调整。",
+    '总之，thoughts 今后将作为 Thoughost "直接"传达给你们我们所构想声音的系列，也就是所谓的 Thoughost Compilation Series 。 当然，这不意味着 Thoughost 的胡来结束了，我们正准备更尽情的发疯。',
+    '第一张顺理成章地将主题定为了 "rebirth"。 既象征这是 Thoughost 的下一步，也说明了本次整体的声音方向。 听起来有些忧伤，仿佛被灰色笼罩的世界，在这之中抓住了一丝光亮。 虽然是很不具象的画面，但大家都从不同的角度诠释了这一主题。',
+    "更详细的创作幕后，请见下方各位的自我说明。",
+    "感谢你们的支持。",
+  ],
+  ja: [
+    "thoughts 这个系列的想法大约在两年前开始浮现。 我们一直是比较胡来的创作思路，五年间，几乎是想到哪里就做到哪里。 但随着时间的推移，渐渐地也想分享给你属于我们自己的声音。",
+    'thoughts 的创作逻辑是一种逆向思维。 先征集成员们想实现怎样的声音方向，汇总后经过讨论和细微的调整，得出专辑的主题和方向。 这样的好处在于可以不用被主题所限制，可以最大程度的发挥所思所想，专辑也不会过于发散。 可以说是真正的展现出我们的 "thoughts"。',
+    "当然，作为首张专辑，还是不可避免地出现了一些过于命题作文的情况，在未来会逐渐调整。",
+    '总之，thoughts 今后将作为 Thoughost "直接"传达给你们我们所构想声音的系列，也就是所谓的 Thoughost Compilation Series 。 当然，这不意味着 Thoughost 的胡来结束了，我们正准备更尽情的发疯。',
+    '第一张顺理成章地将主题定为了 "rebirth"。 既象征这是 Thoughost 的下一步，也说明了本次整体的声音方向。 听起来有些忧伤，仿佛被灰色笼罩的世界，在这之中抓住了一丝光亮。 虽然是很不具象的画面，但大家都从不同的角度诠释了这一主题。',
+    "更详细的创作幕后，请见下方各位的自我说明。",
+    "感谢你们的支持。",
   ],
 } satisfies LocalizedParagraphs;
 
@@ -357,7 +395,7 @@ export function getThoughts2Special(locale: Locale, edition: Thoughts2Edition) {
       alt: pickText(locale, item.alt),
       caption: pickText(locale, item.caption),
     })),
-    editions: thoughts2Editions.map((item) => ({
+    editions: visibleThoughts2Editions.map((item) => ({
       key: item,
       href: getThoughts2EditionHref(item),
       label: pickText(locale, editionConfigs[item].label),
@@ -396,9 +434,13 @@ export function getThoughts2Special(locale: Locale, edition: Thoughts2Edition) {
         value: pickText(locale, item.value),
       })),
     },
+    echoProductionNotes: {
+      title: pickText(locale, echoProductionNotesTitle),
+      paragraphs: pickParagraphs(locale, echoProductionNotes),
+    },
     labels: {
       editionSwitcher: locale === "zh" ? "版本切换" : locale === "ja" ? "エディション切替" : "Edition switcher",
-      overview: "Overview",
+      overview: "Release Info",
       about: "About",
       gallery: "Gallery",
       manifesto: "Series Notes",

@@ -91,6 +91,10 @@
   /* Removed padding-inline to avoid double padding with children sections */
 }
 
+.echoThoughtsEmbed {
+  padding-top: 0;
+}
+
 .heroPoster {
   position: relative;
   display: grid;
@@ -637,6 +641,31 @@
   border-top: 1px solid var(--line);
 }
 
+.copyBlock[data-variant="echo"] {
+  width: min(100%, 980px);
+  margin: 0 auto;
+  padding: 36px 28px 56px;
+  border-top: 0;
+}
+
+.copyBlock[data-variant="echo"] .sectionTitle {
+  margin-bottom: 18px;
+}
+
+.copyBlock[data-variant="echo"] .copyText {
+  max-width: 760px;
+}
+
+.copyBlock[data-variant="echo"] .copyText p {
+  margin-top: 18px;
+  font-size: 15px;
+  line-height: 1.95;
+}
+
+.copyBlock[data-variant="echo"] .copyText p:first-child {
+  margin-top: 0;
+}
+
 .copyText p {
   margin: 16px 0 0;
 }
@@ -811,8 +840,17 @@
 }
 
 .trackSection[data-variant="echo"] {
-  background: white;
+  position: relative;
   padding-top: 100px;
+  isolation: isolate;
+}
+
+.trackSection[data-variant="echo"]::before {
+  content: "";
+  position: absolute;
+  inset: 0 calc(50% - 50vw);
+  background: white;
+  z-index: -1;
 }
 
 .trackSection[data-variant="echo"] .trackLayout {

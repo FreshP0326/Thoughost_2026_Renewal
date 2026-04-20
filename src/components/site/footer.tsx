@@ -97,8 +97,8 @@ export function SiteFooter({
               </div>
               <a
                 href={`mailto:${contactEmail}`}
-                className="motion-link block text-[var(--footer-muted)] hover:text-white"
-                style={{ fontSize: "var(--footer-email-size)", lineHeight: 1.2, fontWeight: 500 }}
+                className="motion-link block text-[var(--footer-muted)] visited:text-[var(--footer-muted)] hover:text-white"
+                style={{ color: "var(--footer-muted)", fontSize: "var(--footer-email-size)", lineHeight: 1.2, fontWeight: 500 }}
               >
                 {contactEmail}
               </a>

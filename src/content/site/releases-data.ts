@@ -167,7 +167,7 @@ Across fourteen tracks, circle members and guests move between fragile melody, s
       { number: "14", title: "ending", artist: "VeetaCrush" },
     ]),
     links: [],
-    specialLink: "https://thoughost.com/special/thoughts-2/1",
+    specialLink: "https://thoughost.com/special/thoughts-2/3",
     isFeatured: true,
   },
   {

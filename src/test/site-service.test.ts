@@ -228,7 +228,7 @@ describe("site-service", () => {
     expect(release?.tracksDetailed[9]?.title).toBe("間");
     expect(release?.infoFields[0]?.value).toBe("THGO-0011");
     expect(release?.infoFields[2]?.value).toBe("Venue ¥1,500 / Mail order ¥1,980");
-    expect(release?.specialLink).toBe("https://thoughost.com/special/thoughts-2/1");
+    expect(release?.specialLink).toBe("https://thoughost.com/special/thoughts-2/3");
   });
 
   it("keeps singles and collaborations distinct", () => {
@@ -322,6 +322,25 @@ describe("site-service", () => {
     expect(release?.infoFields[2]?.value).toBe("¥1,500 JPY or more");
     expect(release?.storeLinks.some((link) => link.label === "Circle")).toBe(false);
     expect(release?.storeLinks.some((link) => link.label === "Item List")).toBe(false);
+  });
+
+  it("keeps thoughts wired to its special page with the original ten-track order", () => {
+    const release = getReleaseBySlug("en", "thoughts");
+
+    expect(release?.specialLink).toBe("https://thoughost.com/special/thoughts");
+    expect(release?.tracksDetailed).toHaveLength(10);
+    expect(release?.tracksDetailed.map((track) => track.title)).toEqual([
+      "palette ii",
+      "Awake",
+      "幽けきルミノールライト",
+      "Lucidandelion",
+      "Titania",
+      "December",
+      "6 p.m.",
+      "Voix sacrée",
+      "曇天",
+      "Epilogue",
+    ]);
   });
 
   it("builds a four-track preview for longer releases", () => {

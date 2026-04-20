@@ -435,3 +435,60 @@ export type BlackHolePageViewModel = {
   backLinkLabel: string;
   backLinkHref: string;
 };
+
+export type ThoughtsSpecialCard = {
+  title: string;
+  subtitle: string;
+  paragraphs: string[];
+};
+
+export type ThoughtsSpecialImage = {
+  key: string;
+  src: string;
+  alt: string;
+  caption: string;
+  width: number;
+  height: number;
+};
+
+export type ThoughtsSpecialImageGroup = {
+  title: string;
+  images: ThoughtsSpecialImage[];
+};
+
+export type ThoughtsSpecialCreditGroup = {
+  label: string;
+  values: string[];
+};
+
+export type ThoughtsSpecialPersonSection = {
+  name: string;
+  role: string;
+  paragraphs: string[];
+  images: ThoughtsSpecialImage[];
+};
+
+export type ThoughtsSpecialViewModel = {
+  title: string;
+  labels: {
+    introSection: string;
+    tracklist: string;
+    storyHeading: string;
+    musicSection: string;
+    artSection: string;
+    creditsSection: string;
+    previousCard: string;
+    nextCard: string;
+    closePreview: string;
+  };
+  introSection: {
+    coverImage: ThoughtsSpecialImage;
+    tracklist: ReleaseTrack[];
+    storyParagraphs: string[];
+  };
+  musicCards: ThoughtsSpecialCard[];
+  artCards: ThoughtsSpecialCard[];
+  artProcessGroups: ThoughtsSpecialImageGroup[];
+  konsekiSection: ThoughtsSpecialPersonSection;
+  credits: ThoughtsSpecialCreditGroup[];
+};

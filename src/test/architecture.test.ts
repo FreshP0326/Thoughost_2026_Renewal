@@ -75,6 +75,12 @@ describe("architecture boundaries", () => {
     expect(typeof editionFive.default).toBe("function");
   }, 20000);
 
+  it("ships the rebuilt thoughts special route page", async () => {
+    const thoughtsSpecialPage = await import("@/app/(site)/[locale]/special/thoughts/page");
+
+    expect(typeof thoughtsSpecialPage.default).toBe("function");
+  }, 20000);
+
   it("renders the root entry as the default home page without redirect script", async () => {
     const rootLayout = await import("@/app/(root)/layout");
     const rootPage = await import("@/app/(root)/page");
