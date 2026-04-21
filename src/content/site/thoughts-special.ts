@@ -634,13 +634,33 @@ const labels = {
     zh: "下一张",
     ja: "次へ",
   },
+  previousPreview: {
+    en: "Previous image",
+    zh: "上一张图片",
+    ja: "前の画像",
+  },
+  nextPreview: {
+    en: "Next image",
+    zh: "下一张图片",
+    ja: "次の画像",
+  },
   closePreview: {
     en: "Close preview",
     zh: "关闭预览",
     ja: "プレビューを閉じる",
   },
 } satisfies Record<
-  "introSection" | "tracklist" | "storyHeading" | "musicSection" | "artSection" | "creditsSection" | "previousCard" | "nextCard" | "closePreview",
+  | "introSection"
+  | "tracklist"
+  | "storyHeading"
+  | "musicSection"
+  | "artSection"
+  | "creditsSection"
+  | "previousCard"
+  | "nextCard"
+  | "previousPreview"
+  | "nextPreview"
+  | "closePreview",
   LocalizedText
 >;
 
@@ -693,6 +713,8 @@ export function getThoughtsSpecial(locale: Locale): ThoughtsSpecialViewModel {
       creditsSection: pickText(locale, labels.creditsSection),
       previousCard: pickText(locale, labels.previousCard),
       nextCard: pickText(locale, labels.nextCard),
+      previousPreview: pickText(locale, labels.previousPreview),
+      nextPreview: pickText(locale, labels.nextPreview),
       closePreview: pickText(locale, labels.closePreview),
     },
     introSection: {
@@ -707,6 +729,20 @@ export function getThoughtsSpecial(locale: Locale): ThoughtsSpecialViewModel {
         paragraphs: pickParagraphs(locale, card.paragraphs),
       }),
     ),
+    artPeople: [
+      ...artCards.map(
+        (card): ThoughtsSpecialCard => ({
+          title: card.title,
+          subtitle: pickText(locale, card.subtitle),
+          paragraphs: pickParagraphs(locale, card.paragraphs),
+        }),
+      ),
+      {
+        title: "Konseki Takane",
+        subtitle: pickText(locale, konsekiRole),
+        paragraphs: pickParagraphs(locale, konsekiParagraphs),
+      },
+    ],
     artCards: artCards.map(
       (card): ThoughtsSpecialCard => ({
         title: card.title,

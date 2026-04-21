@@ -468,6 +468,8 @@ export type ThoughtsSpecialPersonSection = {
   images: ThoughtsSpecialImage[];
 };
 
+export type ThoughtsSpecialVariant = "standalone" | "echo-embed";
+
 export type ThoughtsSpecialViewModel = {
   title: string;
   labels: {
@@ -479,6 +481,8 @@ export type ThoughtsSpecialViewModel = {
     creditsSection: string;
     previousCard: string;
     nextCard: string;
+    previousPreview: string;
+    nextPreview: string;
     closePreview: string;
   };
   introSection: {
@@ -487,6 +491,7 @@ export type ThoughtsSpecialViewModel = {
     storyParagraphs: string[];
   };
   musicCards: ThoughtsSpecialCard[];
+  artPeople: ThoughtsSpecialCard[];
   artCards: ThoughtsSpecialCard[];
   artProcessGroups: ThoughtsSpecialImageGroup[];
   konsekiSection: ThoughtsSpecialPersonSection;

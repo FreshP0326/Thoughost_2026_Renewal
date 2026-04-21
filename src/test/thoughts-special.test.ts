@@ -17,11 +17,14 @@ describe("thoughts special content", () => {
       expect(page.introSection.tracklist).toHaveLength(10);
       expect(page.introSection.storyParagraphs.length).toBeGreaterThanOrEqual(6);
       expect(page.musicCards).toHaveLength(7);
+      expect(page.artPeople).toHaveLength(2);
       expect(page.artCards).toHaveLength(1);
       expect(page.artProcessGroups).toHaveLength(5);
       expect(page.konsekiSection.name).toBe("Konseki Takane");
       expect(page.konsekiSection.images).toHaveLength(3);
       expect(page.credits).toHaveLength(6);
+      expect(page.labels.previousPreview.length).toBeGreaterThan(0);
+      expect(page.labels.nextPreview.length).toBeGreaterThan(0);
       expect(page.credits.map((group) => group.values.length > 0)).not.toContain(false);
       expect(page.introSection.tracklist.map((track) => track.title)).toEqual(release?.tracksDetailed.map((track) => track.title));
     }
