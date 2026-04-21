@@ -77,20 +77,20 @@ const sharedManifesto = {
 } satisfies LocalizedParagraphs;
 
 const echoProductionNotesTitle = {
-  en: "制作历程",
+  en: "Production Notes",
   zh: "制作历程",
   ja: "制作历程",
 } satisfies LocalizedText;
 
 const echoProductionNotes = {
   en: [
-    "thoughts 这个系列的想法大约在两年前开始浮现。 我们一直是比较胡来的创作思路，五年间，几乎是想到哪里就做到哪里。 但随着时间的推移，渐渐地也想分享给你属于我们自己的声音。",
-    'thoughts 的创作逻辑是一种逆向思维。 先征集成员们想实现怎样的声音方向，汇总后经过讨论和细微的调整，得出专辑的主题和方向。 这样的好处在于可以不用被主题所限制，可以最大程度的发挥所思所想，专辑也不会过于发散。 可以说是真正的展现出我们的 "thoughts"。',
-    "当然，作为首张专辑，还是不可避免地出现了一些过于命题作文的情况，在未来会逐渐调整。",
-    '总之，thoughts 今后将作为 Thoughost "直接"传达给你们我们所构想声音的系列，也就是所谓的 Thoughost Compilation Series 。 当然，这不意味着 Thoughost 的胡来结束了，我们正准备更尽情的发疯。',
-    '第一张顺理成章地将主题定为了 "rebirth"。 既象征这是 Thoughost 的下一步，也说明了本次整体的声音方向。 听起来有些忧伤，仿佛被灰色笼罩的世界，在这之中抓住了一丝光亮。 虽然是很不具象的画面，但大家都从不同的角度诠释了这一主题。',
-    "更详细的创作幕后，请见下方各位的自我说明。",
-    "感谢你们的支持。",
+    "The idea for the thoughts series first appeared about two years ago. Our approach has always been a little unruly. For five years we mostly made whatever felt right in the moment. As time passed, though, we also wanted to share a sound that felt unmistakably our own.",
+    'The way thoughts is built is a kind of reverse thinking. We first gathered the kinds of sounds each member wanted to realize, then discussed and refined them until the album theme and direction emerged. The advantage is that the music never has to be trapped by a preset concept, while the record still avoids drifting too far apart. In that sense, it really is a direct display of our "thoughts."',
+    "Even so, because this is the first album in the series, a few parts still ended up feeling a little too much like theme assignments. That is something we plan to keep adjusting in the future.",
+    'From here on, thoughts will be the series through which Thoughost directly delivers the sounds we imagine, in other words the Thoughost Compilation Series. That does not mean the chaos is over. If anything, we are getting ready to go even further.',
+    'It felt natural for the first title to revolve around "rebirth." It points to Thoughost\'s next step, but also describes the overall emotional direction of the album. There is sadness in it, as if the world were covered in gray, yet somewhere inside it a small piece of light is still being held onto. It is not a literal image, but everyone interpreted that theme from a different angle.',
+    "For more detailed notes from behind the making of the album, please continue to the individual statements below.",
+    "Thank you for your support.",
   ],
   zh: [
     "thoughts 这个系列的想法大约在两年前开始浮现。 我们一直是比较胡来的创作思路，五年间，几乎是想到哪里就做到哪里。 但随着时间的推移，渐渐地也想分享给你属于我们自己的声音。",
