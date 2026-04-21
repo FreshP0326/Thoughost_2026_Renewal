@@ -11,6 +11,25 @@
   color: var(--ink-strong);
 }
 
+.shell[data-edition="3"] {
+  --echo-align-max: var(--site-nav-max);
+  --echo-align-inline: clamp(16px, var(--header-edge-inline), 40px);
+  --echo-align-width: min(calc(100% - (var(--echo-align-inline) * 2)), var(--echo-align-max));
+  --echo-copy-measure: min(100%, 84ch);
+  --echo-copy-tight-measure: min(100%, 62ch);
+  --echo-hero-pad-top: clamp(28px, 2.6vw, 38px);
+  --echo-hero-pad-bottom: clamp(44px, 4.8vw, 64px);
+  --echo-section-gap: clamp(44px, 4.6vw, 64px);
+  --echo-section-gap-tight: clamp(22px, 2vw, 30px);
+  --echo-panel-pad-top: clamp(20px, 2.1vw, 28px);
+  --echo-section-title-size: clamp(28px, 2.1vw, 36px);
+  --echo-section-title-line: 1;
+  --echo-list-title-size: clamp(22px, 1.8vw, 28px);
+  --echo-list-title-line: 1.04;
+  --echo-body-size: clamp(15px, 1.02vw, 16px);
+  --echo-body-line: 1.84;
+}
+
 .switcher {
   position: fixed;
   top: calc(var(--header-height) + 14px);
@@ -55,6 +74,10 @@
   background: rgba(255, 255, 255, 0.8);
 }
 
+.shell[data-edition="3"] .switcher {
+  right: max(var(--echo-align-inline), calc((100vw - var(--echo-align-max)) / 2));
+}
+
 .shell[data-edition="2"] .switcher {
   top: calc(var(--header-height) + 10px);
   right: 14px;
@@ -94,6 +117,20 @@
 .echoThoughtsEmbed {
   padding-top: 0;
   padding-bottom: 84px;
+}
+
+.shell[data-edition="3"] .copyBlock[data-variant="echo"] {
+  width: var(--echo-align-width);
+  margin-inline: auto;
+  padding-inline: 0;
+}
+
+.shell[data-edition="3"] .heroEcho,
+.shell[data-edition="3"] .trackSection[data-variant="echo"],
+.shell[data-edition="3"] .echoThoughtsEmbed {
+  width: var(--echo-align-width);
+  margin-inline: auto;
+  padding-inline: 0;
 }
 
 .heroPoster {
@@ -543,7 +580,7 @@
 .infoDeck[data-variant="echo"] > .sectionHeader,
 .infoDeck[data-variant="echo"] > .metaRail,
 .infoDeck[data-variant="echo"] > .infoDeckBody {
-  width: min(100%, 1540px);
+  width: var(--echo-align-width);
   margin-inline: auto;
 }
 
@@ -753,36 +790,57 @@
 }
 
 .copyBlock[data-variant="echo"] {
-  width: min(100%, 980px);
-  margin: 0 auto;
   position: relative;
-  padding: 28px 28px 36px;
+  padding: var(--echo-section-gap) 0;
   border-top: 0;
 }
 
 .copyBlock[data-variant="echo"]::before {
   content: "";
   position: absolute;
-  left: 28px;
-  right: 28px;
+  left: 0;
+  right: 0;
   top: 0;
   height: 1px;
   background: linear-gradient(90deg, rgba(127, 145, 120, 0.16), rgba(127, 145, 120, 0));
 }
 
 .copyBlock[data-variant="echo"] .sectionTitle {
-  margin-bottom: 16px;
-  font-size: clamp(34px, 4vw, 52px);
+  margin-bottom: 0;
+  font-size: var(--echo-section-title-size);
+  line-height: var(--echo-section-title-line);
+  letter-spacing: -0.04em;
+}
+
+.copyBlockInner {
+  display: block;
+}
+
+.copyBlockHeading {
+  display: grid;
+  gap: 12px;
+}
+
+.copyBlock[data-variant="echo"] .copyBlockInner {
+  display: grid;
+  grid-template-columns: minmax(180px, 220px) minmax(0, 1fr);
+  gap: clamp(20px, 3vw, 48px);
+  align-items: start;
+}
+
+.copyBlock[data-variant="echo"] .copyBlockHeading {
+  position: sticky;
+  top: calc(var(--header-height) + 24px);
 }
 
 .copyBlock[data-variant="echo"] .copyText {
-  max-width: 70ch;
+  max-width: var(--echo-copy-measure);
 }
 
 .copyBlock[data-variant="echo"] .copyText p {
-  margin-top: 15px;
-  font-size: 16px;
-  line-height: 1.92;
+  margin-top: 14px;
+  font-size: var(--echo-body-size);
+  line-height: var(--echo-body-line);
 }
 
 .copyBlock[data-variant="echo"] .copyText p:first-child {
@@ -996,8 +1054,8 @@
 .echoThoughtsEmbed::before {
   content: "";
   position: absolute;
-  left: 28px;
-  right: 28px;
+  left: 0;
+  right: 0;
   top: 0;
   height: 1px;
   background: linear-gradient(90deg, rgba(127, 145, 120, 0.14), rgba(127, 145, 120, 0));
@@ -1082,6 +1140,68 @@
   margin: 14px 0 0;
   font-size: 14px;
   line-height: 1.8;
+}
+
+.copyBlockBody {
+  display: block;
+}
+
+.copyBlock[data-variant="echo"] .copyBlockBody {
+  display: block;
+}
+
+.copyBlock[data-variant="echo"] .copyText {
+  position: relative;
+  width: 100%;
+  max-width: none;
+  padding: clamp(20px, 2.6vw, 28px);
+  border: 1px solid rgba(127, 145, 120, 0.12);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.44)),
+    radial-gradient(circle at 12% 0%, rgba(255, 255, 255, 0.52), rgba(255, 255, 255, 0) 42%);
+  box-shadow: 0 20px 48px rgba(120, 138, 124, 0.06);
+}
+
+.copyBlock[data-variant="echo"] .copyText::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 84px;
+  height: 1px;
+  background: rgba(127, 145, 120, 0.24);
+}
+
+.echoEssayVisuals {
+  position: sticky;
+  top: calc(var(--header-height) + 96px);
+  display: grid;
+  gap: 16px;
+}
+
+.echoEssayVisual {
+  position: relative;
+  margin: 0;
+  padding: 18px;
+  border: 1px solid rgba(127, 145, 120, 0.14);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.68)),
+    radial-gradient(circle at 50% 18%, rgba(255, 255, 255, 0.68), rgba(232, 240, 236, 0.22));
+  box-shadow: 0 24px 54px rgba(120, 138, 124, 0.08);
+  overflow: hidden;
+}
+
+.echoEssayVisual[data-index="0"] {
+  transform: rotate(-2deg);
+}
+
+.echoEssayVisual[data-index="1"] {
+  transform: translateX(18px) rotate(3deg);
+}
+
+.echoEssayImage {
+  max-height: min(32vw, 360px);
+  object-fit: contain;
 }
 
 .image {
@@ -1173,9 +1293,8 @@
 
 .heroEcho {
   position: relative;
-  width: min(100%, 1360px);
   min-height: min(calc(100svh - var(--header-height)), 920px);
-  padding: 34px 28px 42px;
+  padding: var(--echo-hero-pad-top) 0 var(--echo-hero-pad-bottom);
   overflow: hidden;
   text-align: left;
   isolation: isolate;
@@ -1849,6 +1968,10 @@
     gap: 18px;
   }
 
+  .echoEssayVisuals {
+    position: static;
+  }
+
   .materialLead {
     border-left: 0;
     padding: 40px 0;
@@ -1898,6 +2021,15 @@
     top: auto;
     right: 12px;
     bottom: 12px;
+  }
+
+  .shell[data-edition="3"] {
+    --echo-align-inline: 16px;
+    --echo-section-title-size: 26px;
+  }
+
+  .shell[data-edition="3"] .switcher {
+    right: var(--echo-align-inline);
   }
 
   .heroPoster,
@@ -2050,6 +2182,15 @@
     padding-inline: 16px;
   }
 
+  .copyBlock[data-variant="echo"] .copyBlockInner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .copyBlock[data-variant="echo"] .copyBlockHeading {
+    position: static;
+  }
+
   .copyBlock[data-variant="echo"]::before {
     left: 16px;
     right: 16px;
@@ -2075,6 +2216,18 @@
 
   .trackBody h2 {
     font-size: 24px;
+  }
+
+  .echoEssayVisual {
+    transform: none;
+  }
+
+  .copyBlock[data-variant="echo"] .copyText {
+    padding: 18px 16px;
+  }
+
+  .echoEssayVisual {
+    padding: 14px;
   }
 
   .spineStack {

@@ -148,11 +148,13 @@ html {
 }
 
 html[lang="zh"] {
-  --site-font-body: var(--font-noto-sans-sc), var(--font-archivo), var(--font-noto-sans-jp), sans-serif;
+  --site-font-body: var(--font-archivo), var(--font-noto-sans-sc), var(--font-noto-sans-jp), sans-serif;
+  --site-font-display: var(--font-archivo), var(--font-noto-sans-sc), var(--font-noto-sans-jp), sans-serif;
 }
 
 html[lang="ja"] {
-  --site-font-body: var(--font-noto-sans-jp), var(--font-archivo), var(--font-noto-sans-sc), sans-serif;
+  --site-font-body: var(--font-archivo), var(--font-noto-sans-jp), var(--font-noto-sans-sc), sans-serif;
+  --site-font-display: var(--font-archivo), var(--font-noto-sans-jp), var(--font-noto-sans-sc), sans-serif;
 }
 
 body {

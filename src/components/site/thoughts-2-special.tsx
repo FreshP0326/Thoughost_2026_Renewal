@@ -87,7 +87,7 @@ function EditionLayout({
           </div>
           <div className={styles.posterVerticalTitle}>{page.title}</div>
         </section>
-        <OverviewSection locale={locale} release={release} page={page} variant="poster" />
+        <OverviewSection page={page} variant="poster" />
         <section className={styles.dualColumnSection}>
           <AboutSection page={page} variant="poster" />
           <StaffSection page={page} contributors={contributors} variant="poster" />
@@ -107,7 +107,7 @@ function EditionLayout({
           intro={page.intro}
           media={<ThoughtsImage material={page.materials[0]} priority />}
         />
-        <OverviewSection locale={locale} release={release} page={page} variant="echo" />
+        <OverviewSection page={page} variant="echo" />
         <AboutSection page={page} variant="echo" />
         <TracklistSection page={page} release={release} variant="echo" emphasis />
         {linkedThoughtsRelease && linkedThoughtsPage ? (
@@ -137,7 +137,7 @@ function EditionLayout({
             </div>
           </div>
         </section>
-        <OverviewSection locale={locale} release={release} page={page} variant="material" />
+        <OverviewSection page={page} variant="material" />
         <GallerySection page={page} materials={[page.materials[0], page.materials[5], page.materials[4], page.materials[3]]} variant="material" />
         <section className={styles.dualColumnSection}>
           <AboutSection page={page} variant="material" />
@@ -177,7 +177,7 @@ function EditionLayout({
             </div>
           </div>
         </section>
-        <OverviewSection locale={locale} release={release} page={page} variant="ring" />
+        <OverviewSection page={page} variant="ring" />
         <StaffSection page={page} contributors={contributors} variant="ring" />
         <section className={styles.ringBottom}>
           <GallerySection page={page} materials={[page.materials[5], page.materials[1], page.materials[2]]} variant="ring" />
@@ -333,13 +333,9 @@ function TokusetsuEditionTwoLayout({
 }
 
 function OverviewSection({
-  locale,
-  release,
   page,
   variant,
 }: {
-  locale: Locale;
-  release: ReleaseDetailViewModel;
   page: Thoughts2SpecialData;
   variant: string;
 }) {
@@ -431,12 +427,18 @@ function AboutSection({
 
   return (
     <section id="about" className={styles.copyBlock} data-variant={variant}>
-      <h2 className={styles.sectionTitle}>{title}</h2>
-      {!isEcho ? <p className={styles.sectionLabel}>{page.labels.manifesto}</p> : null}
-      <div className={styles.copyText}>
-        {paragraphs.map((paragraph) => (
-          <p key={paragraph}>{paragraph}</p>
-        ))}
+      <div className={styles.copyBlockInner} data-variant={variant}>
+        <div className={styles.copyBlockHeading}>
+          <h2 className={styles.sectionTitle}>{title}</h2>
+          {!isEcho ? <p className={styles.sectionLabel}>{page.labels.manifesto}</p> : null}
+        </div>
+        <div className={styles.copyBlockBody} data-variant={variant}>
+          <div className={styles.copyText}>
+            {paragraphs.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
