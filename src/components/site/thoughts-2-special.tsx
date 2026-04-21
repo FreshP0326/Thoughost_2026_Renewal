@@ -11,6 +11,7 @@ import { withBasePathAsset } from "@/lib/base-path";
 import { withLocale } from "@/lib/locale";
 import type { Locale, ReleaseDetailViewModel } from "@/types/site";
 import { Thoughts2Share } from "@/components/site/thoughts-2-share";
+import { Thoughts2EchoHero } from "@/components/site/thoughts-2-special-echo-hero";
 import { getReleaseBySlug } from "@/server/services/site-service";
 
 import styles from "./thoughts-2-special.module.css";
@@ -86,7 +87,7 @@ function EditionLayout({
           </div>
           <div className={styles.posterVerticalTitle}>{page.title}</div>
         </section>
-        <OverviewSection locale={locale} release={release} page={page} variant="poster" />
+        <OverviewSection page={page} variant="poster" />
         <section className={styles.dualColumnSection}>
           <AboutSection page={page} variant="poster" />
           <StaffSection page={page} contributors={contributors} variant="poster" />
@@ -100,36 +101,18 @@ function EditionLayout({
     ),
     3: (
       <>
-        <section className={styles.heroEcho}>
-          <div className={styles.echoBackground}>
-            <div className={styles.echoRingLarge} />
-            <div className={styles.echoRingMedium} />
-            <div className={styles.echoRingSmall} />
-          </div>
-          <div className={styles.echoCopy}>
-            <FadeIn delay={0.04} y={12}>
-              <p className={styles.eyebrow}>{page.currentEdition.shortTitle}</p>
-            </FadeIn>
-            <FadeIn delay={0.08} y={18}>
-              <h1 className={styles.echoTitle}>{page.title}</h1>
-            </FadeIn>
-            <FadeIn delay={0.12} y={16}>
-              <p className={styles.echoIntro}>{page.currentEdition.summary}</p>
-            </FadeIn>
-            <FadeIn delay={0.16} y={18}>
-              <p className={styles.echoText}>{page.intro}</p>
-            </FadeIn>
-          </div>
-          <div className={styles.echoMedia}>
-            <ThoughtsImage material={page.materials[0]} priority />
-          </div>
-        </section>
-        <OverviewSection locale={locale} release={release} page={page} variant="echo" />
+        <Thoughts2EchoHero
+          title={page.title}
+          summary={page.currentEdition.summary}
+          intro={page.intro}
+          media={<ThoughtsImage material={page.materials[0]} priority />}
+        />
+        <OverviewSection page={page} variant="echo" />
         <AboutSection page={page} variant="echo" />
         <TracklistSection page={page} release={release} variant="echo" emphasis />
         {linkedThoughtsRelease && linkedThoughtsPage ? (
           <section className={styles.echoThoughtsEmbed}>
-            <ThoughtsSpecial release={linkedThoughtsRelease} page={linkedThoughtsPage} showTitle={false} includeIntro={false} />
+            <ThoughtsSpecial release={linkedThoughtsRelease} page={linkedThoughtsPage} variant="echo-embed" />
           </section>
         ) : null}
       </>
@@ -154,7 +137,7 @@ function EditionLayout({
             </div>
           </div>
         </section>
-        <OverviewSection locale={locale} release={release} page={page} variant="material" />
+        <OverviewSection page={page} variant="material" />
         <GallerySection page={page} materials={[page.materials[0], page.materials[5], page.materials[4], page.materials[3]]} variant="material" />
         <section className={styles.dualColumnSection}>
           <AboutSection page={page} variant="material" />
@@ -194,7 +177,7 @@ function EditionLayout({
             </div>
           </div>
         </section>
-        <OverviewSection locale={locale} release={release} page={page} variant="ring" />
+        <OverviewSection page={page} variant="ring" />
         <StaffSection page={page} contributors={contributors} variant="ring" />
         <section className={styles.ringBottom}>
           <GallerySection page={page} materials={[page.materials[5], page.materials[1], page.materials[2]]} variant="ring" />
@@ -350,24 +333,23 @@ function TokusetsuEditionTwoLayout({
 }
 
 function OverviewSection({
-  locale,
-  release,
   page,
   variant,
 }: {
-  locale: Locale;
-  release: ReleaseDetailViewModel;
   page: Thoughts2SpecialData;
   variant: string;
 }) {
+  const isEcho = variant === "echo";
+  const metaItems = isEcho ? [page.meta[0], page.meta[1], page.meta[2], page.meta[4]].filter(Boolean) : page.meta;
+
   return (
     <section id="overview" className={styles.infoDeck} data-variant={variant}>
       <div className={styles.sectionHeader}>
         <h2 className={styles.sectionTitle}>{page.labels.overview}</h2>
-        <p className={styles.sectionSummary}>{page.currentEdition.description}</p>
+        {!isEcho ? <p className={styles.sectionSummary}>{page.currentEdition.description}</p> : null}
       </div>
-      <MetaRail page={page} compact />
-      <div className={styles.infoDeckBody}>
+      <MetaRail items={metaItems} compact />
+      <div className={styles.infoDeckBody} data-panel-count={isEcho ? "1" : "2"}>
         <section className={styles.infoDeckPanel}>
           <p className={styles.sectionLabel}>{page.labels.availability}</p>
           <div className={styles.availabilityList}>
@@ -376,24 +358,24 @@ function OverviewSection({
               <strong>{page.placeholders.streaming}</strong>
             </div>
             <div className={styles.availabilityRow}>
-              <span>Mail order</span>
+              <span>Dizzylab</span>
               <strong>{page.placeholders.mailOrder}</strong>
             </div>
             <div className={styles.availabilityRow}>
-              <span>{page.labels.releaseDetail}</span>
-              <Link href={withLocale(locale, `/releases/${release.slug}`)} className={styles.inlineLink}>
-                {release.title}
-              </Link>
+              <span>Diverse Direct</span>
+              <strong>{page.placeholders.mailOrder}</strong>
             </div>
           </div>
         </section>
-        <section className={styles.infoDeckPanel}>
-          <p className={styles.sectionLabel}>{page.labels.about}</p>
-          <div className={styles.infoDeckCopy}>
-            <p>{page.intro}</p>
-            <p>{page.currentEdition.summary}</p>
-          </div>
-        </section>
+        {!isEcho ? (
+          <section className={styles.infoDeckPanel}>
+            <p className={styles.sectionLabel}>{page.labels.about}</p>
+            <div className={styles.infoDeckCopy}>
+              <p>{page.intro}</p>
+              <p>{page.currentEdition.summary}</p>
+            </div>
+          </section>
+        ) : null}
       </div>
     </section>
   );
@@ -445,12 +427,18 @@ function AboutSection({
 
   return (
     <section id="about" className={styles.copyBlock} data-variant={variant}>
-      <h2 className={styles.sectionTitle}>{title}</h2>
-      {!isEcho ? <p className={styles.sectionLabel}>{page.labels.manifesto}</p> : null}
-      <div className={styles.copyText}>
-        {paragraphs.map((paragraph) => (
-          <p key={paragraph}>{paragraph}</p>
-        ))}
+      <div className={styles.copyBlockInner} data-variant={variant}>
+        <div className={styles.copyBlockHeading}>
+          <h2 className={styles.sectionTitle}>{title}</h2>
+          {!isEcho ? <p className={styles.sectionLabel}>{page.labels.manifesto}</p> : null}
+        </div>
+        <div className={styles.copyBlockBody} data-variant={variant}>
+          <div className={styles.copyText}>
+            {paragraphs.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -513,15 +501,15 @@ function StaffSection({
 }
 
 function MetaRail({
-  page,
+  items,
   compact = false,
 }: {
-  page: Thoughts2SpecialData;
+  items: Thoughts2SpecialData["meta"];
   compact?: boolean;
 }) {
   return (
     <section className={styles.metaRail} data-compact={compact ? "true" : "false"}>
-      {page.meta.map((item) => (
+      {items.map((item) => (
         <div key={item.label} className={styles.metaCell}>
           <span>{item.label}</span>
           <strong>{item.value}</strong>
@@ -573,6 +561,8 @@ function TracklistSection({
   compact?: boolean;
   emphasis?: boolean;
 }) {
+  const useStaticTracklist = variant === "echo";
+
   return (
     <section
       id="tracklist"
@@ -583,22 +573,36 @@ function TracklistSection({
     >
       <div className={styles.sectionHeader}>
         <h2 className={styles.sectionTitle}>{page.labels.tracklist}</h2>
-        <p className={styles.sectionSummary}>{page.tagline}</p>
+        {!useStaticTracklist ? <p className={styles.sectionSummary}>{page.tagline}</p> : null}
       </div>
       <div className={styles.trackLayout}>
-        <StaggerGroup className={styles.trackList} density="tight" amount={0.04}>
-          {release.tracksDetailed.map((track, index) => (
-            <StaggerItem key={`${track.number ?? index}-${track.title}`}>
-              <article className={styles.trackRow}>
+        {useStaticTracklist ? (
+          <div className={styles.trackList}>
+            {release.tracksDetailed.map((track, index) => (
+              <article key={`${track.number ?? index}-${track.title}`} className={styles.trackRow}>
                 <span className={styles.trackNumber}>{track.number ?? String(index + 1).padStart(2, "0")}</span>
                 <div className={styles.trackBody}>
                   <h2>{track.title}</h2>
                   <p>{track.artist ?? release.artistName}</p>
                 </div>
               </article>
-            </StaggerItem>
-          ))}
-        </StaggerGroup>
+            ))}
+          </div>
+        ) : (
+          <StaggerGroup className={styles.trackList} density="tight" amount={0.04}>
+            {release.tracksDetailed.map((track, index) => (
+              <StaggerItem key={`${track.number ?? index}-${track.title}`}>
+                <article className={styles.trackRow}>
+                  <span className={styles.trackNumber}>{track.number ?? String(index + 1).padStart(2, "0")}</span>
+                  <div className={styles.trackBody}>
+                    <h2>{track.title}</h2>
+                    <p>{track.artist ?? release.artistName}</p>
+                  </div>
+                </article>
+              </StaggerItem>
+            ))}
+          </StaggerGroup>
+        )}
         <div className={styles.trackAside} data-variant={variant}>
           <p className={styles.sectionLabel}>{page.labels.about}</p>
           <p className={styles.trackAsideText}>{page.currentEdition.summary}</p>
