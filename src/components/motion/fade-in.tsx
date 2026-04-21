@@ -1,13 +1,14 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 
 import { createFadeUp, fadeIn, motionViewport } from "@/lib/motion";
 
 type FadeInProps = {
   children: ReactNode;
   className?: string;
+  style?: CSSProperties;
   delay?: number;
   y?: number;
   once?: boolean;
@@ -17,6 +18,7 @@ type FadeInProps = {
 export function FadeIn({
   children,
   className,
+  style,
   delay = 0,
   y = 16,
   once = true,
@@ -28,6 +30,7 @@ export function FadeIn({
   return (
     <motion.div
       className={className}
+      style={style}
       initial="hidden"
       whileInView="visible"
       viewport={{ ...motionViewport, once, amount }}

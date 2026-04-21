@@ -1,7 +1,9 @@
+import Image from "next/image";
 import Link from "next/link";
 
 import { FadeIn } from "@/components/motion/fade-in";
 import { StaggerGroup, StaggerItem } from "@/components/motion/stagger-group";
+import { withBasePathAsset } from "@/lib/base-path";
 import { withLocale } from "@/lib/locale";
 import type { Locale, NewsCardItem } from "@/types/site";
 
@@ -19,18 +21,22 @@ export function NewsSection({
   items: NewsCardItem[];
 }) {
   return (
-    <section id="news" className="bg-white pb-[40px] md:pb-[44px]" style={{ paddingTop: "var(--news-section-top)" }}>
+    <section id="news" className="bg-white" style={{ paddingTop: "var(--news-section-top)", paddingBottom: "45.4px" }}>
       <div className="site-nav-frame">
         <FadeIn y={12} amount={0.12}>
           <h2
             className="text-[#101010]"
-            style={{ fontSize: "var(--news-heading-size)", lineHeight: "var(--news-heading-line)", fontWeight: 600, letterSpacing: "-0.024em" }}
+            style={{ margin: 0, fontSize: "var(--news-heading-size)", lineHeight: "var(--news-heading-line)", fontWeight: 600, letterSpacing: "-0.024em" }}
           >
             {title}
           </h2>
         </FadeIn>
         <div style={{ marginTop: "var(--news-list-gap-top)" }}>
-          <StaggerGroup className="grid gap-y-0 md:grid-cols-2" density="tight" amount={0.06}>
+          <StaggerGroup
+            className="grid gap-y-0 md:grid-cols-2 md:gap-x-[16px]"
+            density="tight"
+            amount={0.06}
+          >
             {items.map((item) => (
               <StaggerItem key={item.slug}>
                 <Link
@@ -66,9 +72,14 @@ export function NewsSection({
             ))}
           </StaggerGroup>
         </div>
-        <FadeIn className="mt-[8px] flex justify-end" delay={0.08}>
-          <Link href={withLocale(locale, moreHref)} className="type-nav text-[var(--page-ink)] uppercase motion-surface hover:text-neutral-500">
-            {moreLabel} →
+        <FadeIn className="flex justify-end" delay={0.08} style={{ marginTop: "25.6px" }}>
+          <Link
+            href={withLocale(locale, moreHref)}
+            className="inline-flex items-center gap-[4px] uppercase text-[var(--page-ink)] motion-surface hover:text-neutral-500"
+            style={{ fontSize: "13px", lineHeight: 1, fontWeight: 700, letterSpacing: "0.025em" }}
+          >
+            <span>{moreLabel}</span>
+            <Image src={withBasePathAsset("/icons/more-arrow.svg")} alt="" aria-hidden width={20} height={12} className="h-[12px] w-[20px]" />
           </Link>
         </FadeIn>
       </div>

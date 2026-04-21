@@ -1,13 +1,14 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 
 import { fadeIn, motionViewport, staggerContainer, staggerItem } from "@/lib/motion";
 
 type StaggerGroupProps = {
   children: ReactNode;
   className?: string;
+  style?: CSSProperties;
   once?: boolean;
   amount?: number;
   density?: "tight" | "base";
@@ -16,6 +17,7 @@ type StaggerGroupProps = {
 export function StaggerGroup({
   children,
   className,
+  style,
   once = true,
   amount = 0.08,
   density = "base",
@@ -25,6 +27,7 @@ export function StaggerGroup({
   return (
     <motion.div
       className={className}
+      style={style}
       initial="hidden"
       whileInView="visible"
       viewport={{ ...motionViewport, once, amount }}

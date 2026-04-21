@@ -13,7 +13,7 @@
 
 .shell[data-edition="3"] {
   --echo-align-max: var(--site-nav-max);
-  --echo-align-inline: clamp(16px, var(--header-edge-inline), 40px);
+  --echo-align-inline: var(--header-edge-inline);
   --echo-align-width: min(calc(100% - (var(--echo-align-inline) * 2)), var(--echo-align-max));
   --echo-copy-measure: min(100%, 84ch);
   --echo-copy-tight-measure: min(100%, 62ch);
@@ -2024,7 +2024,6 @@
   }
 
   .shell[data-edition="3"] {
-    --echo-align-inline: 16px;
     --echo-section-title-size: 26px;
   }
 

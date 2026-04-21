@@ -1,7 +1,6 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowUp } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { motionEasing, motionTokens } from "@/lib/motion";
@@ -32,13 +31,16 @@ export function BackToTop() {
       initial={false}
       animate={
         visible
-          ? { opacity: 1, y: 0, scale: 1, pointerEvents: "auto" as const }
-          : { opacity: 0, y: 12, scale: 0.94, pointerEvents: "none" as const }
+          ? { opacity: 1, scale: 1, pointerEvents: "auto" as const }
+          : { opacity: 0, scale: 0.94, pointerEvents: "none" as const }
       }
       transition={{ duration: motionTokens.enterFast, ease: motionEasing.soft }}
-      className="motion-surface fixed right-5 bottom-5 z-40 flex h-10 w-10 items-center justify-center border border-neutral-700 bg-[#171717]/96 text-white shadow-[0_10px_24px_rgba(0,0,0,0.16)] hover:border-neutral-600 hover:bg-[#262626] hover:shadow-[0_14px_28px_rgba(0,0,0,0.2)]"
+      className="motion-surface fixed top-1/2 right-[8px] z-40 flex h-[56px] w-[56px] items-center justify-center bg-[#2f2f2f] text-white shadow-[0_10px_24px_rgba(0,0,0,0.22)] hover:bg-[#393939]"
+      style={{ marginTop: "-28px" }}
     >
-      <ArrowUp size={18} strokeWidth={2} />
+      <svg width="28" height="18" viewBox="0 0 28 18" aria-hidden="true" focusable="false">
+        <path d="M3 14L14 3L25 14" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="square" strokeLinejoin="miter" />
+      </svg>
     </motion.button>
   );
 }

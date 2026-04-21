@@ -89,26 +89,26 @@ export function SiteFooter({
             />
           </div>
           <div className="hidden md:block" />
-          <div className="grid gap-8 md:grid-cols-[auto_auto] md:justify-self-end md:gap-x-[44px]">
-            <div className="space-y-[6px]">
-              <div className="flex items-center gap-2 text-[var(--footer-muted)]">
-                <Image src={withBasePathAsset("/icons/email.svg")} alt="" width={18} height={18} className="h-[18px] w-[18px] opacity-90" />
-                <span style={{ fontSize: "var(--footer-nav-size)", lineHeight: 1.2, fontWeight: 600 }}>{contactLabel}</span>
-              </div>
+          <div className="grid self-start gap-8 md:grid-cols-[auto_auto] md:justify-self-end md:gap-x-[44px]">
+            <div className="grid grid-cols-[18px_auto] items-start gap-x-2 gap-y-[2px] self-start">
+              <Image src={withBasePathAsset("/icons/email.svg")} alt="" width={18} height={18} className="mt-[1px] h-[18px] w-[18px] opacity-90" />
+              <span className="text-[var(--footer-muted)]" style={{ fontSize: "var(--footer-nav-size)", lineHeight: 1.45, fontWeight: 600 }}>
+                {contactLabel}
+              </span>
               <a
                 href={`mailto:${contactEmail}`}
-                className="motion-link block text-[var(--footer-muted)] visited:text-[var(--footer-muted)] hover:text-white"
+                className="motion-link col-start-2 block text-[var(--footer-muted)] visited:text-[var(--footer-muted)] hover:text-white"
                 style={{ color: "var(--footer-muted)", fontSize: "var(--footer-email-size)", lineHeight: 1.2, fontWeight: 500 }}
               >
                 {contactEmail}
               </a>
             </div>
-            <div className="space-y-[10px]">
-              <div className="flex items-center gap-2 text-[var(--footer-muted)]">
-                <Image src={withBasePathAsset("/icons/followus.svg")} alt="" width={18} height={18} className="h-[18px] w-[18px] opacity-90" />
-                <span style={{ fontSize: "var(--footer-nav-size)", lineHeight: 1.2, fontWeight: 600 }}>{followUsLabel}</span>
-              </div>
-              <div className="flex items-center gap-[var(--footer-social-gap)]">
+            <div className="grid grid-cols-[18px_auto] items-start gap-x-2 gap-y-[4px] self-start">
+              <Image src={withBasePathAsset("/icons/followus.svg")} alt="" width={18} height={18} className="mt-[1px] h-[18px] w-[18px] opacity-90" />
+              <span className="text-[var(--footer-muted)]" style={{ fontSize: "var(--footer-nav-size)", lineHeight: 1.45, fontWeight: 600 }}>
+                {followUsLabel}
+              </span>
+              <div className="col-start-2 flex h-[36px] items-center gap-[var(--footer-social-gap)]">
                 {socialLinks.map((item) => (
                   <Link
                     key={item.platform}
@@ -138,7 +138,7 @@ export function SiteFooter({
         </div>
         <FadeIn className="mt-0" delay={0.08}>
           <div
-            className="flex flex-col justify-between gap-3 pt-5 leading-[1.45] md:flex-row md:items-center"
+            className="grid gap-3 leading-[1.45] md:grid-cols-[minmax(240px,1fr)_minmax(160px,0.55fr)_minmax(260px,0.8fr)] md:items-center"
             style={{
               marginTop: "var(--footer-logo-bottom-gap)",
               paddingTop: "var(--footer-divider-bottom-gap)",
@@ -147,7 +147,8 @@ export function SiteFooter({
             }}
           >
             <p>{copyrightText}</p>
-            <p>{quote}</p>
+            <div className="hidden md:block" />
+            <p className="md:justify-self-end">{quote}</p>
           </div>
         </FadeIn>
       </div>

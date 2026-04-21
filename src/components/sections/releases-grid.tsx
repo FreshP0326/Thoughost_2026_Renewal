@@ -68,8 +68,13 @@ export function ReleasesGridSection({
         </div>
         {moreLabel ? (
           <FadeIn className="mt-[8px] flex justify-end" delay={0.08}>
-            <Link href={withLocale(locale, "/releases")} className="type-nav text-[#101010] uppercase motion-surface hover:text-neutral-500">
-              {moreLabel} →
+            <Link
+              href={withLocale(locale, "/releases")}
+              className="inline-flex items-center gap-[4px] uppercase text-[#101010] motion-surface hover:text-neutral-500"
+              style={{ fontSize: "13px", lineHeight: 1, fontWeight: 700, letterSpacing: "0.025em" }}
+            >
+              <span>{moreLabel}</span>
+              <Image src={withBasePathAsset("/icons/more-arrow.svg")} alt="" aria-hidden width={20} height={12} className="h-[12px] w-[20px]" />
             </Link>
           </FadeIn>
         ) : null}
