@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import type { ReactNode } from "react";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
@@ -103,10 +104,13 @@ export function ThoughtsSpecial({
             <FadeIn y={16} amount={0.12}>
               <ImageButton image={page.introSection.coverImage} onOpen={openSinglePreview} className={styles.coverButton}>
                 <div className={styles.coverFrame}>
-                  <img
+                  <Image
                     src={withBasePathAsset(page.introSection.coverImage.src)}
                     alt={page.introSection.coverImage.alt}
+                    width={page.introSection.coverImage.width}
+                    height={page.introSection.coverImage.height}
                     className={styles.coverImage}
+                    sizes="(max-width: 720px) calc(100vw - 24px), (max-width: 1080px) 100vw, 50vw"
                   />
                 </div>
               </ImageButton>
@@ -388,7 +392,14 @@ export function ThoughtsSpecial({
                 ) : null}
 
                 <div className={styles.previewStageMedia}>
-                  <img src={withBasePathAsset(activePreviewImage.src)} alt={activePreviewImage.alt} className={styles.previewImage} />
+                  <Image
+                    src={withBasePathAsset(activePreviewImage.src)}
+                    alt={activePreviewImage.alt}
+                    width={activePreviewImage.width}
+                    height={activePreviewImage.height}
+                    className={styles.previewImage}
+                    sizes="(max-width: 720px) 100vw, 80vw"
+                  />
                 </div>
 
                 {hasPreviewNavigation ? (
@@ -576,7 +587,14 @@ function ImageFigure({
     <figure className={styles.imageFigure} data-compact={compact ? "true" : "false"}>
       <ImageButton image={image} onOpen={onOpen}>
         <div className={styles.imageFrame} data-compact={compact ? "true" : "false"}>
-          <img src={withBasePathAsset(image.src)} alt={image.alt} className={styles.gridImage} />
+          <Image
+            src={withBasePathAsset(image.src)}
+            alt={image.alt}
+            width={image.width}
+            height={image.height}
+            className={styles.gridImage}
+            sizes={compact ? "(max-width: 1080px) 50vw, 33vw" : "(max-width: 720px) 100vw, 33vw"}
+          />
         </div>
       </ImageButton>
       <figcaption className={styles.imageCaption}>{image.caption}</figcaption>
