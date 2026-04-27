@@ -3,6 +3,9 @@ import { notFound, redirect } from "next/navigation";
 
 import { Thoughts2Special } from "@/components/site/thoughts-2-special";
 import {
+  supportedLocales,
+} from "@/content/site/data";
+import {
   featuredThoughts2Edition,
   getThoughts2Special,
   thoughts2ReleaseSlug,
@@ -11,6 +14,10 @@ import {
 import { withBasePathAsset } from "@/lib/base-path";
 import { assertLocale, withLocale } from "@/lib/locale";
 import { getReleaseBySlug } from "@/server/services/site-service";
+
+export function generateThoughts2EditionStaticParams() {
+  return supportedLocales.map((locale) => ({ locale }));
+}
 
 export async function buildThoughts2EditionMetadata({
   params,

@@ -1,6 +1,12 @@
 import { featuredThoughts2Edition } from "@/content/site/thoughts2-special";
 
-import { buildThoughts2EditionMetadata, redirectToFeaturedThoughts2Edition } from "../edition-page";
+import {
+  buildThoughts2EditionMetadata,
+  generateThoughts2EditionStaticParams,
+  redirectToFeaturedThoughts2Edition,
+} from "../edition-page";
+
+export const generateStaticParams = generateThoughts2EditionStaticParams;
 
 export async function generateMetadata({
   params,

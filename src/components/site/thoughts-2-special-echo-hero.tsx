@@ -2,7 +2,7 @@
 
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import type { ReactNode } from "react";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { motionEasing, motionTokens } from "@/lib/motion";
 
@@ -80,17 +80,41 @@ const mediaSequence = {
 
 export function Thoughts2EchoHero({
   title,
-  summary,
   intro,
+  actions,
   media,
 }: {
   title: string;
-  summary: string;
   intro: string;
+  actions: Array<
+    | {
+        label: string;
+        variant: "primary" | "secondary";
+        type: "media";
+        media: {
+          title: string;
+          embedUrl: string | null;
+          externalUrl: string | null;
+          message: string;
+        };
+      }
+    | {
+        label: string;
+        variant: "primary" | "secondary";
+        type: "link";
+        href: string;
+      }
+  >;
   media: ReactNode;
 }) {
   const sectionRef = useRef<HTMLElement | null>(null);
   const shouldReduceMotion = useReducedMotion();
+  const [activeMedia, setActiveMedia] = useState<null | {
+    title: string;
+    embedUrl: string | null;
+    externalUrl: string | null;
+    message: string;
+  }>(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end start"],
@@ -100,6 +124,28 @@ export function Thoughts2EchoHero({
   const heroY = useTransform(scrollYProgress, [0, 1], [0, -18]);
   const backgroundY = useTransform(scrollYProgress, [0, 1], [0, -28]);
   const mediaY = useTransform(scrollYProgress, [0, 1], [0, -12]);
+
+  useEffect(() => {
+    if (!activeMedia) {
+      return undefined;
+    }
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setActiveMedia(null);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [activeMedia]);
 
   return (
     <motion.section
@@ -152,7 +198,7 @@ export function Thoughts2EchoHero({
 
           <div className={styles.echoCopyBody}>
             <motion.p
-              className={styles.echoIntro}
+              className={styles.echoText}
               custom={0.32}
               initial={shouldReduceMotion ? { opacity: 0 } : "hidden"}
               animate={shouldReduceMotion ? { opacity: 1, y: 0, filter: "blur(0px)" } : "visible"}
@@ -167,27 +213,49 @@ export function Thoughts2EchoHero({
                   : undefined
               }
             >
-              {summary}
-            </motion.p>
-            <motion.p
-              className={styles.echoText}
-              custom={0.4}
-              initial={shouldReduceMotion ? { opacity: 0 } : "hidden"}
-              animate={shouldReduceMotion ? { opacity: 1, y: 0, filter: "blur(0px)" } : "visible"}
-              variants={shouldReduceMotion ? undefined : bodySequence}
-              transition={
-                shouldReduceMotion
-                ? {
-                      duration: motionTokens.enterFast,
-                      delay: 0.08,
-                      ease: motionEasing.soft,
-                    }
-                  : undefined
-              }
-            >
               {intro}
             </motion.p>
           </div>
+
+          <motion.div
+            className={styles.echoActionRow}
+            custom={0.46}
+            initial={shouldReduceMotion ? { opacity: 0 } : "hidden"}
+            animate={shouldReduceMotion ? { opacity: 1, y: 0, filter: "blur(0px)" } : "visible"}
+            variants={shouldReduceMotion ? undefined : bodySequence}
+            transition={
+              shouldReduceMotion
+                ? {
+                    duration: motionTokens.enterFast,
+                    delay: 0.12,
+                    ease: motionEasing.soft,
+                  }
+                : undefined
+            }
+          >
+            {actions.map((action) => (
+              action.type === "link" ? (
+                <a
+                  key={`${action.label}-${action.href}`}
+                  href={action.href}
+                  className={styles.echoAction}
+                  data-variant={action.variant}
+                >
+                  {action.label}
+                </a>
+              ) : (
+                <button
+                  key={`${action.label}-${action.media.title}`}
+                  type="button"
+                  className={styles.echoAction}
+                  data-variant={action.variant}
+                  onClick={() => setActiveMedia(action.media)}
+                >
+                  {action.label}
+                </button>
+              )
+            ))}
+          </motion.div>
         </div>
 
         <motion.div
@@ -212,6 +280,50 @@ export function Thoughts2EchoHero({
           </div>
         </motion.div>
       </div>
+
+      {activeMedia ? (
+        <div className={styles.echoMediaModalOverlay} onClick={() => setActiveMedia(null)}>
+          <div
+            className={styles.echoMediaModal}
+            role="dialog"
+            aria-modal="true"
+            aria-label={activeMedia.title}
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className={styles.echoMediaModalHeader}>
+              <h2>{activeMedia.title}</h2>
+              <button
+                type="button"
+                className={styles.echoMediaModalClose}
+                onClick={() => setActiveMedia(null)}
+                aria-label="Close media dialog"
+              >
+                ×
+              </button>
+            </div>
+
+            {activeMedia.embedUrl ? (
+              <div className={styles.echoMediaModalFrame}>
+                <iframe
+                  src={activeMedia.embedUrl}
+                  title={activeMedia.title}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+            ) : (
+              <div className={styles.echoMediaModalFallback}>
+                <p>{activeMedia.message}</p>
+                {activeMedia.externalUrl ? (
+                  <a href={activeMedia.externalUrl} target="_blank" rel="noreferrer" className={styles.echoMediaModalLink}>
+                    Open in new tab
+                  </a>
+                ) : null}
+              </div>
+            )}
+          </div>
+        </div>
+      ) : null}
     </motion.section>
   );
 }
