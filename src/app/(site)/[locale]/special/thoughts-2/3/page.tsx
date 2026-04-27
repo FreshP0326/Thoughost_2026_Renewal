@@ -1,4 +1,10 @@
-import { buildThoughts2EditionMetadata, renderThoughts2EditionPage } from "../edition-page";
+import {
+  buildThoughts2EditionMetadata,
+  generateThoughts2EditionStaticParams,
+  renderThoughts2EditionPage,
+} from "../edition-page";
+
+export const generateStaticParams = generateThoughts2EditionStaticParams;
 
 export async function generateMetadata({
   params,

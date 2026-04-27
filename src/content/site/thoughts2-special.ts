@@ -46,6 +46,12 @@ type Thoughts2PageTwoStaffRow = {
   value: LocalizedText;
 };
 
+type Thoughts2EchoStatement = {
+  name: string;
+  role?: string;
+  paragraphs: string[];
+};
+
 const sharedTagline = {
   en: "Discover our own sound.",
   zh: "Discover our own sound.",
@@ -53,9 +59,9 @@ const sharedTagline = {
 } satisfies LocalizedText;
 
 const sharedIntro = {
-  en: "thoughts 2 keeps the series moving inward, across fourteen tracks full of hesitation, afterimages, and dissolving code.",
-  zh: "《thoughts 2》把这个系列继续往内侧推进，14 首曲目沿着迟疑、残像与逐渐溶解的代码缓慢移动。",
-  ja: "『thoughts 2』はシリーズをさらに内側へ押し進め、ためらいと残像、ほどけていくコードを14曲の中で静かに巡らせます。",
+  en: "「thoughts」から「thoughts 2」へ。シリーズがここから始まる。 今回のテーマは「hesitate」です。 14名のアーティストによる『思考』を、IDM / アンビエント / ブレイクビーツなど多彩なジャンルで形にしました。",
+  zh: "「thoughts」から「thoughts 2」へ。シリーズがここから始まる。 今回のテーマは「hesitate」です。 14名のアーティストによる『思考』を、IDM / アンビエント / ブレイクビーツなど多彩なジャンルで形にしました。",
+  ja: "「thoughts」から「thoughts 2」へ。シリーズがここから始まる。 今回のテーマは「hesitate」です。 14名のアーティストによる『思考』を、IDM / アンビエント / ブレイクビーツなど多彩なジャンルで形にしました。",
 } satisfies LocalizedText;
 
 const sharedManifesto = {
@@ -84,33 +90,109 @@ const echoProductionNotesTitle = {
 
 const echoProductionNotes = {
   en: [
-    "The idea for the thoughts series first appeared about two years ago. Our approach has always been a little unruly. For five years we mostly made whatever felt right in the moment. As time passed, though, we also wanted to share a sound that felt unmistakably our own.",
-    'The way thoughts is built is a kind of reverse thinking. We first gathered the kinds of sounds each member wanted to realize, then discussed and refined them until the album theme and direction emerged. The advantage is that the music never has to be trapped by a preset concept, while the record still avoids drifting too far apart. In that sense, it really is a direct display of our "thoughts."',
-    "Even so, because this is the first album in the series, a few parts still ended up feeling a little too much like theme assignments. That is something we plan to keep adjusting in the future.",
-    'From here on, thoughts will be the series through which Thoughost directly delivers the sounds we imagine, in other words the Thoughost Compilation Series. That does not mean the chaos is over. If anything, we are getting ready to go even further.',
-    'It felt natural for the first title to revolve around "rebirth." It points to Thoughost\'s next step, but also describes the overall emotional direction of the album. There is sadness in it, as if the world were covered in gray, yet somewhere inside it a small piece of light is still being held onto. It is not a literal image, but everyone interpreted that theme from a different angle.',
-    "For more detailed notes from behind the making of the album, please continue to the individual statements below.",
-    "Thank you for your support.",
+    "全新的想法，彷徨的终点。系列第二作——「thoughts 2」",
+    '本次的主题是——"hesitate"',
+    "之前也提到过，Thoughost的成员大多都是00年左右出生，现在已经走出了校园，在职场中打拼了一些时间。面对各种之前从未遇到过的压力，还有两点一线永远没有终点的生活，一边是理想、另一边是现实，各种各样的话题在无时无刻冲击着我们，\"迷茫\"是我们这个世代的共同话题，理所当然成为了第二作的主题。",
+    "「thoughts」与「thoughts 2」是互为上下篇的关系，它们共同组成了这个系列的开篇。实际上我们从未赋予这个系列真正意义上的故事，只是捕捉到一些概念，由各位艺术家的作品逐渐具象化成现在的样子，就这样，这个世界模模糊糊地出现了。让我们没想到的是，2的处处都与1相呼应，在创作时并未着重朝这个方向推进，这令我们自己也意想不到，但话又说回来，也是这个系列迷人的部分。",
+    "在「thoughts」发行后，我们开始思考，总觉得少了些什么，也许这样还不是系列真正完全态。所以我们再次调整了创作方向，结果每个人都顺利地向着想要探索的声音方向迈进了一步，把自己的想法融入了自己的作品中，非常顺利。可以说「thoughts 2」确定了这个系列是怎样的形状，每个人的创作都达到了自己的新高度，「thoughts 2」是我们现在的集大成之作。因此我们衷心地邀请您来听一听。",
+    "最后，日语的宣传语是这样的：「thoughts」から「thoughts 2」へ。シリーズがここから始まる。",
+    "这是一句双关，从 \"1\" 到 \"2\" 象征着系列化的确定，也象征着1和2一起组成了系列的开篇。",
   ],
   zh: [
-    "thoughts 这个系列的想法大约在两年前开始浮现。 我们一直是比较胡来的创作思路，五年间，几乎是想到哪里就做到哪里。 但随着时间的推移，渐渐地也想分享给你属于我们自己的声音。",
-    'thoughts 的创作逻辑是一种逆向思维。 先征集成员们想实现怎样的声音方向，汇总后经过讨论和细微的调整，得出专辑的主题和方向。 这样的好处在于可以不用被主题所限制，可以最大程度的发挥所思所想，专辑也不会过于发散。 可以说是真正的展现出我们的 "thoughts"。',
-    "当然，作为首张专辑，还是不可避免地出现了一些过于命题作文的情况，在未来会逐渐调整。",
-    '总之，thoughts 今后将作为 Thoughost "直接"传达给你们我们所构想声音的系列，也就是所谓的 Thoughost Compilation Series 。 当然，这不意味着 Thoughost 的胡来结束了，我们正准备更尽情的发疯。',
-    '第一张顺理成章地将主题定为了 "rebirth"。 既象征这是 Thoughost 的下一步，也说明了本次整体的声音方向。 听起来有些忧伤，仿佛被灰色笼罩的世界，在这之中抓住了一丝光亮。 虽然是很不具象的画面，但大家都从不同的角度诠释了这一主题。',
-    "更详细的创作幕后，请见下方各位的自我说明。",
-    "感谢你们的支持。",
+    "全新的想法，彷徨的终点。系列第二作——「thoughts 2」",
+    '本次的主题是——"hesitate"',
+    "之前也提到过，Thoughost的成员大多都是00年左右出生，现在已经走出了校园，在职场中打拼了一些时间。面对各种之前从未遇到过的压力，还有两点一线永远没有终点的生活，一边是理想、另一边是现实，各种各样的话题在无时无刻冲击着我们，\"迷茫\"是我们这个世代的共同话题，理所当然成为了第二作的主题。",
+    "「thoughts」与「thoughts 2」是互为上下篇的关系，它们共同组成了这个系列的开篇。实际上我们从未赋予这个系列真正意义上的故事，只是捕捉到一些概念，由各位艺术家的作品逐渐具象化成现在的样子，就这样，这个世界模模糊糊地出现了。让我们没想到的是，2的处处都与1相呼应，在创作时并未着重朝这个方向推进，这令我们自己也意想不到，但话又说回来，也是这个系列迷人的部分。",
+    "在「thoughts」发行后，我们开始思考，总觉得少了些什么，也许这样还不是系列真正完全态。所以我们再次调整了创作方向，结果每个人都顺利地向着想要探索的声音方向迈进了一步，把自己的想法融入了自己的作品中，非常顺利。可以说「thoughts 2」确定了这个系列是怎样的形状，每个人的创作都达到了自己的新高度，「thoughts 2」是我们现在的集大成之作。因此我们衷心地邀请您来听一听。",
+    "最后，日语的宣传语是这样的：「thoughts」から「thoughts 2」へ。シリーズがここから始まる。",
+    "这是一句双关，从 \"1\" 到 \"2\" 象征着系列化的确定，也象征着1和2一起组成了系列的开篇。",
   ],
   ja: [
-    "thoughts 这个系列的想法大约在两年前开始浮现。 我们一直是比较胡来的创作思路，五年间，几乎是想到哪里就做到哪里。 但随着时间的推移，渐渐地也想分享给你属于我们自己的声音。",
-    'thoughts 的创作逻辑是一种逆向思维。 先征集成员们想实现怎样的声音方向，汇总后经过讨论和细微的调整，得出专辑的主题和方向。 这样的好处在于可以不用被主题所限制，可以最大程度的发挥所思所想，专辑也不会过于发散。 可以说是真正的展现出我们的 "thoughts"。',
-    "当然，作为首张专辑，还是不可避免地出现了一些过于命题作文的情况，在未来会逐渐调整。",
-    '总之，thoughts 今后将作为 Thoughost "直接"传达给你们我们所构想声音的系列，也就是所谓的 Thoughost Compilation Series 。 当然，这不意味着 Thoughost 的胡来结束了，我们正准备更尽情的发疯。',
-    '第一张顺理成章地将主题定为了 "rebirth"。 既象征这是 Thoughost 的下一步，也说明了本次整体的声音方向。 听起来有些忧伤，仿佛被灰色笼罩的世界，在这之中抓住了一丝光亮。 虽然是很不具象的画面，但大家都从不同的角度诠释了这一主题。',
-    "更详细的创作幕后，请见下方各位的自我说明。",
-    "感谢你们的支持。",
+    "全新的想法，彷徨的终点。系列第二作——「thoughts 2」",
+    '本次的主题是——"hesitate"',
+    "之前也提到过，Thoughost的成员大多都是00年左右出生，现在已经走出了校园，在职场中打拼了一些时间。面对各种之前从未遇到过的压力，还有两点一线永远没有终点的生活，一边是理想、另一边是现实，各种各样的话题在无时无刻冲击着我们，\"迷茫\"是我们这个世代的共同话题，理所当然成为了第二作的主题。",
+    "「thoughts」与「thoughts 2」是互为上下篇的关系，它们共同组成了这个系列的开篇。实际上我们从未赋予这个系列真正意义上的故事，只是捕捉到一些概念，由各位艺术家的作品逐渐具象化成现在的样子，就这样，这个世界模模糊糊地出现了。让我们没想到的是，2的处处都与1相呼应，在创作时并未着重朝这个方向推进，这令我们自己也意想不到，但话又说回来，也是这个系列迷人的部分。",
+    "在「thoughts」发行后，我们开始思考，总觉得少了些什么，也许这样还不是系列真正完全态。所以我们再次调整了创作方向，结果每个人都顺利地向着想要探索的声音方向迈进了一步，把自己的想法融入了自己的作品中，非常顺利。可以说「thoughts 2」确定了这个系列是怎样的形状，每个人的创作都达到了自己的新高度，「thoughts 2」是我们现在的集大成之作。因此我们衷心地邀请您来听一听。",
+    "最后，日语的宣传语是这样的：「thoughts」から「thoughts 2」へ。シリーズがここから始まる。",
+    "这是一句双关，从 \"1\" 到 \"2\" 象征着系列化的确定，也象征着1和2一起组成了系列的开篇。",
   ],
 } satisfies LocalizedParagraphs;
+
+const echoStatements = [
+  {
+    name: "Konseki Takane",
+    role: "Art Direction & Design",
+    paragraphs: [
+      "「thoughts」系列的艺术方向，在 1 中就和 TARA#376 一起确立好了，所以，「thoughts 2」要做的第一件事就是延续这样的方向，让它一眼就能看出系列的特征。",
+      "本次 TARA#376 依然绘制了非常精彩的插画，在收到并确认后，确立了主题色和主要元素“水”。",
+      "在绘画阶段时，我只是确定了使用哪一个版本的构图，剩下的全由 TARA#376 发挥。完成品意外地能对上 1 的画面，这就是之前提到的“在创作时并未着重朝这个方向推进，但成品却巧合地处处充满关联”。从这个意义上来说，「thoughts 2」真的是一张自然流淌出来的专辑。",
+      "由于 TARA#376 的插画完成度已经非常高，我能做的就是尽可能匹配专辑整体的氛围，进行细节上的各种调整，让 TARA#376 的画作更加出彩。我依然坚持不使用夸张的设计元素，“平静又自然”始终是这个系列在专辑设计中追求的目标。",
+      "在原本的画作中，背景出现了两个圆，TARA#376 说这是即兴画上去的，我临时起意改成了破碎的镜子，让画面整体看起来更接近世界观。",
+      "收到实体盘的朋友们可以尝试把 2 的盘面倒过来，与 1 结合着看，也许能找到世界观的一些蛛丝马迹。",
+      "最后，希望你们能喜欢。「thoughts 3」再见！",
+    ],
+  },
+  {
+    name: "nova+z",
+    role: "landingfailure.orz",
+    paragraphs: [
+      "哎呀，我是 nova+z。不是 nova-z，也不是 nova*z，更不是 nova/z，是 nova+z。",
+      "hesitate，刚拿到这个主题时，我完全没有任何“想法”。我习惯先框定一个曲风的范围再进行创作，此前通过公募的形式在 Thoughost 参与的两首曲目也是如此。有时过于自由会让我找不着北，所以迟迟没有动笔。",
+      "总之就是因为这样那样的事，扭伤了膝盖，然后因为这样那样的事，搞得我很懊恼。哎，我有个主意，为什么不把这件事写进歌里呢？",
+      "我把这段时间体会到的感受转换成抽象的语言，基于这个感觉开始创作。",
+      "“想发力却踩空，想落地却漂浮。”",
+      "并且，这是一种恶性循环，不细讲。如果有人能注意到 Intro 和 Outro 之间的某种联系就好了，呼呼。",
+      "等腿差不多能动了，我就开始着手制作。其实全曲的 Drum+Bass+Perc 三者来自同一条轨道，因为我想试试能不能尽量缩减轨道数量，但是画 Automation 太地狱！这带来了很多限制，但有时限制不一定就是坏事。",
+      "结果 Vocal 轨道数量爆炸了。也许我就不该有“随便录点什么”的想法，一旦开始了，我就想做完它。就是过程有点地狱。这是我第一次如此大量地录制自己的声音，音频编辑不太熟练，旋律也没想明白，想到哪就录到哪，和声就直接往里唱，对上了就 OK。",
+      "和新年的鞭炮声斗智斗勇，你放我躲，你不放我录，怎么不算是一种 hesitate 呢（笑）。",
+      "还有，没想到用上了去年散步时顺手做的 Field Recording，当时的路线也是从医院走回家，和曲子里要表达的一样，很巧。",
+      "这是我第一次作为 Thoughost 的正式成员参与专辑，也是第一次这么完整地参与一张专辑的制作过程，更直观地感受到了制作背后的不易。",
+      "原来被热爱驱动是这种感觉。相比 DTM 的时长，我的作品数量少得可怜，创作热情也早就被现生的事情消磨光了。kon 爷发给我的加入 Thoughost 的邀请，确实让我有了一些能打开 DAW 的勇气和动力。",
+      "彷徨吗？那就让它彷徨着吧，谁能知道路的尽头是什么。不知道，我们才有了出发的理由。",
+    ],
+  },
+  {
+    name: "四度夜 靈",
+    role: "間",
+    paragraphs: [
+      "時【間】",
+      "空【間】",
+      "難以填補的隙【間】。",
+    ],
+  },
+  {
+    name: "wheatfox",
+    role: "Fluorescent",
+    paragraphs: [
+      "作为 6 p.m. 的精神续作，本曲将场景从城市入夜推进至朦胧深夜。灵感源于 Serani Poji 于 2002 年发行的专辑《ワンルームサバイバル》中的一首 UK Garage——《胸にアイタ穴》（空虚的内心）。",
+      "《Fluorescent》则试图描绘浮华都市夜色下，内心空虚之人的意象。",
+      "“流萤断续光，一明一灭一尺间……”",
+      "——立花北枝《萤》",
+    ],
+  },
+  {
+    name: "Nirotiy",
+    role: "DEPICT CODE",
+    paragraphs: [
+      "虽然这首歌参与到专辑当中，但在 thoughts 2 的企划开催之前我就已经想做这首歌了。当时我在 Youtube 上看到了 5 键时代的 beatmania 曲目以及古早 DDR 的采样来源的整理视频，挖到了不少自己喜欢的老歌(AM-3P, KEEP ON MOVIN', Look To The Sky, super highway)，其中就有启发了本曲的 area code.",
+      "area code 全程都是同一个节奏型，用失真电吉他 solo 作为填充材料，加上一大堆精巧裁切的 vocal sample 和 atmos 之后成型。而其全长版本，area code 2011 更加偏向于氛围了；配合新的女声 vocal 之后，与原曲相比更加阴郁且氛围隽永；如果我按照这个方向走的话，会很符合这张专辑的基调——迷惘。",
+      "但实际上在进入制作期间的时候，大部分曲目都是重氛围的类型；这让我为了专辑的流畅度考虑开始转往新的方向。我如何在保证氛围抒情部分不受影响的情况下让这首歌听起来更加躁动呢？此时，另一首歌给了我急需的灵感；Dissolved Girl。",
+      "这首由 Trip-Hop 大师制作人组合 Massive Attack 出品的 Dissolved Girl 在保证氛围和女声吟唱的 Trip-Hop 为基底的同时，将声音取向更加工业化，然后在 Bridge 中让 Fuzz 电吉他同时作为氛围和内容的填充；搭配上经典的摇滚鼓组实现了我想做到的效果。",
+      "于是，最后的想法就此成型了：以 BIG BEAT 为脊梁，辅以原声质感居多的打击乐组，致敬 area code 的节奏型以及人声采样的变化；最后再进入 Atmo 和女声吟唱的闭环。",
+      "迷惘本身不应该只是一种状态，它也应该像悲痛一样有阶段可循。在看似无处可去的局面当中疯狂的尝试浑身解数尝试打破僵局无果之后，燃烧殆尽的自我质疑对我来说更符合陷入迷惘的定义。",
+    ],
+  },
+  {
+    name: "05",
+    role: "stutter and dissolve",
+    paragraphs: [
+      "一转眼一年过去了~~~",
+      "但是比起之前创作欲望下降了不少，现实里很多杂七杂八的事情比较烦恼。然后这次大家选出来的主题是——hesitate，说实话还是比较符合目前自己的状态的。",
+      "选择了最熟悉也是最粗暴，切割叠加并打开 beat repeat random amenbreak 的方法来呈现它，不料成了整张合集里最狂暴的一首曲子。",
+      "听完本次的曲子你可能觉得：这么狂？！所以就是依然保留一些虚无缥缈的合成器，其余部分即兴发狂，但是整体有一种统一感——这也是今后想要继续追求的东西。",
+    ],
+  },
+] satisfies Thoughts2EchoStatement[];
 
 const sharedMeta: LocalizedMetaEntry[] = [
   {
@@ -438,6 +520,7 @@ export function getThoughts2Special(locale: Locale, edition: Thoughts2Edition) {
       title: pickText(locale, echoProductionNotesTitle),
       paragraphs: pickParagraphs(locale, echoProductionNotes),
     },
+    echoStatements,
     labels: {
       editionSwitcher: locale === "zh" ? "版本切换" : locale === "ja" ? "エディション切替" : "Edition switcher",
       overview: "Release Info",
@@ -449,6 +532,7 @@ export function getThoughts2Special(locale: Locale, edition: Thoughts2Edition) {
       tracklist: "Tracklist",
       contributors: "Contributors",
       staff: "Staff",
+      behindTheMusic: "Behind the Music",
       releaseDetail: locale === "zh" ? "发行详情页" : locale === "ja" ? "リリース詳細" : "Release detail",
       versionStatement: locale === "zh" ? "当前版本" : locale === "ja" ? "Current edition" : "Current edition",
       availability: "Availability",
