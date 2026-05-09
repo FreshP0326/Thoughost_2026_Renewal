@@ -2545,7 +2545,6 @@
   width: var(--echo-align-width);
   margin: 0 auto;
   overflow: hidden;
-  border-block: 1px solid rgba(127, 145, 120, 0.14);
   background: transparent;
 }
 
@@ -2666,7 +2665,6 @@
   width: var(--echo-align-width);
   margin: 0 auto;
   padding: 24px 0 52px;
-  border-top: 1px solid rgba(127, 145, 120, 0.16);
   border-bottom: 1px solid rgba(127, 145, 120, 0.12);
 }
 
