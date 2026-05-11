@@ -746,7 +746,6 @@ function EchoTracklistSection({
     <section id="tracklist" className={styles.echoTrackSection}>
       <div className={styles.echoTrackHeader}>
         <div className={styles.echoTrackHeaderCopy}>
-          <p className={styles.sectionLabel}>{page.labels.tracklist}</p>
           <h2 className={styles.sectionTitle}>{page.labels.tracklist}</h2>
         </div>
       </div>
@@ -940,8 +939,16 @@ function createThoughts2LinkedThoughtsPage(
   contributors: string[],
 ): ReturnType<typeof getThoughtsSpecial> {
   const designStatement = page.echoStatements.find((statement) => statement.name === "Konseki Takane");
+  const artStatementNames = new Set(["Konseki Takane", "TARA#376"]);
+  const artStatementCards = page.echoStatements
+    .filter((statement) => artStatementNames.has(statement.name))
+    .map((statement) => ({
+      title: statement.name,
+      subtitle: statement.role ?? "",
+      paragraphs: statement.paragraphs,
+    }));
   const musicCards = page.echoStatements
-    .filter((statement) => statement.name !== "Konseki Takane")
+    .filter((statement) => !artStatementNames.has(statement.name))
     .map((statement) => ({
       title: statement.name,
       subtitle: statement.role ?? "",
@@ -967,7 +974,9 @@ function createThoughts2LinkedThoughtsPage(
     ...linkedThoughtsPage,
     musicCards,
     artProcessGroups: createThoughts2ArtProcessGroups(),
-    artPeople: linkedThoughtsPage.artPeople.map((person) => (person.title === designStatement.name ? designCard : person)),
+    artPeople: linkedThoughtsPage.artPeople.map(
+      (person) => artStatementCards.find((card) => card.title === person.title) ?? person,
+    ),
     konsekiSection: {
       ...linkedThoughtsPage.konsekiSection,
       role: designCard.subtitle,
