@@ -887,7 +887,7 @@ const thoughts2DesignImages = {
     width: 1181,
     height: 936,
     alt: "thoughts 2 character design sheet",
-    caption: "Character design",
+    caption: "Official character design",
   },
   characterDesignTwo: {
     key: "thoughts-2-character-design-2",
@@ -895,7 +895,7 @@ const thoughts2DesignImages = {
     width: 2000,
     height: 2900,
     alt: "thoughts 2 full character design sheet",
-    caption: "Full character design",
+    caption: "Concept design",
   },
   compositionOne: {
     key: "thoughts-2-composition-1",
