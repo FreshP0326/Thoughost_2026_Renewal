@@ -133,6 +133,18 @@ const echoStatements = [
     ],
   },
   {
+    name: "TARA#376",
+    role: "Illustration",
+    paragraphs: [
+      "负责了本次专辑的封面插画！（再一次！）",
+      "以及为了让封面角色更加贴合本次的主题，给她设计了新衣服。",
+      "我很喜欢这次的主题——彷徨，迷茫，感觉就像是封面角色在“重生”之后必定会经历的故事。",
+      "所以就有了在陌生的空间中徘徊、漂浮、犹豫着不敢前进的印象。最后也像上次一样，选择了成员们最喜欢的构图。",
+      "相比 1 来说，本次的作画过程可以说是畅通无阻，我自己也对最终的结果感到满意。",
+      "希望大家能够喜欢 thoughts 2，也希望下一次能够提供更好的插画！_(:з」∠)_",
+    ],
+  },
+  {
     name: "nova+z",
     role: "landingfailure.orz",
     paragraphs: [
@@ -192,6 +204,17 @@ const echoStatements = [
       "听完本次的曲子你可能觉得：这么狂？！所以就是依然保留一些虚无缥缈的合成器，其余部分即兴发狂，但是整体有一种统一感——这也是今后想要继续追求的东西。",
     ],
   },
+  {
+    name: "Irish Kappa",
+    role: "Don't Leave Me",
+    paragraphs: [
+      "一开始看到这个主题的时候，脑子里第一个想到的是写一首哀愁系高速音乐，不过在几次尝试无果之后就暂时搁置了。",
+      "在寻找思路的过程中无意中翻到这个人声采样，当时就觉得这个 mood 很对本次的主题，就很快敲定了方向。把几个铺底的音色和 beat 搭完之后，就很顺理成章地写出来了。",
+      "就整体的呈现效果上来说可能是有点压抑的，除了 beat 以外的声音都故意处理得比较朦胧，想营造一种特别的潮湿感，大概是一种烦闷的、迷茫的感觉吧。",
+      "最后情绪越推越高、戛然而止后接一段 glitch 收尾的想法，也是缘起于一个 glitch 插件。觉得这种处理手法很酷，又有一种思绪被切断的花屏感。",
+      "希望听到这首曲子的你能喜欢这种特别的 feel。",
+    ],
+  },
 ] satisfies Thoughts2EchoStatement[];
 
 const sharedMeta: LocalizedMetaEntry[] = [
@@ -240,7 +263,7 @@ const sharedMeta: LocalizedMetaEntry[] = [
 const materials: Thoughts2Material[] = [
   {
     key: "cover",
-    src: "/images/special/thoughts-2/cover.png",
+    src: "/images/special/thoughts-2/cover-hero.png",
     width: 1072,
     height: 1072,
     alt: { en: "thoughts 2 cover artwork", zh: "thoughts 2 封面", ja: "thoughts 2 ジャケット" },
